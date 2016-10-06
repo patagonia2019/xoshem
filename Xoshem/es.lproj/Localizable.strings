@@ -1,0 +1,39 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Acerca de";
+"Cancel" = "Cancelar";
+"  Copyright © 2015-2016 Mobile Patagonia. All rights reserved." = "  Derechos de autor © 2016 Mobile Patagonia. Todos los derechos reservados.";
+"DONE" = "Listo";
+"Error on delete" = "Error al borrar";
+"Error on import" = "Falla al importar";
+"Error on search" = "Falla al buscar";
+"Error on update" = "Falla en actualización";
+"Fetch Forecast" = "Pronósticos";
+"failed" = "falló";
+"Failed at fetch data from table" = "Falla al obtener datos de la tabla";
+"Failed at fetch forecasts" = "Falla al obtener pronósticos";
+"Failed at import objects" = "Falla al importar objectos";
+"Failed at init facade" = "Falla al inicializar";
+"Forecast" = "Pronóstico";
+"forecasts" = "pronósticos";
+"Frequently Asked Questions" = "Preguntas Más Frecuentes";
+"Help" = "Ayuda";
+"Location Updated with" = "Ubicación actualizada con";
+"Location failed" = "Falla en ubicación";
+"Location Not Authorized" = "Detectar Ubicación no autorizada";
+"Options" = "Opciones";
+"Please authorize" = "necesita usar tu ubicación para obtener los datos del tiempo. Permitenos el acceso a tu ubicación antes de usar esta app.\n(No compartiremos tu ubicación sin tu permiso).";
+"Reload" = "Recargar";
+"Retry" = "Reintentar";
+"Search" = "Buscar";
+"Services failed" = "Falla en servicios";
+"Success getting" = "Exitosamente trayendo";
+"Terms and Conditions" = "Términos y Condiciones";
+"Terms of Use" = "Términos de Uso";
+"Tutorial" = "Tutorial";

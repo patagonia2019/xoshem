@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "大約";
+"Cancel" = "取消";
+"DONE" = "做";
+"Error on delete" = "錯誤的刪除";
+"Error on import" = "錯誤進口";
+"Error on search" = "錯誤搜索";
+"Error on update" = "錯誤的更新";
+"Fetch Forecast" = "取預測";
+"failed" = "失敗";
+"Failed at fetch data from table" = "在獲取從表中的數據失敗";
+"Failed at fetch forecasts" = "在取預測失敗";
+"Failed at import objects" = "在導入對象失敗";
+"Failed at init facade" = "在初始化失敗";
+"Forecast" = "天氣預報";
+"forecasts" = "天氣預報";
+"Frequently Asked Questions" = "經常問的問題";
+"Help" = "幫幫我";
+"Location Updated with" = "更新了位置";
+"Location failed" = "位置失敗";
+"Location Not Authorized" = "位置沒有獲得許可";
+"Options" = "選項";
+"Please authorize" = "必須使用您的位置，以獲得預期。請允許我們向您開始使用應用程序之前，使用您的位置。\n（未經您的許可，我們絕不會分享您的位置。）";
+"Reload" = "重新加載";
+"Retry" = "重試";
+"Search" = "搜尋";
+"Services failed" = "服務失敗";
+"Success getting" = "獲得成功";
+"Terms and Conditions" = "條款和條件";
+"Terms of Use" = "使用條款";
+"Tutorial" = "教程的";

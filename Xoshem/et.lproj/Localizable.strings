@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Umbes";
+"Cancel" = "Katkesta";
+"DONE" = "tehtud";
+"Error on delete" = "Viga kustuta";
+"Error on import" = "Viga import";
+"Error on search" = "Viga otsing";
+"Error on update" = "Viga uuendus";
+"Fetch Forecast" = "Tõmba prognoos";
+"failed" = "ebaõnnestunud";
+"Failed at fetch data from table" = "Kukkunud andmete hankimiseks tabelis";
+"Failed at fetch forecasts" = "Kukkunud tõmbad prognoosid";
+"Failed at import objects" = "Kukkunud impordi objektide";
+"Failed at init facade" = "Kukkunud init'iga";
+"Forecast" = "Ennustuse";
+"forecasts" = "prognooside";
+"Frequently Asked Questions" = "Korduma kippuvad küsimused";
+"Help" = "Abi";
+"Location Updated with" = "Asukoht Täiendatud";
+"Location failed" = "Asukoht ebaõnnestus";
+"Location Not Authorized" = "Asukoht Ei volitatud";
+"Options" = "Valikud";
+"Please authorize" = "peab kasutama oma asukohta saada prognoosi. Laske meil kasutada oma asukohta enne kui hakata rakendust kasutades.\n(Me ei jaga teie asukoha ilma teie loata.)";
+"Reload" = "Reload";
+"Retry" = "Laadi uuesti";
+"Search" = "Otsing";
+"Services failed" = "Teenused ebaõnnestus";
+"Success getting" = "Edu saada";
+"Terms and Conditions" = "Tingimused";
+"Terms of Use" = "Kasutustingimused";
+"Tutorial" = "Treening";

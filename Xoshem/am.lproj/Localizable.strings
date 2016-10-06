@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "ስለ";
+"Cancel" = "ሰርዝ";
+"DONE" = "ተከናውኗል";
+"Error on delete" = "ስረዛ ላይ ስህተት";
+"Error on import" = "ማስመጣት ላይ ስህተት";
+"Error on search" = "ፍለጋ ላይ ስህተት";
+"Error on update" = "ዝማኔ ላይ ስህተት";
+"Fetch Forecast" = "ትንበያ ሰብስብ";
+"failed" = "አልተሳካም";
+"Failed at fetch data from table" = "የሠንጠረዥ ውሂብ ማምጣት ላይ አልተሳካም";
+"Failed at fetch forecasts" = "ትንበያዎች ማምጣት ላይ አልተሳካም";
+"Failed at import objects" = "ማስመጣት ነገሮች ላይ አልተሳካም";
+"Failed at init facade" = "ማስጀመር ላይ አልተሳካም";
+"Forecast" = "ተነበየ";
+"forecasts" = "ትንበያዎች";
+"Frequently Asked Questions" = "ተደጋግሞ የሚነሱ ጥያቄዎች";
+"Help" = "እርዳታ";
+"Location Updated with" = "አካባቢ ጋር ዘምኗል";
+"Location failed" = "አካባቢ አልተሳካም";
+"Location Not Authorized" = "አካባቢ የተፈቀዱ አይደለም";
+"Options" = "አማራጮች";
+"Please authorize" = "ትንበያው ለማግኘት አካባቢዎን መጠቀም አለብህ. መተግበሪያው መጠቀም ከመጀመራችን በፊት አካባቢዎን እንዲጠቀም ፍቀድ.\n(የእርስዎን ፈቃድ ያለ አካባቢዎን ማጋራት ፈጽሞ.)";
+"Reload" = "ዳግም ጫን";
+"Retry" = "ድጋሚ ይሞክሩ";
+"Search" = "ፍለጋ";
+"Services failed" = "አገልግሎቶች አልተሳካም";
+"Success getting" = "ስኬት ማግኘት";
+"Terms and Conditions" = "አተገባበሩና መመሪያው";
+"Terms of Use" = "የአጠቃቀም መመሪያ";
+"Tutorial" = "ማጠናከሪያ ትምህርት";

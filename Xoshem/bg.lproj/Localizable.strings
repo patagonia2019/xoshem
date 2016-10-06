@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Относно";
+"Cancel" = "Отказ";
+"DONE" = "Готово";
+"Error on delete" = "Грешка на изтриване";
+"Error on import" = "Грешка при внос";
+"Error on search" = "Грешка на търсене";
+"Error on update" = "Грешка на актуализация";
+"Fetch Forecast" = "Изважда Forecast";
+"failed" = "се провали";
+"Failed at fetch data from table" = "Неуспех при извличане на данни от таблица";
+"Failed at fetch forecasts" = "Неуспех при донесе прогнози";
+"Failed at import objects" = "Неуспех при внос обекти";
+"Failed at init facade" = "Неуспех при първоначален";
+"Forecast" = "прогноза";
+"forecasts" = "прогнози";
+"Frequently Asked Questions" = "често задавани въпроси";
+"Help" = "Помощ";
+"Location Updated with" = "Местоположение Обновено с";
+"Location failed" = "местоположение провали";
+"Location Not Authorized" = "Местоположение които не са разрешени";
+"Options" = "Настроики";
+"Please authorize" = "трябва да използва местоположението ви, за да получите прогнозата. Позволете ни да използва местоположението ви, преди да започнете да използвате приложението.\n(Ние никога няма да споделите местоположението си, без вашето разрешение.)";
+"Reload" = "Презареди";
+"Retry" = "Нов опит";
+"Search" = "Търсене";
+"Services failed" = "Услуги провалиха";
+"Success getting" = "Успехът получаване";
+"Terms and Conditions" = "Правила и условия";
+"Terms of Use" = "Условия за ползване";
+"Tutorial" = "настойнически";

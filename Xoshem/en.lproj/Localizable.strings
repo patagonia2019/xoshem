@@ -1,0 +1,39 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "About";
+"Cancel" = "Cancel";
+"  Copyright © 2015-2016 Mobile Patagonia. All rights reserved." = "  Copyright © 2015-2016 Mobile Patagonia. All rights reserved.";
+"DONE" = "DONE";
+"Error on delete" = "Error on delete";
+"Error on import" = "Error on import";
+"Error on search" = "Error on search";
+"Error on update" = "Error on update";
+"Fetch Forecast" = "Fetch Forecast";
+"failed" = "failed";
+"Failed at fetch data from table" = "Failed at fetch data from table";
+"Failed at fetch forecasts" = "Failed at fetch forecasts";
+"Failed at import objects" = "Failed at import objects";
+"Failed at init facade" = "Failed at init";
+"Forecast" = "Forecast";
+"forecasts" = "forecasts";
+"Frequently Asked Questions" = "Frequently Asked Questions";
+"Help" = "Help";
+"Location Updated with" = "Location Updated with";
+"Location failed" = "Location failed";
+"Location Not Authorized" = "Location Not Authorized";
+"Options" = "Options";
+"Please authorize" = "must use your location to get the forecast. Allow us to use your location before you begin using the app.\n(We will never share your location without your permission.)";
+"Reload" = "Reload";
+"Retry" = "Retry";
+"Search" = "Search";
+"Services failed" = "Services failed";
+"Success getting" = "Success getting";
+"Terms and Conditions" = "Terms and Conditions";
+"Terms of Use" = "Terms of Use";
+"Tutorial" = "Tutorial";

@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Asi";
+"Cancel" = "Zrušit";
+"DONE" = "hotový";
+"Error on delete" = "Chyba při mazání";
+"Error on import" = "Chyba při importu";
+"Error on search" = "Chyba při vyhledávání";
+"Error on update" = "Chyba při aktualizaci";
+"Fetch Forecast" = "Fetch předpověď";
+"failed" = "neúspěšný";
+"Failed at fetch data from table" = "Nepodařilo se načíst data z tabulky";
+"Failed at fetch forecasts" = "Nepodařilo se načíst prognózy";
+"Failed at import objects" = "Selhala při importu objektů";
+"Failed at init facade" = "Nepodařilo se init";
+"Forecast" = "Předpověď";
+"forecasts" = "předpovědi";
+"Frequently Asked Questions" = "Často kladené otázky";
+"Help" = "Pomoc";
+"Location Updated with" = "Místo Aktualizováno";
+"Location failed" = "Umístění se nezdařilo";
+"Location Not Authorized" = "Místo Nepovoleno";
+"Options" = "Možnosti";
+"Please authorize" = "musí používat svou polohu se dostat prognózu. Nám umožňují použít vaši polohu, než začnete používat aplikaci.\n(My se nikdy sdílet vaši polohu bez vašeho souhlasu.)";
+"Reload" = "Znovu nahrát";
+"Retry" = "Akci opakujte";
+"Search" = "Vyhledávání";
+"Services failed" = "selhala služby";
+"Success getting" = "úspěch získání";
+"Terms and Conditions" = "Pravidla a podmínky";
+"Terms of Use" = "Podmínky použití";
+"Tutorial" = "Tutoriál";

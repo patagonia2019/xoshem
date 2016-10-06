@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "për";
+"Cancel" = "anuloj";
+"DONE" = "BËHET";
+"Error on delete" = "Gabim në fshini";
+"Error on import" = "Gabim në importim";
+"Error on search" = "Gabim në kërkim";
+"Error on update" = "Gabim në përditësimit";
+"Fetch Forecast" = "Sille Parashikimi";
+"failed" = "i dështuar";
+"Failed at fetch data from table" = "Dështoi në shkoj të marr të dhëna nga tavolinë";
+"Failed at fetch forecasts" = "Dështoi në shkoj të marr parashikimet";
+"Failed at import objects" = "Dështoi në objekte të importit";
+"Failed at init facade" = "Dështoi në inicializimit";
+"Forecast" = "Parashikim";
+"forecasts" = "parashikimet";
+"Frequently Asked Questions" = "Pyetjet më të shpeshta";
+"Help" = "Ndihmë";
+"Location Updated with" = "Vendndodhja Përditësimi me";
+"Location failed" = "Vendndodhja dështuar";
+"Location Not Authorized" = "Vendndodhja Jo Autorizuar";
+"Options" = "Opsione";
+"Please authorize" = "duhet të përdorni vendndodhjen tuaj për të marrë parashikimin. Të na lejojë të përdorni vendndodhjen tuaj para se të filloni duke përdorur app.\n(Ne kurrë nuk do të ndani vendndodhjen tuaj pa lejen tuaj.)";
+"Reload" = "Ringarkoj";
+"Retry" = "rigjykoj";
+"Search" = "kërkim";
+"Services failed" = "Shërbimet dështuar";
+"Success getting" = "suksesi marrë";
+"Terms and Conditions" = "Termat dhe Kushtet";
+"Terms of Use" = "Kushtet e Përdorimit";
+"Tutorial" = "Punë pra";

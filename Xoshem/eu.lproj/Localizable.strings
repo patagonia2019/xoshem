@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Buruz";
+"Cancel" = "Utzi";
+"DONE" = "Egind";
+"Error on delete" = "Errorea Ezabatu on";
+"Error on import" = "Errorea inportatzean";
+"Error on search" = "Errorea bilaketa on";
+"Error on update" = "Akatsa eguneratzean";
+"Fetch Forecast" = "Eskuratu Iragarpena";
+"failed" = "Porrota";
+"Failed at fetch data from table" = "Mahaitik datuak eskuratu at Huts";
+"Failed at fetch forecasts" = "Aurreikuspenak fetch at Huts";
+"Failed at import objects" = "Import objektuak Huts";
+"Failed at init facade" = "init at Huts";
+"Forecast" = "Iragarpena";
+"forecasts" = "Aurreikuspenak";
+"Frequently Asked Questions" = "Galdera arruntak";
+"Help" = "Laguntza";
+"Location Updated with" = "Kokapena batera eguneratua";
+"Location failed" = "Kokapena huts";
+"Location Not Authorized" = "Kokapena Baimenik";
+"Options" = "Aukerak";
+"Please authorize" = "zure kokapena erabili behar Iragarpen lortzeko. Utzi zure kokapena erabiltzeko gurekin aplikazioa erabiliz Hasi aurretik.\n (Inoiz ez dugu zure partekatzen zure baimenik gabe.)";
+"Reload" = "Birkargatu";
+"Retry" = "Birkonetatu";
+"Search" = "Bilaketa";
+"Services failed" = "Zerbitzuak huts";
+"Success getting" = "Arrakasta lortzeko";
+"Terms and Conditions" = "Baldintzak eta baldintzak";
+"Terms of Use" = "Erabilpen baldintzak";
+"Tutorial" = "Tutoretza";

@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Om";
+"Cancel" = "Ophæve";
+"DONE" = "Udført";
+"Error on delete" = "Fejl på sletningen";
+"Error on import" = "Fejl ved import";
+"Error on search" = "Fejl på søgning";
+"Error on update" = "Fejl på opdatering";
+"Fetch Forecast" = "Hent Prognose";
+"failed" = "mislykkedes";
+"Failed at fetch data from table" = "Mislykkedes ved hente data fra tabel";
+"Failed at fetch forecasts" = "Kunne ikke ved hente prognoser";
+"Failed at import objects" = "Mislykkedes på import- objekter";
+"Failed at init facade" = "Mislykket på init";
+"Forecast" = "Prognose";
+"forecasts" = "prognoser";
+"Frequently Asked Questions" = "Ofte stillede spørgsmål";
+"Help" = "Hjælp";
+"Location Updated with" = "Beliggenhed Opdateret med";
+"Location failed" = "Placering mislykkedes";
+"Location Not Authorized" = "Placering Ikke autoriseret";
+"Options" = "Indstillinger";
+"Please authorize" = "skal bruge din placering til at få prognosen. Tillad os at bruge din placering, før du begynder at bruge den app.\n(Vi vil aldrig dele din placering uden din tilladelse.)";
+"Reload" = "Genindlæs";
+"Retry" = "Prøv igen";
+"Search" = "Søge";
+"Services failed" = "Tjenester mislykkedes";
+"Success getting" = "Lykkes få";
+"Terms and Conditions" = "Vilkår og betingelser";
+"Terms of Use" = "Betingelser for brug";
+"Tutorial" = "Selvstudie";

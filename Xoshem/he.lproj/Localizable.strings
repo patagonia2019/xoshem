@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "על אודות";
+"Cancel" = "לְבַטֵל";
+"DONE" = "בוצע";
+"Error on delete" = "שגיאה על מחיקה";
+"Error on import" = "שגיאה על יבוא";
+"Error on search" = "שגיאה על חיפוש";
+"Error on update" = "שגיאה על עדכון";
+"Fetch Forecast" = "תביא תחזית";
+"failed" = "נִכשָׁל";
+"Failed at fetch data from table" = "נכשל להביא נתונים מטבלה";
+"Failed at fetch forecasts" = "נכשל להביא תחזיות מזג אוויר";
+"Failed at import objects" = "נכשל על אובייקטי יבוא";
+"Failed at init facade" = "נכשל אתחול";
+"Forecast" = "תחזית מזג האוויר";
+"forecasts" = "תחזיות מזג אוויר";
+"Frequently Asked Questions" = "בשאלות נפוצות לגבי";
+"Help" = "עֶזרָה";
+"Location Updated with" = "מיקום לעדכון עם";
+"Location failed" = "מיקום נכשל";
+"Location Not Authorized" = "מיקום לא מורשה";
+"Options" = "אפשרויות";
+"Please authorize" = "חייב להשתמש במיקום שלך כדי לקבל את התחזית. הרשו לנו להשתמש במיקום שלך לפני שתתחיל להשתמש את היישום. אנו לעולם לא לשתף את המיקום שלך ללא רשותך.";
+"Reload" = "לִטעוֹן מִחָדָשׁ";
+"Retry" = "נסה שוב";
+"Search" = "לחפש";
+"Services failed" = "שירותים נכשלו";
+"Success getting" = "הצלחה מקבלת";
+"Terms and Conditions" = "תנאים והגבלות";
+"Terms of Use" = "תנאי שימוש";
+"Tutorial" = "שֶׁל מוֹרֶה";

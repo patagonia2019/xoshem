@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Körülbelül";
+"Cancel" = "Mégsem";
+"DONE" = "Kész";
+"Error on delete" = "Hiba törlés";
+"Error on import" = "Hiba az import";
+"Error on search" = "Hiba keresés";
+"Error on update" = "Hiba frissítés";
+"Fetch Forecast" = "Lekérni előrejelzés";
+"failed" = "nem sikerült";
+"Failed at fetch data from table" = "Meghiúsult az adatok lekérése asztal";
+"Failed at fetch forecasts" = "Meghiúsult a csel előrejelzések";
+"Failed at import objects" = "Meghiúsult az import tárgyak";
+"Failed at init facade" = "Megbukott init";
+"Forecast" = "Előrejelzés";
+"forecasts" = "előrejelzések";
+"Frequently Asked Questions" = "Gyakran Ismételt Kérdések";
+"Help" = "Segítség";
+"Location Updated with" = "Hely Frissítve";
+"Location failed" = "Elhelyezkedés nem sikerült";
+"Location Not Authorized" = "Hely nem engedélyezett";
+"Options" = "Opciók";
+"Please authorize" = "kell használni a helyet kap az előrejelzés. Engedje meg, hogy használja a helyét, mielőtt elkezdi használni az alkalmazást.\n(Mi soha nem fogjuk megosztani a helyét az Ön engedélye nélkül.)";
+"Reload" = "Töltse be újra";
+"Retry" = "Próbálja újra";
+"Search" = "Keresés";
+"Services failed" = "Szolgáltatás nem";
+"Success getting" = "A siker kap";
+"Terms and Conditions" = "Felhasználási feltételek";
+"Terms of Use" = "Használati feltételek";
+"Tutorial" = "Bemutatója";

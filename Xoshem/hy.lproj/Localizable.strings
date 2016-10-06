@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Մասին";
+"Cancel" = "եղել չեղյալ հայտարարել";
+"DONE" = "ԿԱՏԱՐԱԾ";
+"Error on delete" = "Ձախողումը Ջնջել";
+"Error on import" = "Ձախողումը է ներմուծման";
+"Error on search" = "Ձախողումը որոնման";
+"Error on update" = "Ձախողումը է թարմացման";
+"Fetch Forecast" = "խորամանկություն կանխատեսում";
+"failed" = "ձախողվեց";
+"Failed at fetch data from table" = "Չհաջողվեց ժամը վերցնել տվյալներ սեղանի";
+"Failed at fetch forecasts" = "Ձախողվեց ստանում են կանխատեսումների";
+"Failed at import objects" = "Չհաջողվեց ներմուծման օբյեկտների";
+"Failed at init facade" = "Ձախողվեց նախաստորագրումը";
+"Forecast" = "կանխատեսում";
+"forecasts" = "կանխատեսումները";
+"Frequently Asked Questions" = "Հաճախակի տրվող հարցեր";
+"Help" = "Օգնություն";
+"Location Updated with" = "Որտեղից Թարմացվել է";
+"Location failed" = "Որտեղից ձախողվեց";
+"Location Not Authorized" = "Որտեղից լիազորված չէ";
+"Options" = "Ընտրանքներ";
+"Please authorize" = "պետք է օգտագործել ձեր գտնվելու վայրը ստանալ կանխատեսումը: Մեզ թույլ են տալիս օգտագործել ձեր գտնվելու վայրը, նախքան դուք սկսում օգտագործելով հավելվածը. \n (Մենք երբեք չենք կիսում ձեր գտնվելու վայրը, առանց Ձեր թույլտվության.)";
+"Reload" = "վերաբեռնել";
+"Retry" = "կրկնել";
+"Search" = "որոնում";
+"Services failed" = "Ծառայություններ ձախողվեց";
+"Success getting" = "Հաջող ստանալու";
+"Terms and Conditions" = "Պայմաններ եւ դրույթներ;";
+"Terms of Use" = "Օգտվելու կանոններ";
+"Tutorial" = "խնամակալական";

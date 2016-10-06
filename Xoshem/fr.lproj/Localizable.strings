@@ -1,0 +1,39 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "À propos de ";
+"Cancel" = "Annuler";
+"  Copyright © 2015-2016 Mobile Patagonia. All rights reserved." = "  Copyright © 2015-2016 Mobile Patagonia. Tous les droits sont réservés.";
+"DONE" = "Fini";
+"Error on delete" = "Erreur sur la suppression";
+"Error on import" = "Erreur lors de l'importation";
+"Error on search" = "Erreur sur la recherche";
+"Error on update" = "Erreur sur la mise à jour";
+"Fetch Forecast" = "Extraire Prévisions";
+"failed" = "échec";
+"Failed at fetch data from table" = "Échec à récupérer les données de la table";
+"Failed at fetch forecasts" = "Échec à chercher les prévisions";
+"Failed at import objects" = "Échec des objets d'importation";
+"Failed at init facade" = "Échec au initialisation";
+"Forecast" = "Prévision";
+"forecasts" = "prévisions";
+"Frequently Asked Questions" = "Questions fréquemment posées";
+"Help" = "Aide";
+"Location Updated with" = "Emplacement Mise à jour avec";
+"Location failed" = "Localisation échec";
+"Location Not Authorized" = "Lieu Non autorisé";
+"Options" = "Options";
+"Please authorize" = "doit vous localiser pour obtenir les prévisions. Laissez-nous vous localiser avant d'utiliser l'application.\n(Nous ne partagerons jamais vos données de localisation sans votre autorisation).";
+"Reload" = "Recharger";
+"Retry" = "Retenter";
+"Search" = "Chercher";
+"Services failed" = "L'échec des services";
+"Success getting" = "Le succès se";
+"Terms and Conditions" = "Termes et conditions";
+"Terms of Use" = "Conditions d'utilisation";
+"Tutorial" = "Tutoriel";

@@ -1,0 +1,79 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D1539770E844C1A343A5A6771BEE839F40BAAE5B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D1539770E844C1A343A5A6771BEE839F40BAAE5B" : 0,
+    "CA22995E16ADB940ED328330E7D37E4BEB09C583" : 0,
+    "003043AFAF5D5A0634F26D3CEFB13C790128B879" : 0,
+    "05630D693F59F7CEDACB6CAB0E4EA0A642C60427" : 0,
+    "7BB1AF9D2EE3C42F833BF17486A3B8868A2514BD" : 0,
+    "A65AFD29FEFEF4A7C191987D2A4452CBF66B4CB2" : 0,
+    "777BAFA1E8F9825A0B505DD4BE1D79238ECB3DCB" : 0,
+    "84AEFC7EE1DBA4134E7C025D125C0F065B935F2F" : 0,
+    "EDAF98FF9B12C3D13F362FCCF70C64CF095155A5" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4CA1E54D-B398-4F85-BF9B-0D58BFE3B254",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D1539770E844C1A343A5A6771BEE839F40BAAE5B" : "xoshem\/",
+    "CA22995E16ADB940ED328330E7D37E4BEB09C583" : "DGElasticPullToRefresh\/",
+    "003043AFAF5D5A0634F26D3CEFB13C790128B879" : "FontWeather.swift\/",
+    "05630D693F59F7CEDACB6CAB0E4EA0A642C60427" : "SweetAlert-iOS\/",
+    "7BB1AF9D2EE3C42F833BF17486A3B8868A2514BD" : "jfcore\/",
+    "A65AFD29FEFEF4A7C191987D2A4452CBF66B4CB2" : "SwiftIconFont\/",
+    "777BAFA1E8F9825A0B505DD4BE1D79238ECB3DCB" : "Localize-Swift\/",
+    "84AEFC7EE1DBA4134E7C025D125C0F065B935F2F" : "NVActivityIndicatorView\/",
+    "EDAF98FF9B12C3D13F362FCCF70C64CF095155A5" : "jfwindguru\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Xoshem",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Xoshem.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/southfox\/FontWeather.swift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "003043AFAF5D5A0634F26D3CEFB13C790128B879"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/southfox\/SweetAlert-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "05630D693F59F7CEDACB6CAB0E4EA0A642C60427"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/southfox\/Localize-Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "777BAFA1E8F9825A0B505DD4BE1D79238ECB3DCB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/southfox\/jfcore.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7BB1AF9D2EE3C42F833BF17486A3B8868A2514BD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/southfox\/NVActivityIndicatorView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "84AEFC7EE1DBA4134E7C025D125C0F065B935F2F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/southfox\/SwiftIconFont",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A65AFD29FEFEF4A7C191987D2A4452CBF66B4CB2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/southfox\/DGElasticPullToRefresh.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CA22995E16ADB940ED328330E7D37E4BEB09C583"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/southfox\/xoshem.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D1539770E844C1A343A5A6771BEE839F40BAAE5B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/southfox\/jfwindguru.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EDAF98FF9B12C3D13F362FCCF70C64CF095155A5"
+    }
+  ]
+}

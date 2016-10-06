@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
+    </dependencies>
+    <scenes>
+        <!--background-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller backgroundImage="background" animationDuration="2" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="watchos" customModuleProvider="target">
+                    <items>
+                        <activity alignment="left" id="jZC-dD-52H"/>
+                        <group width="1" alignment="left" hidden="YES" backgroundImage="background" id="wy2-Yx-s4f">
+                            <items>
+                                <label width="42.5" height="30" alignment="right" text="18 hs" textAlignment="right" id="IkO-9v-ezp">
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <slider width="89" height="30" alignment="left" value="1" maximum="9" steps="9" id="mX2-sR-DXj">
+                                    <connections>
+                                        <action selector="sliderAction:" destination="AgC-eL-Hgc" id="6kS-my-ng3"/>
+                                    </connections>
+                                </slider>
+                            </items>
+                        </group>
+                        <group width="1" height="20" alignment="left" hidden="YES" id="hXl-Oy-D12">
+                            <items>
+                                <label width="1" height="30" alignment="left" text="Bariloche" textAlignment="center" id="2WD-eY-GKf">
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" height="59" alignment="center" verticalAlignment="center" hidden="YES" id="XKh-r4-Ien">
+                            <items>
+                                <imageView width="63" height="64" alignment="left" image="WeatherSun" contentMode="scaleAspectFit" id="ArH-TD-qtg"/>
+                                <imageView width="20" height="28" alignment="center" verticalAlignment="center" image="WindDirectionS" contentMode="scaleAspectFill" id="3A4-FI-0ZR"/>
+                                <label width="48.5" height="48" alignment="right" verticalAlignment="center" text="1.9 knots" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.5" id="6SV-V4-jyh">
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group height="28.5" alignment="left" verticalAlignment="bottom" hidden="YES" id="3co-hY-2fl">
+                            <items>
+                                <label width="53.5" height="30" alignment="center" text="-18" textAlignment="right" id="s7x-JY-cCY">
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" weight="heavy" pointSize="29"/>
+                                </label>
+                                <label width="15" height="16" alignment="center" text="o" textAlignment="left" id="Ora-9f-tBd">
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" weight="heavy" pointSize="24"/>
+                                </label>
+                                <label width="22.5" height="30" alignment="center" text="C" textAlignment="left" id="8Bd-VL-fdJ">
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" weight="heavy" pointSize="29"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="bottomGroup" destination="3co-hY-2fl" id="WnY-5K-CMm"/>
+                        <outlet property="hourLabel" destination="IkO-9v-ezp" id="kiW-rb-Uv7"/>
+                        <outlet property="locationLabel" destination="2WD-eY-GKf" id="L7O-oD-bKD"/>
+                        <outlet property="middleGroup" destination="XKh-r4-Ien" id="nFd-qc-ObL"/>
+                        <outlet property="slider" destination="mX2-sR-DXj" id="MGG-wf-cTu"/>
+                        <outlet property="spinner" destination="jZC-dD-52H" id="ZPI-qI-bPk"/>
+                        <outlet property="temperatureLabel" destination="s7x-JY-cCY" id="eGJ-dP-jb4"/>
+                        <outlet property="toolbarGroup" destination="wy2-Yx-s4f" id="V98-et-ubm"/>
+                        <outlet property="topGroup" destination="hXl-Oy-D12" id="0K1-W4-G4c"/>
+                        <outlet property="unitLabel" destination="8Bd-VL-fdJ" id="97N-q4-2ID"/>
+                        <outlet property="weatherImage" destination="ArH-TD-qtg" id="q1i-Hx-0tg"/>
+                        <outlet property="windImage" destination="3A4-FI-0ZR" id="y32-sY-JFz"/>
+                        <outlet property="windSpeedLabel" destination="6SV-V4-jyh" id="hUf-sd-r4L"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="180" y="227"/>
+        </scene>
+    </scenes>
+</document>

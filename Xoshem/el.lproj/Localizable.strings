@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Περίπου";
+"Cancel" = "Ματαίωση";
+"DONE" = "Έγινε";
+"Error on delete" = "Σφάλμα διαγραφής";
+"Error on import" = "Σφάλμα κατά την εισαγωγή";
+"Error on search" = "Σφάλμα στην αναζήτηση";
+"Error on update" = "Σφάλμα στην ενημέρωση";
+"Fetch Forecast" = "φέρω Πρόγνωση";
+"failed" = "απέτυχε";
+"Failed at fetch data from table" = "Αποτυχία σε φέρω τα δεδομένα από τον πίνακα";
+"Failed at fetch forecasts" = "Αποτυχία σε φέρω προβλέψεις";
+"Failed at import objects" = "Αποτυχία σε αντικείμενα εισαγωγής";
+"Failed at init facade" = "Αποτυχία στην εκκίνηση";
+"Forecast" = "Δελτίο καιρού";
+"forecasts" = "προβλέψεις καιρού";
+"Frequently Asked Questions" = "Συχνές Ερωτήσεις";
+"Help" = "Βοηθώ";
+"Location Updated with" = "Τοποθεσία Ενημέρωση με";
+"Location failed" = "Τοποθεσία απέτυχε";
+"Location Not Authorized" = "Τοποθεσία Δεν Εξουσιοδοτημένος";
+"Options" = "επιλογές για";
+"Please authorize" = "πρέπει να χρησιμοποιήσει την τοποθεσία σας για να πάρετε την πρόβλεψη. Επιτρέψτε μας να χρησιμοποιήσει την τοποθεσία σας πριν ξεκινήσετε τη χρήση της εφαρμογής.\n(Εμείς δεν πρόκειται ποτέ να μοιραστείτε την τοποθεσία σας χωρίς την άδειά σας.)";
+"Reload" = "Φορτώνω πάλι";
+"Retry" = "Δοκιμάζω πάλι";
+"Search" = "Ψάξιμο";
+"Services failed" = "υπηρεσίες απέτυχε";
+"Success getting" = "επιτυχία πάρει";
+"Terms and Conditions" = "Όροι και Προϋποθέσεις";
+"Terms of Use" = "Όροι χρήσης";
+"Tutorial" = "Φροντιστήριο";

@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Par";
+"Cancel" = "Anulēt";
+"DONE" = "padaryta";
+"Error on delete" = "Kļūda uz Dzēst";
+"Error on import" = "Kļūda importējot";
+"Error on search" = "Kļūda meklēšanā";
+"Error on update" = "Kļūda par atjauninājumu";
+"Fetch Forecast" = "Atnest Prognoze";
+"failed" = "neizdevās";
+"Failed at fetch data from table" = "Neizdevās ielādēt datus no tabulas";
+"Failed at fetch forecasts" = "Neizdevās at atnest prognozes";
+"Failed at import objects" = "Neizdevās pie importa objektos";
+"Failed at init facade" = "Neizdevās at inicializācijas";
+"Forecast" = "Prognoze";
+"forecasts" = "prognozes";
+"Frequently Asked Questions" = "Biežāk uzdotie jautājumi";
+"Help" = "Palīdziet";
+"Location Updated with" = "Atrašanās vieta Papildināta ar";
+"Location failed" = "Atrašanās vieta neizdevās";
+"Location Not Authorized" = "Atrašanās vieta nav atļauts";
+"Options" = "Opcijas";
+"Please authorize" = "jāizmanto savu atrašanās vietu, lai iegūtu prognozi. Ļaujiet mums izmantot savu atrašanās vietu, pirms sākat, izmantojot lietotni.\n(Mēs nekad koplietot jūsu atrašanās vietu bez jūsu atļaujas.)";
+"Reload" = "Pārlādēt";
+"Retry" = "Atkārtot";
+"Search" = "Meklēt";
+"Services failed" = "Pakalpojumi neizdevās";
+"Success getting" = "Veiksme kļūst";
+"Terms and Conditions" = "Noteikumi un nosacījumi";
+"Terms of Use" = "Lietošanas noteikumi";
+"Tutorial" = "Apmācība";

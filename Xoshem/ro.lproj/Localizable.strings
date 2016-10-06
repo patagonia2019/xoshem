@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Despre";
+"Cancel" = "Anula";
+"DONE" = "S-A comis";
+"Error on delete" = "Eroare la ștergere";
+"Error on import" = "Eroare cu privire la importul";
+"Error on search" = "Eroare de căutare";
+"Error on update" = "Eroare la actualizare";
+"Fetch Forecast" = "Prognoza Preluați";
+"failed" = "a eșuat";
+"Failed at fetch data from table" = "A eșuat la preluarea datelor din tabelul";
+"Failed at fetch forecasts" = "A eșuat la preluarea previziuni";
+"Failed at import objects" = "A eșuat la obiectele de import";
+"Failed at init facade" = "A eșuat la inițializare";
+"Forecast" = "Prognoză";
+"forecasts" = "prognozele";
+"Frequently Asked Questions" = "Intrebari puse frecvent";
+"Help" = "Ajutor";
+"Location Updated with" = "Locație Actualizat cu";
+"Location failed" = "Locul de amplasare a eșuat";
+"Location Not Authorized" = "Localizare pe care nu sunt autorizate";
+"Options" = "Opțiuni";
+"Please authorize" = "trebuie să utilizeze locația dvs. pentru a obține prognoza. Ne permite să utilizați locația înainte de a începe utilizarea aplicației.\n(Noi nu vom împărtăși locația fără permisiunea dvs.).";
+"Reload" = "Reîncărcați";
+"Retry" = "Reîncerca";
+"Search" = "Căutare";
+"Services failed" = "Servicii nu a reușit";
+"Success getting" = "Succesul obtinerea";
+"Terms and Conditions" = "Termeni si conditii";
+"Terms of Use" = "Termeni de utilizare";
+"Tutorial" = "Tutelar";

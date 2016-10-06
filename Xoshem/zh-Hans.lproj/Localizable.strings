@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "大约";
+"Cancel" = "取消";
+"DONE" = "做";
+"Error on delete" = "错误的删除";
+"Error on import" = "错误进口";
+"Error on search" = "错误搜索";
+"Error on update" = "错误的更新";
+"Fetch Forecast" = "取天气预报";
+"failed" = "失败";
+"Failed at fetch data from table" = "在获取从表中的数据失败";
+"Failed at fetch forecasts" = "在取天气预报失败";
+"Failed at import objects" = "在导入对象失败";
+"Failed at init facade" = "在初始化失败";
+"Forecast" = "天气预报";
+"forecasts" = "天气预报";
+"Frequently Asked Questions" = "经常问的问题";
+"Help" = "帮忙啊";
+"Location Updated with" = "更新了位置";
+"Location failed" = "位置失败";
+"Location Not Authorized" = "位置没有获得许可";
+"Options" = "选项";
+"Please authorize" = "必须使用您的位置，以获得预期。请允许我们向您开始使用应用程序之前，使用您的位置。\n（未经您的许可，我们绝不会分享您的位置。）";
+"Reload" = "重新加载";
+"Retry" = "重试";
+"Search" = "搜寻";
+"Services failed" = "服务失败";
+"Success getting" = "获得成功";
+"Terms and Conditions" = "条款和条件";
+"Terms of Use" = "使用条款";
+"Tutorial" = "教程";

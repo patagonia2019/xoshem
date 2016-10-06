@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Sobre";
+"Cancel" = "Aturar";
+"DONE" = "fet";
+"Error on delete" = "Error a Elimina";
+"Error on import" = "Error en la importació";
+"Error on search" = "Error en la recerca";
+"Error on update" = "Error en l'actualització";
+"Fetch Forecast" = "Obteniu el pronòstic";
+"failed" = "fracassat";
+"Failed at fetch data from table" = "Errada en obtenir les dades de la taula";
+"Failed at fetch forecasts" = "Errada Durant la recuperació de les previsions";
+"Failed at import objects" = "Errada en importar objectes";
+"Failed at init facade" = "Errada en init";
+"Forecast" = "Pronòstic";
+"forecasts" = "previsions";
+"Frequently Asked Questions" = "Preguntes Més Freqüents";
+"Help" = "Ajudar";
+"Location Updated with" = "Localització Actualitzat amb";
+"Location failed" = "ubicació va fallar";
+"Location Not Authorized" = "La ubicació no autoritzada";
+"Options" = "Opcions";
+"Please authorize" = "ha d'usar la seva ubicació per obtenir el pronòstic. Ens permeten utilitzar la seva ubicació abans de començar a utilitzar l'aplicació. \n (Mai no compartirem la seva ubicació sense el seu permís.)";
+"Reload" = "Recarregar";
+"Retry" = "Ho a provar";
+"Search" = "Cerca";
+"Services failed" = "Serveis fracassar";
+"Success getting" = "L'èxit aconseguir";
+"Terms and Conditions" = "Termes i condicions";
+"Terms of Use" = "Condicions d'ús";
+"Tutorial" = "Tutorial";

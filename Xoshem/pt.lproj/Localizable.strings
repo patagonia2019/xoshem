@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Cerca de";
+"Cancel" = "Cancelar";
+"DONE" = "Topo";
+"Error on delete" = "Erro na exclusão";
+"Error on import" = "Erro durante a importação";
+"Error on search" = "Erro na busca";
+"Error on update" = "Erro na atualização";
+"Fetch Forecast" = "buscar Previsão";
+"failed" = "falha";
+"Failed at fetch data from table" = "Falhou em buscar dados da tabela";
+"Failed at fetch forecasts" = "Falha em obter previsões";
+"Failed at import objects" = "Falha na objetos importação";
+"Failed at init facade" = "Falha na inicialização";
+"Forecast" = "Previsão";
+"forecasts" = "previsões";
+"Frequently Asked Questions" = "Perguntas Mais Frequentes";
+"Help" = "Ajuda";
+"Location Updated with" = "Localização Atualizado com";
+"Location failed" = "Localização falhou";
+"Location Not Authorized" = "Localização Não autorizado";
+"Options" = "Options";
+"Please authorize" = "tem de usar a sua localização para obter a previsão ao longo do dia. Permitam-nos utilize a sua localização antes de começar a utilizar a aplicação.\n(Nunca iremos partilhar a sua localização sem a sua permissão.)";
+"Reload" = "Recarregar";
+"Retry" = "tentar novamente";
+"Search" = "Pesquisa";
+"Services failed" = "Serviços falhou";
+"Success getting" = "êxito ficando";
+"Terms and Conditions" = "Termos e Condições";
+"Terms of Use" = "Termos de uso";
+"Tutorial" = "Tutorial";

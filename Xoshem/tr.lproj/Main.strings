@@ -1,0 +1,36 @@
+
+/* Class = "UILabel"; text = "Search"; ObjectID = "0fh-Qf-i1c"; */
+"0fh-Qf-i1c.text" = "Arama";
+
+/* Class = "UILabel"; text = "Bariloche\nRio Negro"; ObjectID = "54k-bs-K38"; */
+"54k-bs-K38.text" = "Bariloche\nRio Negro";
+
+/* Class = "UITableViewController"; title = "Master"; ObjectID = "7bK-jq-Zjz"; */
+"7bK-jq-Zjz.title" = "Master";
+
+/* Class = "UILabel"; text = "value"; ObjectID = "F8V-ZD-oHZ"; */
+"F8V-ZD-oHZ.text" = "value";
+
+/* Class = "UIViewController"; title = "Detail"; ObjectID = "JEX-9P-axG"; */
+"JEX-9P-axG.title" = "Detail";
+
+/* Class = "UINavigationController"; title = "Master"; ObjectID = "RMx-3f-FxP"; */
+"RMx-3f-FxP.title" = "Master";
+
+/* Class = "UILabel"; text = "35°"; ObjectID = "a4o-qB-lrb"; */
+"a4o-qB-lrb.text" = "35°";
+
+/* Class = "UILabel"; text = "value"; ObjectID = "dUc-tL-Cb8"; */
+"dUc-tL-Cb8.text" = "value";
+
+/* Class = "UILabel"; text = "Aeropuerto\nBariloche"; ObjectID = "lsc-mC-YjG"; */
+"lsc-mC-YjG.text" = "Aeropuerto\nBariloche";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "mOI-FS-AaM"; */
+"mOI-FS-AaM.title" = "Detail";
+
+/* Class = "UILabel"; text = "key"; ObjectID = "ql8-LX-lYN"; */
+"ql8-LX-lYN.text" = "key";
+
+/* Class = "UILabel"; text = "Search"; ObjectID = "qyF-s8-hbJ"; */
+"qyF-s8-hbJ.text" = "Arama";

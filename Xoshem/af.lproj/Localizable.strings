@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Meer oor";
+"Cancel" = "kanselleer";
+"DONE" = "Gedoen";
+"Error on delete" = "Fout op minusteken";
+"Error on import" = "Fout op die invoer";
+"Error on search" = "Fout op soek";
+"Error on update" = "Fout op werk";
+"Fetch Forecast" = "Haal Weer Voorspelling";
+"failed" = "versuim het";
+"Failed at fetch data from table" = "Kon by haal data van tabel";
+"Failed at fetch forecasts" = "Kon by haal voorspellings";
+"Failed at import objects" = "Kon by invoer voorwerpe";
+"Failed at init facade" = "Kon by inisialisering";
+"Forecast" = "Weervoorspelling";
+"forecasts" = "weervoorspellings";
+"Frequently Asked Questions" = "Kwelvrae";
+"Help" = "Hulp";
+"Location Updated with" = "Plek Opdateer met";
+"Location failed" = "plek versuim het";
+"Location Not Authorized" = "Plek nie gemagtig";
+"Options" = "Opsies";
+"Please authorize" = "moet jou plek te gebruik om die voorspelling te kry. Laat ons toe om jou plek te gebruik voordat jy begin met behulp van die app.\n(Ons sal nooit jou plek te deel sonder jou toestemming.)";
+"Reload" = "Reload";
+"Retry" = "Herprobeer";
+"Search" = "Soek";
+"Services failed" = "Dienste versuim het";
+"Success getting" = "Sukses kry";
+"Terms and Conditions" = "Terme en voorwaardes";
+"Terms of Use" = "Voorwaardes";
+"Tutorial" = "Tutoriaal";

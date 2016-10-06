@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Hakkında";
+"Cancel" = "İptal";
+"DONE" = "Tamam";
+"Error on delete" = "Silme hata";
+"Error on import" = "Ithalat hata";
+"Error on search" = "Arama hatası";
+"Error on update" = "Güncelleme hata";
+"Fetch Forecast" = "Tahmin getir";
+"failed" = "başarısız oldu";
+"Failed at fetch data from table" = "Tablodan veri getirmesi başarısız";
+"Failed at fetch forecasts" = "Tahminleri getirilemedi başarısız";
+"Failed at import objects" = "Ithalat nesnelere Başarısız";
+"Failed at init facade" = "Ilklendirme sırasında başarısız oldu";
+"Forecast" = "Tahmin";
+"forecasts" = "tahminleri";
+"Frequently Asked Questions" = "sık sorulan Sorular";
+"Help" = "Yardım";
+"Location Updated with" = "Yer ile Güncelleme";
+"Location failed" = "Yer başarısız";
+"Location Not Authorized" = "Konum Yetkili Değil";
+"Options" = "Seçenekler";
+"Please authorize" = "tahmini almak için konum kullanmanız gerekir. Uygulamayı kullanmaya başlamadan önce bize konumunuzu kullanmasına izin verin.\n(Biz sizin izniniz olmadan konumunuzu paylaşmak asla.)";
+"Reload" = "Tekrar yükle";
+"Retry" = "Tekrar dene";
+"Search" = "Arama";
+"Services failed" = "Hizmetler başarısız";
+"Success getting" = "Başarı elde";
+"Terms and Conditions" = "Şartlar ve koşullar";
+"Terms of Use" = "Kullanım Şartları";
+"Tutorial" = "Eğitseli";

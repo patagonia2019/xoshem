@@ -1,0 +1,38 @@
+/*
+ Localizable.strings
+ Xoshem
+ 
+ Created by Javier Fuchs on 8/11/16.
+ Copyright © 2015-2016 Mobile Patagonia. All rights reserved.
+ */
+
+"About" = "Noin";
+"Cancel" = "Peruuttaa";
+"DONE" = "Tehty";
+"Error on delete" = "Virhe poisto";
+"Error on import" = "Virhe tuonti";
+"Error on search" = "Virhe haku";
+"Error on update" = "Virhe päivitys";
+"Fetch Forecast" = "Nouda Ennuste";
+"failed" = "epäonnistuneet";
+"Failed at fetch data from table" = "Epäonnistui at hakea tietoja taulukosta";
+"Failed at fetch forecasts" = "Epäonnistunut nouto ennusteet";
+"Failed at import objects" = "Epäonnistui tuonnin esineitä";
+"Failed at init facade" = "Epäonnistui init";
+"Forecast" = "Ennuste";
+"forecasts" = "ennusteet";
+"Frequently Asked Questions" = "Usein Kysytyt Kysymykset";
+"Help" = "Auttaa";
+"Location Updated with" = "Paikka Päivitetty kanssa";
+"Location failed" = "Sijainti epäonnistuneet";
+"Location Not Authorized" = "Sijainti ei valtuutusta";
+"Options" = "Vaihtoehdot";
+"Please authorize" = "täytyy käyttää paikka saada ennusteen. Anna meidän käyttää paikkaan ennen kuin alat käyttää sovellusta.\n(Emme koskaan jaa sijaintitietojasi ilman lupaa.)";
+"Reload" = "Ladata uudelleen";
+"Retry" = "Yritä uudelleen";
+"Search" = "Haku";
+"Services failed" = "Palvelut epäonnistuneet";
+"Success getting" = "Onnistuminen saada";
+"Terms and Conditions" = "Käyttöehdot";
+"Terms of Use" = "Käyttöehtoja";
+"Tutorial" = "n opetusohjelma";
