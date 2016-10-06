@@ -1,0 +1,147 @@
+/*
+URL: https://www.windguru.cz/int/jsonapi.php?client=wgapp&q=search_spots&username=southfox&password=zorrito1&search=bariloche
+
+*/
+{
+    "count": 426,
+    "spots": [
+        {
+            "id_spot": "64141",
+            "spotname": "Bariloche",
+            "country": "Argentina",
+            "id_user": "169"
+        },
+        {
+            "id_spot": "209155",
+            "spotname": "Bariloche Classic",
+            "country": "Argentina",
+            "id_user": "169"
+        },
+        {
+            "id_spot": "261334",
+            "spotname": "a BARILOCHE AEROPUERTO",
+            "country": "Argentina",
+            "nickname": "oamxyz09",
+            "id_user": "348765"
+        },
+        {
+            "id_spot": "241490",
+            "spotname": "ªBARILOCHE (cumbre Catedral, Enduro A.P.E)",
+            "country": "Argentina",
+            "nickname": "LUISSANCHEZMASTER",
+            "id_user": "146632"
+        },
+        {
+            "id_spot": "315499",
+            "spotname": "A Bariloche. Los Alamos. Cnia. Suiza",
+            "country": "Argentina",
+            "nickname": "armani1",
+            "id_user": "290476"
+        },
+        {
+            "id_spot": "295254",
+            "spotname": "Aeropuerto Bariloche",
+            "country": "Argentina",
+            "nickname": "wernerluis",
+            "id_user": "268566"
+        },
+        {
+            "id_spot": "287956",
+            "spotname": "Aeropuerto Bariloche",
+            "country": "Argentina",
+            "nickname": "polcahue",
+            "id_user": "353820"
+        },
+        {
+            "id_spot": "62269",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "alejon1",
+            "id_user": "95311"
+        },
+        {
+            "id_spot": "119897",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "******",
+            "id_user": "52807"
+        },
+        {
+            "id_spot": "179844",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "sebastianescudero",
+            "id_user": "279495"
+        },
+        {
+            "id_spot": "80908",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "pokkar",
+            "id_user": "78366"
+        },
+        {
+            "id_spot": "99079",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "soaresmariano",
+            "id_user": "154934"
+        },
+        {
+            "id_spot": "515250",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "pabloandre",
+            "id_user": "621137"
+        },
+        {
+            "id_spot": "141754",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "rober221",
+            "id_user": "41784"
+        },
+        {
+            "id_spot": "54647",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "leokita1",
+            "id_user": "85086"
+        },
+        {
+            "id_spot": "177150",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "cacobus",
+            "id_user": "260427"
+        },
+        {
+            "id_spot": "167031",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "GUEMESITO",
+            "id_user": "185190"
+        },
+        {
+            "id_spot": "121303",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "EstebanPac",
+            "id_user": "189753"
+        },
+        {
+            "id_spot": "243413",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "surpack",
+            "id_user": "382416"
+        },
+        {
+            "id_spot": "294040",
+            "spotname": "bariloche",
+            "country": "Argentina",
+            "nickname": "semitriton",
+            "id_user": "339399"
+        }
+    ]
+}

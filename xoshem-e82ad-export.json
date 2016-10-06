@@ -1,0 +1,57 @@
+{
+	"menu": [{
+		"edit": true,
+		"icon": "1468046481_cloud-weather-forecast-cloudy-outline-stroke",
+		"id": 1,
+		"parentId": 0,
+		"name": "Forecast"
+	}, {
+		"parentId": 0,
+		"id": 2,
+		"name": "Search",
+		"icon": "1468046237_common-search-lookup-glyph",
+		"edit": false
+	}, {
+		"parentId": 0,
+		"id": 3,
+		"name": "Options",
+		"icon": "1468046524_editor-setting-gear-outline-stroke",
+		"edit": false
+	}, {
+		"parentId": 0,
+		"id": 4,
+		"name": "Help",
+		"icon": "1468046356_circle-help-question-mark-outline-stroke",
+		"edit": false
+	}, {
+		"parentId": 4,
+		"id": 1,
+		"name": "Frequently Asked Questions",
+		"icon": "1468046356_circle-help-question-mark-outline-stroke",
+		"edit": false
+	}, {
+		"parentId": 4,
+		"id": 2,
+		"name": "Tutorial",
+		"icon": "1468046956_common-bookmark-book-open-glyph",
+		"edit": false
+	}, {
+		"parentId": 4,
+		"id": 3,
+		"name": "Terms of Use",
+		"icon": "1468046901_editor-books-library-collection-glyph",
+		"edit": false
+	}, {
+		"parentId": 4,
+		"id": 4,
+		"name": "Terms and Conditions",
+		"icon": "1468046859_business-tie-outline-stroke",
+		"edit": false
+	}, {
+		"parentId": 4,
+		"id": 5,
+		"name": "About",
+		"icon": "1468046733_circle-info-more-information-detail-outline-stroke",
+		"edit": false
+	}]
+}
