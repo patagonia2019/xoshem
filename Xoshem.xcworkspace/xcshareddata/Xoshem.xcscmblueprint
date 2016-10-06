@@ -1,10 +1,10 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D1539770E844C1A343A5A6771BEE839F40BAAE5B",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "817209F4DF0A2D24A2666A9E54990EDA397BC779",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "D1539770E844C1A343A5A6771BEE839F40BAAE5B" : 0,
+    "817209F4DF0A2D24A2666A9E54990EDA397BC779" : 9223372036854775807,
     "CA22995E16ADB940ED328330E7D37E4BEB09C583" : 0,
     "003043AFAF5D5A0634F26D3CEFB13C790128B879" : 0,
     "05630D693F59F7CEDACB6CAB0E4EA0A642C60427" : 0,
@@ -16,7 +16,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4CA1E54D-B398-4F85-BF9B-0D58BFE3B254",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "D1539770E844C1A343A5A6771BEE839F40BAAE5B" : "xoshem\/",
+    "817209F4DF0A2D24A2666A9E54990EDA397BC779" : "xoshem\/",
     "CA22995E16ADB940ED328330E7D37E4BEB09C583" : "DGElasticPullToRefresh\/",
     "003043AFAF5D5A0634F26D3CEFB13C790128B879" : "FontWeather.swift\/",
     "05630D693F59F7CEDACB6CAB0E4EA0A642C60427" : "SweetAlert-iOS\/",
@@ -51,6 +51,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7BB1AF9D2EE3C42F833BF17486A3B8868A2514BD"
     },
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/southfox\/xoshem.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "817209F4DF0A2D24A2666A9E54990EDA397BC779"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/southfox\/NVActivityIndicatorView.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "84AEFC7EE1DBA4134E7C025D125C0F065B935F2F"
@@ -64,11 +69,6 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/southfox\/DGElasticPullToRefresh.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CA22995E16ADB940ED328330E7D37E4BEB09C583"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/southfox\/xoshem.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D1539770E844C1A343A5A6771BEE839F40BAAE5B"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/southfox\/jfwindguru.git",

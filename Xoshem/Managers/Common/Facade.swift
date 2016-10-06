@@ -606,8 +606,8 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
                 "segue": Common.segue.web,
                 "file": Common.file.tou,
                 "icon": "1468046901_editor-books-library-collection-glyph",
-                "iconList": "MaterialIcons-Regular",
-                "iconName": "collections",
+                "iconList": "Ionicons",
+                "iconName": "bowtie",
                 "edit": Bool(false)
             ],
             [

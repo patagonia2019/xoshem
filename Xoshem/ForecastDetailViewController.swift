@@ -26,7 +26,7 @@ class ForecastDetailViewController: BaseViewController {
         if let detail = self.detailItem {
             self.title = detail.namecheck()
         }
-        self.showComponent(2)
+        self.showComponent(1)
     }
     
     override func viewDidLoad() {

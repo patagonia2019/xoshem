@@ -9,7 +9,7 @@
 import UIKit
 import JFCore
 
-class ForecastHierarchyFooterViewController: BaseViewController {
+class ForecastHierarchyFooterViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,4 +27,12 @@ class ForecastHierarchyFooterViewController: BaseViewController {
         
     }
 
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(Common.cell.identifier.root, forIndexPath: indexPath)
+        return cell
+    }
 }

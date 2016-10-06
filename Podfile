@@ -3,24 +3,19 @@ use_frameworks!
 def sharedPods
     pod 'AlamofireObjectMapper', '~> 2.1'
     pod 'Localize-Swift', :git => 'https://github.com/southfox/Localize-Swift.git', :branch => 'develop'
-    #pod 'JFWindguru', :git => 'https://bitbucket.org/southfox/jfwindguru.git', :branch => 'develop'
-    pod 'JFWindguru', :path => '../jfwindguru'
-    #pod 'JFCore', :git => 'https://bitbucket.org/southfox/jfcore.git', :branch => 'develop'
-    pod 'JFCore', :path => '../jfcore'
-    pod 'FontWeather.swift', :path => '../FontWeather.swift'
+    pod 'JFWindguru', :git => 'https://github.com/southfox/jfwindguru.git', :branch => 'master'
+    pod 'JFCore', :git => 'https://github.com/southfox/jfcore.git', :branch => 'master'
+    pod 'FontWeather.swift', :git => 'https://github.com/southfox/FontWeather.swift', :branch => 'master'
 end
 
 def iosPods
     pod 'DGElasticPullToRefresh', :git => 'https://github.com/southfox/DGElasticPullToRefresh.git', :branch => 'develop'
     pod 'NVActivityIndicatorView', :git => 'https://github.com/southfox/NVActivityIndicatorView.git', :branch => 'develop'
     pod 'SCLAlertView', :git => 'https://github.com/southfox/SCLAlertView-Swift', :branch => 'swift-2.3'
-    pod 'SwiftIconFont', :path => '../SwiftIconFont'
+    pod 'SwiftIconFont', :git => 'https://github.com/southfox/SwiftIconFont', :branch => 'tag-2.5.1-swift2.3'
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'Digits'
-    #pod 'TwitterCore'
-    #    pod 'AWSCognito'
-    #pod 'SlackKit'
 end
 
 def watchPods

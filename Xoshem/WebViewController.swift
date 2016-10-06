@@ -51,10 +51,8 @@ class WebViewController: BaseViewController, UIWebViewDelegate {
     }
     
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        if let e = error {
-            SCLAlertView().showError(Common.title.error, subTitle:e.description)
-        }
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+        SCLAlertView().showError(Common.title.error, subTitle:error.description)
     }
     
     func webViewDidStartLoad(webView: UIWebView) {
