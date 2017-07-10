@@ -35,7 +35,6 @@ class CDMenu: CDManagedObject {
             
             do {
                 _ = try importObject(menuDictionary, mco: mco)
-                return true
             }
             catch {
                 let myerror = JFError(code: Common.ErrorCode.cdImportMenuArrayIssue.rawValue,
@@ -45,7 +44,8 @@ class CDMenu: CDManagedObject {
                 throw myerror
             }
         }
-        return false
+        return true
+        
     }
     
     

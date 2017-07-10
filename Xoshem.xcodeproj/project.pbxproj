@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		70A970941F13026800DBC25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A970931F13026800DBC25D /* Assets.xcassets */; };
+		70A970971F130B2300DBC25D /* HockeyAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A970961F130B2300DBC25D /* HockeyAppManager.swift */; };
 		70FE005A1F12E88500096217 /* CDManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */; };
 		70FE005B1F12E88500096217 /* CDManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */; };
 		70FE005C1F12F93B00096217 /* CDManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */; };
@@ -146,6 +147,7 @@
 		67A931181C6D8E6C04467BFB /* Pods_Xoshem_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6879D4052CC2AC23310CE46A /* Pods-watchos Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchos Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-watchos Extension/Pods-watchos Extension.release.xcconfig"; sourceTree = "<group>"; };
 		70A970931F13026800DBC25D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		70A970961F130B2300DBC25D /* HockeyAppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HockeyAppManager.swift; sourceTree = "<group>"; };
 		70FE00511F12E84600096217 /* Xoshem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Xoshem-Bridging-Header.h"; sourceTree = "<group>"; };
 		70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				953241E31BC81C75009659A7 /* Common */,
+				70A970961F130B2300DBC25D /* HockeyAppManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				B5B3B53ED7A61B3EE8A1F13C /* [CP] Embed Pods Frameworks */,
 				A02F1FC7A2F805FF6771BAA9 /* [CP] Copy Pods Resources */,
 				951784D21D522323007399F6 /* ShellScript */,
+				70A970951F130A6600DBC25D /* Run Script Hockey */,
 			);
 			buildRules = (
 			);
@@ -842,6 +846,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-watchos Extension/Pods-watchos Extension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		70A970951F130A6600DBC25D /* Run Script Hockey */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script Hockey";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
 		925C5C12B2C79308316B8AE6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -994,6 +1012,7 @@
 				A129F8C41B2CA81600EBC1DD /* AppDelegate.swift in Sources */,
 				95D1DA201D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift in Sources */,
 				954033731D3C299F00330B57 /* CDTimeWeather.swift in Sources */,
+				70A970971F130B2300DBC25D /* HockeyAppManager.swift in Sources */,
 				9508D1D01DA0B932008C2A75 /* ForecastHierarchyBodyViewController.swift in Sources */,
 				95D1DA281D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift in Sources */,
 			);

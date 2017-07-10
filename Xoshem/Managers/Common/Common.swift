@@ -68,10 +68,6 @@ struct Common {
         struct forecast {
             static let updated : String = "notification.forecast.updated"
         }
-        struct spinner {
-            static let start : String = "notification.spinner.start"
-            static let stop : String = "notification.spinner.stop"
-        }
     }
 
 

@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         started = true
         try! Facade.instance.start()
-        
+        HockeyAppManager.instance.configure()
+
         // Override point for customization after application launch.
         guard let window = window else {
             return false

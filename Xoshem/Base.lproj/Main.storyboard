@@ -14,7 +14,7 @@
         <scene sceneID="pY4-Hu-kfo">
             <objects>
                 <navigationController title="Master" id="RMx-3f-FxP" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="Pmd-2v-anx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -158,7 +158,7 @@
         <scene sceneID="r7l-gg-dq7">
             <objects>
                 <navigationController id="vC3-pB-5Vb" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="DjV-YW-jjY">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -365,7 +365,7 @@ Bariloche</string>
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2199" y="978"/>
+            <point key="canvasLocation" x="2450" y="978"/>
         </scene>
         <!--Forecast Detail View Controller-->
         <scene sceneID="vWC-Iw-NeR">
@@ -829,7 +829,7 @@ Bariloche</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uhU-8Z-Xnw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3962" y="175"/>
+            <point key="canvasLocation" x="4366" y="261"/>
         </scene>
         <!--Forecast Hierarchy Header View Controller-->
         <scene sceneID="cRy-1M-nsY">
@@ -861,7 +861,7 @@ Bariloche</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6k0-aQ-MHR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4668" y="-130"/>
+            <point key="canvasLocation" x="5050" y="-152"/>
         </scene>
         <!--Forecast Hierarchy Body View Controller-->
         <scene sceneID="ZlR-cz-S8e">
@@ -893,7 +893,7 @@ Bariloche</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Idw-BA-Taa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4690" y="485.5"/>
+            <point key="canvasLocation" x="5181" y="500"/>
         </scene>
         <!--Forecast Hierarchy Footer View Controller-->
         <scene sceneID="9h1-jO-m9w">
@@ -941,6 +941,6 @@ Bariloche</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
-        <segue reference="eCk-VF-1Wl"/>
+        <segue reference="DiF-Ld-fdr"/>
     </inferredMetricsTieBreakers>
 </document>

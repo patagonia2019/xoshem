@@ -645,10 +645,10 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
     func fetchRootMenu() -> [CDMenu] {
         var array = [CDMenu]()
         do {
-            array = try CDMenu.fetchRootMenu (mco)
+            array = try CDMenu.fetchRootMenu(mco)
             if array.count == 0 {
                 try createMenu()
-                array = try CDMenu.fetchRootMenu (mco)
+                array = try CDMenu.fetchRootMenu(mco)
             }
         }
         catch {

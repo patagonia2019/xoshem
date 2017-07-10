@@ -71,14 +71,7 @@ class DetailViewController: BaseViewController {
         }
     }
     
-    
-    fileprivate func unobserveSpinner()
-    {
-        for notification in [Common.notification.spinner.start, Common.notification.spinner.stop] {
-            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
-        }
-    }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
