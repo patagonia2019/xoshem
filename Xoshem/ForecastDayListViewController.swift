@@ -71,7 +71,7 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if tableView == tableView {
+        if tableView == self.tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: Common.cell.identifier.forecastDayList,
                                                                    for: indexPath) as! ForecastDayListViewCell
             cell.backgroundColor = UIColor.clear
