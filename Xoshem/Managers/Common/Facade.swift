@@ -19,19 +19,19 @@ import CoreData
  *    It is subscribed to notifications of the LocationManager to update the plist file with the new location/country.
  */
 
-public class Facade: NSObject, NSFetchedResultsControllerDelegate {
+open class Facade: NSObject, NSFetchedResultsControllerDelegate {
     //
     // Attributes only modified by this class
     //
-    private var forecast: ForecastWindguruService!
-    private var locations = [CLLocation]()
-    private var started : Bool = false
-    private var onProcessing : Bool = false
-    private var auth: Auth!
-    private static var firstTime: Bool = true
-    public var lastRefreshDate : NSDate?
+    fileprivate var forecast: ForecastWindguruService!
+    fileprivate var locations = [CLLocation]()
+    fileprivate var started : Bool = false
+    fileprivate var onProcessing : Bool = false
+    fileprivate var auth: Auth!
+    fileprivate static var firstTime: Bool = true
+    open var lastRefreshDate : Date?
 
-    public static let instance = Facade()
+    open static let instance = Facade()
 
     lazy var mco: NSManagedObjectContext = {
         let _mco: NSManagedObjectContext = CoreDataManager.instance.taskContext
@@ -41,34 +41,31 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     //
     // initialization
     //
-    private override init() {
+    fileprivate override init() {
         super.init()
-        self.forecast = ForecastWindguruService()
+        forecast = ForecastWindguruService()
         Crash.start()
-        self.auth = Auth()
+        auth = Auth()
     }
     
-    public func restart() throws {
+    open func restart() throws {
         stop()
         try! start()
     }
     
     
 
-    public func restartLocation() throws {
-        JFCore.Common.synchronized({
-            self.spinnerStop()
+    open func restartLocation() throws {
+        JFCore.Common.synchronized(syncBlock: {
             LocationManager.instance.stop()
-            self.spinnerStart()
 
             LocationManager.instance.start()
         })
     }
     
-    public func stopLocation() throws {
-        JFCore.Common.synchronized({
+    open func stopLocation() throws {
+        JFCore.Common.synchronized(syncBlock: {
             LocationManager.instance.stop()
-            self.spinnerStop()
         })
     }
     
@@ -76,21 +73,19 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     //
     // start service manager
     //
-    public func start() throws
+    open func start() throws
     {
-        JFCore.Common.synchronized({
-            if self.started {
+        JFCore.Common.synchronized(syncBlock: { [weak self] in
+            if let started = self?.started, started == true {
                 return
             }
-            self.spinnerStart()
 
-            self.started = true
+            self?.started = true
 
-            self.logCurrentLanguage()
-            self.observeNotifications()
+            self?.observeNotifications()
             
             if (Facade.firstTime) {
-                try! self.removeMenu()
+                try! self?.removeMenu()
                 Facade.firstTime = false
             }
 
@@ -100,54 +95,57 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
         #else
             if (TARGET_OS_SIMULATOR == 1) {
                 print("TARGET_OS_SIMULATOR")
-                Analytics.logFunction(#function, parameters: ["line": "\(#line)", "device": "simulator"])
+                Analytics.logFunction(function: #function,
+                                      parameters: ["line": "\(#line)" as AnyObject,
+                                                   "device": "simulator" as AnyObject])
             }
             else {
-                Analytics.logFunction(#function, parameters: ["line": "\(#line)", "device": "real device"])
+                Analytics.logFunction(function: #function,
+                                      parameters: ["line": "\(#line)" as AnyObject,
+                                                   "device": "real device" as AnyObject])
             }
         #endif
 
             LocationManager.instance.start()
-//            self.updatePlacemarksAndLocation()
-            try! self.startForecastServices()
+//            updatePlacemarksAndLocation()
+            try! self?.startForecastServices()
         })
     }
     
     //
     // stop service manager
     //
-    public func stop()
+    open func stop()
     {
-        JFCore.Common.synchronized({
+        JFCore.Common.synchronized(syncBlock: { [weak self] in
             Analytics.stop()
             LocationManager.instance.stop()
 
-            self.unobserveNotifications()
-            self.stopForecastServices()
+            self?.unobserveNotifications()
+            self?.stopForecastServices()
         
             CoreDataManager.instance.save()
-            self.spinnerStop()
-            self.started = false
+            self?.started = false
         })
     }
     
     //
     // Forecast group of code
     //
-    private func startForecastServices() throws
+    fileprivate func startForecastServices() throws
     {
         do {
-            let fetchedForecastResults = try CDForecastResult.fetch(self.mco)
+            let fetchedForecastResults = try CDForecastResult.fetch (mco)
             if fetchedForecastResults.count > 0 {
-                self.updateSpotsForecastResult(fetchedForecastResults, placemark: nil)
+                updateSpotsForecastResult(fetchedForecastResults, placemark: nil)
             }
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.ForecastResultIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.forecastResultIssue.rawValue,
                                 desc: Common.title.failedAtFetchForecasts,
                                 reason: "Seems to be an initialization error in database with table ForecastResult",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+            Analytics.logError(error: myerror)
             throw myerror
         }
         
@@ -158,106 +156,110 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     // Location code
     //
     
-    func didUpdateSpotOwners(spotOwners: [SpotOwner], placemark: CDPlacemark) throws {
+    func recursivelyUpdateSpotOwners(_ spotOwners: [SpotOwner], placemark: CDPlacemark) throws {
         do {
             var array = spotOwners
             if array.count > 0 {
                 let spotOwner = array.removeFirst()
-                let cdSpotOwner = try CDSpotOwner.importObject(spotOwner, mco: self.mco)
-                self.forecast
-                    .queryWeatherSpot(spot: cdSpotOwner.identity!,
-                                      updateForecastDidFailWithError: { [weak self] (error) in
-                                        do {
-                                            if let strong = self {
-                                                try strong.didUpdateSpotOwners(array, placemark: placemark)
-                                            }
-                                        }
-                                        catch {
-                                            let myerror = Error(code: Common.ErrorCode.UpdateSpotsOwnersIssue.rawValue,
-                                                desc: Common.title.failedAtImportObjects,
-                                                reason: "Error on update CDSpotOwners",
-                                                suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-                                            Analytics.logFatal(myerror)
-                                            myerror.fatal()
-                                        }
-                        },
-                                      didUpdateForecastResult: { [weak self] (forecastResult) in
-                                        do {
-                                            if let strong = self {
-                                                strong.lastRefreshDate = NSDate()
-                                                try strong.didUpdateForecastResult(forecastResult, spotOwner:cdSpotOwner, placemark: placemark)
-                                                try strong.didUpdateSpotOwners(array, placemark: placemark)
-                                            }
-                                        }
-                                        catch {
-                                            let myerror = Error(code: Common.ErrorCode.UpdateForecastSpotsResultIssue.rawValue,
+                guard let cdSpotOwner = try CDSpotOwner.importObject(spotOwner, mco: mco),
+                      let identity = cdSpotOwner.identity else {
+                    try recursivelyUpdateSpotOwners(array, placemark: placemark)
+                    return
+                }
+                
+                forecast.queryWeatherSpot(spot: identity,
+                    updateForecastDidFailWithError: {
+                        [weak self] (error) in
+                        do {
+                            try self?.recursivelyUpdateSpotOwners(array, placemark: placemark)
+                        }
+                        catch {
+                            let myerror = JFError(code: Common.ErrorCode.updateSpotsOwnersIssue.rawValue,
+                                                  desc: Common.title.failedAtImportObjects,
+                                                  reason: "Error on update CDSpotOwners",
+                                                  suggestion: "\(#file):\(#line):\(#column):\(#function)",
+                                underError: error as NSError)
+                            Analytics.logFatal(error: myerror)
+                            myerror.fatal()
+                        }
+                    },
+                    didUpdateForecastResult: {
+                        [weak self] (forecastResult) in
+                        do {
+                            self?.lastRefreshDate = Date.init()
+                            try self?.didUpdateForecastResult(forecastResult, spotOwner:cdSpotOwner,
+                                                              placemark: placemark)
+                            try self?.recursivelyUpdateSpotOwners(array, placemark: placemark)
+                        }
+                        catch {
+                            let myerror = JFError(code: Common.ErrorCode.updateForecastSpotsResultIssue.rawValue,
                                                 desc: Common.title.failedAtImportObjects,
                                                 reason: "Error on update CDForecastResult",
-                                                suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-                                            Analytics.logFatal(myerror)
-                                            myerror.fatal()
-                                        }
+                                                suggestion: "\(#file):\(#line):\(#column):\(#function)",
+                                underError: error as NSError)
+                            Analytics.logFatal(error: myerror)
+                            myerror.fatal()
+                        }
                     })
             }
             else {
-                self.forecastUpdated()
-                self.spinnerStop()
+                forecastUpdated()
             }
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.UpdateForecastSpotsResultIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.updateForecastSpotsResultIssue.rawValue,
                                 desc: Common.title.failedAtImportObjects,
                                 reason: "Error in ForecastResult/SpotOwners",
-                                suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+                                suggestion: "\(#file):\(#line):\(#column):\(#function)",
+                underError: error as NSError)
+            Analytics.logError(error: myerror)
             throw myerror
         }
     }
     
-    func queryLocationWithString(string: String, placemark: CDPlacemark, tryAgain:() -> Void) {
-        self.forecast.queryLocation(location: string,
-                                    updateSpotDidFailWithError: { (error) in
-                                        tryAgain()
-                                    },
-                                    didUpdateSpotResult: { [weak self] (spotResult) in
-                                        if let array = spotResult.spots {
-                                            do {
-                                                if let strong = self {
-                                                    try strong.didUpdateSpotOwners(array, placemark: placemark)
-                                                }
-                                            }
-                                            catch {
-                                                let myerror = Error(code: Common.ErrorCode.UpdateSpotsOwnersIssue.rawValue,
-                                                    desc: Common.title.failedAtImportObjects,
-                                                    reason: "Error on update CDSpotOwners",
-                                                    suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-                                                Analytics.logFatal(myerror)
-                                                myerror.fatal()
-                                            }
-                                        }
-                                        else {
-                                            tryAgain()
-                                        }
+    func queryLocationWithString(_ string: String, placemark: CDPlacemark, tryAgain:@escaping () -> Void) {
+        forecast.queryLocation(location: string,
+            updateSpotDidFailWithError: {
+                (error) in
+                tryAgain()
+            },
+            didUpdateSpotResult: {
+                [weak self] (spotResult) in
+                if let array = spotResult.spots {
+                    do {
+                        try self?.recursivelyUpdateSpotOwners(array, placemark: placemark)
+                    }
+                    catch {
+                        let myerror = JFError(code: Common.ErrorCode.updateSpotsOwnersIssue.rawValue,
+                                              desc: Common.title.failedAtImportObjects,
+                                              reason: "Error on update CDSpotOwners",
+                                              suggestion: "\(#file):\(#line):\(#column):\(#function)",
+                            underError: error as NSError)
+                        Analytics.logFatal(error: myerror)
+                        myerror.fatal()
+                    }
+                }
+                else {
+                    tryAgain()
+                }
         })
     }
     
     
-    func queryLocationWithArray(strings: [String], placemark: CDPlacemark) {
+    func recursivelyQueryLocationWithArray(_ strings: [String], placemark: CDPlacemark) {
         var array = strings
         if array.count > 0 {
             let string = array.removeFirst()
-            self.queryLocationWithString(string, placemark: placemark, tryAgain: { [weak self] in
+            queryLocationWithString(string, placemark: placemark, tryAgain: { [weak self] in
                 if array.count > 0 {
-                    if let strong = self {
-                        strong.queryLocationWithArray(array, placemark: placemark)
-                    }
+                    self?.recursivelyQueryLocationWithArray(array, placemark: placemark)
                 }
                 else {
-                    let myerror = Error(code: Common.ErrorCode.QueryLocationWithPlacemarkIssue.rawValue,
+                    let myerror = JFError(code: Common.ErrorCode.queryLocationWithPlacemarkIssue.rawValue,
                         desc: Common.title.errorOnSearch,
                         reason: "Failed to query placemark with string \(string)",
                         suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
-                    Analytics.logFatal(myerror)
+                    Analytics.logFatal(error: myerror)
                     myerror.fatal()
                 }
             })
@@ -266,7 +268,7 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     
     
     
-    func queryLocationWithPlacemark(placemark: CDPlacemark) -> Bool {
+    func queryLocationWithPlacemark(_ placemark: CDPlacemark) -> Bool {
         
         var array = [String]()
 
@@ -287,7 +289,7 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
         }
 
         if array.count > 0 {
-            self.queryLocationWithArray(array, placemark: placemark)
+            recursivelyQueryLocationWithArray(array, placemark: placemark)
             return true
         }
 
@@ -295,40 +297,40 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func updatePlacemarksAndLocation() {
-        if (self.locations.count > 0) {
-            self.updateLocations()
+        if  (locations.count > 0) {
+            updateLocations()
         }
     }
     
-    func updatePlacemarks(placemarks: [CLPlacemark], location: CDLocation) throws {
+    func updatePlacemarks(_ placemarks: [CLPlacemark], location: CDLocation) throws {
         var array = placemarks
         if array.count > 0 {
             let placemark = array.removeFirst()
             do {
-                if let cdPlacemark = try CDPlacemark.importObject(placemark, mco: self.mco) {
+                if let cdPlacemark = try CDPlacemark.importObject(placemark, mco: mco) {
                     cdPlacemark.location = location
-                    if (self.queryLocationWithPlacemark(cdPlacemark)) {
-                        try self.updatePlacemarks(array, location: location)
+                    if  (queryLocationWithPlacemark(cdPlacemark)) {
+                        try updatePlacemarks(array, location: location)
                     }
                 }
             } catch {
-                let myerror = Error(code: Common.ErrorCode.UpdatePlacemarksLocationIssue.rawValue,
+                let myerror = JFError(code: Common.ErrorCode.updatePlacemarksLocationIssue.rawValue,
                                     desc: Common.title.failedAtImportObjects,
                                     reason: "Error on update Placemark",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-                Analytics.logError(myerror)
+                Analytics.logError(error: myerror)
                 throw myerror
             }
         }
     }
 
-    func updateLocations(currentLocations: [CLLocation]) throws {
-        JFCore.Common.synchronized({ [weak self] in
-            guard let strong = self else {
-                return
-            }
+    func updateLocations(_ currentLocations: [CLLocation]) throws {
+        JFCore.Common.synchronized(syncBlock: { [weak self] in
+
             do {
-                let locations = try strong.fetchLocation()
+                guard let locations = try self?.fetchLocation() else {
+                    return
+                }
                 
                 var change = true
                 
@@ -344,19 +346,19 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
                 }
                 if change {
                     for location in locations {
-                        strong.mco.deleteObject(location)
+                        self?.mco.delete(location)
                     }
-                    strong.locations = currentLocations
-                    strong.updateLocations()
+                    self?.locations = currentLocations
+                    self?.updateLocations()
                 }
-//                try self.mco.save()
+//                try mco.save()
             }
             catch {
-                let myerror = Error(code: Common.ErrorCode.FetchLocationIssue.rawValue,
+                let myerror = JFError(code: Common.ErrorCode.fetchLocationIssue.rawValue,
                     desc: Common.title.errorOnSearch,
                     reason: "Error on search / delete location",
                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-                Analytics.logFatal(myerror)
+                Analytics.logFatal(error: myerror)
                 myerror.fatal()
             }
         })
@@ -365,92 +367,67 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
 
 
     func updateLocations() {
-        if self.locations.count > 0 && !self.onProcessing {
-            self.onProcessing = true
-            JFCore.Common.synchronized({ [weak self] in
-                guard let strong = self else {
+        if locations.count > 0 && !self.onProcessing {
+            onProcessing = true
+            JFCore.Common.synchronized(syncBlock: { [weak self] in
+                guard let location = self?.locations.removeFirst() else {
                     return
                 }
-                let location = strong.locations.removeFirst()
-                LocationManager.instance.reverseLocation(location,
+                LocationManager.instance.reverseLocation(location: location,
                     didFailWithError: { (error) in
-                        strong.updateLocations()
+                        self?.updateLocations()
                     },
                     didUpdatePlacemarks: { (placemarks) in
                         do {
-                            if let cdLocation = try CDLocation.importObject(location, mco: strong.mco) {
-                                try strong.updatePlacemarks(placemarks, location: cdLocation)
+                            if  let mco = self?.mco,
+                                let cdLocation = try CDLocation.importObject(location, mco: mco) {
+                                try self?.updatePlacemarks(placemarks, location: cdLocation)
                             }
                         }
                         catch {
-                            let myerror = Error(code: Common.ErrorCode.CDUpdateLocationIssue.rawValue,
+                            let myerror = JFError(code: Common.ErrorCode.cdUpdateLocationIssue.rawValue,
                                 desc: Common.title.errorOnUpdate,
                                 reason: "Error on Location/Placemarks import",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-                            Analytics.logFatal(myerror)
+                            Analytics.logFatal(error: myerror)
                             myerror.fatal()
                         }
-                        strong.updateLocations()
+                        self?.updateLocations()
                 })
             })
         }
         else {
-            self.onProcessing = false
-            self.locationSaved()
+            onProcessing = false
+            locationSaved()
         }
     }
     
-    private func logCurrentLanguage()
-    {
-        if let locale : NSLocale = NSLocale.currentLocale() {
-            for key in [NSLocaleIdentifier, NSLocaleLanguageCode, NSLocaleCountryCode, NSLocaleScriptCode, NSLocaleVariantCode, NSLocaleUsesMetricSystem, NSLocaleMeasurementSystem, NSLocaleDecimalSeparator] {
-                if let name = locale.objectForKey(key) {
-                    Analytics.logFunction(#function, parameters: [key : String(name)])
-                }
-            }
-            if let calendar = locale.objectForKey(NSLocaleCalendar) as? NSCalendar {
-                Analytics.logFunction(#function, parameters: [NSLocaleCalendar : calendar.calendarIdentifier])
-            }
-        }
-    }
 
-    private func observeNotifications()
+    fileprivate func observeNotifications()
     {
-        self.unobserveNotifications()
+        unobserveNotifications()
         
-        NSNotificationCenter.defaultCenter().addObserverForName(JFCore.Constants.Notification.locationUpdated, object: nil, queue: NSOperationQueue.mainQueue()) { (NSNotification) in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationUpdated), object: nil, queue: OperationQueue.main) { (NSNotification) in
             if !LocationManager.instance.isRunning() {
                 return
             }
-            JFCore.Common.synchronized({ [weak self] in
-                guard let strong = self else {
-                    return
-                }
+            JFCore.Common.synchronized(syncBlock: { [weak self] in
                 guard let locations = LocationManager.instance.locations else {
                     return
                 }
-                if strong.onProcessing {
+                if let onProcessing = self?.onProcessing, onProcessing == true {
                     return
                 }
-                try! strong.updateLocations(locations)
+                try! self?.updateLocations(locations)
             })
         }
 
-//        NSNotificationCenter.defaultCenter().addObserverForName(JFCore.Constants.Notification.locationError, object: nil, queue: NSOperationQueue.mainQueue()) {
-//            note in if let object: Error = note.object as? Error {
-//                object.fatal()
-//            }
-//        }
-//
-//        NSNotificationCenter.defaultCenter().addObserverForName(JFCore.Constants.Notification.locationAuthorized, object: nil, queue: NSOperationQueue.mainQueue()) { (NSNotification) in
-//
-//        }
     }
     
-    private func unobserveNotifications()
+    fileprivate func unobserveNotifications()
     {
         for notification in [JFCore.Constants.Notification.locationUpdated, JFCore.Constants.Notification.locationError, JFCore.Constants.Notification.locationAuthorized] {
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: notification, object: nil);
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
         }
     }
 
@@ -458,82 +435,73 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     // update forecast
     //
     
-    func didUpdateForecastResult(forecastResult: ForecastResult, spotOwner: CDSpotOwner?, placemark: CDPlacemark?) throws {
+    func didUpdateForecastResult(_ forecastResult: ForecastResult, spotOwner: CDSpotOwner?, placemark: CDPlacemark?) throws {
         do {
-            let forecastResult = try CDForecastResult.importObject(forecastResult, mco: self.mco)
-            if let placemarkToUpdate = placemark,
-                    _ = placemarkToUpdate.location {
-                forecastResult.placemarkResult = placemarkToUpdate
-                forecastResult.spotOwner = spotOwner
+            guard let forecastResult = try CDForecastResult.importObject(forecastResult, mco: mco),
+                let placemarkToUpdate = placemark,
+                let _ = placemarkToUpdate.location else {
+                    return
             }
+            forecastResult.placemarkResult = placemarkToUpdate
+            forecastResult.spotOwner = spotOwner
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.UpdateForecastResultIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.updateForecastResultIssue.rawValue,
                                 desc: Common.title.failedAtImportObjects,
                                 reason: "Error on update ForecastResult",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+            Analytics.logError(error: myerror)
             throw myerror
         }
     }
 
-    func updateSpotsForecastResult(fetchedForecastResults: [CDForecastResult]?, placemark: CDPlacemark?) {
+    func updateSpotsForecastResult(_ fetchedForecastResults: [CDForecastResult]?, placemark: CDPlacemark?) {
         if var array : [CDForecastResult] = fetchedForecastResults {
             if array.count > 0 {
-                JFCore.Common.synchronized({ [weak self] in
-                    guard let strong = self else {
-                        return
-                    }
+                JFCore.Common.synchronized(syncBlock: { [weak self] in
 
                     let mySpot = array.removeFirst()
                     guard let identity = mySpot.identity,
-                        currentModel = mySpot.currentModel else {
-                            strong.updateSpotsForecastResult(array, placemark: placemark)
+                        let currentModel = mySpot.currentModel else {
+                            self?.updateSpotsForecastResult(array, placemark: placemark)
                             return
                     }
-                    strong.forecast.queryWeatherSpot(spot: identity, model: currentModel,
+                    self?.forecast.queryWeatherSpot(spot: identity, model: currentModel,
                         updateForecastDidFailWithError: { [weak self] (error) in
-                            guard let strong = self else {
-                                return
-                            }
-                            strong.updateSpotsForecastResult(array, placemark: placemark)
+                            self?.updateSpotsForecastResult(array, placemark: placemark)
                         },
                         didUpdateForecastResult: { [weak self] (forecastResult) in
                             do {
-                                guard let strong = self else {
-                                    return
-                                }
-                                try strong.didUpdateForecastResult(forecastResult, spotOwner: nil, placemark: placemark)
-                                strong.updateSpotsForecastResult(array, placemark: placemark)
+                                try self?.didUpdateForecastResult(forecastResult, spotOwner: nil, placemark: placemark)
+                                self?.updateSpotsForecastResult(array, placemark: placemark)
                             }
                             catch {
-                                let myerror = Error(code: Common.ErrorCode.UpdateForecastSpotsResultIssue.rawValue,
+                                let myerror = JFError(code: Common.ErrorCode.updateForecastSpotsResultIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Error on update ForecastResult/Spots",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-                                Analytics.logFatal(myerror)
+                                Analytics.logFatal(error: myerror)
                                 myerror.fatal()
                             }
                     })
                 })
             }
             else {
-                self.forecastUpdated()
-                self.spinnerStop()
+                forecastUpdated()
             }
         }
     }
     
     
-    private func stopForecastServices()
+    fileprivate func stopForecastServices()
     {
     }
     
     // MARK: - Core Data stack
  
-    lazy var applicationDocumentsDirectory: NSURL = {
+    lazy var applicationDocumentsDirectory: URL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.fuchs.mater-detail.md" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls[urls.count-1]
     }()
     
@@ -542,95 +510,95 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
                 
         let menuArray : [[String: AnyObject]] = [
             [
-                "parentId": Int(0),
-                "id": Int(1),
-                "name": Common.title.Forecast,
-                "icon": "1468046481_cloud-weather-forecast-cloudy-outline-stroke",
-                "iconList": "themify",
-                "iconName": "cloud",
-                "edit": Bool(true)
+                "parentId": Int(0) as AnyObject,
+                "id": Int(1) as AnyObject,
+                "name": Common.title.Forecast as AnyObject,
+                "icon": "1468046481_cloud-weather-forecast-cloudy-outline-stroke" as AnyObject,
+                "iconList": "themify" as AnyObject,
+                "iconName": "cloud" as AnyObject,
+                "edit": Bool(true) as AnyObject
             ],
             [
-                "parentId": Int(0),
-                "id": Int(2),
-                "name": Common.title.Search,
-                "icon": "1468046237_common-search-lookup-glyph",
-                "iconList": "FontAwesome",
-                "iconName": "search",
-                "edit": Bool(false)
+                "parentId": Int(0) as AnyObject,
+                "id": Int(2) as AnyObject,
+                "name": Common.title.Search as AnyObject,
+                "icon": "1468046237_common-search-lookup-glyph" as AnyObject,
+                "iconList": "FontAwesome" as AnyObject,
+                "iconName": "search" as AnyObject,
+                "edit": Bool(false) as AnyObject
             ],
             [
-                "parentId": Int(0),
-                "id": Int(3),
-                "name": Common.title.Options,
-                "icon": "1468046524_editor-setting-gear-outline-stroke",
-                "iconList": "FontAwesome",
-                "iconName": "gear",
-                "edit": Bool(false)
+                "parentId": Int(0) as AnyObject,
+                "id": Int(3) as AnyObject,
+                "name": Common.title.Options as AnyObject,
+                "icon": "1468046524_editor-setting-gear-outline-stroke" as AnyObject,
+                "iconList": "FontAwesome" as AnyObject,
+                "iconName": "gear" as AnyObject,
+                "edit": Bool(false) as AnyObject
             ],
             [
-                "parentId": Int(0),
-                "id": Int(4),
-                "name": Common.title.Help,
-                "icon": "1468046356_circle-help-question-mark-outline-stroke",
-                "iconList": "Ionicons",
-                "iconName": "help-circled",
-                "edit": Bool(false)
+                "parentId": Int(0) as AnyObject,
+                "id": Int(4) as AnyObject,
+                "name": Common.title.Help as AnyObject,
+                "icon": "1468046356_circle-help-question-mark-outline-stroke" as AnyObject,
+                "iconList": "Ionicons" as AnyObject,
+                "iconName": "help-circled" as AnyObject,
+                "edit": Bool(false) as AnyObject
             ],
             [
-                "parentId": Int(4),
-                "id": Int(1),
-                "name": Common.title.frequentlyAskedQuestions,
-                "segue": Common.segue.web,
-                "file": Common.file.faq,
-                "icon": "1468046956_common-bookmark-book-open-glyph",
-                "iconList": "Ionicons",
-                "iconName": "ios-book-outline",
-                "edit": Bool(false)
+                "parentId": Int(4) as AnyObject,
+                "id": Int(1) as AnyObject,
+                "name": Common.title.frequentlyAskedQuestions as AnyObject,
+                "segue": Common.segue.web as AnyObject,
+                "file": Common.file.faq as AnyObject,
+                "icon": "1468046956_common-bookmark-book-open-glyph" as AnyObject,
+                "iconList": "Ionicons" as AnyObject,
+                "iconName": "ios-book-outline" as AnyObject,
+                "edit": Bool(false) as AnyObject
             ],
             [
-                "parentId": Int(4),
-                "id": Int(2),
-                "name": Common.title.Tutorial,
-                "segue": Common.segue.web,
-                "file": Common.file.tutorial,
-                "icon": "1475082499_device-board-presentation-content-chart-outline-stroke",
-                "iconList": "octicons",
-                "iconName": "device-desktop",
-                "edit": Bool(false)
+                "parentId": Int(4) as AnyObject,
+                "id": Int(2) as AnyObject,
+                "name": Common.title.Tutorial as AnyObject,
+                "segue": Common.segue.web as AnyObject,
+                "file": Common.file.tutorial as AnyObject,
+                "icon": "1475082499_device-board-presentation-content-chart-outline-stroke" as AnyObject,
+                "iconList": "octicons" as AnyObject,
+                "iconName": "device-desktop" as AnyObject,
+                "edit": Bool(false) as AnyObject
             ],
             [
-                "parentId": Int(4),
-                "id": Int(3),
-                "name": Common.title.TermsOfUse,
-                "segue": Common.segue.web,
-                "file": Common.file.tou,
-                "icon": "1468046901_editor-books-library-collection-glyph",
-                "iconList": "Ionicons",
-                "iconName": "bowtie",
-                "edit": Bool(false)
+                "parentId": Int(4) as AnyObject,
+                "id": Int(3) as AnyObject,
+                "name": Common.title.TermsOfUse as AnyObject,
+                "segue": Common.segue.web as AnyObject,
+                "file": Common.file.tou as AnyObject,
+                "icon": "1468046901_editor-books-library-collection-glyph" as AnyObject,
+                "iconList": "Ionicons" as AnyObject,
+                "iconName": "bowtie" as AnyObject,
+                "edit": Bool(false) as AnyObject
             ],
             [
-                "parentId": Int(4),
-                "id": Int(4),
-                "name": Common.title.TermsAndConditions,
-                "segue": Common.segue.web,
-                "file": Common.file.tac,
-                "icon": "1468046859_business-tie-outline-stroke",
-                "iconList": "Ionicons",
-                "iconName": "bowtie",
-                "edit": Bool(false)
+                "parentId": Int(4) as AnyObject,
+                "id": Int(4) as AnyObject,
+                "name": Common.title.TermsAndConditions as AnyObject,
+                "segue": Common.segue.web as AnyObject,
+                "file": Common.file.tac as AnyObject,
+                "icon": "1468046859_business-tie-outline-stroke" as AnyObject,
+                "iconList": "Ionicons" as AnyObject,
+                "iconName": "bowtie" as AnyObject,
+                "edit": Bool(false) as AnyObject
             ],
             [
-                "parentId": Int(4),
-                "id": Int(5),
-                "name": "\(Common.title.About) \(JFCore.Common.app)",
-                "segue": Common.segue.about,
-                "file": Common.file.about,
-                "icon": "1468046733_circle-info-more-information-detail-outline-stroke",
-                "iconList": "Ionicons",
-                "iconName": "ios-information-outline",
-                "edit": Bool(false)
+                "parentId": Int(4) as AnyObject,
+                "id": Int(5) as AnyObject,
+                "name": "\(Common.title.About) \(JFCore.Common.app)" as AnyObject,
+                "segue": Common.segue.about as AnyObject,
+                "file": Common.file.about as AnyObject,
+                "icon": "1468046733_circle-info-more-information-detail-outline-stroke" as AnyObject,
+                "iconList": "Ionicons" as AnyObject,
+                "iconName": "ios-information-outline" as AnyObject,
+                "edit": Bool(false) as AnyObject
             ]
         ]
 
@@ -641,15 +609,15 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
          */
 
         do {
-            try CDMenu.importArray(menuArray, mco: self.mco)
+            try _ = CDMenu.importArray(menuArray, mco: mco)
 
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.ImportMenuArrayIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.importMenuArrayIssue.rawValue,
                                 desc: Common.title.errorOnImport,
                                 reason: "Error on CDMenu",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+            Analytics.logError(error: myerror)
             throw myerror
         }
     }
@@ -657,18 +625,18 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     
     func removeMenu() throws {
         do {
-            let array = try CDMenu.fetch(self.mco)
+            let array = try CDMenu.fetch (mco)
             for menu in array {
-                self.mco.deleteObject(menu)
+                mco.delete(menu)
             }
-            try self.mco.save()
+            try mco.save()
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.CDRemoveMenuIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.cdRemoveMenuIssue.rawValue,
                                 desc: Common.title.errorOnDelete,
                                 reason: "Failed at fetch menu and remove",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+            Analytics.logError(error: myerror)
             throw myerror
         }
     }
@@ -677,18 +645,18 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     func fetchRootMenu() -> [CDMenu] {
         var array = [CDMenu]()
         do {
-            array = try CDMenu.fetchRootMenu(self.mco)
+            array = try CDMenu.fetchRootMenu (mco)
             if array.count == 0 {
-                try self.createMenu()
-                array = try CDMenu.fetchRootMenu(self.mco)
+                try createMenu()
+                array = try CDMenu.fetchRootMenu (mco)
             }
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.FetchRootMenuIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.fetchRootMenuIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Error on CDMenu",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logFatal(myerror)
+            Analytics.logFatal(error: myerror)
             myerror.fatal()
         }
         return array
@@ -698,14 +666,14 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     func fetchHelpMenu() -> [CDMenu] {
         var array = [CDMenu]()
         do {
-            array = try CDMenu.fetchHelpMenu(self.mco)
+            array = try CDMenu.fetchHelpMenu (mco)
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.FetchHelpMenuIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.fetchHelpMenuIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Error on CDMenu",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+            Analytics.logError(error: myerror)
             myerror.fatal()
         }
         return array
@@ -714,14 +682,14 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     func fetchForecastResult() throws -> [CDForecastResult] {
         var array = [CDForecastResult]()
         do {
-            array = try CDForecastResult.fetch(self.mco)
+            array = try CDForecastResult.fetch (mco)
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.ForecastResultIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.forecastResultIssue.rawValue,
                                 desc: Common.title.failedAtFetchForecasts,
                                 reason: "Seems to be an initialization error in database with table ForecastResult",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+            Analytics.logError(error: myerror)
             throw myerror
         }
         return array
@@ -731,14 +699,14 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     func fetchLocation() throws -> [CDLocation] {
         var array = [CDLocation]()
         do {
-            array = try CDLocation.fetch(self.mco)
+            array = try CDLocation.fetch (mco)
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.FetchLocationIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.fetchLocationIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Seems to be an initialization error in database with table Location",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+            Analytics.logError(error: myerror)
             throw myerror
         }
         return array
@@ -747,7 +715,7 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     func fetchCurrentLocation() throws -> CDLocation? {
         var array = [CDLocation]()
         do {
-            array = try self.fetchLocation()
+            array = try fetchLocation()
         }
         catch {
             return nil
@@ -762,91 +730,43 @@ public class Facade: NSObject, NSFetchedResultsControllerDelegate {
     func fetchPlacemarks() throws -> [CDPlacemark] {
         var array = [CDPlacemark]()
         do {
-            array = try CDPlacemark.fetch(self.mco)
+            array = try CDPlacemark.fetch (mco)
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.FetchPlacemarkIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.fetchPlacemarkIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Seems to be an initialization error in database with table Placemark",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+            Analytics.logError(error: myerror)
             throw myerror
         }
         return array
     }
     
 
-    func fetchForecastModel(forecastResult: CDForecastResult) throws -> CDForecastModel {
+    func fetchForecastModel(_ forecastResult: CDForecastResult) throws -> CDForecastModel {
         var array = [CDForecastModel]()
         do {
-            array = try CDForecastModel.fetchWithSpot(withSpot: forecastResult, mco: self.mco)!
+            array = try CDForecastModel.fetchWithSpot(withSpot: forecastResult, mco: mco)!
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.ForecastResultIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.forecastResultIssue.rawValue,
                                 desc: Common.title.failedAtFetchForecasts,
                                 reason: "Seems to be an initialization error in database with table ForecastResult",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(myerror)
+            Analytics.logError(error: myerror)
             throw myerror
         }
         return array.first!
     }
 
     func forecastUpdated() {
-        NSNotificationCenter.defaultCenter().postNotificationName(Common.notification.forecast.updated, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: Common.notification.forecast.updated), object: nil)
     }
     
     func locationSaved() {
-        NSNotificationCenter.defaultCenter().postNotificationName(Common.notification.location.saved, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: Common.notification.location.saved), object: nil)
     }
     
-
-    func spinnerStart() {
-        NSNotificationCenter.defaultCenter().postNotificationName(Common.notification.spinner.start, object: nil)
-    }
-    
-    func spinnerStop() {
-        NSNotificationCenter.defaultCenter().postNotificationName(Common.notification.spinner.stop, object: nil)
-    }
-
-
-#if os(iOS)
-
-    private lazy var spinner : SpinnerView = {
-        let spinnerView = SpinnerView(frame: CGRectMake(0,0,40,40))
-        spinnerView.backgroundColor = UIColor.clearColor()
-        spinnerView.sizeToFit()
-        return spinnerView
-    }()
-    
-    
-    private func removeSpinner() {
-        self.spinner.removeFromSuperview()
-    }
-    
-    func addSpinnerToView(view: UIView, translates translatesAutoresizingMaskIntoConstraints: Bool) {
-    
-        self.removeSpinner()
-    
-        view.addSubview(self.spinner)
-        
-        view.translatesAutoresizingMaskIntoConstraints = translatesAutoresizingMaskIntoConstraints
-        self.spinner.translatesAutoresizingMaskIntoConstraints = !translatesAutoresizingMaskIntoConstraints
-        
-        let spinnerConstraints = ["spinner" : self.spinner]
-        
-        let constraintsH = NSLayoutConstraint.constraintsWithVisualFormat("V:[spinner(\(self.spinner.frame.size.width))]", options: .AlignAllTop, metrics: nil, views: spinnerConstraints)
-        let constraintsV = NSLayoutConstraint.constraintsWithVisualFormat("H:[spinner(\(self.spinner.frame.size.height))]", options: .AlignAllTop, metrics: nil, views: spinnerConstraints)
-        
-        self.spinner.addConstraints(constraintsH)
-        self.spinner.addConstraints(constraintsV)
-        
-        let constraintsX = NSLayoutConstraint.constraintsWithVisualFormat("V:[spinner]-1-|", options: .AlignAllTop, metrics: nil, views: spinnerConstraints)
-        let constraintsY = NSLayoutConstraint.constraintsWithVisualFormat("H:[spinner]-1-|", options: .AlignAllTop, metrics: nil, views: spinnerConstraints)
-        
-        view.addConstraints(constraintsX)
-        view.addConstraints(constraintsY)
-    }
-#endif
     
 }

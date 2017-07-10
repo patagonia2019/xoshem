@@ -17,57 +17,58 @@ class ForecastDetailViewController: BaseViewController {
     var detailItem: CDForecastResult? {
         didSet {
             // Update the view.
-            self.configureView()
+            configureView()
         }
     }
     
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail = self.detailItem {
-            self.title = detail.namecheck()
+        if let detail = detailItem {
+            title = detail.namecheck()
         }
-        self.showComponent(1)
+        showComponent(1)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.configureView()
+        configureView()
     }
     
-    func showComponent(id: Int) {
+    func showComponent(_ id: Int) {
         let array = [dayListContainer, hierarchyContainer]
         
         for subview in array {
             if subview != nil {
-                subview.alpha = 0
+                subview?.alpha = 0
             }
         }
         
         if let subview = array[id-1] {
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 subview.alpha = 1
             })
         }
     }
     
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        NSNotificationCenter.defaultCenter().postNotificationName(Common.notification.editing, object: editing)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: Common.notification.editing), object: editing)
         
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Common.segue.forecastDayList {
-            let connectContainerViewController = segue.destinationViewController as! ForecastDayListViewController
-            connectContainerViewController.forecastResult = self.detailItem
+            let connectContainerViewController = segue.destination as! ForecastDayListViewController
+            connectContainerViewController.forecastResult = detailItem
         }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        Analytics.logMemoryWarning(#function, line: #line)
+        Analytics.logMemoryWarning(function: #function, line: #line)
     }
     
 

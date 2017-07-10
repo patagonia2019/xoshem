@@ -22,7 +22,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             try Facade.instance.start()
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.AppDidBecomeActiveError.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.appDidBecomeActiveError.rawValue,
                                 desc: "Failed at start of services",
                                 reason: "Error on did become active",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)

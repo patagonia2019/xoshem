@@ -13,24 +13,56 @@ import JFCore
 
 class CDLocation: CDManagedObject {
 
-    override class func createInManageContextObject(mco: NSManagedObjectContext) -> CDLocation {
+    override class func createInManageContextObject(_ mco: NSManagedObjectContext) -> CDLocation {
         return super.createName(NSStringFromClass(self), inManageContextObject: mco) as! CDLocation
     }
     
-    func update(object: CLLocation) throws -> Bool {
+    class func importObject(_ object: CLLocation?, mco: NSManagedObjectContext) throws -> CDLocation? {
+        guard let object = object else {
+            return nil
+        }
         
-        var ret = super.update()
+        let search = { () -> [AnyObject]? in
+            let name = "[\(object.coordinate.latitude):\(object.coordinate.longitude):\(object.altitude)]"
+            let predicate = NSPredicate(format: "name = %@", name)
+            guard let array = try CDLocation.searchEntityName(NSStringFromClass(self), predicate: predicate,
+                                                   sortDescriptors: [], limit: 1, mco: mco) as? [CDLocation]
+                else {
+                    return nil
+            }
+            return array
+        }
+        
+        let update = { (cdObject: CDManagedObject?) -> Bool in
+            let obj = cdObject as! CDLocation
+            let wgo = object
+            return try obj.update(wgo)
+        }
+        let create = { () -> AnyObject? in
+            return CDLocation.createInManageContextObject(mco)
+        }
+        
+        return try CDLocation.importObject(wgObject: object as AnyObject, mco: mco, search: search,
+                                           update: update, create: create) as? CDLocation
+    }
+
+    func update(_ object: CLLocation?) throws -> Bool {
+        
+        guard let object = object else {
+            return false
+        }
+
         guard let
             _latitude           = object.coordinate.latitude as Double?,
-            _longitude          = object.coordinate.longitude as Double?,
-            _altitude           = object.altitude as Double?,
-            _horizontalAccuracy = object.horizontalAccuracy as Double?,
-            _verticalAccuracy   = object.verticalAccuracy as Double?,
-            _floor              = object.floor as CLFloor?,
-            _floorLevel         = Int16(_floor.level) as Int16?,
-            _name               = "[\(_latitude):\(_longitude):\(_altitude)]" as String?
+            let _longitude          = object.coordinate.longitude as Double?,
+            let _altitude           = object.altitude as Double?,
+            let _horizontalAccuracy = object.horizontalAccuracy as Double?,
+            let _verticalAccuracy   = object.verticalAccuracy as Double?,
+            let _floor              = object.floor as CLFloor?,
+            let _floorLevel         = Int16(_floor.level) as Int16?,
+            let _name               = "[\(_latitude):\(_longitude):\(_altitude)]" as String?
             else {
-                let myerror = Error(code: Common.ErrorCode.CDUpdateLocationIssue.rawValue,
+                let myerror = JFError(code: Common.ErrorCode.cdUpdateLocationIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Failed at import CLLocation object into CDLocation",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -43,35 +75,33 @@ class CDLocation: CDManagedObject {
             verticalAccuracy   == _verticalAccuracy &&
             floorLevel         == _floorLevel &&
             name               == _name {
-            ret = false
+            return false
         }
-        else {
-            latitude           = _latitude
-            longitude          = _longitude
-            altitude           = _altitude
-            horizontalAccuracy = _horizontalAccuracy
-            verticalAccuracy   = _verticalAccuracy
-            floorLevel         = _floorLevel
-            name               = _name
-            ret = ret && true
-        }
-        return ret
+
+        latitude           = _latitude
+        longitude          = _longitude
+        altitude           = _altitude
+        horizontalAccuracy = _horizontalAccuracy
+        verticalAccuracy   = _verticalAccuracy
+        floorLevel         = _floorLevel
+        name               = _name
+        return true
     }
 
-    class func search(object: CLLocation, mco: NSManagedObjectContext) throws -> [CDLocation] {
+    class func search(_ object: CLLocation, mco: NSManagedObjectContext) throws -> [CDLocation] {
         let name = "[\(object.coordinate.latitude):\(object.coordinate.longitude):\(object.altitude)]"
         let predicate = NSPredicate(format: "name = %@", name as String)
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [], limit: 1, mco: mco) as! [CDLocation]
     }
     
-    class func searchLocation(object: CLLocation, mco: NSManagedObjectContext) throws -> CDLocation? {
+    class func searchLocation(_ object: CLLocation, mco: NSManagedObjectContext) throws -> CDLocation? {
         var array = [CDLocation]()
         
         do {
             array = try CDLocation.search(object, mco: mco)
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.CDSearchLocationsIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.cdSearchLocationsIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Failed to search all the locations using CLLocation",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -84,29 +114,13 @@ class CDLocation: CDManagedObject {
         return nil
     }
     
-    class func importObject(object: CLLocation, mco: NSManagedObjectContext) throws -> CDLocation? {
-        return try CDLocation.importObject(object, mco: mco,
-        search: {
-            (wgObject, mco) -> [AnyObject] in
-            let name = "[\(object.coordinate.latitude):\(object.coordinate.longitude):\(object.altitude)]"
-            let predicate = NSPredicate(format: "name = %@", name)
-            return try CDLocation.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [], limit: 1, mco: mco) as! [CDLocation]
-        },
-        update: {
-            (cdObject, wgObject, mco) -> Bool in
-            return try (cdObject as! CDLocation).update(wgObject as! CLLocation)
-        },
-        create: { (mco) -> AnyObject in
-            return CDLocation.createInManageContextObject(mco)
-        }) as? CDLocation
-    }
-    
-    class func fetch(mco: NSManagedObjectContext) throws -> [CDLocation] {
+
+    class func fetch(_ mco: NSManagedObjectContext) throws -> [CDLocation] {
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: nil,
                                                     sortDescriptors: [], limit: 0, mco: mco) as! [CDLocation]
     }
     
-    class func fetchCurrent(mco: NSManagedObjectContext) throws -> CDLocation? {
+    class func fetchCurrent(_ mco: NSManagedObjectContext) throws -> CDLocation? {
         var array = [CDLocation]()
         
         do {
@@ -115,7 +129,7 @@ class CDLocation: CDManagedObject {
                                                         sortDescriptors: [], limit: 1, mco: mco) as! [CDLocation]
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.CDSearchCurrentLocationIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.cdSearchCurrentLocationIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Error on search entity name location",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)

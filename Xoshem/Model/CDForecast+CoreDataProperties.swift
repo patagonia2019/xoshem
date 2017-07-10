@@ -14,7 +14,7 @@ import CoreData
 
 extension CDForecast {
 
-    @NSManaged var initDate: NSTimeInterval
+    @NSManaged var initDate: TimeInterval
     @NSManaged var initStamp: Int64
     @NSManaged var modelName: String?
     @NSManaged var forecastModel: CDForecastModel?

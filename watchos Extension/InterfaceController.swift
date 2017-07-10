@@ -28,21 +28,21 @@ class InterfaceController: WKInterfaceController {
     var forecastResult: ForecastResult!
     var sliderHeight: Float!
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        self.observeNotification()
+        observeNotification()
         
-        self.hideWeatherInfo()
+        hideWeatherInfo()
         
-        if self.forecastResult != nil
+        if forecastResult != nil
         {
-            self.updateForecastView()
+            updateForecastView()
         }
     }
     
@@ -50,65 +50,68 @@ class InterfaceController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
         
-        self.unobserveNotification()
+        unobserveNotification()
         
     }
     
-    @IBAction func sliderAction(value: Float) {
+    @IBAction func sliderAction(_ value: Float) {
         
     }
     
     
     
-    private func updateForecastView()
+    fileprivate func updateForecastView()
     {
-        if self.forecastResult != nil
+        if forecastResult != nil
         {
-            self.weatherImage.setImageNamed(self.forecastResult.asCurrentWeatherImagename)
-            self.windImage.setImageNamed(self.forecastResult.asCurrentWindDirectionImagename)
-            self.temperatureLabel.setText(self.forecastResult.asCurrentTemperature)
-            self.unitLabel.setText(self.forecastResult.asCurrentUnit)
-            self.locationLabel.setText(self.forecastResult.asCurrentLocation)
-            self.windSpeedLabel.setText(self.forecastResult.asCurrentWindSpeed)
-            self.hourLabel.setText(self.forecastResult.asHourString)
+            weatherImage.setImageNamed (forecastResult.asCurrentWeatherImagename)
+            windImage.setImageNamed (forecastResult.asCurrentWindDirectionImagename)
+            temperatureLabel.setText (forecastResult.asCurrentTemperature)
+            unitLabel.setText (forecastResult.asCurrentUnit)
+            locationLabel.setText (forecastResult.asCurrentLocation)
+            windSpeedLabel.setText (forecastResult.asCurrentWindSpeed)
+            hourLabel.setText (forecastResult.asHourString)
             
-            self.showWeatherInfo()
+            showWeatherInfo()
         }
         
     }
     
     
-    private func observeNotification()
+    fileprivate func observeNotification()
     {
-        self.unobserveNotification()
+        unobserveNotification()
         
-        NSNotificationCenter.defaultCenter().addObserverForName(Common.notification.forecast.updated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: {
-            note in if let object: ForecastResult = note.object as? ForecastResult {
-                self.forecastResult = object
-                self.updateForecastView()
-            }})
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Common.notification.forecast.updated), object: nil, queue: OperationQueue.main,
+               using: {
+                [weak self]
+                note in if let object: ForecastResult = note.object as? ForecastResult {
+                    self?.forecastResult = object
+                    self?.updateForecastView()
+                }
+        })
     }
     
-    private func unobserveNotification()
+    fileprivate func unobserveNotification()
     {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: Common.notification.forecast.updated, object: nil);
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Common.notification.forecast.updated), object: nil);
     }
     
-    private func hideWeatherInfo()
+    fileprivate func hideWeatherInfo()
     {
-        self.toolbarGroup.setAlpha(0)
-        self.topGroup.setAlpha(0)
-        self.middleGroup.setAlpha(0)
-        self.bottomGroup.setAlpha(0)
+        toolbarGroup.setAlpha(0)
+        topGroup.setAlpha(0)
+        middleGroup.setAlpha(0)
+        bottomGroup.setAlpha(0)
     }
     
-    private func showWeatherInfo()
+    fileprivate func showWeatherInfo()
     {
-        self.animateWithDuration(Common.animation.duration) { () -> Void in
-            self.toolbarGroup.setAlpha(1)
-            self.topGroup.setAlpha(1)
-            self.middleGroup.setAlpha(1)
-            self.bottomGroup.setAlpha(1)
+        animate(withDuration: Common.animation.duration) { [weak self] () -> Void in
+            self?.toolbarGroup.setAlpha(1)
+            self?.topGroup.setAlpha(1)
+            self?.middleGroup.setAlpha(1)
+            self?.bottomGroup.setAlpha(1)
         }
     }
     

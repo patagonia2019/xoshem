@@ -26,51 +26,54 @@ class HelpViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
 
     // MARK: - Table View
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Facade.instance.fetchHelpMenu().count ?? 0
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Facade.instance.fetchHelpMenu().count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Common.cell.identifier.help, forIndexPath: indexPath)
-        let menu = Facade.instance.fetchHelpMenu()[indexPath.row]
-        self.configureCell(cell, withMenu: menu)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Common.cell.identifier.help, for: indexPath)
+        let menu = Facade.instance.fetchHelpMenu()[(indexPath as NSIndexPath).row]
+        configureCell(cell, withMenu: menu)
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.currentMenuOption = Facade.instance.fetchHelpMenu()[indexPath.row]
-        guard let menu = self.currentMenuOption,
-                  segue = menu.segue else { return }
-        self.performSegueWithIdentifier(segue, sender: self)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentMenuOption = Facade.instance.fetchHelpMenu()[(indexPath as NSIndexPath).row]
+        guard let menu = currentMenuOption,
+                  let segue = menu.segue else { return }
+        performSegue(withIdentifier: segue, sender: self)
     }
     
-    func configureCell(cell: UITableViewCell, withMenu menu: CDMenu) {
-        cell.backgroundColor = UIColor.clearColor()
+    func configureCell(_ cell: UITableViewCell, withMenu menu: CDMenu) {
+        cell.backgroundColor = UIColor.clear
         if let name = menu.name,
             let textLabel = cell.textLabel {
             textLabel.text = name
-            textLabel.font = UIFont.boldSystemFontOfSize(16)
+            textLabel.font = UIFont.boldSystemFont(ofSize: 16)
         }
         guard let fromFont = menu.iconFont,
-            iconName = menu.iconName,
-            cellImage = cell.imageView,
-            icon = UIImage.iconToImage(fromFont, iconCode: iconName, imageSize: CGSizeMake(50, 50), fontSize: 40) else {
+            let iconName = menu.iconName,
+            let cellImage = cell.imageView
+             else {
                 assertionFailure("need icon here for \(menu)")
             return
         }
-        cellImage.image = icon.convertColor(UIColor.whiteColor())
+        let size = CGSize(width: 50, height: 50)
+        let fontSize :CGFloat = 40.0
+        let icon = UIImage.icon(from: fromFont, iconColor: .white, code: iconName, imageSize: size, ofSize: fontSize)
+        cellImage.image = icon
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let menu = self.currentMenuOption else { return }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let menu = currentMenuOption else { return }
         if segue.identifier == Common.segue.web {
-            if let web = segue.destinationViewController as? WebViewController {
+            if let web = segue.destination as? WebViewController {
                 web.title = menu.name
                 web.fileName = menu.file
             }
         }
         else if segue.identifier == Common.segue.about {
-            if let about = segue.destinationViewController as? AboutViewController {
+            if let about = segue.destination as? AboutViewController {
                 about.title = menu.name
                 about.fileName = menu.file
             }
@@ -81,7 +84,7 @@ class HelpViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        Analytics.logMemoryWarning(#function, line: #line)
+        Analytics.logMemoryWarning(function: #function, line: #line)
     }
 
 }

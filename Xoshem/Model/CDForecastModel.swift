@@ -12,20 +12,59 @@ import JFCore
 
 class CDForecastModel: CDManagedObject {
 
-    override class func createInManageContextObject(mco: NSManagedObjectContext) -> CDForecastModel {
+    override class func createInManageContextObject(_ mco: NSManagedObjectContext) -> CDForecastModel {
         return super.createName(NSStringFromClass(self), inManageContextObject: mco) as! CDForecastModel
     }
-    
-    func update(object: ForecastModel, forecastResultId: String) throws -> Bool {
-        var ret = super.update()
+
+    class func importObject(_ object: ForecastModel?, forecastResultId: String?,
+                            mco: NSManagedObjectContext) throws -> CDForecastModel? {
+        
+        guard let object = object,
+            let forecastResultId = forecastResultId else {
+                return nil
+        }
+        
+        let search = { () -> [AnyObject]? in
+            guard let model = object.model else {
+                return nil
+            }
+            let format = "model = %@ and forecastResult.identity = %@"
+            let predicate = NSPredicate(format: format, model, forecastResultId)
+            guard let array = try CDForecastModel.searchEntityName(NSStringFromClass(self), predicate: predicate,
+                                                              sortDescriptors: [], limit: 1, mco: mco) as? [CDForecastModel]
+                else {
+                    return nil
+            }
+            return array
+        }
+        
+        let update = { (cdObject: CDManagedObject?) -> Bool in
+            let obj = cdObject as! CDForecastModel
+            let wgo = object
+            return try obj.update(wgo, forecastResultId: forecastResultId)
+        }
+        let create = { () -> AnyObject? in
+            return CDForecastModel.createInManageContextObject(mco)
+        }
+        
+        return try CDForecastModel.importObject(wgObject: object as AnyObject, mco: mco, search: search,
+                                           update: update, create: create) as? CDForecastModel
+    }
+
+    func update(_ object: ForecastModel?, forecastResultId: String?) throws -> Bool {
+        guard let object = object,
+            let forecastResultId = forecastResultId else {
+                return false
+        }
+
         guard let
             _model      = object.model as String?,
-            _forecast  =  object.info as Forecast?,
-            _mco = self.managedObjectContext,
-            _cdForecast = try CDForecast.importObject(_forecast, forecastResultId: forecastResultId,
+            let _forecast  =  object.info as Forecast?,
+            let _mco = managedObjectContext,
+            let _cdForecast = try CDForecast.importObject(_forecast, forecastResultId: forecastResultId,
                                                       model: _model, mco: _mco)
             else {
-                let myerror = Error(code: Common.ErrorCode.CDUpdateForecastModelIssue.rawValue,
+                let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastModelIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Failed to update CDForecastModel using ForecastModel object",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -34,31 +73,15 @@ class CDForecastModel: CDManagedObject {
 
         model  = _model
         forecast = _cdForecast
-        ret = ret && true
-        return ret
+
+        return true
     }
     
-    class func search(wgObject: ForecastModel, mco: NSManagedObjectContext) throws -> [CDForecastModel] {
+    
+    class func search(_ wgObject: ForecastModel, mco: NSManagedObjectContext) throws -> [CDForecastModel] {
         let predicate = NSPredicate(format: "model = %@", wgObject.model!)
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [],
                                                     limit: 1, mco: mco) as! [CDForecastModel]
-    }
-    
-    class func importObject(object: ForecastModel, forecastResultId: String, mco: NSManagedObjectContext) throws -> CDForecastModel? {
-        return try CDForecastModel.importObject(object, mco: mco,
-            search: {
-                (wgObject, mco) -> [AnyObject] in
-                let predicate = NSPredicate(format: "model = %@ and forecastResult.identity = %@", (wgObject as! ForecastModel).model!,
-                                            forecastResultId)
-                return try CDForecastModel.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [], limit: 1, mco: mco) as! [CDForecastModel]
-                
-            },
-            update: {
-                (cdObject, wgObject, mco) -> Bool in
-                return try (cdObject as! CDForecastModel).update(wgObject as! ForecastModel, forecastResultId: forecastResultId)
-            }, create: { (mco) -> AnyObject in
-                return CDForecastModel.createInManageContextObject(mco)
-        }) as? CDForecastModel
     }
     
     class func fetchWithSpot(withSpot spot:CDSpot, mco: NSManagedObjectContext) throws -> [CDForecastModel]? {
@@ -66,16 +89,16 @@ class CDForecastModel: CDManagedObject {
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: nil, limit: 0, mco: mco) as? [CDForecastModel]
     }
     
-    class func fetch(mco: NSManagedObjectContext) throws -> [CDForecastModel]? {
+    class func fetch(_ mco: NSManagedObjectContext) throws -> [CDForecastModel]? {
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: nil, sortDescriptors: [], limit: 0, mco: mco) as? [CDForecastModel]
     }
 
-    class func fetchCurrent(forecastResult: CDForecastResult, mco: NSManagedObjectContext) throws -> CDForecastModel? {
+    class func fetchCurrent(_ forecastResult: CDForecastResult, mco: NSManagedObjectContext) throws -> CDForecastModel? {
         var array = [CDForecastModel]()
         
         do {
             guard let identity = forecastResult.identity,
-                      currentModel = forecastResult.currentModel else {
+                      let currentModel = forecastResult.currentModel else {
                         return nil
             }
             let predicate = NSPredicate(format: "forecastResult.identity = %@ and forecastResult.currentModel = %@",
@@ -85,7 +108,7 @@ class CDForecastModel: CDManagedObject {
                                                          mco: mco) as! [CDForecastModel]
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.CDSearchCurrentForecastModelIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.cdSearchCurrentForecastModelIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Failed to search the current firecat",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)

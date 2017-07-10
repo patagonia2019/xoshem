@@ -22,108 +22,110 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         
-        self.roundedContainerView.layer.cornerRadius = self.roundedContainerView.frame.size.height / 2
-        self.trashButton.exclusiveTouch = true
+        roundedContainerView.layer.cornerRadius = roundedContainerView.frame.size.height / 2
+        trashButton.isExclusiveTouch = true
     }
     
     func configure()
     {
-        self.currentLocationImageView.alpha = 0
-        self.roundedContainerView.alpha = 0
-        self.cityLabel.alpha = 0
-        self.spotNameLabel.alpha = 0
-        self.degreeLabel.alpha = 0
-        self.createAnotherCityImageView.alpha = 0
-        self.trashButton.alpha = 0
+        currentLocationImageView.alpha = 0
+        roundedContainerView.alpha = 0
+        cityLabel.alpha = 0
+        spotNameLabel.alpha = 0
+        degreeLabel.alpha = 0
+        createAnotherCityImageView.alpha = 0
+        trashButton.alpha = 0
     }
     
     func updateName() {
         if let _namecheck = forecastResult.namecheck() {
-            self.cityLabel.text = "\(_namecheck)"
-            self.cityLabel.alpha = 1
+            cityLabel.text = "\(_namecheck)"
+            cityLabel.alpha = 1
         }
         else {
-            self.cityLabel.alpha = 0
+            cityLabel.alpha = 0
         }
     }
 
     func updateSpotName() {
         if let name = forecastResult.name {
-            self.spotNameLabel.text = "\(name)"
-            self.spotNameLabel.alpha = 1
+            spotNameLabel.text = "\(name)"
+            spotNameLabel.alpha = 1
         }
         else {
-            self.spotNameLabel.alpha = 0
+            spotNameLabel.alpha = 0
         }
     }
     
     func updateTemperature() {
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.Hour, fromDate: date)
-        guard let temperature : Float = forecastResult.temperatureByHour(components.hour) else {
-            self.degreeLabel.alpha = 0
-            self.roundedContainerView.alpha = 0
+        let date = Date()
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components(.hour, from: date)
+        guard let hour = components.hour else {
             return
         }
-        self.degreeLabel.text = "\(temperature)°"
-        self.roundedContainerView.alpha = 1
-        self.degreeLabel.alpha = 1
+        guard let temperature : Float = forecastResult.temperatureByHour(hour) else {
+            degreeLabel.alpha = 0
+            roundedContainerView.alpha = 0
+            return
+        }
+        degreeLabel.text = "\(temperature)°"
+        roundedContainerView.alpha = 1
+        degreeLabel.alpha = 1
     }
     
-    func configureCellWithLocation(location: CDLocation, isEditing: Bool, didUpdate:(Void) -> Void)
+    func configureCellWithLocation(_ location: CDLocation, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
     {
-        self.configure()
-//        self.forecastResult = forecastResult
-        self.degreeLabel.alpha = 1
-        self.trashButton.alpha = isEditing ? 1 : 0
-        self.trashButton.highlighted = self.forecastResult.hide
-        self.currentLocationImageView.alpha = self.forecastResult.placemarkResult != nil ? 1 : 0
-        self.updateName()
-        self.updateSpotName()
-        self.updateTemperature()
-        self.configureColor()
-        self.updateClosure = didUpdate
+        configure()
+        degreeLabel.alpha = 1
+        trashButton.alpha = isEditing ? 1 : 0
+        trashButton.isHighlighted = forecastResult.hide
+        currentLocationImageView.alpha = forecastResult.placemarkResult != nil ? 1 : 0
+        updateName()
+        updateSpotName()
+        updateTemperature()
+        configureColor()
+        updateClosure = didUpdate
     }
     
-    func configureCell(forecastResult: CDForecastResult, isEditing: Bool, didUpdate:(Void) -> Void)
+    func configureCell(_ fcr: CDForecastResult, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
     {
-        self.configure()
-        self.forecastResult = forecastResult
-        self.degreeLabel.alpha = 1
-        self.trashButton.alpha = isEditing ? 1 : 0
-        self.trashButton.highlighted = self.forecastResult.hide
-        self.currentLocationImageView.alpha = self.forecastResult.placemarkResult != nil ? 1 : 0
-        self.updateName()
-        self.updateSpotName()
-        self.updateTemperature()
-        self.configureColor()
-        self.updateClosure = didUpdate
+        configure()
+        forecastResult = fcr
+        degreeLabel.alpha = 1
+        trashButton.alpha = isEditing ? 1 : 0
+        trashButton.isHighlighted = forecastResult.hide
+        currentLocationImageView.alpha = forecastResult.placemarkResult != nil ? 1 : 0
+        updateName()
+        updateSpotName()
+        updateTemperature()
+        configureColor()
+        updateClosure = didUpdate
     }
     
     func configureColor() {
-        self.contentView.backgroundColor = forecastResult.color
+        contentView.backgroundColor = forecastResult.color
     }
 
     func configureLastCell()
     {
-        self.configure()
-        self.createAnotherCityImageView.alpha = 1
-        self.contentView.backgroundColor = UIColor.redColor()
+        configure()
+        createAnotherCityImageView.alpha = 1
+        contentView.backgroundColor = UIColor.red
     }
     
     func selected()
     {
-        self.contentView.alpha = 0.5
+        contentView.alpha = 0.5
     }
     
     func unselected()
     {
-        self.contentView.alpha = 1.0
+        contentView.alpha = 1.0
     }
     
-    @IBAction func trashAction(sender: AnyObject) {
-        if let closure = self.updateClosure {
+    @IBAction func trashAction(_ sender: AnyObject) {
+        if let closure = updateClosure {
             forecastResult.hide = !forecastResult.hide
             closure()
         }

@@ -20,48 +20,76 @@ import JFCore
 */
 class CDSpotOwner: CDSpot {
 
-    override class func createInManageContextObject(mco: NSManagedObjectContext) -> CDSpotOwner {
+    override class func createInManageContextObject(_ mco: NSManagedObjectContext) -> CDSpotOwner {
         return super.createName(NSStringFromClass(self), inManageContextObject: mco) as! CDSpotOwner
     }
     
-    func update(spotOwner: SpotOwner) throws -> Bool {
+    
+    
+    class func importObject(_ object: SpotOwner?, mco: NSManagedObjectContext) throws -> CDSpotOwner? {
         
-        var ret = try super.update(spotOwner as Spot)
+        guard let object = object else {
+            return nil
+        }
+        
+        let search = { () -> [AnyObject]? in
+            guard let identity = object.identity else {
+                return nil
+            }
+            let predicate = NSPredicate(format: "identity = %@", identity)
+            guard let array = try CDSpotOwner.searchEntityName(NSStringFromClass(self), predicate: predicate,
+                                                               sortDescriptors: [], limit: 1,
+                                                               mco: mco) as? [CDSpotOwner]
+                else {
+                    return nil
+            }
+            return array
+            
+        }
+        
+        let update = { (cdObject: CDManagedObject?) -> Bool in
+            let obj = cdObject as! CDSpotOwner
+            let wgo = object
+            return try obj.update(wgo)
+        }
+        let create = { () -> AnyObject? in
+            return CDSpotOwner.createInManageContextObject(mco)
+        }
+        
+        return try CDSpotOwner.importObject(wgObject: object as AnyObject, mco: mco, search: search,
+                                            update: update, create: create) as? CDSpotOwner
+    }
+    
+    
+    func update(_ spotOwner: SpotOwner?) throws -> Bool {
+        
+        guard let object = spotOwner,
+            let spot = spotOwner else {
+            return false
+        }
+        
+        if try super.update(spot) == false {
+            return false
+        }
+        
         guard let
-            _nickname = spotOwner.nickname as String?,
-            _userId = spotOwner.userId as Int? else {
-                let myerror = Error(code: Common.ErrorCode.CDUpdateSpotsOwnersIssue.rawValue,
+            _nickname = object.nickname as String?,
+            let _userId = object.userId as Int? else {
+                let myerror = JFError(code: Common.ErrorCode.cdUpdateSpotsOwnersIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Failed at import spotOwner boject into SpotOwner",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
                 throw myerror
         }
         if nickname == _nickname && userId == Int16(_userId) {
-            ret = false
+            return false
         }
-        else {
-            nickname = _nickname
-            userId = Int16(_userId)
-            ret = ret && true
-        }
-        return ret
+
+        nickname = _nickname
+        userId = Int16(_userId)
+        return true
     }
     
-    class func importObject(object: SpotOwner, mco: NSManagedObjectContext) throws -> CDSpotOwner {
-        return try CDSpotOwner.importObject(object, mco: mco,
-                                       search: {
-                                        (wgObject, mco) -> [AnyObject] in
-                                        let predicate = NSPredicate(format: "identity = %@", object.identity!)
-                                        return try CDSpotOwner.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [], limit: 1, mco: mco) as! [CDSpotOwner]
-            },
-                                       update: {
-                                        (cdObject, wgObject, mco) -> Bool in
-                                        return try (cdObject as! CDSpotOwner).update(wgObject as! SpotOwner)
-            },
-                                       create: { (mco) -> AnyObject in
-                                        return CDSpotOwner.createInManageContextObject(mco)
-        }) as! CDSpotOwner
-    }
     
     override var description : String {
         var aux : String = "["

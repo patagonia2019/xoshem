@@ -22,15 +22,15 @@ class Crash {
         Fabric.sharedSDK().debug = true
         let selector = #selector(logCustomEventWithName(_:customAttributes:))
         let cl : AnyClass = Answers.classForCoder()
-        Analytics.configureWithAnalyticsTarget(cl, selector: selector)
+        Analytics.configureWithAnalyticsTarget(target: cl, selector: selector)
     #endif
     }
     
-    @objc class func logCustomEventWithName(event: String, customAttributes:[String : AnyObject]?) {
+    @objc class func logCustomEventWithName(_ event: String, customAttributes:[String : AnyObject]?) {
         assert(false, "not implemented")
     }
     
-    func logUser(id: String, email: String, userName: String) {
+    func logUser(_ id: String, email: String, userName: String) {
     #if os(iOS)
         Crashlytics.sharedInstance().setUserIdentifier(id)
         Crashlytics.sharedInstance().setUserName(userName)

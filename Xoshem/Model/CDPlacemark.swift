@@ -13,20 +13,61 @@ import JFCore
 
 class CDPlacemark: CDManagedObject {
 
-    override class func createInManageContextObject(mco: NSManagedObjectContext) -> CDPlacemark {
+    override class func createInManageContextObject(_ mco: NSManagedObjectContext) -> CDPlacemark {
         return super.createName(NSStringFromClass(self), inManageContextObject: mco) as! CDPlacemark
     }
 
-    func update(placemark: CLPlacemark) throws -> Bool {
+    
+    class func importObject(_ object: CLPlacemark?, mco: NSManagedObjectContext) throws -> CDPlacemark? {
+        guard let object = object else {
+            return nil
+        }
         
-        var ret = super.update()
+        let search = { () -> [AnyObject]? in
+            var predicate : NSPredicate? = nil
+            if let name = object.name {
+                predicate = NSPredicate(format: "name = %@", name)
+            }
+            else if let locality = object.locality {
+                predicate = NSPredicate(format: "locality = %@", locality)
+            }
+            guard let array = try CDPlacemark.searchEntityName(NSStringFromClass(self),
+                                                               predicate: predicate,
+                                                               sortDescriptors: [],
+                                                               limit: 1,
+                                                               mco: mco) as? [CDPlacemark]
+                else {
+                    return nil
+            }
+            return array
+        }
+        
+        let update = { (cdObject: CDManagedObject?) -> Bool in
+            let obj = cdObject as! CDPlacemark
+            let wgo = object
+            return try obj.update(wgo)
+        }
+        let create = { () -> AnyObject? in
+            return CDPlacemark.createInManageContextObject(mco)
+        }
+        
+        return try CDPlacemark.importObject(wgObject: object as AnyObject, mco: mco, search: search,
+                                            update: update, create: create) as? CDPlacemark
+    }
+
+    
+    func update(_ object: CLPlacemark?) throws -> Bool {
+        
+        guard let object = object else {
+            return false
+        }
 
         guard let
-            _locality               = placemark.locality,
-            _name                   = placemark.name,
-            _country                = placemark.country
+            _locality               = object.locality,
+            let _name                   = object.name,
+            let _country                = object.country
             else {
-                let myerror = Error(code: Common.ErrorCode.CDUpdatePlacemarkIssue.rawValue,
+                let myerror = JFError(code: Common.ErrorCode.cdUpdatePlacemarkIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Failed at import CLPlacemark oject into CDPlacemark",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -36,38 +77,37 @@ class CDPlacemark: CDManagedObject {
         locality                = _locality
         country                 = _country
         name                    = _name
-        thoroughfare            = placemark.thoroughfare
-        subThoroughfare         = placemark.subThoroughfare
-        subLocality             = placemark.subLocality
-        administrativeArea      = placemark.administrativeArea
-        subAdministrativeArea   = placemark.subAdministrativeArea
-        postalCode              = placemark.postalCode
-        isoCountryCode          = placemark.ISOcountryCode
-        inlandWater             = placemark.inlandWater
-        ocean                   = placemark.ocean
-        if let _areaOfInterest = placemark.areasOfInterest {
+        thoroughfare            = object.thoroughfare
+        subThoroughfare         = object.subThoroughfare
+        subLocality             = object.subLocality
+        administrativeArea      = object.administrativeArea
+        subAdministrativeArea   = object.subAdministrativeArea
+        postalCode              = object.postalCode
+        isoCountryCode          = object.isoCountryCode
+        inlandWater             = object.inlandWater
+        ocean                   = object.ocean
+        if let _areaOfInterest = object.areasOfInterest {
             areasOfInterest         = _areaOfInterest.description
         }
-        ret = ret && true
 
-        return ret
+        return true
     }
     
-    class func search(placemark: CLPlacemark, mco: NSManagedObjectContext) throws -> [CDPlacemark] {
+    class func search(_ placemark: CLPlacemark, mco: NSManagedObjectContext) throws -> [CDPlacemark] {
         let predicate = NSPredicate(format: "name = %@ && country = %@ && locality = %@", placemark.name!,
                                     placemark.country!, placemark.locality!)
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [],
                                                     limit: 1, mco: mco) as! [CDPlacemark]
     }
     
-    class func searchPlacemark(object: CLPlacemark, mco: NSManagedObjectContext) throws -> CDPlacemark? {
+    class func searchPlacemark(_ object: CLPlacemark, mco: NSManagedObjectContext) throws -> CDPlacemark? {
         var array = [CDPlacemark]()
         
         do {
             array = try CDPlacemark.search(object, mco: mco)
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.CDSearchPlacemarksIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.cdSearchPlacemarksIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Failed to search all the placemarks",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -80,38 +120,12 @@ class CDPlacemark: CDManagedObject {
         return nil
     }
     
-    
-    class func importObject(object: CLPlacemark, mco: NSManagedObjectContext) throws -> CDPlacemark? {
-        return try CDPlacemark.importObject(object, mco: mco,
-            search: {
-                (wgObject, mco) -> [AnyObject] in
-                var predicate : NSPredicate? = nil
-                if let name = object.name {
-                    predicate = NSPredicate(format: "name = %@", name)
-                }
-                else if let locality = object.locality {
-                    predicate = NSPredicate(format: "locality = %@", locality)
-                }
-                
-                return try CDPlacemark.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [], limit: 1, mco: mco) as! [CDPlacemark]
-            
-            },
-            update: {
-                (cdObject, wgObject, mco) -> Bool in
-                return try (cdObject as! CDPlacemark).update(wgObject as! CLPlacemark)
-            },
-            create: { (mco) -> AnyObject in
-                return CDPlacemark.createInManageContextObject(mco)
-        }) as? CDPlacemark
-    }
-
-    
-    class func fetch(mco: NSManagedObjectContext) throws -> [CDPlacemark] {
+    class func fetch(_ mco: NSManagedObjectContext) throws -> [CDPlacemark] {
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: nil, sortDescriptors: [], limit: 0, mco: mco) as! [CDPlacemark]
     }
 
     
-    class func fetchCurrent(mco: NSManagedObjectContext) throws -> CDPlacemark? {
+    class func fetchCurrent(_ mco: NSManagedObjectContext) throws -> CDPlacemark? {
         var array = [CDPlacemark]()
         
         do {
@@ -120,7 +134,7 @@ class CDPlacemark: CDManagedObject {
                                                          sortDescriptors: [], limit: 1, mco: mco) as! [CDPlacemark]
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.CDFetchCurrentPlacemarkIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.cdFetchCurrentPlacemarkIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Failed to fetch current placemarks",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)

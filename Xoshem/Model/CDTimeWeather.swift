@@ -12,17 +12,24 @@ import JFCore
 
 class CDTimeWeather: CDManagedObject {
 
-    override class func createInManageContextObject(mco: NSManagedObjectContext) -> CDTimeWeather {
+    override class func createInManageContextObject(_ mco: NSManagedObjectContext) -> CDTimeWeather {
         return super.createName(NSStringFromClass(self), inManageContextObject: mco) as! CDTimeWeather
     }
     
-    class func fetch(mco: NSManagedObjectContext) throws -> [CDTimeWeather]? {
-        return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: nil, sortDescriptors: nil, limit: 0, mco: mco) as? [CDTimeWeather]
+    class func fetch(_ mco: NSManagedObjectContext) throws -> [CDTimeWeather]? {
+        return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: nil, sortDescriptors: nil,
+                                                    limit: 0, mco: mco) as? [CDTimeWeather]
     }
     
-    class func fetchWithForecastResult(forecastResult: CDForecastResult, mco: NSManagedObjectContext) throws -> [CDTimeWeather]? {
-        let predicate = NSPredicate(format: "forecastResult = %@", forecastResult.identity!)
-        return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: nil, limit: 0, mco: mco) as? [CDTimeWeather]
+    class func fetchWithForecastResult(_ forecastResult: CDForecastResult,
+                                       mco: NSManagedObjectContext) throws -> [CDTimeWeather]? {
+        guard let identity = forecastResult.identity else {
+            return nil
+        }
+        let predicate = NSPredicate(format: "forecastResult = %@", identity)
+        return try CDManagedObject.searchEntityName(NSStringFromClass(self),
+                                                    predicate: predicate, sortDescriptors: nil,
+                                                    limit: 0, mco: mco) as? [CDTimeWeather]
     }
     
     override var description : String {

@@ -11,47 +11,86 @@ import JFWindguru
 import JFCore
 class CDForecast: CDManagedObject {
 
-    override class func createInManageContextObject(mco: NSManagedObjectContext) -> CDForecast {
+    override class func createInManageContextObject(_ mco: NSManagedObjectContext) -> CDForecast {
         return super.createName(NSStringFromClass(self), inManageContextObject: mco) as! CDForecast
     }
     
-    func update(object: Forecast) throws -> Bool {
-        var ret = super.update()
+
+    class func importObject(_ object: Forecast?, forecastResultId: String?, model: String?,
+                            mco: NSManagedObjectContext) throws -> CDForecast? {
+
+        guard let object = object,
+              let forecastResultId = forecastResultId,
+              let model = model else {
+            return nil
+        }
+        
+        let search = { () -> [AnyObject]? in
+            let format = "forecastModel.forecastResult.identity = %@ and forecastModel.forecastResult.currentModel = %@"
+            let predicate = NSPredicate(format: format, forecastResultId, model)
+            guard let array = try CDForecast.searchEntityName(NSStringFromClass(self), predicate: predicate,
+                                                              sortDescriptors: [], limit: 1, mco: mco) as? [CDForecast]
+                else {
+                    return nil
+            }
+            return array
+        }
+        
+        let update = { (cdObject: CDManagedObject?) -> Bool in
+            let obj = cdObject as! CDForecast
+            let wgo = object
+            return try obj.update(wgo)
+        }
+        let create = { () -> AnyObject? in
+            return CDForecast.createInManageContextObject(mco)
+        }
+        
+        return try CDForecast.importObject(wgObject: object as AnyObject, mco: mco, search: search,
+                                           update: update, create: create) as? CDForecast
+    }
+    
+
+    func update(_ object: Forecast?) throws -> Bool {
+        
+        guard let object = object else {
+            return false
+        }
+        
         guard let
             _date      = object.initDate,
-            _initDate  = _date.timeIntervalSince1970 as NSTimeInterval?,
-            _initStamp = object.initStamp as Int?,
-            _modelName = object.modelName as String?,
-            _temperature       = object.temperature as TimeWeather?,
-            _cloudCoverTotal   = object.cloudCoverTotal as TimeWeather?,
-            _cloudCoverHigh    = object.cloudCoverHigh as TimeWeather?,
-            _cloudCoverMid     = object.cloudCoverMid as TimeWeather?,
-            _cloudCoverLow     = object.cloudCoverLow as TimeWeather?,
-            _relativeHumidity  = object.relativeHumidity as TimeWeather?,
-            _windGust          = object.windGust as TimeWeather?,
-            _seaLevelPressure  = object.seaLevelPressure as TimeWeather?,
-            _freezingLevel     = object.freezingLevel as TimeWeather?,
-            _precipitation     = object.precipitation as TimeWeather?,
-            _windSpeed         = object.windSpeed as TimeWeather?,
-            _windDirection     = object.windDirection as TimeWeather?,
-            _windDirectionName = object.windDirectionName as TimeWeather?,
-            _temperatureReal   = object.temperatureReal as TimeWeather?,
-            _temperatureValue       = _temperature.value,
-            _cloudCoverTotalValue   = _cloudCoverTotal.value,
-            _cloudCoverHighValue    = _cloudCoverHigh.value,
-            _cloudCoverMidValue     = _cloudCoverMid.value,
-            _cloudCoverLowValue     = _cloudCoverLow.value,
-            _relativeHumidityValue  = _relativeHumidity.value,
-            _windGustValue          = _windGust.value,
-            _seaLevelPressureValue  = _seaLevelPressure.value,
-            _freezingLevelValue     = _freezingLevel.value,
-            _precipitationValue     = _precipitation.value,
-            _windSpeedValue         = _windSpeed.value,
-            _windDirectionValue     = _windDirection.value,
-            _windDirectionNameValue = _windDirectionName.value,
-            _temperatureRealValue   = _temperatureReal.value
+            let _initDate  = _date.timeIntervalSince1970 as TimeInterval?,
+            let _initStamp = object.initStamp as Int?,
+            let _modelName = object.modelName as String?,
+            let _temperature       = object.temperature as TimeWeather?,
+            let _cloudCoverTotal   = object.cloudCoverTotal as TimeWeather?,
+            let _cloudCoverHigh    = object.cloudCoverHigh as TimeWeather?,
+            let _cloudCoverMid     = object.cloudCoverMid as TimeWeather?,
+            let _cloudCoverLow     = object.cloudCoverLow as TimeWeather?,
+            let _relativeHumidity  = object.relativeHumidity as TimeWeather?,
+            let _windGust          = object.windGust as TimeWeather?,
+            let _seaLevelPressure  = object.seaLevelPressure as TimeWeather?,
+            let _freezingLevel     = object.freezingLevel as TimeWeather?,
+            let _precipitation     = object.precipitation as TimeWeather?,
+            let _windSpeed         = object.windSpeed as TimeWeather?,
+            let _windDirection     = object.windDirection as TimeWeather?,
+            let _windDirectionName = object.windDirectionName as TimeWeather?,
+            let _temperatureReal   = object.temperatureReal as TimeWeather?,
+            let _temperatureValue       = _temperature.value,
+            let _cloudCoverTotalValue   = _cloudCoverTotal.value,
+            let _cloudCoverHighValue    = _cloudCoverHigh.value,
+            let _cloudCoverMidValue     = _cloudCoverMid.value,
+            let _cloudCoverLowValue     = _cloudCoverLow.value,
+            let _relativeHumidityValue  = _relativeHumidity.value,
+            let _windGustValue          = _windGust.value,
+            let _seaLevelPressureValue  = _seaLevelPressure.value,
+            let _freezingLevelValue     = _freezingLevel.value,
+            let _precipitationValue     = _precipitation.value,
+            let _windSpeedValue         = _windSpeed.value,
+            let _windDirectionValue     = _windDirection.value,
+            let _windDirectionNameValue = _windDirectionName.value,
+            let _temperatureRealValue   = _temperatureReal.value
             else {
-                let myerror = Error(code: Common.ErrorCode.CDUpdateForecastIssue.rawValue,
+                let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Failed to update forecast",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -61,11 +100,11 @@ class CDForecast: CDManagedObject {
         initStamp = Int64(_initStamp)
         modelName = _modelName
 
-        let timeWeathers = NSMutableSet()
+        let timeWeatherMutableSet = NSMutableSet()
         
         for hour in _temperatureValue.keys {
-            guard let mco = self.managedObjectContext else {
-                let myerror = Error(code: Common.ErrorCode.CDUpdateForecastCreateTimeWeatherIssue.rawValue,
+            guard let mco = managedObjectContext else {
+                let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastCreateTimeWeatherIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Failed to update forecast",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -115,48 +154,26 @@ class CDForecast: CDManagedObject {
             if let value = _temperatureRealValue[hour] as? Float {
                 timeWeather.temperatureReal = value
             }
-            timeWeathers.addObject(timeWeather)
+            timeWeatherMutableSet.add(timeWeather)
         }
         
-        self.timeWeathers = timeWeathers
+        timeWeathers = timeWeatherMutableSet
 
-        ret = ret && true
-        
-        return ret
+        return true
     }
     
-    class func search(forecast: Forecast, mco: NSManagedObjectContext) throws -> [CDForecast] {
+    class func search(_ forecast: Forecast, mco: NSManagedObjectContext) throws -> [CDForecast] {
         let predicate = NSPredicate(format: "modelName = %@", forecast.modelName!)
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [], limit: 1, mco: mco) as! [CDForecast]
     }
     
-    class func importObject(object: Forecast, forecastResultId: String, model: String, mco: NSManagedObjectContext) throws -> CDForecast? {
-        return try CDForecast.importObject(object, mco: mco,
-           search: {
-                (wgObject, mco) -> [AnyObject] in
-                    let predicate = NSPredicate(format: "forecastModel.forecastResult.identity = %@ and forecastModel.forecastResult.currentModel = %@",
-                        forecastResultId, model)
-                    return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate,
-                        sortDescriptors: [], limit: 1,
-                        mco: mco) as! [CDForecast]
-
-            },
-           update: {
-                (cdObject, wgObject, mco) -> Bool in
-                return try (cdObject as! CDForecast).update(wgObject as! Forecast)
-            },
-           create: { (mco) -> AnyObject in
-                return CDForecast.createInManageContextObject(mco)
-        }) as? CDForecast
-    }
-
-    func fetch(hour: Int) -> CDTimeWeather? {
+    func fetch(_ hour: Int) -> CDTimeWeather? {
         var hour3 = hour
         let remainder = hour % 3
         hour3 -= remainder
 
-        guard let  _timeWeathers = self.timeWeathers,
-                _objects = _timeWeathers.allObjects as? [CDTimeWeather] else {
+        guard let  _timeWeathers = timeWeathers,
+                let _objects = _timeWeathers.allObjects as? [CDTimeWeather] else {
             return nil
         }
         var tw : CDTimeWeather? = nil
@@ -169,7 +186,7 @@ class CDForecast: CDManagedObject {
         return tw
     }
     
-    class func searchWithForecastResultId(forecastResultId: String, model: String, mco: NSManagedObjectContext) throws -> CDForecast? {
+    class func searchWithForecastResultId(_ forecastResultId: String, model: String, mco: NSManagedObjectContext) throws -> CDForecast? {
         var array = [CDForecast]()
         
         do {
@@ -180,7 +197,7 @@ class CDForecast: CDManagedObject {
                                                          mco: mco) as! [CDForecast]
         }
         catch {
-            let myerror = Error(code: Common.ErrorCode.CDSearchForecastWithIdentifierModelIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.cdSearchForecastWithIdentifierModelIssue.rawValue,
                                 desc: Common.title.errorOnSearch,
                                 reason: "Failed to search the forecast with id and model",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -193,7 +210,7 @@ class CDForecast: CDManagedObject {
         return nil
     }
 
-    class func fetch(mco: NSManagedObjectContext) throws -> [CDForecast]? {
+    class func fetch(_ mco: NSManagedObjectContext) throws -> [CDForecast]? {
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: nil, sortDescriptors: [], limit: 1, mco: mco) as? [CDForecast]
     }
 

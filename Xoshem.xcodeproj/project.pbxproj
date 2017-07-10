@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70A970941F13026800DBC25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A970931F13026800DBC25D /* Assets.xcassets */; };
+		70FE005A1F12E88500096217 /* CDManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */; };
+		70FE005B1F12E88500096217 /* CDManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */; };
+		70FE005C1F12F93B00096217 /* CDManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */; };
+		70FE005D1F12F95800096217 /* CDManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */; };
 		95069C871D664110003704F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95069C891D664110003704F6 /* Localizable.strings */; };
 		95069C921D66646B003704F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95069C901D66646B003704F6 /* Main.storyboard */; };
 		95069CB31D670DED003704F6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95069C9F1D670A77003704F6 /* CoreText.framework */; };
@@ -29,7 +34,6 @@
 		952DDC701D3F28DD00BD57FD /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
 		952DDC721D3F28DD00BD57FD /* CDForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033491D3C299F00330B57 /* CDForecastModel.swift */; };
 		952DDC741D3F28DD00BD57FD /* CDForecastResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334B1D3C299F00330B57 /* CDForecastResult.swift */; };
-		952DDC761D3F28DD00BD57FD /* CDManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334D1D3C299F00330B57 /* CDManagedObject.swift */; };
 		952DDC781D3F28DD00BD57FD /* CDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334F1D3C299F00330B57 /* CDMenu.swift */; };
 		952DDC7A1D3F28DD00BD57FD /* CDSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033511D3C299F00330B57 /* CDSpot.swift */; };
 		952DDC7C1D3F28DD00BD57FD /* CDSpotOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033531D3C299F00330B57 /* CDSpotOwner.swift */; };
@@ -39,7 +43,6 @@
 		954033571D3C299F00330B57 /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
 		9540335B1D3C299F00330B57 /* CDForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033491D3C299F00330B57 /* CDForecastModel.swift */; };
 		9540335F1D3C299F00330B57 /* CDForecastResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334B1D3C299F00330B57 /* CDForecastResult.swift */; };
-		954033631D3C299F00330B57 /* CDManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334D1D3C299F00330B57 /* CDManagedObject.swift */; };
 		954033671D3C299F00330B57 /* CDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334F1D3C299F00330B57 /* CDMenu.swift */; };
 		9540336B1D3C299F00330B57 /* CDSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033511D3C299F00330B57 /* CDSpot.swift */; };
 		9540336F1D3C299F00330B57 /* CDSpotOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033531D3C299F00330B57 /* CDSpotOwner.swift */; };
@@ -64,7 +67,6 @@
 		9577B0EC1CFC6F15002B023B /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953241E41BC81C75009659A7 /* Common.swift */; };
 		959A31191D370376003649D5 /* Facade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953241E51BC81C75009659A7 /* Facade.swift */; };
 		959A311F1D38056B003649D5 /* ForecastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959A311E1D38056B003649D5 /* ForecastDetailViewController.swift */; };
-		95C1EA5C1D3DCCC500204C82 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1EA5B1D3DCCC500204C82 /* SpinnerView.swift */; };
 		95C4CAA01D55012E00D35F91 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C4CA9F1D55012E00D35F91 /* Auth.swift */; };
 		95C4CAA11D55012E00D35F91 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C4CA9F1D55012E00D35F91 /* Auth.swift */; };
 		95D1DA1E1D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA141D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift */; };
@@ -73,8 +75,6 @@
 		95D1DA211D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA151D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift */; };
 		95D1DA221D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA161D4670EB000EF482 /* CDSpot+CoreDataProperties.swift */; };
 		95D1DA231D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA161D4670EB000EF482 /* CDSpot+CoreDataProperties.swift */; };
-		95D1DA241D4670EB000EF482 /* CDManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA171D4670EB000EF482 /* CDManagedObject+CoreDataProperties.swift */; };
-		95D1DA251D4670EB000EF482 /* CDManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA171D4670EB000EF482 /* CDManagedObject+CoreDataProperties.swift */; };
 		95D1DA261D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA181D4670EB000EF482 /* CDLocation+CoreDataProperties.swift */; };
 		95D1DA271D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA181D4670EB000EF482 /* CDLocation+CoreDataProperties.swift */; };
 		95D1DA281D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA191D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift */; };
@@ -87,7 +87,6 @@
 		95D1DA2F1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1C1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift */; };
 		95D1DA301D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1D1D4670EB000EF482 /* CDMenu+CoreDataProperties.swift */; };
 		95D1DA311D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1D1D4670EB000EF482 /* CDMenu+CoreDataProperties.swift */; };
-		95E61DBB1D303D8E0096E616 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95E61DBA1D303D8E0096E616 /* Assets.xcassets */; };
 		95E61DFD1D3054440096E616 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61DFB1D3054440096E616 /* MasterViewController.swift */; };
 		95E61DFE1D3054440096E616 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61DFC1D3054440096E616 /* DetailViewController.swift */; };
 		95E61E071D305A3D0096E616 /* Xoshem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95E61E051D305A3D0096E616 /* Xoshem.xcdatamodeld */; };
@@ -146,6 +145,10 @@
 		23A32751654F3056CE8F62B5 /* Pods_Xoshem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A931181C6D8E6C04467BFB /* Pods_Xoshem_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6879D4052CC2AC23310CE46A /* Pods-watchos Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchos Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-watchos Extension/Pods-watchos Extension.release.xcconfig"; sourceTree = "<group>"; };
+		70A970931F13026800DBC25D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		70FE00511F12E84600096217 /* Xoshem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Xoshem-Bridging-Header.h"; sourceTree = "<group>"; };
+		70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		86C4ABEBDC3424CB6C0E70AB /* Pods-Xoshem WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xoshem WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Xoshem WatchKit Extension/Pods-Xoshem WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		95069C741D663D6A003704F6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Interface.strings; sourceTree = "<group>"; };
 		95069C7F1D663DB3003704F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -174,7 +177,6 @@
 		954033471D3C299F00330B57 /* CDForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CDForecast.swift; path = Model/CDForecast.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		954033491D3C299F00330B57 /* CDForecastModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CDForecastModel.swift; path = Model/CDForecastModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9540334B1D3C299F00330B57 /* CDForecastResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDForecastResult.swift; path = Model/CDForecastResult.swift; sourceTree = "<group>"; };
-		9540334D1D3C299F00330B57 /* CDManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDManagedObject.swift; path = Model/CDManagedObject.swift; sourceTree = "<group>"; };
 		9540334F1D3C299F00330B57 /* CDMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDMenu.swift; path = Model/CDMenu.swift; sourceTree = "<group>"; };
 		954033511D3C299F00330B57 /* CDSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSpot.swift; path = Model/CDSpot.swift; sourceTree = "<group>"; };
 		954033531D3C299F00330B57 /* CDSpotOwner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSpotOwner.swift; path = Model/CDSpotOwner.swift; sourceTree = "<group>"; };
@@ -336,19 +338,16 @@
 		958B142F1D394540002C2BA9 /* watchos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "watchos-Bridging-Header.h"; sourceTree = "<group>"; };
 		959A311E1D38056B003649D5 /* ForecastDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDetailViewController.swift; sourceTree = "<group>"; };
 		95B522201D54D8010084AF81 /* Crash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crash.swift; sourceTree = "<group>"; };
-		95C1EA5B1D3DCCC500204C82 /* SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		95C4CA9F1D55012E00D35F91 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		95D1DA141D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDTimeWeather+CoreDataProperties.swift"; path = "Model/CDTimeWeather+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95D1DA151D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDForecastModel+CoreDataProperties.swift"; path = "Model/CDForecastModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95D1DA161D4670EB000EF482 /* CDSpot+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSpot+CoreDataProperties.swift"; path = "Model/CDSpot+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95D1DA171D4670EB000EF482 /* CDManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDManagedObject+CoreDataProperties.swift"; path = "Model/CDManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95D1DA181D4670EB000EF482 /* CDLocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDLocation+CoreDataProperties.swift"; path = "Model/CDLocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95D1DA191D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDForecastResult+CoreDataProperties.swift"; path = "Model/CDForecastResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95D1DA1A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSpotOwner+CoreDataProperties.swift"; path = "Model/CDSpotOwner+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDForecast+CoreDataProperties.swift"; path = "Model/CDForecast+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95D1DA1C1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDPlacemark+CoreDataProperties.swift"; path = "Model/CDPlacemark+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95D1DA1D1D4670EB000EF482 /* CDMenu+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDMenu+CoreDataProperties.swift"; path = "Model/CDMenu+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95E61DBA1D303D8E0096E616 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95E61DFB1D3054440096E616 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		95E61DFC1D3054440096E616 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		95E61E061D305A3D0096E616 /* Xoshem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Xoshem.xcdatamodel; sourceTree = "<group>"; };
@@ -451,10 +450,10 @@
 		951A80871D7448EF000FEF30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				70A970931F13026800DBC25D /* Assets.xcassets */,
 				95151AFF1BC82610003DC3E3 /* Xoshem.entitlements */,
 				95069C891D664110003704F6 /* Localizable.strings */,
 				95069C901D66646B003704F6 /* Main.storyboard */,
-				95E61DBA1D303D8E0096E616 /* Assets.xcassets */,
 				A129F8CC1B2CA81600EBC1DD /* LaunchScreen.storyboard */,
 				A129F8CF1B2CA81600EBC1DD /* Info.plist */,
 				952A82C41D52C87300C546DB /* GoogleService-Info.plist */,
@@ -521,7 +520,6 @@
 			isa = PBXGroup;
 			children = (
 				95D1D96E1D427FE7000EF482 /* CoreData */,
-				9540334D1D3C299F00330B57 /* CDManagedObject.swift */,
 				952DDC611D3F20D200BD57FD /* CDLocation.swift */,
 				952DDC631D3F20D200BD57FD /* CDPlacemark.swift */,
 				954033471D3C299F00330B57 /* CDForecast.swift */,
@@ -550,16 +548,18 @@
 		95D1D96E1D427FE7000EF482 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */,
+				70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */,
 				95D1DA141D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift */,
 				95D1DA151D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift */,
 				95D1DA161D4670EB000EF482 /* CDSpot+CoreDataProperties.swift */,
-				95D1DA171D4670EB000EF482 /* CDManagedObject+CoreDataProperties.swift */,
 				95D1DA181D4670EB000EF482 /* CDLocation+CoreDataProperties.swift */,
 				95D1DA191D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift */,
 				95D1DA1A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift */,
 				95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */,
 				95D1DA1C1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift */,
 				95D1DA1D1D4670EB000EF482 /* CDMenu+CoreDataProperties.swift */,
+				70FE00511F12E84600096217 /* Xoshem-Bridging-Header.h */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -600,7 +600,6 @@
 				95E61E0E1D3471FF0096E616 /* HelpViewController.swift */,
 				955E141B1D75568700B5B4D9 /* WebViewController.swift */,
 				954081A81D8B16A800A0CA35 /* AboutViewController.swift */,
-				95C1EA5B1D3DCCC500204C82 /* SpinnerView.swift */,
 				951A80871D7448EF000FEF30 /* Resources */,
 			);
 			path = Xoshem;
@@ -644,12 +643,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9577B0E81CF8DCAE002B023B /* Build configuration list for PBXNativeTarget "watchos Extension" */;
 			buildPhases = (
-				E90FFAC9D96FE74FDFB6E67F /* 📦 Check Pods Manifest.lock */,
+				E90FFAC9D96FE74FDFB6E67F /* [CP] Check Pods Manifest.lock */,
 				9577B0CD1CF8DCAE002B023B /* Sources */,
 				9577B0CE1CF8DCAE002B023B /* Frameworks */,
 				9577B0CF1CF8DCAE002B023B /* Resources */,
-				50BF52F14C7CE13E9A734B6C /* 📦 Embed Pods Frameworks */,
-				516799E5407FA09BA85A5356 /* 📦 Copy Pods Resources */,
+				50BF52F14C7CE13E9A734B6C /* [CP] Embed Pods Frameworks */,
+				516799E5407FA09BA85A5356 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -664,13 +663,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A129F8F71B2CA81700EBC1DD /* Build configuration list for PBXNativeTarget "Xoshem" */;
 			buildPhases = (
-				925C5C12B2C79308316B8AE6 /* 📦 Check Pods Manifest.lock */,
+				925C5C12B2C79308316B8AE6 /* [CP] Check Pods Manifest.lock */,
 				A129F8BC1B2CA81600EBC1DD /* Sources */,
 				A129F8BD1B2CA81600EBC1DD /* Frameworks */,
 				A129F8BE1B2CA81600EBC1DD /* Resources */,
 				A129F8F61B2CA81700EBC1DD /* Embed Watch Content */,
-				B5B3B53ED7A61B3EE8A1F13C /* 📦 Embed Pods Frameworks */,
-				A02F1FC7A2F805FF6771BAA9 /* 📦 Copy Pods Resources */,
+				B5B3B53ED7A61B3EE8A1F13C /* [CP] Embed Pods Frameworks */,
+				A02F1FC7A2F805FF6771BAA9 /* [CP] Copy Pods Resources */,
 				951784D21D522323007399F6 /* ShellScript */,
 			);
 			buildRules = (
@@ -690,23 +689,23 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Fuchs;
 				TargetAttributes = {
 					9577B0C41CF8DCAE002B023B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 5URLM297UU;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 					};
 					9577B0D01CF8DCAE002B023B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 5URLM297UU;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 					};
 					A129F8BF1B2CA81600EBC1DD = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 5URLM297UU;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -798,9 +797,9 @@
 			files = (
 				A129F8CE1B2CA81600EBC1DD /* LaunchScreen.storyboard in Resources */,
 				955E143D1D75673C00B5B4D9 /* TermsOfUse.html in Resources */,
+				70A970941F13026800DBC25D /* Assets.xcassets in Resources */,
 				955E14431D75680400B5B4D9 /* TermsAndConditions.html in Resources */,
 				95069C871D664110003704F6 /* Localizable.strings in Resources */,
-				95E61DBB1D303D8E0096E616 /* Assets.xcassets in Resources */,
 				955E142B1D7566A500B5B4D9 /* FAQ.html in Resources */,
 				955E144F1D75687300B5B4D9 /* About.html in Resources */,
 				955E14541D76DAD100B5B4D9 /* common.css in Resources */,
@@ -813,14 +812,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		50BF52F14C7CE13E9A734B6C /* 📦 Embed Pods Frameworks */ = {
+		50BF52F14C7CE13E9A734B6C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -828,14 +827,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-watchos Extension/Pods-watchos Extension-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		516799E5407FA09BA85A5356 /* 📦 Copy Pods Resources */ = {
+		516799E5407FA09BA85A5356 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -843,19 +842,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-watchos Extension/Pods-watchos Extension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		925C5C12B2C79308316B8AE6 /* 📦 Check Pods Manifest.lock */ = {
+		925C5C12B2C79308316B8AE6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		951784D21D522323007399F6 /* ShellScript */ = {
@@ -871,47 +870,47 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 061cb8f826889206e7bf1b139bd809c35b9aac3a f08b4d6a39d81cee14a96985dea1610c4097fc32e0985c8a14bb49493a3b0d8a";
 		};
-		A02F1FC7A2F805FF6771BAA9 /* 📦 Copy Pods Resources */ = {
+		A02F1FC7A2F805FF6771BAA9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Xoshem/Pods-Xoshem-resources.sh\"\n";
 		};
-		B5B3B53ED7A61B3EE8A1F13C /* 📦 Embed Pods Frameworks */ = {
+		B5B3B53ED7A61B3EE8A1F13C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Xoshem/Pods-Xoshem-frameworks.sh\"\n";
 		};
-		E90FFAC9D96FE74FDFB6E67F /* 📦 Check Pods Manifest.lock */ = {
+		E90FFAC9D96FE74FDFB6E67F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -922,13 +921,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				952DDC741D3F28DD00BD57FD /* CDForecastResult.swift in Sources */,
-				95D1DA251D4670EB000EF482 /* CDManagedObject+CoreDataProperties.swift in Sources */,
 				95D1DA271D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */,
 				952DDC781D3F28DD00BD57FD /* CDMenu.swift in Sources */,
 				9577B0DD1CF8DCAE002B023B /* NotificationController.swift in Sources */,
 				952DDC7E1D3F28DD00BD57FD /* CDTimeWeather.swift in Sources */,
 				95D1DA211D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift in Sources */,
 				952DDC6D1D3F28DD00BD57FD /* CDLocation.swift in Sources */,
+				70FE005D1F12F95800096217 /* CDManagedObject+CoreDataClass.swift in Sources */,
+				70FE005C1F12F93B00096217 /* CDManagedObject+CoreDataProperties.swift in Sources */,
 				952DDC7C1D3F28DD00BD57FD /* CDSpotOwner.swift in Sources */,
 				95D1DA1F1D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift in Sources */,
 				95D1DA2F1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift in Sources */,
@@ -939,7 +939,6 @@
 				959A31191D370376003649D5 /* Facade.swift in Sources */,
 				9577B0DB1CF8DCAE002B023B /* ExtensionDelegate.swift in Sources */,
 				9577B0EC1CFC6F15002B023B /* Common.swift in Sources */,
-				952DDC761D3F28DD00BD57FD /* CDManagedObject.swift in Sources */,
 				952DDC6F1D3F28DD00BD57FD /* CDPlacemark.swift in Sources */,
 				95D1DA291D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift in Sources */,
 				9577B0D91CF8DCAE002B023B /* InterfaceController.swift in Sources */,
@@ -969,20 +968,18 @@
 				95E61E0D1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift in Sources */,
 				95069CB51D670F4D003704F6 /* Crash.swift in Sources */,
 				9508D1CA1DA0B5D4008C2A75 /* ForecastHierarchyHeaderViewController.swift in Sources */,
-				95C1EA5C1D3DCCC500204C82 /* SpinnerView.swift in Sources */,
 				95E61E071D305A3D0096E616 /* Xoshem.xcdatamodeld in Sources */,
+				70FE005B1F12E88500096217 /* CDManagedObject+CoreDataProperties.swift in Sources */,
 				95D1DA261D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */,
 				95E61E0F1D3471FF0096E616 /* HelpViewController.swift in Sources */,
 				954033671D3C299F00330B57 /* CDMenu.swift in Sources */,
 				95D1DA221D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */,
-				954033631D3C299F00330B57 /* CDManagedObject.swift in Sources */,
 				9529961F1D510EA4000030B0 /* ForecastDayListViewController.swift in Sources */,
 				95D1DA301D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */,
 				954033571D3C299F00330B57 /* CDForecast.swift in Sources */,
 				95D1DA2A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */,
 				953241F81BC81C75009659A7 /* Facade.swift in Sources */,
 				95C4CAA01D55012E00D35F91 /* Auth.swift in Sources */,
-				95D1DA241D4670EB000EF482 /* CDManagedObject+CoreDataProperties.swift in Sources */,
 				952DDC651D3F20D200BD57FD /* CDLocation.swift in Sources */,
 				9540335F1D3C299F00330B57 /* CDForecastResult.swift in Sources */,
 				954081A91D8B16A800A0CA35 /* AboutViewController.swift in Sources */,
@@ -992,6 +989,7 @@
 				9540336B1D3C299F00330B57 /* CDSpot.swift in Sources */,
 				952996221D512387000030B0 /* ForecastDayListViewCell.swift in Sources */,
 				952713781DA2D854002D2A29 /* CDMenu+SwiftIconFont.swift in Sources */,
+				70FE005A1F12E88500096217 /* CDManagedObject+CoreDataClass.swift in Sources */,
 				953241F61BC81C75009659A7 /* Common.swift in Sources */,
 				A129F8C41B2CA81600EBC1DD /* AppDelegate.swift in Sources */,
 				95D1DA201D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift in Sources */,
@@ -1235,12 +1233,12 @@
 		9577B0E41CF8DCAE002B023B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = watchos_Extension;
 				INFOPLIST_FILE = watchos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -1250,7 +1248,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Xoshem/watchos-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -1259,12 +1257,12 @@
 		9577B0E51CF8DCAE002B023B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = watchos_Extension;
 				INFOPLIST_FILE = watchos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -1273,7 +1271,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Xoshem/watchos-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -1293,7 +1291,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -1313,7 +1311,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -1323,6 +1321,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1332,8 +1331,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1367,6 +1368,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1376,8 +1378,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1396,6 +1400,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1405,6 +1410,7 @@
 			baseConfigurationReference = AB3921BD253FA31467B6F5D9 /* Pods-Xoshem.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Xoshem/Xoshem.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1415,7 +1421,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.fuchs.Fuchs.Xoshem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_OBJC_BRIDGING_HEADER = "Xoshem/Xoshem-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1426,6 +1434,7 @@
 			baseConfigurationReference = A735F109F8FD3FF32B28BA3D /* Pods-Xoshem.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Xoshem/Xoshem.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1436,7 +1445,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.fuchs.Fuchs.Xoshem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_OBJC_BRIDGING_HEADER = "Xoshem/Xoshem-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

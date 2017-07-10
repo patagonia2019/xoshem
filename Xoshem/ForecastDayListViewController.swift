@@ -38,19 +38,19 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.offsetHour = 0
+        offsetHour = 0
         
-        self.updateForecast()
+        updateForecast()
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         observeNotification()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         unobserveNotification()
@@ -60,8 +60,8 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     /// UITableViewDataSource
     ///
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == tableView {
             return fd.count
         }
         // headerTableView
@@ -69,22 +69,22 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if tableView == self.tableView {
-            let cell = tableView.dequeueReusableCellWithIdentifier(Common.cell.identifier.forecastDayList,
-                                                                   forIndexPath: indexPath) as! ForecastDayListViewCell
-            cell.backgroundColor = UIColor.clearColor()
-            let data = fd[indexPath.row]
+        if tableView == tableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Common.cell.identifier.forecastDayList,
+                                                                   for: indexPath) as! ForecastDayListViewCell
+            cell.backgroundColor = UIColor.clear
+            let data = fd[(indexPath as NSIndexPath).row]
             cell.configure(data.iconData, key: data.keyData, value: data.valueData)
             return cell
         }
         
         // headerTableView
 
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifierSteper, forIndexPath: indexPath) as! ForecastDayStepViewCell
-        cell.backgroundColor = UIColor.clearColor()
-        cell.configureCell(self.hour3(), limit:self.stepperLimit(), didUpdate: { [weak self] (value: Int) in
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierSteper, for: indexPath) as! ForecastDayStepViewCell
+        cell.backgroundColor = UIColor.clear
+        cell.configureCell (hour3(), limit:self.stepperLimit(), didUpdate: { [weak self] (value: Int) in
             guard let strong = self else {
                 return
             }
@@ -98,58 +98,57 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     /// UITableViewDataSource
     ///
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
 
     func hour3() -> Int {
-        var hour3 = self.hour()
+        var hour3 = hour()
         let remainder = hour3 % 3
         hour3 -= remainder
         return hour3
     }
     
     func hour24() -> Int {
-        var hour24 = self.hour3()
+        var hour24 = hour3()
         hour24 = hour24 % 24
         return hour24
     }
     
     func day24() -> Int {
-        let day24 = self.day() + self.hour3() / 24
+        let day24 = day() + hour3() / 24
         return day24
     }
     
     func hour() -> Int {
-        var hour = self.dateComponents().hour
-        if let oh = self.offsetHour {
+        var hour = dateComponents().hour ?? 0
+        if let oh = offsetHour {
             hour += oh
         }
         return hour
     }
 
     func weekday() -> String {
-        let calendar = NSCalendar.currentCalendar()
-        let weekday = calendar.shortWeekdaySymbols[self.dateComponents().weekday-1]
+        let calendar = Calendar.current
+        let weekday = calendar.shortWeekdaySymbols[self.dateComponents().weekday!-1]
         return weekday
     }
     
     func month() -> String {
-        let calendar = NSCalendar.currentCalendar()
-        let month = calendar.shortMonthSymbols[self.dateComponents().month]
+        let calendar = Calendar.current
+        let month = calendar.shortMonthSymbols[self.dateComponents().month!]
         return month
     }
     
     func day() -> Int {
-        return self.dateComponents().day
+        return dateComponents().day!
     }
     
-    func dateComponents() -> NSDateComponents {
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let unitFlags: NSCalendarUnit = [.Hour, .Weekday, .Month, .Day]
-        let components = calendar.components(unitFlags, fromDate: date)
+    func dateComponents() -> DateComponents {
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .weekday, .month, .day], from: date)
         return components
     }
     
@@ -164,7 +163,7 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
         return limit
     }
     
-    func appendFd(icon: String, key: String, value: String) {
+    func appendFd(_ icon: String, key: String, value: String) {
         let data = DataStruct(order: fd.count, icon: icon, key: key, value: value)
         fd.append(data)
     }
@@ -175,10 +174,10 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
 
         if let _fr = forecastResult {
             
-            self.backgroundColorView.backgroundColor = _fr.color
-            let weekday = self.weekday()
-            let month = self.month()
-            appendFd("behance-heeyeun-jeong-14", key: "\(weekday) \(self.day24()), \(month)", value: "\(self.hour24())h")
+            backgroundColorView.backgroundColor = _fr.color
+            let wd = weekday()
+            let m = month()
+            appendFd("behance-heeyeun-jeong-14", key: "\(wd) \(day24()), \(m)", value: "\(hour24())h")
             if let nameCheck = _fr.namecheck() {
                 appendFd("behance-heeyeun-jeong-14", key: "City", value: "\(nameCheck)")
             }
@@ -218,7 +217,7 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
             if let tides = _fr.tides {
                 appendFd("behance-heeyeun-jeong-6", key: "Tides", value: "\(tides)")
             }
-            if let w = _fr.weather(self.hour()) {
+            if let w = _fr.weather (hour()) {
                 appendFd("behance-heeyeun-jeong-85", key: "Temperature", value: "\(w.temperature) °C")
                 appendFd("behance-heeyeun-jeong-86", key: "Temperature Real", value: "\(w.temperatureReal) °C")
                 appendFd("behance-heeyeun-jeong-12", key: "Relative humidity", value: "\(w.relativeHumidity) %")
@@ -236,21 +235,21 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
                 appendFd("behance-heeyeun-jeong-10", key: "Freezing Level", value: "\(w.freezingLevel) metters (0° isotherm)")
             }
         }
-        self.tableView.reloadData()
-        self.headerTableView.reloadData()
+        tableView.reloadData()
+        headerTableView.reloadData()
     }
     
     func incrementHour() {
-        self.offsetHour = self.offsetHour ?? 0 + 1
-        if let oh = self.offsetHour {
-            self.offsetHour = oh + 1
+        offsetHour = offsetHour ?? 0 + 1
+        if let oh = offsetHour {
+            offsetHour = oh + 1
         }
     }
     
     func decrementHour() {
-        if let oh = self.offsetHour {
+        if let oh = offsetHour {
             if oh - 1 > 0 {
-                self.offsetHour = oh - 1
+                offsetHour = oh - 1
             }
         }
     }
@@ -259,29 +258,32 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     /// Notification
     ///
     
-    private func observeNotification()
+    fileprivate func observeNotification()
     {
-        self.unobserveNotification()
+        unobserveNotification()
         
-        NSNotificationCenter.defaultCenter().addObserverForName(Common.notification.forecast.updated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (NSNotification) in
-            guard let strong = self else { return }
-            if let navigationController = strong.navigationController {
-                navigationController.popToRootViewControllerAnimated(true)
-            }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Common.notification.forecast.updated),
+                                               object: nil, queue: OperationQueue.main, using:
+            {
+                [weak self] (NSNotification) in
+                guard let strong = self else { return }
+                if let navigationController = strong.navigationController {
+                    navigationController.popToRootViewController(animated: true)
+                }
         })
     }
     
-    private func unobserveNotification()
+    fileprivate func unobserveNotification()
     {
         for notification in [Common.notification.forecast.updated] {
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: notification, object: nil);
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        Analytics.logMemoryWarning(#function, line: #line)
+        Analytics.logMemoryWarning(function: #function, line: #line)
     }
     
 

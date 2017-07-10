@@ -21,15 +21,15 @@ class Auth {
     #else
     var session: DGTSession!
 
-    func loginWithView(view:UIView, blockWithError:(error: Error) -> Void, blockWithSuccess:() -> Void) {
+    func loginWithView(_ view:UIView, blockWithError:@escaping (_ error: Error) -> Void, blockWithSuccess:@escaping () -> Void) {
         let authButton = DGTAuthenticateButton(authenticationCompletion: { [weak self]  (session: DGTSession?, error: NSError?) in
             if let e = error {
-                let myerror = Error(code: Common.ErrorCode.FacadeRestartIssue.rawValue,
+                let myerror = JFError(code: Common.ErrorCode.facadeRestartIssue.rawValue,
                     desc: "Failed at authenticate using Digits",
                     reason: "Error on start Facade",
                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: e)
-                Analytics.logError(myerror)
-                blockWithError(error: myerror)
+                Analytics.logError(error: myerror)
+                blockWithError(myerror)
             }
             else if let s = session {
                 guard let strong = self else {
@@ -48,24 +48,24 @@ class Auth {
             } else {
                 NSLog("Some other authentication error")
             }
-        })
-        authButton.center = view.center
-        view.addSubview(authButton)
+        } as! DGTAuthenticationCompletion)
+        authButton?.center = view.center
+        view.addSubview(authButton!)
     }
     
     func userId() -> String? {
-        return self.session.userID
+        return session.userID
     }
     
     func emailAddress() -> String? {
-        return self.session.emailAddress
+        return session.emailAddress
     }
     
     #endif
     
     func start() {
         #if os(iOS)
-        Digits.sharedInstance().startWithConsumerKey("your_key", consumerSecret: "your_secret")
+        Digits.sharedInstance().start(withConsumerKey: "your_key", consumerSecret: "your_secret")
         #endif
     }
 }

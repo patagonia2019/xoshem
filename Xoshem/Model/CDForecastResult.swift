@@ -12,26 +12,64 @@ import JFCore
 
 class CDForecastResult: CDSpot {
     
-    override class func createInManageContextObject(mco: NSManagedObjectContext) -> CDForecastResult {
+    override class func createInManageContextObject(_ mco: NSManagedObjectContext) -> CDForecastResult {
         return super.createName(NSStringFromClass(self), inManageContextObject: mco) as! CDForecastResult
     }
     
-    func update(forecastResult: ForecastResult) throws -> Bool {
-        // Only update the menu if all the relevant properties can be accessed.
-        var ret = try super.update(forecastResult as Spot)
+    class func importObject(_ object: ForecastResult?, mco: NSManagedObjectContext) throws -> CDForecastResult? {
+        
+        guard let object = object else {
+            return nil
+        }
+        
+        let search = { () -> [AnyObject]? in
+            guard let identity = object.identity else {
+                return nil
+            }
+            let predicate = NSPredicate(format: "identity = %@", identity)
+            guard let array = try CDForecastResult.searchEntityName(NSStringFromClass(self), predicate: predicate,
+                                                                    sortDescriptors: [], limit: 1, mco: mco) as? [CDForecastResult]
+                else {
+                    return nil
+            }
+            return array
+            
+        }
+        
+        let update = { (cdObject: CDManagedObject?) -> Bool in
+            let obj = cdObject as! CDForecastResult
+            let wgo = object
+            return try obj.update(wgo)
+        }
+        let create = { () -> AnyObject? in
+            return CDForecastResult.createInManageContextObject(mco)
+        }
+        
+        return try CDForecastResult.importObject(wgObject: object as AnyObject, mco: mco, search: search, update: update, create: create) as? CDForecastResult
+    }
+
+    
+    func update(_ forecastResult: ForecastResult?) throws -> Bool {
+
+        guard let object = forecastResult,
+              let spot = forecastResult else {
+            return false
+        }
+        
+        var ret = try super.update(spot)
         guard let
-            _countryId      = forecastResult.countryId,
-            _latitude       = forecastResult.latitude,
-            _longitude      = forecastResult.longitude,
-            _altitude       = forecastResult.altitude,
-            _timezone       = forecastResult.timezone,
-            _gmtHourOffset  = forecastResult.gmtHourOffset,
-            _sunrise        = forecastResult.sunrise,
-            _sunset         = forecastResult.sunset,
-            _currentModel   = forecastResult.currentModel,
-            _tides          = forecastResult.tides,
-            _models         = forecastResult.models else {
-                let myerror = Error(code: Common.ErrorCode.CDUpdateForecastResultIssue.rawValue,
+            _countryId      = object.countryId,
+            let _latitude       = object.latitude,
+            let _longitude      = object.longitude,
+            let _altitude       = object.altitude,
+            let _timezone       = object.timezone,
+            let _gmtHourOffset  = object.gmtHourOffset,
+            let _sunrise        = object.sunrise,
+            let _sunset         = object.sunset,
+            let _currentModel   = object.currentModel,
+            let _tides          = object.tides,
+            let _models         = object.models else {
+                let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastResultIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Failed to update CDForecastResult using ForecastResult object",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -66,12 +104,16 @@ class CDForecastResult: CDSpot {
                 
                 let set = NSMutableSet()
                 for model in _models {
-                    if let forecastModel = forecastResult.forecasts![model],
-                           mco = self.managedObjectContext {
+                    guard let forecasts = object.forecasts,
+                          let identity = object.identity else {
+                        continue
+                    }
+                    if let forecastModel = forecasts[model],
+                        let mco = managedObjectContext {
                         if let cdForecastModel = try CDForecastModel.importObject(forecastModel,
-                                                                                  forecastResultId: forecastResult.identity!,
+                                                                                  forecastResultId: identity,
                                                                                   mco: mco) {
-                            set.addObject(cdForecastModel)
+                            set.add(cdForecastModel)
                         }
                     }
                 }
@@ -79,7 +121,7 @@ class CDForecastResult: CDSpot {
                 
             } catch {
                 ret = false
-                let myerror = Error(code: Common.ErrorCode.CDUpdateForecastResultOnForecastModelIssue.rawValue,
+                let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastResultOnForecastModelIssue.rawValue,
                                     desc: "Failed to import ForecastModel into CDForecastModel inside CDForecastResult",
                                     reason: "Error on update forecast model inside result",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
@@ -92,64 +134,50 @@ class CDForecastResult: CDSpot {
     }
     
     
-    class func importObject(object: ForecastResult, mco: NSManagedObjectContext) throws -> CDForecastResult {
-        return try CDForecastResult.importObject(object, mco: mco,
-        search: {
-            (wgObject, mco) -> [AnyObject] in
-            let predicate = NSPredicate(format: "identity = %@", object.identity!)
-            return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [], limit: 1, mco: mco) as! [CDForecastResult]
-        },
-        update: {
-            (cdObject, wgObject, mco) -> Bool in
-            return try (cdObject as! CDForecastResult).update(wgObject as! ForecastResult)
-        },
-        create: { (mco) -> AnyObject in
-            return CDForecastResult.createInManageContextObject(mco)
-        }) as! CDForecastResult
-    }
-    
-    class func fetch(mco: NSManagedObjectContext) throws -> [CDForecastResult] {
+    class func fetch(_ mco: NSManagedObjectContext) throws -> [CDForecastResult] {
         let predicate = NSPredicate(format: "currentModel.length > 0")
-        let sortDescriptors = [NSSortDescriptor(key: "placemarkResult", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
-        return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: sortDescriptors, limit: 0, mco: mco) as! [CDForecastResult]
+        let sortDescriptors = [NSSortDescriptor(key: "placemarkResult", ascending: false),
+                               NSSortDescriptor(key: "name", ascending: true)]
+        return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate,
+                                                    sortDescriptors: sortDescriptors, limit: 0, mco: mco) as! [CDForecastResult]
     }
     
     func currentForecastModel() -> CDForecastModel? {
         guard let _currentModel = currentModel,
-                  _currentForecastModel = fetch(_currentModel) else {
+                  let _currentForecastModel = fetch(_currentModel) else {
             return nil
         }
         return _currentForecastModel
     }
     
-    func weather(hour: Int) -> CDTimeWeather? {
+    func weather(_ hour: Int) -> CDTimeWeather? {
         guard let _forecastModel = currentForecastModel(),
-            _forecast = _forecastModel.forecast as CDForecast?,
-            _timeWeather = _forecast.fetch(hour)
+            let _forecast = _forecastModel.forecast as CDForecast?,
+            let _timeWeather = _forecast.fetch(hour)
             else {
                 return nil
         }
         return _timeWeather
     }
 
-    func temperatureByHour(hour: Int) -> Float {
+    func temperatureByHour(_ hour: Int) -> Float? {
         guard let _forecastModel = currentForecastModel(),
-                  _forecast = _forecastModel.forecast as CDForecast?,
-                  _timeWeather = _forecast.fetch(hour),
-                  _temperature = _timeWeather.temperature as Float?
+                  let _forecast = _forecastModel.forecast as CDForecast?,
+                  let _timeWeather = _forecast.fetch(hour),
+                  let _temperature = _timeWeather.temperature as Float?
         else {
-            return 0.0
+            return nil
         }
         return _temperature
     }
     
-    func fetch(model: String) -> CDForecastModel? {
-        guard let _forecastModels = self.forecastModels else {
+    func fetch(_ model: String) -> CDForecastModel? {
+        guard let _forecastModels = forecastModels else {
             return nil
         }
         var fm : CDForecastModel? = nil
         for forecastModel in _forecastModels {
-            if forecastModel.model == model {
+            if (forecastModel as AnyObject).model == model {
                 fm = forecastModel as? CDForecastModel
                 break
             }
@@ -160,7 +188,7 @@ class CDForecastResult: CDSpot {
     override func namecheck() -> String? {
         var aux : String = ""
         if let _placemarkResult = placemarkResult,
-               _namecheck = _placemarkResult.namecheck() {
+               let _namecheck = _placemarkResult.namecheck() {
                 aux = _namecheck
         } else {
             if let _namecheck = super.namecheck() {

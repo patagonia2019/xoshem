@@ -12,21 +12,21 @@ import UIKit
 class AboutViewController: WebViewController {
     
     override func viewDidLoad() {
-        self.title = Common.title.About
+        title = Common.title.About
         super.viewDidLoad()
-        let dic = NSProcessInfo.processInfo().environment
-        if let tokens = self.aboutTokens() {
-            self.tokens = tokens
+//        let dic = ProcessInfo.processInfo.environment
+        if let tks = aboutTokens() {
+            tokens = tks
         }
 
     }
     
     func aboutTokens() -> [String : String]? {
-        if let info = NSBundle.mainBundle().infoDictionary,
+        let date = Facade.instance.lastRefreshDate ?? Date.init()
+        if let info = Bundle.main.infoDictionary,
            let bundleName = info["CFBundleName"] as? String,
            let bundleShortVersion = info["CFBundleShortVersionString"] as? String,
-           let bundleVersion = info["CFBundleVersion"] as? String,
-           let date = Facade.instance.lastRefreshDate ?? "-"
+           let bundleVersion = info["CFBundleVersion"] as? String
         {
            return [
                 "<ABOUT_APPNAME>": bundleName,

@@ -16,25 +16,25 @@ class ForecastDayListViewCell: UITableViewCell {
         
     func configure()
     {
-        self.iconView.alpha = 0
-        self.keyLabel.alpha = 0
-        self.valueLabel.alpha = 0
+        iconView.alpha = 0
+        keyLabel.alpha = 0
+        valueLabel.alpha = 0
     }
     
-    func configure(iconName: String?, key: String?, value: String?)
+    func configure(_ iconName: String?, key: String?, value: String?)
     {
-        self.configure()
+        configure()
         if let _iconName = iconName {
-            self.iconView.alpha = 1
-            self.iconView.image = UIImage.init(named: _iconName)
+            iconView.alpha = 1
+            iconView.image = UIImage.init(named: _iconName)
         }
         if let _key = key {
-            self.keyLabel.alpha = 1
-            self.keyLabel.text = _key
+            keyLabel.alpha = 1
+            keyLabel.text = _key
         }
         if let _value = value {
-            self.valueLabel.alpha = 1
-            self.valueLabel.text = _value
+            valueLabel.alpha = 1
+            valueLabel.text = _value
         }
     }
 

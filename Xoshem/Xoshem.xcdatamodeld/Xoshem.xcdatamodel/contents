@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G1004" minimumToolsVersion="Xcode 7.0">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Xcode 7.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDForecast" representedClassName=".CDForecast" parentEntity="CDManagedObject" syncable="YES">
-        <attribute name="initDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="initStamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="initDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="initStamp" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="modelName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="forecastModel" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDForecastModel" inverseName="forecast" inverseEntity="CDForecastModel" syncable="YES"/>
         <relationship name="timeWeathers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDTimeWeather" inverseName="forecasts" inverseEntity="CDTimeWeather" syncable="YES"/>
@@ -13,13 +13,13 @@
         <relationship name="forecastResult" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDForecastResult" inverseName="forecastModels" inverseEntity="CDForecastResult" syncable="YES"/>
     </entity>
     <entity name="CDForecastResult" representedClassName=".CDForecastResult" parentEntity="CDSpot" syncable="YES">
-        <attribute name="altitude" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="countryId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="altitude" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="countryId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="currentModel" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="gmtHourOffset" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="hide" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="gmtHourOffset" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="hide" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="sunrise" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sunset" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tides" optional="YES" attributeType="String" syncable="YES"/>
@@ -29,28 +29,29 @@
         <relationship name="spotOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSpotOwner" inverseName="forecastResult" inverseEntity="CDSpotOwner" syncable="YES"/>
     </entity>
     <entity name="CDLocation" representedClassName=".CDLocation" parentEntity="CDManagedObject" syncable="YES">
-        <attribute name="altitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="floorLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="horizontalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="isCurrent" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="altitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="floorLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="horizontalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isCurrent" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="verticalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="verticalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="placemarks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDPlacemark" inverseName="location" inverseEntity="CDPlacemark" syncable="YES"/>
     </entity>
     <entity name="CDManagedObject" representedClassName=".CDManagedObject" syncable="YES">
-        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="CDMenu" representedClassName=".CDMenu" parentEntity="CDManagedObject" syncable="YES">
-        <attribute name="edit" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="edit" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="file" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iconList" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iconName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="parentId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="requireLogin" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="parentId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="requireLogin" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="segue" optional="YES" attributeType="String" syncable="YES"/>
         <fetchedProperty name="fetchedProperty" optional="YES" syncable="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="CDMenu"/>
@@ -80,33 +81,33 @@
     </entity>
     <entity name="CDSpotOwner" representedClassName=".CDSpotOwner" parentEntity="CDSpot" syncable="YES">
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="forecastResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDForecastResult" inverseName="spotOwner" inverseEntity="CDForecastResult" syncable="YES"/>
     </entity>
     <entity name="CDTimeWeather" representedClassName=".CDTimeWeather" parentEntity="CDManagedObject" syncable="YES">
-        <attribute name="cloudCoverHigh" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="cloudCoverLow" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="cloudCoverMid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="cloudCoverTotal" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="freezingLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="hour" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="precipitation" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="relativeHumidity" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="seaLevelPressure" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="temperature" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
-        <attribute name="temperatureReal" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="windDirection" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="cloudCoverHigh" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="cloudCoverLow" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="cloudCoverMid" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="cloudCoverTotal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="freezingLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="hour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="precipitation" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="relativeHumidity" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="seaLevelPressure" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="temperature" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="temperatureReal" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="windDirection" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="windDirectionName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="windGust" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="windSpeed" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="windGust" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="windSpeed" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="forecasts" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDForecast" inverseName="timeWeathers" inverseEntity="CDForecast" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDForecast" positionX="466" positionY="-414" width="128" height="118"/>
+        <element name="CDForecast" positionX="466" positionY="-414" width="128" height="120"/>
         <element name="CDForecastModel" positionX="187" positionY="-207" width="128" height="88"/>
         <element name="CDForecastResult" positionX="-29" positionY="-210" width="128" height="255"/>
         <element name="CDLocation" positionX="639" positionY="-99" width="128" height="178"/>
-        <element name="CDManagedObject" positionX="288" positionY="-345" width="128" height="30"/>
+        <element name="CDManagedObject" positionX="288" positionY="-345" width="128" height="75"/>
         <element name="CDMenu" positionX="-45" positionY="-297" width="128" height="209"/>
         <element name="CDPlacemark" positionX="781" positionY="-405" width="128" height="270"/>
         <element name="CDSpot" positionX="270" positionY="-9" width="128" height="90"/>

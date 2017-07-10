@@ -18,98 +18,100 @@ class MasterViewController: BaseTableViewController {
 
     
     override func viewDidLoad() {
-        self.title = ""
+        title = ""
         super.viewDidLoad()
         
-        if let split = self.splitViewController {
+        if let split = splitViewController {
             let controllers = split.viewControllers
             let last = (controllers[controllers.count-1] as! UINavigationController)
-            self.detailViewController = last.topViewController as? DetailViewController
+            detailViewController = last.topViewController as? DetailViewController
         }
  
     }
 
-    override func viewWillAppear(animated: Bool) {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+    override func viewWillAppear(_ animated: Bool) {
+        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
-        self.observeLocationServices()
+        observeLocationServices()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unobserveLocationServices()
+        unobserveLocationServices()
     }
 
     // MARK: - Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let indexPath = self.tableView.indexPathForSelectedRow {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = tableView.indexPathForSelectedRow {
             
             let controller : DetailViewController
-            if let dt = segue.destinationViewController as? UINavigationController {
+            if let dt = segue.destination as? UINavigationController {
                 controller = dt.topViewController as! DetailViewController
             }
             else {
-                controller = segue.destinationViewController as! DetailViewController
+                controller = segue.destination as! DetailViewController
             }
             let object = Facade.instance.fetchRootMenu()[indexPath.row] as CDMenu
             controller.detailItem = object
-            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+            controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
             controller.navigationItem.leftItemsSupplementBackButton = true
             
-            if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-                self.splitViewController?.preferredDisplayMode = .Automatic
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                splitViewController?.preferredDisplayMode = .automatic
             }
-            else if self.splitViewController!.displayMode == .PrimaryOverlay {
-                let animations : () -> Void = {
-                    self.splitViewController?.preferredDisplayMode = .PrimaryHidden
+            else if splitViewController!.displayMode == .primaryOverlay {
+                let animations : () -> Void = { [weak self] in
+                    self?.splitViewController?.preferredDisplayMode = .primaryHidden
                 }
-                let completion : Bool -> Void = { _ in
-                    self.splitViewController?.preferredDisplayMode = .Automatic
+                let completion : (Bool) -> Void = { [weak self] _ in
+                    self?.splitViewController?.preferredDisplayMode = .automatic
                 }
-                UIView.animateWithDuration(0.3, animations: animations, completion: completion)
+                UIView.animate(withDuration: 0.3, animations: animations, completion: completion)
             }
         }
     }
     
     // MARK: - Table View
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Facade.instance.fetchRootMenu().count ?? 0
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Facade.instance.fetchRootMenu().count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Common.cell.identifier.root, forIndexPath: indexPath)
-        let menu = Facade.instance.fetchRootMenu()[indexPath.row] as CDMenu
-        self.configureCell(cell, withMenu: menu)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Common.cell.identifier.root, for: indexPath)
+        let menu = Facade.instance.fetchRootMenu()[(indexPath as NSIndexPath).row] as CDMenu
+        configureCell(cell, withMenu: menu)
         return cell
     }
     
-    func configureCell(cell: UITableViewCell, withMenu menu: CDMenu) {
-        cell.backgroundColor = UIColor.clearColor()
+    func configureCell(_ cell: UITableViewCell, withMenu menu: CDMenu) {
+        cell.backgroundColor = UIColor.clear
         if let name = menu.name,
            let textLabel = cell.textLabel {
-            textLabel.font = UIFont.boldSystemFontOfSize(16)
+            textLabel.font = UIFont.boldSystemFont(ofSize: 16)
             textLabel.text = name
         }
         guard let fromFont = menu.iconFont,
-            iconName = menu.iconName,
-            cellImage = cell.imageView,
-            icon = UIImage.iconToImage(fromFont, iconCode: iconName, imageSize: CGSizeMake(50, 50), fontSize: 40) else {
+            let iconName = menu.iconName,
+            let cellImage = cell.imageView else {
                 assertionFailure("need icon here for \(menu)")
                 return
         }
-        cellImage.image = icon.convertColor(UIColor.whiteColor())
+        let size = CGSize(width: 50, height: 50)
+        let fontSize :CGFloat = 40.0
+        let icon = UIImage.icon(from: fromFont, iconColor: .white, code: iconName, imageSize: size, ofSize: fontSize)
+        cellImage.image = icon
     }
     
 
-    private func observeLocationServices()
+    fileprivate func observeLocationServices()
     {
-        self.unobserveLocationServices()
+        unobserveLocationServices()
 
-        let queue = NSOperationQueue.mainQueue()
+        let queue = OperationQueue.main
         
-        NSNotificationCenter.defaultCenter().addObserverForName(JFCore.Constants.Notification.locationError, object: nil,
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationError), object: nil,
                                                                 queue: queue) {
             note in if let object: Error = note.object as? Error {
                 let alertView = SCLAlertView()
@@ -121,11 +123,11 @@ class MasterViewController: BaseTableViewController {
                         strong.locationRestart()
                     }
                 }
-                alertView.showError(Common.title.Locationfailed, subTitle: object.description)
+                alertView.showError(Common.title.Locationfailed, subTitle: object.localizedDescription)
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(JFCore.Constants.Notification.locationAuthorized, object: nil,
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationAuthorized), object: nil,
                                                                 queue: queue) {
             (NSNotification) in
             if !JFCore.LocationManager.instance.isAuthorized() {
@@ -134,28 +136,27 @@ class MasterViewController: BaseTableViewController {
         }
     }
     
-    private func locationRestart() {
+    fileprivate func locationRestart() {
         do {
             try Facade.instance.restartLocation()
         } catch {
-            if let e = error as? Error {
-                SCLAlertView().showError(Common.title.Servicesfailed, subTitle:e.description)
-            }
+            let e = error
+            SCLAlertView().showError(Common.title.Servicesfailed, subTitle:e.localizedDescription)
         }
     }
     
-    private func unobserveLocationServices()
+    fileprivate func unobserveLocationServices()
     {
         for notification in [JFCore.Constants.Notification.locationError,
                              JFCore.Constants.Notification.locationAuthorized] {
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: notification, object: nil);
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        Analytics.logMemoryWarning(#function, line: #line)
+        Analytics.logMemoryWarning(function: #function, line: #line)
     }
 
 }

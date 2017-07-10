@@ -12,52 +12,73 @@ import JFCore
 
 class CDSpot: CDManagedObject {
 
-    override class func createInManageContextObject(mco: NSManagedObjectContext) -> CDSpot {
+    override class func createInManageContextObject(_ mco: NSManagedObjectContext) -> CDSpot {
         return super.createName(NSStringFromClass(self), inManageContextObject: mco) as! CDSpot
     }
+    
+    
+    class func importObject(_ object: Spot?, mco: NSManagedObjectContext) throws -> CDSpot? {
+        
+        guard let object = object else {
+            return nil
+        }
+        
+        let search = { () -> [AnyObject]? in
+            guard let identity = object.identity else {
+                    return nil
+            }
+            let predicate = NSPredicate(format: "identity = %@", identity)
+            guard let array = try CDSpot.searchEntityName(NSStringFromClass(self), predicate: predicate,
+                                                          sortDescriptors: [], limit: 1,
+                                                          mco: mco) as? [CDSpot]
+                else {
+                    return nil
+            }
+            return array
+            
+        }
+        
+        let update = { (cdObject: CDManagedObject?) -> Bool in
+            let obj = cdObject as! CDSpot
+            let wgo = object
+            return try obj.update(wgo)
+        }
+        let create = { () -> AnyObject? in
+            return CDSpot.createInManageContextObject(mco)
+        }
+        
+        return try CDSpot.importObject(wgObject: object as AnyObject, mco: mco, search: search,
+                                       update: update, create: create) as? CDSpot
+    }
 
-    func update(spot: Spot) throws -> Bool {
+    func update(_ spot: Spot?) throws -> Bool {
 
-        var ret = super.update()
+        guard let spot = spot else {
+            return false
+        }
+
         guard let
             _identity = spot.identity
             else {
-                let myerror = Error(code: Common.ErrorCode.CDUpdateSpotIssue.rawValue,
+                let myerror = JFError(code: Common.ErrorCode.cdUpdateSpotIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Failed to update CDSpot using Spot object",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
                 throw myerror
         }
         if identity == _identity {
-            ret = false
+            return false
         }
-        else {
-            identity = _identity
-            if let _country = spot.country {
-                country = _country
-            }
-            if let _name = spot.name {
-                name = _name
-            }
-            ret = ret && true
-        }
-        return ret
-    }
 
-    class func importObject(object: Spot, mco: NSManagedObjectContext) throws -> CDSpot {
-        return try CDSpot.importObject(object, mco: mco,
-        search: {
-            (wgObject, mco) -> [AnyObject] in
-            let predicate = NSPredicate(format: "identity = %@", object.identity!)
-            return try CDSpot.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: [], limit: 1, mco: mco) as! [CDSpot]
-        },
-        update: {
-            (cdObject, wgObject, mco) -> Bool in
-            return try (cdObject as! CDSpot).update(wgObject as! Spot)
-        },
-        create: { (mco) -> AnyObject in
-            return CDSpot.createInManageContextObject(mco)
-        }) as! CDSpot
+        identity = _identity
+        if let _country = spot.country {
+            country = _country
+        }
+        if let _name = spot.name {
+            name = _name
+        }
+        
+        return false
     }
     
     func namecheck() -> String? {
