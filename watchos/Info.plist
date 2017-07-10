@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>org.fuchs.Fuchs.Xoshem</string>
+	<string>com.mobilepatagonia.Xoshem</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>
