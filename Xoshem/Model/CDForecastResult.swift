@@ -1,5 +1,5 @@
 //
-//  ForecastResult.swift
+//  SpotForecast.swift
 //  Xoshem
 //
 //  Created by Javier Fuchs on 7/15/16.
@@ -16,17 +16,17 @@ class CDForecastResult: CDSpot {
         return super.createName(NSStringFromClass(self), inManageContextObject: mco) as! CDForecastResult
     }
     
-    class func importObject(_ object: ForecastResult?, mco: NSManagedObjectContext) throws -> CDForecastResult? {
+    class func importObject(_ object: SpotForecast?, mco: NSManagedObjectContext) throws -> CDForecastResult? {
         
         guard let object = object else {
             return nil
         }
         
         let search = { () -> [AnyObject]? in
-            guard let identity = object.identity else {
+            guard let id_spot = object.id_spot else {
                 return nil
             }
-            let predicate = NSPredicate(format: "identity = %@", identity)
+            let predicate = NSPredicate(format: "id_spot = %@", id_spot)
             guard let array = try CDForecastResult.searchEntityName(NSStringFromClass(self), predicate: predicate,
                                                                     sortDescriptors: [], limit: 1, mco: mco) as? [CDForecastResult]
                 else {
@@ -49,7 +49,7 @@ class CDForecastResult: CDSpot {
     }
 
     
-    func update(_ forecastResult: ForecastResult?) throws -> Bool {
+    func update(_ forecastResult: SpotForecast?) throws -> Bool {
 
         guard let object = forecastResult,
               let spot = forecastResult else {
@@ -71,7 +71,7 @@ class CDForecastResult: CDSpot {
             let _models         = object.models else {
                 let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastResultIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
-                                    reason: "Failed to update CDForecastResult using ForecastResult object",
+                                    reason: "Failed to update CDForecastResult using SpotForecast object",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
                throw myerror
         }
@@ -104,14 +104,14 @@ class CDForecastResult: CDSpot {
                 
                 let set = NSMutableSet()
                 for model in _models {
-                    guard let forecasts = object.forecasts,
-                          let identity = object.identity else {
+                    let forecasts = object.forecasts
+                    guard let id_spot = object.id_spot else {
                         continue
                     }
                     if let forecastModel = forecasts[model],
                         let mco = managedObjectContext {
                         if let cdForecastModel = try CDForecastModel.importObject(forecastModel,
-                                                                                  forecastResultId: identity,
+                                                                                  forecastResultId: id_spot,
                                                                                   mco: mco) {
                             set.add(cdForecastModel)
                         }

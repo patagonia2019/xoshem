@@ -25,7 +25,7 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var windSpeedLabel: WKInterfaceLabel!
     @IBOutlet var hourLabel: WKInterfaceLabel!
     
-    var forecastResult: ForecastResult!
+    var forecastResult: SpotForecast!
     var sliderHeight: Float!
     
     override func awake(withContext context: Any?) {
@@ -85,7 +85,7 @@ class InterfaceController: WKInterfaceController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Common.notification.forecast.updated), object: nil, queue: OperationQueue.main,
                using: {
                 [weak self]
-                note in if let object: ForecastResult = note.object as? ForecastResult {
+                note in if let object: SpotForecast = note.object as? SpotForecast {
                     self?.forecastResult = object
                     self?.updateForecastView()
                 }

@@ -24,10 +24,10 @@ class CDSpot: CDManagedObject {
         }
         
         let search = { () -> [AnyObject]? in
-            guard let identity = object.identity else {
+            guard let id_spot = object.id_spot else {
                     return nil
             }
-            let predicate = NSPredicate(format: "identity = %@", identity)
+            let predicate = NSPredicate(format: "id_spot = %@", id_spot)
             guard let array = try CDSpot.searchEntityName(NSStringFromClass(self), predicate: predicate,
                                                           sortDescriptors: [], limit: 1,
                                                           mco: mco) as? [CDSpot]
@@ -58,7 +58,7 @@ class CDSpot: CDManagedObject {
         }
 
         guard let
-            _identity = spot.identity
+            _identity = spot.id_spot
             else {
                 let myerror = JFError(code: Common.ErrorCode.cdUpdateSpotIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
@@ -66,15 +66,15 @@ class CDSpot: CDManagedObject {
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
                 throw myerror
         }
-        if identity == _identity {
+        if id_spot == _identity {
             return false
         }
 
-        identity = _identity
+        id_spot = _identity
         if let _country = spot.country {
             country = _country
         }
-        if let _name = spot.name {
+        if let _name = spot.spotname {
             name = _name
         }
         
@@ -102,7 +102,7 @@ class CDSpot: CDManagedObject {
         if let _country = country {
             aux += "\(_country);"
         } else { aux += "();" }
-        if let _identity = identity {
+        if let _identity = id_spot {
             aux += "\(_identity);"
         } else { aux += "();" }
         if let _name = name {

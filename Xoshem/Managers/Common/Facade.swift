@@ -143,7 +143,7 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
         catch {
             let myerror = JFError(code: Common.ErrorCode.forecastResultIssue.rawValue,
                                 desc: Common.title.failedAtFetchForecasts,
-                                reason: "Seems to be an initialization error in database with table ForecastResult",
+                                reason: "Seems to be an initialization error in database with table SpotForecast",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
             Analytics.logError(error: myerror)
             throw myerror
@@ -162,13 +162,13 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
             if array.count > 0 {
                 let spotOwner = array.removeFirst()
                 guard let cdSpotOwner = try CDSpotOwner.importObject(spotOwner, mco: mco),
-                      let identity = cdSpotOwner.identity else {
+                      let id_spot = cdSpotOwner.id_spot else {
                     try recursivelyUpdateSpotOwners(array, placemark: placemark)
                     return
                 }
                 
-                forecast.queryWeatherSpot(spot: identity,
-                    updateForecastDidFailWithError: {
+                forecast.forecast(bySpotId: id_spot,
+                    failure: {
                         [weak self] (error) in
                         do {
                             try self?.recursivelyUpdateSpotOwners(array, placemark: placemark)
@@ -183,12 +183,14 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
                             myerror.fatal()
                         }
                     },
-                    didUpdateForecastResult: {
+                    success: {
                         [weak self] (forecastResult) in
                         do {
                             self?.lastRefreshDate = Date.init()
-                            try self?.didUpdateForecastResult(forecastResult, spotOwner:cdSpotOwner,
+                            if let forecastResult = forecastResult {
+                                try self?.didUpdateForecastResult(forecastResult, spotOwner:cdSpotOwner,
                                                               placemark: placemark)
+                            }
                             try self?.recursivelyUpdateSpotOwners(array, placemark: placemark)
                         }
                         catch {
@@ -209,7 +211,7 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
         catch {
             let myerror = JFError(code: Common.ErrorCode.updateForecastSpotsResultIssue.rawValue,
                                 desc: Common.title.failedAtImportObjects,
-                                reason: "Error in ForecastResult/SpotOwners",
+                                reason: "Error in SpotForecast/SpotOwners",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)",
                 underError: error as NSError)
             Analytics.logError(error: myerror)
@@ -218,14 +220,15 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func queryLocationWithString(_ string: String, placemark: CDPlacemark, tryAgain:@escaping () -> Void) {
-        forecast.queryLocation(location: string,
-            updateSpotDidFailWithError: {
+        forecast.searchSpots(byLocation: string,
+            failure: {
                 (error) in
                 tryAgain()
             },
-            didUpdateSpotResult: {
+            success: {
                 [weak self] (spotResult) in
-                if let array = spotResult.spots {
+                if  let spotResult = spotResult,
+                    let array = spotResult.spots {
                     do {
                         try self?.recursivelyUpdateSpotOwners(array, placemark: placemark)
                     }
@@ -435,7 +438,7 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
     // update forecast
     //
     
-    func didUpdateForecastResult(_ forecastResult: ForecastResult, spotOwner: CDSpotOwner?, placemark: CDPlacemark?) throws {
+    func didUpdateForecastResult(_ forecastResult: SpotForecast, spotOwner: CDSpotOwner?, placemark: CDPlacemark?) throws {
         do {
             guard let forecastResult = try CDForecastResult.importObject(forecastResult, mco: mco),
                 let placemarkToUpdate = placemark,
@@ -448,7 +451,7 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
         catch {
             let myerror = JFError(code: Common.ErrorCode.updateForecastResultIssue.rawValue,
                                 desc: Common.title.failedAtImportObjects,
-                                reason: "Error on update ForecastResult",
+                                reason: "Error on update SpotForecast",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
             Analytics.logError(error: myerror)
             throw myerror
@@ -461,24 +464,26 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
                 JFCore.Common.synchronized(syncBlock: { [weak self] in
 
                     let mySpot = array.removeFirst()
-                    guard let identity = mySpot.identity,
+                    guard let id_spot = mySpot.id_spot,
                         let currentModel = mySpot.currentModel else {
                             self?.updateSpotsForecastResult(array, placemark: placemark)
                             return
                     }
-                    self?.forecast.queryWeatherSpot(spot: identity, model: currentModel,
-                        updateForecastDidFailWithError: { [weak self] (error) in
+                    self?.forecast.forecast(bySpotId: id_spot, model: currentModel,
+                        failure: { [weak self] (error) in
                             self?.updateSpotsForecastResult(array, placemark: placemark)
                         },
-                        didUpdateForecastResult: { [weak self] (forecastResult) in
+                        success: { [weak self] (forecastResult) in
                             do {
-                                try self?.didUpdateForecastResult(forecastResult, spotOwner: nil, placemark: placemark)
+                                if let forecastResult = forecastResult {
+                                    try self?.didUpdateForecastResult(forecastResult, spotOwner: nil, placemark: placemark)
+                                }
                                 self?.updateSpotsForecastResult(array, placemark: placemark)
                             }
                             catch {
                                 let myerror = JFError(code: Common.ErrorCode.updateForecastSpotsResultIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
-                                    reason: "Error on update ForecastResult/Spots",
+                                    reason: "Error on update SpotForecast/Spots",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
                                 Analytics.logFatal(error: myerror)
                                 myerror.fatal()
@@ -687,7 +692,7 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
         catch {
             let myerror = JFError(code: Common.ErrorCode.forecastResultIssue.rawValue,
                                 desc: Common.title.failedAtFetchForecasts,
-                                reason: "Seems to be an initialization error in database with table ForecastResult",
+                                reason: "Seems to be an initialization error in database with table SpotForecast",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
             Analytics.logError(error: myerror)
             throw myerror
@@ -752,7 +757,7 @@ open class Facade: NSObject, NSFetchedResultsControllerDelegate {
         catch {
             let myerror = JFError(code: Common.ErrorCode.forecastResultIssue.rawValue,
                                 desc: Common.title.failedAtFetchForecasts,
-                                reason: "Seems to be an initialization error in database with table ForecastResult",
+                                reason: "Seems to be an initialization error in database with table SpotForecast",
                                 suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
             Analytics.logError(error: myerror)
             throw myerror

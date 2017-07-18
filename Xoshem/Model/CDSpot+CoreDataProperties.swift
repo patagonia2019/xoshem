@@ -15,7 +15,7 @@ import CoreData
 extension CDSpot {
 
     @NSManaged var country: String?
-    @NSManaged var identity: String?
+    @NSManaged var id_spot: String?
     @NSManaged var name: String?
 
 }

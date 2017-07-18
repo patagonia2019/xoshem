@@ -26,7 +26,7 @@ class CDForecast: CDManagedObject {
         }
         
         let search = { () -> [AnyObject]? in
-            let format = "forecastModel.forecastResult.identity = %@ and forecastModel.forecastResult.currentModel = %@"
+            let format = "forecastModel.forecastResult.id_spot = %@ and forecastModel.forecastResult.currentModel = %@"
             let predicate = NSPredicate(format: format, forecastResultId, model)
             guard let array = try CDForecast.searchEntityName(NSStringFromClass(self), predicate: predicate,
                                                               sortDescriptors: [], limit: 1, mco: mco) as? [CDForecast]
@@ -74,21 +74,7 @@ class CDForecast: CDManagedObject {
             let _windSpeed         = object.windSpeed as TimeWeather?,
             let _windDirection     = object.windDirection as TimeWeather?,
             let _windDirectionName = object.windDirectionName as TimeWeather?,
-            let _temperatureReal   = object.temperatureReal as TimeWeather?,
-            let _temperatureValue       = _temperature.value,
-            let _cloudCoverTotalValue   = _cloudCoverTotal.value,
-            let _cloudCoverHighValue    = _cloudCoverHigh.value,
-            let _cloudCoverMidValue     = _cloudCoverMid.value,
-            let _cloudCoverLowValue     = _cloudCoverLow.value,
-            let _relativeHumidityValue  = _relativeHumidity.value,
-            let _windGustValue          = _windGust.value,
-            let _seaLevelPressureValue  = _seaLevelPressure.value,
-            let _freezingLevelValue     = _freezingLevel.value,
-            let _precipitationValue     = _precipitation.value,
-            let _windSpeedValue         = _windSpeed.value,
-            let _windDirectionValue     = _windDirection.value,
-            let _windDirectionNameValue = _windDirectionName.value,
-            let _temperatureRealValue   = _temperatureReal.value
+            let _temperatureReal   = object.temperatureReal as TimeWeather?
             else {
                 let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
@@ -101,6 +87,21 @@ class CDForecast: CDManagedObject {
         modelName = _modelName
 
         let timeWeatherMutableSet = NSMutableSet()
+        
+        let _temperatureValue       = _temperature.value
+        let _cloudCoverTotalValue   = _cloudCoverTotal.value
+        let _cloudCoverHighValue    = _cloudCoverHigh.value
+        let _cloudCoverMidValue     = _cloudCoverMid.value
+        let _cloudCoverLowValue     = _cloudCoverLow.value
+        let _relativeHumidityValue  = _relativeHumidity.value
+        let _windGustValue          = _windGust.value
+        let _seaLevelPressureValue  = _seaLevelPressure.value
+        let _freezingLevelValue     = _freezingLevel.value
+        let _precipitationValue     = _precipitation.value
+        let _windSpeedValue         = _windSpeed.value
+        let _windDirectionValue     = _windDirection.value
+        let _windDirectionNameValue = _windDirectionName.value
+        let _temperatureRealValue   = _temperatureReal.value
         
         for hour in _temperatureValue.keys {
             guard let mco = managedObjectContext else {
@@ -190,7 +191,7 @@ class CDForecast: CDManagedObject {
         var array = [CDForecast]()
         
         do {
-            let predicate = NSPredicate(format: "forecastModel.forecastResult.identity = %@ and forecastModel.forecastResult.currentModel = %@",
+            let predicate = NSPredicate(format: "forecastModel.forecastResult.id_spot = %@ and forecastModel.forecastResult.currentModel = %@",
                                         forecastResultId, model)
             array = try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate,
                                                          sortDescriptors: [], limit: 1,

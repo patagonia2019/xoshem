@@ -14,7 +14,7 @@ import CoreData
 
 extension CDSpotOwner {
 
-    @NSManaged var nickname: String?
+    @NSManaged var spotname: String?
     @NSManaged var userId: Int16
     @NSManaged var forecastResult: CDForecastResult?
 

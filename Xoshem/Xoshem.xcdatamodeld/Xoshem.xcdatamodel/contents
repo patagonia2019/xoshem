@@ -76,11 +76,11 @@
     </entity>
     <entity name="CDSpot" representedClassName=".CDSpot" isAbstract="YES" parentEntity="CDManagedObject" syncable="YES">
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id_spot" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="CDSpotOwner" representedClassName=".CDSpotOwner" parentEntity="CDSpot" syncable="YES">
-        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spotname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="forecastResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDForecastResult" inverseName="spotOwner" inverseEntity="CDForecastResult" syncable="YES"/>
     </entity>
@@ -103,15 +103,15 @@
         <relationship name="forecasts" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDForecast" inverseName="timeWeathers" inverseEntity="CDForecast" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDForecast" positionX="466" positionY="-414" width="128" height="120"/>
-        <element name="CDForecastModel" positionX="187" positionY="-207" width="128" height="88"/>
-        <element name="CDForecastResult" positionX="-29" positionY="-210" width="128" height="255"/>
-        <element name="CDLocation" positionX="639" positionY="-99" width="128" height="178"/>
-        <element name="CDManagedObject" positionX="288" positionY="-345" width="128" height="75"/>
-        <element name="CDMenu" positionX="-45" positionY="-297" width="128" height="209"/>
-        <element name="CDPlacemark" positionX="781" positionY="-405" width="128" height="270"/>
-        <element name="CDSpot" positionX="270" positionY="-9" width="128" height="90"/>
-        <element name="CDSpotOwner" positionX="628" positionY="87" width="128" height="90"/>
-        <element name="CDTimeWeather" positionX="268" positionY="-655" width="128" height="283"/>
+        <element name="CDForecast" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDForecastModel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDForecastResult" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDLocation" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDManagedObject" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDMenu" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDPlacemark" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDSpot" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDSpotOwner" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDTimeWeather" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

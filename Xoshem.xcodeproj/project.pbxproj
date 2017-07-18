@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7091A59B1F1E4E6B00460252 /* CDForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */; };
+		7091A59C1F1E4E6C00460252 /* CDForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */; };
+		7091A59D1F1E4E7200460252 /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
+		7091A59E1F1E4E7300460252 /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
 		70A970941F13026800DBC25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A970931F13026800DBC25D /* Assets.xcassets */; };
 		70A970971F130B2300DBC25D /* HockeyAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A970961F130B2300DBC25D /* HockeyAppManager.swift */; };
 		70FE005A1F12E88500096217 /* CDManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */; };
@@ -32,7 +36,6 @@
 		952DDC671D3F20D200BD57FD /* CDPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952DDC631D3F20D200BD57FD /* CDPlacemark.swift */; };
 		952DDC6D1D3F28DD00BD57FD /* CDLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952DDC611D3F20D200BD57FD /* CDLocation.swift */; };
 		952DDC6F1D3F28DD00BD57FD /* CDPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952DDC631D3F20D200BD57FD /* CDPlacemark.swift */; };
-		952DDC701D3F28DD00BD57FD /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
 		952DDC721D3F28DD00BD57FD /* CDForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033491D3C299F00330B57 /* CDForecastModel.swift */; };
 		952DDC741D3F28DD00BD57FD /* CDForecastResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334B1D3C299F00330B57 /* CDForecastResult.swift */; };
 		952DDC781D3F28DD00BD57FD /* CDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334F1D3C299F00330B57 /* CDMenu.swift */; };
@@ -41,7 +44,6 @@
 		952DDC7E1D3F28DD00BD57FD /* CDTimeWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033551D3C299F00330B57 /* CDTimeWeather.swift */; };
 		953241F61BC81C75009659A7 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953241E41BC81C75009659A7 /* Common.swift */; };
 		953241F81BC81C75009659A7 /* Facade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953241E51BC81C75009659A7 /* Facade.swift */; };
-		954033571D3C299F00330B57 /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
 		9540335B1D3C299F00330B57 /* CDForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033491D3C299F00330B57 /* CDForecastModel.swift */; };
 		9540335F1D3C299F00330B57 /* CDForecastResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334B1D3C299F00330B57 /* CDForecastResult.swift */; };
 		954033671D3C299F00330B57 /* CDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334F1D3C299F00330B57 /* CDMenu.swift */; };
@@ -81,8 +83,6 @@
 		95D1DA291D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA191D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift */; };
 		95D1DA2A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift */; };
 		95D1DA2B1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift */; };
-		95D1DA2C1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */; };
-		95D1DA2D1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */; };
 		95D1DA2E1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1C1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift */; };
 		95D1DA2F1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1C1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift */; };
 		95D1DA301D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1D1D4670EB000EF482 /* CDMenu+CoreDataProperties.swift */; };
@@ -937,9 +937,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				952DDC741D3F28DD00BD57FD /* CDForecastResult.swift in Sources */,
+				7091A59C1F1E4E6C00460252 /* CDForecast+CoreDataProperties.swift in Sources */,
 				95D1DA271D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */,
 				952DDC781D3F28DD00BD57FD /* CDMenu.swift in Sources */,
 				9577B0DD1CF8DCAE002B023B /* NotificationController.swift in Sources */,
+				7091A59E1F1E4E7300460252 /* CDForecast.swift in Sources */,
 				952DDC7E1D3F28DD00BD57FD /* CDTimeWeather.swift in Sources */,
 				95D1DA211D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift in Sources */,
 				952DDC6D1D3F28DD00BD57FD /* CDLocation.swift in Sources */,
@@ -949,7 +951,6 @@
 				95D1DA1F1D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift in Sources */,
 				95D1DA2F1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift in Sources */,
 				95C4CAA11D55012E00D35F91 /* Auth.swift in Sources */,
-				952DDC701D3F28DD00BD57FD /* CDForecast.swift in Sources */,
 				95D1DA311D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */,
 				952DDC7A1D3F28DD00BD57FD /* CDSpot.swift in Sources */,
 				959A31191D370376003649D5 /* Facade.swift in Sources */,
@@ -961,7 +962,6 @@
 				952DDC721D3F28DD00BD57FD /* CDForecastModel.swift in Sources */,
 				95D1DA2B1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */,
 				95D1DA231D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */,
-				95D1DA2D1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift in Sources */,
 				95069CB61D670F4E003704F6 /* Crash.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -979,10 +979,11 @@
 				95E61E0B1D31FAB10096E616 /* ForecastLocationViewController.swift in Sources */,
 				952DDC671D3F20D200BD57FD /* CDPlacemark.swift in Sources */,
 				9508D1D21DA0B946008C2A75 /* ForecastHierarchyFooterViewController.swift in Sources */,
-				95D1DA2C1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift in Sources */,
 				95E61DFD1D3054440096E616 /* MasterViewController.swift in Sources */,
 				95E61E0D1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift in Sources */,
+				7091A59B1F1E4E6B00460252 /* CDForecast+CoreDataProperties.swift in Sources */,
 				95069CB51D670F4D003704F6 /* Crash.swift in Sources */,
+				7091A59D1F1E4E7200460252 /* CDForecast.swift in Sources */,
 				9508D1CA1DA0B5D4008C2A75 /* ForecastHierarchyHeaderViewController.swift in Sources */,
 				95E61E071D305A3D0096E616 /* Xoshem.xcdatamodeld in Sources */,
 				70FE005B1F12E88500096217 /* CDManagedObject+CoreDataProperties.swift in Sources */,
@@ -992,7 +993,6 @@
 				95D1DA221D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */,
 				9529961F1D510EA4000030B0 /* ForecastDayListViewController.swift in Sources */,
 				95D1DA301D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */,
-				954033571D3C299F00330B57 /* CDForecast.swift in Sources */,
 				95D1DA2A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */,
 				953241F81BC81C75009659A7 /* Facade.swift in Sources */,
 				95C4CAA01D55012E00D35F91 /* Auth.swift in Sources */,

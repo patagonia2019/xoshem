@@ -28,7 +28,7 @@ class CDForecastModel: CDManagedObject {
             guard let model = object.model else {
                 return nil
             }
-            let format = "model = %@ and forecastResult.identity = %@"
+            let format = "model = %@ and forecastResult.id_spot = %@"
             let predicate = NSPredicate(format: format, model, forecastResultId)
             guard let array = try CDForecastModel.searchEntityName(NSStringFromClass(self), predicate: predicate,
                                                               sortDescriptors: [], limit: 1, mco: mco) as? [CDForecastModel]
@@ -85,7 +85,7 @@ class CDForecastModel: CDManagedObject {
     }
     
     class func fetchWithSpot(withSpot spot:CDSpot, mco: NSManagedObjectContext) throws -> [CDForecastModel]? {
-        let predicate = NSPredicate(format: "forecastResult.identity = %@", spot.identity!)
+        let predicate = NSPredicate(format: "forecastResult.id_spot = %@", spot.id_spot!)
         return try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate, sortDescriptors: nil, limit: 0, mco: mco) as? [CDForecastModel]
     }
     
@@ -97,12 +97,12 @@ class CDForecastModel: CDManagedObject {
         var array = [CDForecastModel]()
         
         do {
-            guard let identity = forecastResult.identity,
+            guard let id_spot = forecastResult.id_spot,
                       let currentModel = forecastResult.currentModel else {
                         return nil
             }
-            let predicate = NSPredicate(format: "forecastResult.identity = %@ and forecastResult.currentModel = %@",
-                                        identity, currentModel)
+            let predicate = NSPredicate(format: "forecastResult.id_spot = %@ and forecastResult.currentModel = %@",
+                                        id_spot, currentModel)
             array = try CDManagedObject.searchEntityName(NSStringFromClass(self), predicate: predicate,
                                                          sortDescriptors: [], limit: 1,
                                                          mco: mco) as! [CDForecastModel]

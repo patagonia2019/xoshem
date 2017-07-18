@@ -11,10 +11,10 @@ import CoreData
 import JFWindguru
 import JFCore
 
-/*    @NSManaged var nickname: String?
+/*    @NSManaged var spotname: String?
  @NSManaged var userId: Int16
  
- var nickname: String?
+ var spotname: String?
  var userId: Int?
 
 */
@@ -33,10 +33,10 @@ class CDSpotOwner: CDSpot {
         }
         
         let search = { () -> [AnyObject]? in
-            guard let identity = object.identity else {
+            guard let id_spot = object.id_spot else {
                 return nil
             }
-            let predicate = NSPredicate(format: "identity = %@", identity)
+            let predicate = NSPredicate(format: "id_spot = %@", id_spot)
             guard let array = try CDSpotOwner.searchEntityName(NSStringFromClass(self), predicate: predicate,
                                                                sortDescriptors: [], limit: 1,
                                                                mco: mco) as? [CDSpotOwner]
@@ -73,19 +73,19 @@ class CDSpotOwner: CDSpot {
         }
         
         guard let
-            _nickname = object.nickname as String?,
-            let _userId = object.userId as Int? else {
+            _nickname = object.spotname as String?,
+            let _userId = object.id_user as Int? else {
                 let myerror = JFError(code: Common.ErrorCode.cdUpdateSpotsOwnersIssue.rawValue,
                                     desc: Common.title.errorOnUpdate,
                                     reason: "Failed at import spotOwner boject into SpotOwner",
                                     suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
                 throw myerror
         }
-        if nickname == _nickname && userId == Int16(_userId) {
+        if spotname == _nickname && userId == Int16(_userId) {
             return false
         }
 
-        nickname = _nickname
+        spotname = _nickname
         userId = Int16(_userId)
         return true
     }
@@ -93,7 +93,7 @@ class CDSpotOwner: CDSpot {
     
     override var description : String {
         var aux : String = "["
-        if let _nickname = nickname {
+        if let _nickname = spotname {
             aux += "\(_nickname);"
         } else { aux += "();" }
         aux += "\(userId);"

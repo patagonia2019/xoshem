@@ -184,8 +184,8 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
             if let country = _fr.country {
                 appendFd("behance-heeyeun-jeong-14", key: "Country", value: "\(country)")
             }
-            if let identity = _fr.identity {
-                appendFd("behance-heeyeun-jeong-14", key: "Spot Id", value: "\(identity)")
+            if let id_spot = _fr.id_spot {
+                appendFd("behance-heeyeun-jeong-14", key: "Spot Id", value: "\(id_spot)")
             }
             if let spotname = _fr.name {
                 appendFd("behance-heeyeun-jeong-14", key: "Spot name", value: "\(spotname)")
@@ -194,8 +194,8 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
                 appendFd("behance-heeyeun-jeong-14", key: "Timezone", value: "\(timezone)")
             }
             if let spotowner = _fr.spotOwner,
-                let nickname = spotowner.nickname {
-                appendFd("behance-heeyeun-jeong-14", key: "Spot Owner", value: "\(nickname)")
+                let spotname = spotowner.spotname {
+                appendFd("behance-heeyeun-jeong-14", key: "Spot Owner", value: "\(spotname)")
             }
             appendFd("behance-heeyeun-jeong-14", key: "Latitude", value: "\(_fr.latitude)")
             appendFd("behance-heeyeun-jeong-14", key: "Longitude", value: "\(_fr.longitude)")

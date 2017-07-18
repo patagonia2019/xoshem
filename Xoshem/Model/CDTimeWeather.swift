@@ -23,10 +23,10 @@ class CDTimeWeather: CDManagedObject {
     
     class func fetchWithForecastResult(_ forecastResult: CDForecastResult,
                                        mco: NSManagedObjectContext) throws -> [CDTimeWeather]? {
-        guard let identity = forecastResult.identity else {
+        guard let id_spot = forecastResult.id_spot else {
             return nil
         }
-        let predicate = NSPredicate(format: "forecastResult = %@", identity)
+        let predicate = NSPredicate(format: "forecastResult = %@", id_spot)
         return try CDManagedObject.searchEntityName(NSStringFromClass(self),
                                                     predicate: predicate, sortDescriptors: nil,
                                                     limit: 0, mco: mco) as? [CDTimeWeather]
