@@ -9,7 +9,7 @@
 import UIKit
 import JFCore
 
-class ForecastHierarchyViewController: BaseViewController {
+class ForecastHierarchyViewController: UIViewController {
     
     @IBOutlet weak var backgroundColorView: UIView!
     @IBOutlet weak var bodyContainer: UIView!

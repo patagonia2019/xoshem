@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import JFCore
 
-class ForecastHierarchyHeaderViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ForecastHierarchyHeaderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {

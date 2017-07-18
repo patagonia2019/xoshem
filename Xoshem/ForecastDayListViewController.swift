@@ -25,7 +25,7 @@ struct DataStruct {
     }
 }
 
-class ForecastDayListViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ForecastDayListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var backgroundColorView: UIView!
     @IBOutlet weak var tableView: UITableView!

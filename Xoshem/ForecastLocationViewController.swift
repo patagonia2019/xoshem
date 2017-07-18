@@ -11,7 +11,7 @@ import JFWindguru
 import JFCore
 import SCLAlertView
 
-class ForecastLocationViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ForecastLocationViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var cellSize: CGSize! = CGSize(width: 191.5, height: 350.0)

@@ -9,7 +9,7 @@
 import UIKit
 import JFCore
 
-class DetailViewController: BaseViewController {
+class DetailViewController: UIViewController {
 
     @IBOutlet weak var forecastContainer: UIView!
     @IBOutlet weak var searchContainer: UIView!

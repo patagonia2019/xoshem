@@ -18,9 +18,8 @@ class MasterViewController: BaseTableViewController {
 
     
     override func viewDidLoad() {
-        title = ""
         super.viewDidLoad()
-        
+        title = JFCore.Common.app
         if let split = splitViewController {
             let controllers = split.viewControllers
             let last = (controllers[controllers.count-1] as! UINavigationController)

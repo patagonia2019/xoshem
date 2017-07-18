@@ -11,7 +11,7 @@ import CoreData
 import JFCore
 import SwiftIconFont
 
-class HelpViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class HelpViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var currentMenuOption : CDMenu?

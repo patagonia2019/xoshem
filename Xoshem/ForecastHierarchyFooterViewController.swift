@@ -9,7 +9,7 @@
 import UIKit
 import JFCore
 
-class ForecastHierarchyFooterViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ForecastHierarchyFooterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
