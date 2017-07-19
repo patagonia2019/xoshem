@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70826A551F1F686100328BC5 /* RWForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A541F1F686100328BC5 /* RWForecast.swift */; };
+		70826A571F1F686F00328BC5 /* RWindguruStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A561F1F686F00328BC5 /* RWindguruStation.swift */; };
+		70826A5B1F1F6C7800328BC5 /* RPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */; };
+		70826A5D1F1F6D1F00328BC5 /* RLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5C1F1F6D1F00328BC5 /* RLocation.swift */; };
 		7091A59B1F1E4E6B00460252 /* CDForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */; };
 		7091A59C1F1E4E6C00460252 /* CDForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */; };
 		7091A59D1F1E4E7200460252 /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
 		7091A59E1F1E4E7300460252 /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
+		7091A5A01F1E5D8300460252 /* RSpotForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7091A59F1F1E5D8300460252 /* RSpotForecast.swift */; };
 		70A970941F13026800DBC25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A970931F13026800DBC25D /* Assets.xcassets */; };
 		70A970971F130B2300DBC25D /* HockeyAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A970961F130B2300DBC25D /* HockeyAppManager.swift */; };
 		70FE005A1F12E88500096217 /* CDManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */; };
@@ -145,6 +150,11 @@
 		23A32751654F3056CE8F62B5 /* Pods_Xoshem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A931181C6D8E6C04467BFB /* Pods_Xoshem_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6879D4052CC2AC23310CE46A /* Pods-watchos Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchos Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-watchos Extension/Pods-watchos Extension.release.xcconfig"; sourceTree = "<group>"; };
+		70826A541F1F686100328BC5 /* RWForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWForecast.swift; sourceTree = "<group>"; };
+		70826A561F1F686F00328BC5 /* RWindguruStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWindguruStation.swift; sourceTree = "<group>"; };
+		70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPlacemark.swift; sourceTree = "<group>"; };
+		70826A5C1F1F6D1F00328BC5 /* RLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLocation.swift; sourceTree = "<group>"; };
+		7091A59F1F1E5D8300460252 /* RSpotForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSpotForecast.swift; sourceTree = "<group>"; };
 		70A970931F13026800DBC25D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70A970961F130B2300DBC25D /* HockeyAppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HockeyAppManager.swift; sourceTree = "<group>"; };
 		70FE00511F12E84600096217 /* Xoshem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Xoshem-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -171,7 +181,7 @@
 		9529961E1D510EA4000030B0 /* ForecastDayListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDayListViewController.swift; sourceTree = "<group>"; };
 		952996211D512387000030B0 /* ForecastDayListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDayListViewCell.swift; sourceTree = "<group>"; };
 		952A82C41D52C87300C546DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		952DDC611D3F20D200BD57FD /* CDLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CDLocation.swift; path = ../Model/CDLocation.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		952DDC611D3F20D200BD57FD /* CDLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CDLocation.swift; path = Model/CDLocation.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		952DDC631D3F20D200BD57FD /* CDPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CDPlacemark.swift; path = Model/CDPlacemark.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		953241E41BC81C75009659A7 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		953241E51BC81C75009659A7 /* Facade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Facade.swift; sourceTree = "<group>"; };
@@ -405,6 +415,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		70826A5E1F1F6F8900328BC5 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */,
+				70826A5C1F1F6D1F00328BC5 /* RLocation.swift */,
+				7091A59F1F1E5D8300460252 /* RSpotForecast.swift */,
+				70826A541F1F686100328BC5 /* RWForecast.swift */,
+				70826A561F1F686F00328BC5 /* RWindguruStation.swift */,
+			);
+			name = Realm;
+			sourceTree = "<group>";
+		};
 		9508D1CB1DA0B8A7008C2A75 /* Hierarchy */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,7 +490,6 @@
 		953241E01BC81C75009659A7 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				952DDC611D3F20D200BD57FD /* CDLocation.swift */,
 				953241E31BC81C75009659A7 /* Common */,
 				70A970961F130B2300DBC25D /* HockeyAppManager.swift */,
 			);
@@ -529,6 +550,8 @@
 				954033511D3C299F00330B57 /* CDSpot.swift */,
 				954033531D3C299F00330B57 /* CDSpotOwner.swift */,
 				954033551D3C299F00330B57 /* CDTimeWeather.swift */,
+				952DDC611D3F20D200BD57FD /* CDLocation.swift */,
+				70826A5E1F1F6F8900328BC5 /* Realm */,
 				95E61E051D305A3D0096E616 /* Xoshem.xcdatamodeld */,
 			);
 			name = Model;
@@ -983,15 +1006,19 @@
 				95E61E0D1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift in Sources */,
 				7091A59B1F1E4E6B00460252 /* CDForecast+CoreDataProperties.swift in Sources */,
 				95069CB51D670F4D003704F6 /* Crash.swift in Sources */,
+				70826A5B1F1F6C7800328BC5 /* RPlacemark.swift in Sources */,
+				70826A571F1F686F00328BC5 /* RWindguruStation.swift in Sources */,
 				7091A59D1F1E4E7200460252 /* CDForecast.swift in Sources */,
 				9508D1CA1DA0B5D4008C2A75 /* ForecastHierarchyHeaderViewController.swift in Sources */,
 				95E61E071D305A3D0096E616 /* Xoshem.xcdatamodeld in Sources */,
 				70FE005B1F12E88500096217 /* CDManagedObject+CoreDataProperties.swift in Sources */,
 				95D1DA261D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */,
 				95E61E0F1D3471FF0096E616 /* HelpViewController.swift in Sources */,
+				70826A5D1F1F6D1F00328BC5 /* RLocation.swift in Sources */,
 				954033671D3C299F00330B57 /* CDMenu.swift in Sources */,
 				95D1DA221D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */,
 				9529961F1D510EA4000030B0 /* ForecastDayListViewController.swift in Sources */,
+				7091A5A01F1E5D8300460252 /* RSpotForecast.swift in Sources */,
 				95D1DA301D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */,
 				95D1DA2A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */,
 				953241F81BC81C75009659A7 /* Facade.swift in Sources */,
@@ -1000,6 +1027,7 @@
 				9540335F1D3C299F00330B57 /* CDForecastResult.swift in Sources */,
 				954081A91D8B16A800A0CA35 /* AboutViewController.swift in Sources */,
 				9540336F1D3C299F00330B57 /* CDSpotOwner.swift in Sources */,
+				70826A551F1F686100328BC5 /* RWForecast.swift in Sources */,
 				9508D1C81DA0AA45008C2A75 /* ForecastHierarchyViewController.swift in Sources */,
 				95E61DFE1D3054440096E616 /* DetailViewController.swift in Sources */,
 				9540336B1D3C299F00330B57 /* CDSpot.swift in Sources */,

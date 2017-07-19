@@ -23,6 +23,7 @@ def iosPods
     pod 'Digits'
     pod 'FontWeather.swift', :path => '/Users/javierfuchs/Job/southfox/FontWeather.swift'
     pod 'HockeySDK', '~> 4.1.5'
+    pod 'RealmSwift'
 end
 
 def watchPods
