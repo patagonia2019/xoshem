@@ -30,7 +30,7 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet weak var backgroundColorView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerTableView: UITableView!
-    var forecastResult: CDForecastResult?
+    var spotForecast: RWSpotForecast?
     var fd = [DataStruct]()
     var segmentControl: UISegmentedControl?
     var offsetHour: Int?
@@ -84,7 +84,7 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
 
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierSteper, for: indexPath) as! ForecastDayStepViewCell
         cell.backgroundColor = UIColor.clear
-        cell.configureCell (hour3(), limit:self.stepperLimit(), didUpdate: { [weak self] (value: Int) in
+        cell.configureCell (hour3(), limit:stepperLimit(), didUpdate: { [weak self] (value: Int) in
             guard let strong = self else {
                 return
             }
@@ -131,13 +131,13 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
 
     func weekday() -> String {
         let calendar = Calendar.current
-        let weekday = calendar.shortWeekdaySymbols[self.dateComponents().weekday!-1]
+        let weekday = calendar.shortWeekdaySymbols[dateComponents().weekday!-1]
         return weekday
     }
     
     func month() -> String {
         let calendar = Calendar.current
-        let month = calendar.shortMonthSymbols[self.dateComponents().month!]
+        let month = calendar.shortMonthSymbols[dateComponents().month!]
         return month
     }
     
@@ -153,14 +153,9 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func stepperLimit() -> Int {
-        var limit = 61
-        if let _fr = forecastResult,
-           let fm = _fr.currentForecastModel(),
-            let f = fm.forecast,
-            let tw = f.timeWeathers{
-            limit = tw.allObjects.count
-        }
-        return limit
+        guard let spotForecast = spotForecast,
+              let fcst = spotForecast.fcst else { return 0 }
+        return fcst.hours.count
     }
     
     func appendFd(_ icon: String, key: String, value: String) {
@@ -172,73 +167,64 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         
         fd = [DataStruct]()
 
-        if let _fr = forecastResult {
-            
-            backgroundColorView.backgroundColor = _fr.color
-            let wd = weekday()
-            let m = month()
-            appendFd("behance-heeyeun-jeong-14", key: "\(wd) \(day24()), \(m)", value: "\(hour24())h")
-            if let nameCheck = _fr.namecheck() {
-                appendFd("behance-heeyeun-jeong-14", key: "City", value: "\(nameCheck)")
-            }
-            if let country = _fr.country {
-                appendFd("behance-heeyeun-jeong-14", key: "Country", value: "\(country)")
-            }
-            if let id_spot = _fr.id_spot {
-                appendFd("behance-heeyeun-jeong-14", key: "Spot Id", value: "\(id_spot)")
-            }
-            if let spotname = _fr.name {
-                appendFd("behance-heeyeun-jeong-14", key: "Spot name", value: "\(spotname)")
-            }
-            if let timezone = _fr.timezone {
-                appendFd("behance-heeyeun-jeong-14", key: "Timezone", value: "\(timezone)")
-            }
-            if let spotowner = _fr.spotOwner,
-                let spotname = spotowner.spotname {
-                appendFd("behance-heeyeun-jeong-14", key: "Spot Owner", value: "\(spotname)")
-            }
-            appendFd("behance-heeyeun-jeong-14", key: "Latitude", value: "\(_fr.latitude)")
-            appendFd("behance-heeyeun-jeong-14", key: "Longitude", value: "\(_fr.longitude)")
-            appendFd("behance-heeyeun-jeong-14", key: "Altitude", value: "\(_fr.altitude) m")
-            if let sunrise = _fr.sunrise {
-                appendFd("behance-heeyeun-jeong-54-copy-sunrise", key: "Sunrise", value: "\(sunrise)")
-            }
-            if let sunset = _fr.sunset {
-                appendFd("behance-heeyeun-jeong-54-copy-sunset", key: "Sunset", value: "\(sunset)")
-            }
-            if let fm = _fr.currentForecastModel(),
-                let model = fm.model,
-                let f = fm.forecast,
-                let modelName = f.modelName {
-                appendFd("behance-heeyeun-jeong-14", key: "Init Date", value: "\(f.initDate)")
-                appendFd("behance-heeyeun-jeong-14", key: "Init Stamp", value: "\(f.initStamp)")
-                appendFd("behance-heeyeun-jeong-59", key: "Forecast Model", value: "\(model) : \(modelName)")
-            }
-            if let tides = _fr.tides {
-                appendFd("behance-heeyeun-jeong-6", key: "Tides", value: "\(tides)")
-            }
-            if let w = _fr.weather (hour()) {
-                appendFd("behance-heeyeun-jeong-85", key: "Temperature", value: "\(w.temperature) °C")
-                appendFd("behance-heeyeun-jeong-86", key: "Temperature Real", value: "\(w.temperatureReal) °C")
-                appendFd("behance-heeyeun-jeong-12", key: "Relative humidity", value: "\(w.relativeHumidity) %")
-                if let wdn = w.windDirectionName {
-                    appendFd("behance-heeyeun-jeong-75", key: "Wind direction", value: "\(wdn)")
-                }
-                appendFd("behance-heeyeun-jeong-9", key: "Wind Speed", value: "\(w.windSpeed) knots")
-                appendFd("behance-heeyeun-jeong-13", key: "Wind Gusts", value: "\(w.windGust) knots")
-                appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Total", value: "\(w.cloudCoverTotal) %")
-                appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover High", value: "\(w.cloudCoverHigh) %")
-                appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Mid", value: "\(w.cloudCoverMid) %")
-                appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Low", value: "\(w.cloudCoverLow) %")
-                appendFd("behance-heeyeun-jeong-23", key: "Precipitation", value: "\(w.precipitation) mm/3h")
-                appendFd("behance-heeyeun-jeong-54", key: "Sea Level Pressure", value: "\(w.seaLevelPressure)")
-                appendFd("behance-heeyeun-jeong-10", key: "Freezing Level", value: "\(w.freezingLevel) metters (0° isotherm)")
-            }
-        }
+        guard let spotForecast = spotForecast,
+            let fcst = spotForecast.fcst else { return }
+        let wd = weekday()
+        let m = month()
+        appendFd("behance-heeyeun-jeong-14", key: "\(wd) \(day24()), \(m)", value: "\(hour24())h")
+        let name = spotForecast.spotname
+        appendFd("behance-heeyeun-jeong-14", key: "Spot Name", value: "\(name)")
+        let id_spot = spotForecast.id_spot
+        appendFd("behance-heeyeun-jeong-14", key: "Spot Id", value: "\(id_spot)")
+        let tz = spotForecast.tz
+        appendFd("behance-heeyeun-jeong-14", key: "Timezone", value: "\(tz)")
+        let spotowner = spotForecast.id_user
+        appendFd("behance-heeyeun-jeong-14", key: "Spot Owner", value: "\(spotowner)")
+        let lat = spotForecast.lat
+        appendFd("behance-heeyeun-jeong-14", key: "Latitude", value: "\(lat)")
+        let lon = spotForecast.lon
+        appendFd("behance-heeyeun-jeong-14", key: "Longitude", value: "\(lon)")
+        let alt = spotForecast.alt
+        appendFd("behance-heeyeun-jeong-14", key: "Altitude", value: "\(alt)")
+        let sunrise = spotForecast.sunrise
+        appendFd("behance-heeyeun-jeong-54-copy-sunrise", key: "Sunrise", value: "\(sunrise)")
+        let sunset = spotForecast.sunset
+        appendFd("behance-heeyeun-jeong-54-copy-sunset", key: "Sunset", value: "\(sunset)")
+        let modelName = spotForecast.model
+        appendFd("behance-heeyeun-jeong-59", key: "Forecast Model", value: "\(modelName)")
+        let date = fcst.init_d
+        appendFd("behance-heeyeun-jeong-14", key: "Init Date", value: "\(date)")
+        let h3 = hour3()
+        let t = fcst.temperature[h3]
+        appendFd("behance-heeyeun-jeong-85", key: "Temperature", value: "\(t) °C")
+        let tr = fcst.temperatureReal[h3]
+        appendFd("behance-heeyeun-jeong-86", key: "Temperature Real", value: "\(tr) °C")
+        let rh = fcst.relativeHumidity[h3]
+        appendFd("behance-heeyeun-jeong-12", key: "Relative humidity", value: "\(rh) %")
+        let speed = fcst.windSpeed[h3]
+        appendFd("behance-heeyeun-jeong-9", key: "Wind Speed", value: "\(speed) knots")
+        let gust = fcst.windGust[h3]
+        appendFd("behance-heeyeun-jeong-13", key: "Wind Gusts", value: "\(gust) knots")
+        let cct = fcst.cloudCoverTotal[h3]
+        appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Total", value: "\(cct) %")
+        let cch = fcst.cloudCoverHigh[h3]
+        appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover High", value: "\(cch) %")
+        let ccm = fcst.cloudCoverMid[h3]
+        appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Mid", value: "\(ccm) %")
+        let ccl = fcst.cloudCoverLow[h3]
+        appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Low", value: "\(ccl) %")
+        let ppt = fcst.precipitation[h3]
+        appendFd("behance-heeyeun-jeong-23", key: "Precipitation", value: "\(ppt) mm/3h")
+        let slp = fcst.seaLevelPressure[h3]
+        appendFd("behance-heeyeun-jeong-54", key: "Sea Level Pressure", value: "\(slp)")
+        let fl = fcst.freezingLevel[h3]
+        appendFd("behance-heeyeun-jeong-10", key: "Freezing Level", value: "\(fl) metters (0° isotherm)")
+        let tides = spotForecast.tides
+        appendFd("behance-heeyeun-jeong-6", key: "Tides", value: "\(tides)")
         tableView.reloadData()
         headerTableView.reloadData()
     }
-    
+
     func incrementHour() {
         offsetHour = offsetHour ?? 0 + 1
         if let oh = offsetHour {

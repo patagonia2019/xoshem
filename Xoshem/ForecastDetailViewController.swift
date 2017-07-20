@@ -14,7 +14,7 @@ class ForecastDetailViewController: UIViewController {
     @IBOutlet weak var dayListContainer: UIView!
     @IBOutlet weak var hierarchyContainer: UIView!
     
-    var detailItem: CDForecastResult? {
+    var detailItem: RWSpotForecast? {
         didSet {
             // Update the view.
             configureView()
@@ -24,7 +24,7 @@ class ForecastDetailViewController: UIViewController {
     func configureView() {
         // Update the user interface for the detail item.
         if let detail = detailItem {
-            title = detail.namecheck()
+            title = detail.locationName()
         }
         showComponent(1)
     }
@@ -61,7 +61,7 @@ class ForecastDetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Common.segue.forecastDayList {
             let connectContainerViewController = segue.destination as! ForecastDayListViewController
-            connectContainerViewController.forecastResult = detailItem
+            connectContainerViewController.spotForecast = detailItem
         }
     }
 

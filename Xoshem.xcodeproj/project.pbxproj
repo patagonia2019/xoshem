@@ -11,17 +11,17 @@
 		70826A571F1F686F00328BC5 /* RWindguruStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A561F1F686F00328BC5 /* RWindguruStation.swift */; };
 		70826A5B1F1F6C7800328BC5 /* RPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */; };
 		70826A5D1F1F6D1F00328BC5 /* RLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5C1F1F6D1F00328BC5 /* RLocation.swift */; };
-		7091A59B1F1E4E6B00460252 /* CDForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */; };
-		7091A59C1F1E4E6C00460252 /* CDForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */; };
-		7091A59D1F1E4E7200460252 /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
-		7091A59E1F1E4E7300460252 /* CDForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033471D3C299F00330B57 /* CDForecast.swift */; };
-		7091A5A01F1E5D8300460252 /* RSpotForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7091A59F1F1E5D8300460252 /* RSpotForecast.swift */; };
+		7091A5A01F1E5D8300460252 /* RWSpotForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7091A59F1F1E5D8300460252 /* RWSpotForecast.swift */; };
 		70A970941F13026800DBC25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A970931F13026800DBC25D /* Assets.xcassets */; };
 		70A970971F130B2300DBC25D /* HockeyAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A970961F130B2300DBC25D /* HockeyAppManager.swift */; };
-		70FE005A1F12E88500096217 /* CDManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */; };
-		70FE005B1F12E88500096217 /* CDManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */; };
-		70FE005C1F12F93B00096217 /* CDManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */; };
-		70FE005D1F12F95800096217 /* CDManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */; };
+		70C9D6221F1F7C0F00F4FED8 /* RPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */; };
+		70C9D6231F1F7C0F00F4FED8 /* RLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5C1F1F6D1F00328BC5 /* RLocation.swift */; };
+		70C9D6241F1F7C0F00F4FED8 /* RWSpotForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7091A59F1F1E5D8300460252 /* RWSpotForecast.swift */; };
+		70C9D6251F1F7C0F00F4FED8 /* RWForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A541F1F686100328BC5 /* RWForecast.swift */; };
+		70C9D6261F1F7C0F00F4FED8 /* RWindguruStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A561F1F686F00328BC5 /* RWindguruStation.swift */; };
+		70C9D6311F20B11600F4FED8 /* RMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9D6301F20B11600F4FED8 /* RMenu.swift */; };
+		70C9D6351F20BA2600F4FED8 /* RWSpotForecast+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9D6341F20BA2600F4FED8 /* RWSpotForecast+.swift */; };
+		70C9D6361F20BA2600F4FED8 /* RWSpotForecast+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9D6341F20BA2600F4FED8 /* RWSpotForecast+.swift */; };
 		95069C871D664110003704F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95069C891D664110003704F6 /* Localizable.strings */; };
 		95069C921D66646B003704F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95069C901D66646B003704F6 /* Main.storyboard */; };
 		95069CB31D670DED003704F6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95069C9F1D670A77003704F6 /* CoreText.framework */; };
@@ -33,28 +33,12 @@
 		9508D1D01DA0B932008C2A75 /* ForecastHierarchyBodyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508D1CF1DA0B932008C2A75 /* ForecastHierarchyBodyViewController.swift */; };
 		9508D1D21DA0B946008C2A75 /* ForecastHierarchyFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508D1D11DA0B946008C2A75 /* ForecastHierarchyFooterViewController.swift */; };
 		951784D11D51ADBA007399F6 /* ForecastDayStepViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951784D01D51ADBA007399F6 /* ForecastDayStepViewCell.swift */; };
-		952713781DA2D854002D2A29 /* CDMenu+SwiftIconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952713771DA2D854002D2A29 /* CDMenu+SwiftIconFont.swift */; };
+		952713781DA2D854002D2A29 /* RMenu+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952713771DA2D854002D2A29 /* RMenu+.swift */; };
 		9529961F1D510EA4000030B0 /* ForecastDayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9529961E1D510EA4000030B0 /* ForecastDayListViewController.swift */; };
 		952996221D512387000030B0 /* ForecastDayListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952996211D512387000030B0 /* ForecastDayListViewCell.swift */; };
 		952A82C51D52C87300C546DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 952A82C41D52C87300C546DB /* GoogleService-Info.plist */; };
-		952DDC651D3F20D200BD57FD /* CDLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952DDC611D3F20D200BD57FD /* CDLocation.swift */; };
-		952DDC671D3F20D200BD57FD /* CDPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952DDC631D3F20D200BD57FD /* CDPlacemark.swift */; };
-		952DDC6D1D3F28DD00BD57FD /* CDLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952DDC611D3F20D200BD57FD /* CDLocation.swift */; };
-		952DDC6F1D3F28DD00BD57FD /* CDPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952DDC631D3F20D200BD57FD /* CDPlacemark.swift */; };
-		952DDC721D3F28DD00BD57FD /* CDForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033491D3C299F00330B57 /* CDForecastModel.swift */; };
-		952DDC741D3F28DD00BD57FD /* CDForecastResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334B1D3C299F00330B57 /* CDForecastResult.swift */; };
-		952DDC781D3F28DD00BD57FD /* CDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334F1D3C299F00330B57 /* CDMenu.swift */; };
-		952DDC7A1D3F28DD00BD57FD /* CDSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033511D3C299F00330B57 /* CDSpot.swift */; };
-		952DDC7C1D3F28DD00BD57FD /* CDSpotOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033531D3C299F00330B57 /* CDSpotOwner.swift */; };
-		952DDC7E1D3F28DD00BD57FD /* CDTimeWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033551D3C299F00330B57 /* CDTimeWeather.swift */; };
 		953241F61BC81C75009659A7 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953241E41BC81C75009659A7 /* Common.swift */; };
 		953241F81BC81C75009659A7 /* Facade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953241E51BC81C75009659A7 /* Facade.swift */; };
-		9540335B1D3C299F00330B57 /* CDForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033491D3C299F00330B57 /* CDForecastModel.swift */; };
-		9540335F1D3C299F00330B57 /* CDForecastResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334B1D3C299F00330B57 /* CDForecastResult.swift */; };
-		954033671D3C299F00330B57 /* CDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540334F1D3C299F00330B57 /* CDMenu.swift */; };
-		9540336B1D3C299F00330B57 /* CDSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033511D3C299F00330B57 /* CDSpot.swift */; };
-		9540336F1D3C299F00330B57 /* CDSpotOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033531D3C299F00330B57 /* CDSpotOwner.swift */; };
-		954033731D3C299F00330B57 /* CDTimeWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954033551D3C299F00330B57 /* CDTimeWeather.swift */; };
 		954081A91D8B16A800A0CA35 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954081A81D8B16A800A0CA35 /* AboutViewController.swift */; };
 		955E141C1D75568700B5B4D9 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955E141B1D75568700B5B4D9 /* WebViewController.swift */; };
 		955E142B1D7566A500B5B4D9 /* FAQ.html in Resources */ = {isa = PBXBuildFile; fileRef = 955E142D1D7566A500B5B4D9 /* FAQ.html */; };
@@ -76,25 +60,8 @@
 		959A311F1D38056B003649D5 /* ForecastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959A311E1D38056B003649D5 /* ForecastDetailViewController.swift */; };
 		95C4CAA01D55012E00D35F91 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C4CA9F1D55012E00D35F91 /* Auth.swift */; };
 		95C4CAA11D55012E00D35F91 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C4CA9F1D55012E00D35F91 /* Auth.swift */; };
-		95D1DA1E1D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA141D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift */; };
-		95D1DA1F1D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA141D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift */; };
-		95D1DA201D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA151D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift */; };
-		95D1DA211D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA151D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift */; };
-		95D1DA221D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA161D4670EB000EF482 /* CDSpot+CoreDataProperties.swift */; };
-		95D1DA231D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA161D4670EB000EF482 /* CDSpot+CoreDataProperties.swift */; };
-		95D1DA261D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA181D4670EB000EF482 /* CDLocation+CoreDataProperties.swift */; };
-		95D1DA271D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA181D4670EB000EF482 /* CDLocation+CoreDataProperties.swift */; };
-		95D1DA281D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA191D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift */; };
-		95D1DA291D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA191D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift */; };
-		95D1DA2A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift */; };
-		95D1DA2B1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift */; };
-		95D1DA2E1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1C1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift */; };
-		95D1DA2F1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1C1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift */; };
-		95D1DA301D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1D1D4670EB000EF482 /* CDMenu+CoreDataProperties.swift */; };
-		95D1DA311D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1DA1D1D4670EB000EF482 /* CDMenu+CoreDataProperties.swift */; };
 		95E61DFD1D3054440096E616 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61DFB1D3054440096E616 /* MasterViewController.swift */; };
 		95E61DFE1D3054440096E616 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61DFC1D3054440096E616 /* DetailViewController.swift */; };
-		95E61E071D305A3D0096E616 /* Xoshem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95E61E051D305A3D0096E616 /* Xoshem.xcdatamodeld */; };
 		95E61E0B1D31FAB10096E616 /* ForecastLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61E0A1D31FAB10096E616 /* ForecastLocationViewController.swift */; };
 		95E61E0D1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61E0C1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift */; };
 		95E61E0F1D3471FF0096E616 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61E0E1D3471FF0096E616 /* HelpViewController.swift */; };
@@ -154,12 +121,12 @@
 		70826A561F1F686F00328BC5 /* RWindguruStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWindguruStation.swift; sourceTree = "<group>"; };
 		70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPlacemark.swift; sourceTree = "<group>"; };
 		70826A5C1F1F6D1F00328BC5 /* RLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLocation.swift; sourceTree = "<group>"; };
-		7091A59F1F1E5D8300460252 /* RSpotForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSpotForecast.swift; sourceTree = "<group>"; };
+		7091A59F1F1E5D8300460252 /* RWSpotForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWSpotForecast.swift; sourceTree = "<group>"; };
 		70A970931F13026800DBC25D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70A970961F130B2300DBC25D /* HockeyAppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HockeyAppManager.swift; sourceTree = "<group>"; };
+		70C9D6301F20B11600F4FED8 /* RMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMenu.swift; sourceTree = "<group>"; };
+		70C9D6341F20BA2600F4FED8 /* RWSpotForecast+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RWSpotForecast+.swift"; sourceTree = "<group>"; };
 		70FE00511F12E84600096217 /* Xoshem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Xoshem-Bridging-Header.h"; sourceTree = "<group>"; };
-		70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
-		70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		86C4ABEBDC3424CB6C0E70AB /* Pods-Xoshem WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xoshem WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Xoshem WatchKit Extension/Pods-Xoshem WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		95069C741D663D6A003704F6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Interface.strings; sourceTree = "<group>"; };
 		95069C7F1D663DB3003704F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -177,21 +144,12 @@
 		9508D1D11DA0B946008C2A75 /* ForecastHierarchyFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastHierarchyFooterViewController.swift; sourceTree = "<group>"; };
 		95151AFF1BC82610003DC3E3 /* Xoshem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Xoshem.entitlements; sourceTree = "<group>"; };
 		951784D01D51ADBA007399F6 /* ForecastDayStepViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDayStepViewCell.swift; sourceTree = "<group>"; };
-		952713771DA2D854002D2A29 /* CDMenu+SwiftIconFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDMenu+SwiftIconFont.swift"; sourceTree = "<group>"; };
+		952713771DA2D854002D2A29 /* RMenu+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RMenu+.swift"; sourceTree = "<group>"; };
 		9529961E1D510EA4000030B0 /* ForecastDayListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDayListViewController.swift; sourceTree = "<group>"; };
 		952996211D512387000030B0 /* ForecastDayListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDayListViewCell.swift; sourceTree = "<group>"; };
 		952A82C41D52C87300C546DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		952DDC611D3F20D200BD57FD /* CDLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CDLocation.swift; path = Model/CDLocation.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		952DDC631D3F20D200BD57FD /* CDPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CDPlacemark.swift; path = Model/CDPlacemark.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		953241E41BC81C75009659A7 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		953241E51BC81C75009659A7 /* Facade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Facade.swift; sourceTree = "<group>"; };
-		954033471D3C299F00330B57 /* CDForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CDForecast.swift; path = Model/CDForecast.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		954033491D3C299F00330B57 /* CDForecastModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CDForecastModel.swift; path = Model/CDForecastModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		9540334B1D3C299F00330B57 /* CDForecastResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDForecastResult.swift; path = Model/CDForecastResult.swift; sourceTree = "<group>"; };
-		9540334F1D3C299F00330B57 /* CDMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDMenu.swift; path = Model/CDMenu.swift; sourceTree = "<group>"; };
-		954033511D3C299F00330B57 /* CDSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSpot.swift; path = Model/CDSpot.swift; sourceTree = "<group>"; };
-		954033531D3C299F00330B57 /* CDSpotOwner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSpotOwner.swift; path = Model/CDSpotOwner.swift; sourceTree = "<group>"; };
-		954033551D3C299F00330B57 /* CDTimeWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDTimeWeather.swift; path = Model/CDTimeWeather.swift; sourceTree = "<group>"; };
 		954081A81D8B16A800A0CA35 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		955C40051D6C4BD70014A0B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		955E141B1D75568700B5B4D9 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -349,18 +307,8 @@
 		959A311E1D38056B003649D5 /* ForecastDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDetailViewController.swift; sourceTree = "<group>"; };
 		95B522201D54D8010084AF81 /* Crash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crash.swift; sourceTree = "<group>"; };
 		95C4CA9F1D55012E00D35F91 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
-		95D1DA141D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDTimeWeather+CoreDataProperties.swift"; path = "Model/CDTimeWeather+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95D1DA151D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDForecastModel+CoreDataProperties.swift"; path = "Model/CDForecastModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95D1DA161D4670EB000EF482 /* CDSpot+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSpot+CoreDataProperties.swift"; path = "Model/CDSpot+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95D1DA181D4670EB000EF482 /* CDLocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDLocation+CoreDataProperties.swift"; path = "Model/CDLocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95D1DA191D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDForecastResult+CoreDataProperties.swift"; path = "Model/CDForecastResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95D1DA1A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSpotOwner+CoreDataProperties.swift"; path = "Model/CDSpotOwner+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDForecast+CoreDataProperties.swift"; path = "Model/CDForecast+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95D1DA1C1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDPlacemark+CoreDataProperties.swift"; path = "Model/CDPlacemark+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95D1DA1D1D4670EB000EF482 /* CDMenu+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDMenu+CoreDataProperties.swift"; path = "Model/CDMenu+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95E61DFB1D3054440096E616 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		95E61DFC1D3054440096E616 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		95E61E061D305A3D0096E616 /* Xoshem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Xoshem.xcdatamodel; sourceTree = "<group>"; };
 		95E61E0A1D31FAB10096E616 /* ForecastLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastLocationViewController.swift; sourceTree = "<group>"; };
 		95E61E0C1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastLocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		95E61E0E1D3471FF0096E616 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
@@ -419,8 +367,11 @@
 			isa = PBXGroup;
 			children = (
 				70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */,
+				70C9D6301F20B11600F4FED8 /* RMenu.swift */,
+				952713771DA2D854002D2A29 /* RMenu+.swift */,
 				70826A5C1F1F6D1F00328BC5 /* RLocation.swift */,
-				7091A59F1F1E5D8300460252 /* RSpotForecast.swift */,
+				7091A59F1F1E5D8300460252 /* RWSpotForecast.swift */,
+				70C9D6341F20BA2600F4FED8 /* RWSpotForecast+.swift */,
 				70826A541F1F686100328BC5 /* RWForecast.swift */,
 				70826A561F1F686F00328BC5 /* RWindguruStation.swift */,
 			);
@@ -540,19 +491,7 @@
 		959A31181D35E3BF003649D5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				95D1D96E1D427FE7000EF482 /* CoreData */,
-				952DDC631D3F20D200BD57FD /* CDPlacemark.swift */,
-				954033471D3C299F00330B57 /* CDForecast.swift */,
-				954033491D3C299F00330B57 /* CDForecastModel.swift */,
-				9540334B1D3C299F00330B57 /* CDForecastResult.swift */,
-				9540334F1D3C299F00330B57 /* CDMenu.swift */,
-				952713771DA2D854002D2A29 /* CDMenu+SwiftIconFont.swift */,
-				954033511D3C299F00330B57 /* CDSpot.swift */,
-				954033531D3C299F00330B57 /* CDSpotOwner.swift */,
-				954033551D3C299F00330B57 /* CDTimeWeather.swift */,
-				952DDC611D3F20D200BD57FD /* CDLocation.swift */,
 				70826A5E1F1F6F8900328BC5 /* Realm */,
-				95E61E051D305A3D0096E616 /* Xoshem.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -564,24 +503,6 @@
 				95C4CA9F1D55012E00D35F91 /* Auth.swift */,
 			);
 			name = Fabric;
-			sourceTree = "<group>";
-		};
-		95D1D96E1D427FE7000EF482 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				70FE00581F12E88500096217 /* CDManagedObject+CoreDataClass.swift */,
-				70FE00591F12E88500096217 /* CDManagedObject+CoreDataProperties.swift */,
-				95D1DA141D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift */,
-				95D1DA151D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift */,
-				95D1DA161D4670EB000EF482 /* CDSpot+CoreDataProperties.swift */,
-				95D1DA181D4670EB000EF482 /* CDLocation+CoreDataProperties.swift */,
-				95D1DA191D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift */,
-				95D1DA1A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift */,
-				95D1DA1B1D4670EB000EF482 /* CDForecast+CoreDataProperties.swift */,
-				95D1DA1C1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift */,
-				95D1DA1D1D4670EB000EF482 /* CDMenu+CoreDataProperties.swift */,
-			);
-			name = CoreData;
 			sourceTree = "<group>";
 		};
 		A129F8B71B2CA81600EBC1DD = {
@@ -959,33 +880,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				952DDC741D3F28DD00BD57FD /* CDForecastResult.swift in Sources */,
-				7091A59C1F1E4E6C00460252 /* CDForecast+CoreDataProperties.swift in Sources */,
-				95D1DA271D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */,
-				952DDC781D3F28DD00BD57FD /* CDMenu.swift in Sources */,
 				9577B0DD1CF8DCAE002B023B /* NotificationController.swift in Sources */,
-				7091A59E1F1E4E7300460252 /* CDForecast.swift in Sources */,
-				952DDC7E1D3F28DD00BD57FD /* CDTimeWeather.swift in Sources */,
-				95D1DA211D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift in Sources */,
-				952DDC6D1D3F28DD00BD57FD /* CDLocation.swift in Sources */,
-				70FE005D1F12F95800096217 /* CDManagedObject+CoreDataClass.swift in Sources */,
-				70FE005C1F12F93B00096217 /* CDManagedObject+CoreDataProperties.swift in Sources */,
-				952DDC7C1D3F28DD00BD57FD /* CDSpotOwner.swift in Sources */,
-				95D1DA1F1D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift in Sources */,
-				95D1DA2F1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift in Sources */,
+				70C9D6231F1F7C0F00F4FED8 /* RLocation.swift in Sources */,
+				70C9D6241F1F7C0F00F4FED8 /* RWSpotForecast.swift in Sources */,
 				95C4CAA11D55012E00D35F91 /* Auth.swift in Sources */,
-				95D1DA311D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */,
-				952DDC7A1D3F28DD00BD57FD /* CDSpot.swift in Sources */,
+				70C9D6221F1F7C0F00F4FED8 /* RPlacemark.swift in Sources */,
 				959A31191D370376003649D5 /* Facade.swift in Sources */,
 				9577B0DB1CF8DCAE002B023B /* ExtensionDelegate.swift in Sources */,
 				9577B0EC1CFC6F15002B023B /* Common.swift in Sources */,
-				952DDC6F1D3F28DD00BD57FD /* CDPlacemark.swift in Sources */,
-				95D1DA291D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift in Sources */,
+				70C9D6251F1F7C0F00F4FED8 /* RWForecast.swift in Sources */,
+				70C9D6261F1F7C0F00F4FED8 /* RWindguruStation.swift in Sources */,
 				9577B0D91CF8DCAE002B023B /* InterfaceController.swift in Sources */,
-				952DDC721D3F28DD00BD57FD /* CDForecastModel.swift in Sources */,
-				95D1DA2B1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */,
-				95D1DA231D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */,
 				95069CB61D670F4E003704F6 /* Crash.swift in Sources */,
+				70C9D6361F20BA2600F4FED8 /* RWSpotForecast+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -996,51 +903,32 @@
 				955E141C1D75568700B5B4D9 /* WebViewController.swift in Sources */,
 				951784D11D51ADBA007399F6 /* ForecastDayStepViewCell.swift in Sources */,
 				959A311F1D38056B003649D5 /* ForecastDetailViewController.swift in Sources */,
-				95D1DA2E1D4670EB000EF482 /* CDPlacemark+CoreDataProperties.swift in Sources */,
-				9540335B1D3C299F00330B57 /* CDForecastModel.swift in Sources */,
-				95D1DA1E1D4670EB000EF482 /* CDTimeWeather+CoreDataProperties.swift in Sources */,
 				95E61E0B1D31FAB10096E616 /* ForecastLocationViewController.swift in Sources */,
-				952DDC671D3F20D200BD57FD /* CDPlacemark.swift in Sources */,
 				9508D1D21DA0B946008C2A75 /* ForecastHierarchyFooterViewController.swift in Sources */,
 				95E61DFD1D3054440096E616 /* MasterViewController.swift in Sources */,
 				95E61E0D1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift in Sources */,
-				7091A59B1F1E4E6B00460252 /* CDForecast+CoreDataProperties.swift in Sources */,
+				70C9D6351F20BA2600F4FED8 /* RWSpotForecast+.swift in Sources */,
 				95069CB51D670F4D003704F6 /* Crash.swift in Sources */,
 				70826A5B1F1F6C7800328BC5 /* RPlacemark.swift in Sources */,
 				70826A571F1F686F00328BC5 /* RWindguruStation.swift in Sources */,
-				7091A59D1F1E4E7200460252 /* CDForecast.swift in Sources */,
 				9508D1CA1DA0B5D4008C2A75 /* ForecastHierarchyHeaderViewController.swift in Sources */,
-				95E61E071D305A3D0096E616 /* Xoshem.xcdatamodeld in Sources */,
-				70FE005B1F12E88500096217 /* CDManagedObject+CoreDataProperties.swift in Sources */,
-				95D1DA261D4670EB000EF482 /* CDLocation+CoreDataProperties.swift in Sources */,
 				95E61E0F1D3471FF0096E616 /* HelpViewController.swift in Sources */,
 				70826A5D1F1F6D1F00328BC5 /* RLocation.swift in Sources */,
-				954033671D3C299F00330B57 /* CDMenu.swift in Sources */,
-				95D1DA221D4670EB000EF482 /* CDSpot+CoreDataProperties.swift in Sources */,
 				9529961F1D510EA4000030B0 /* ForecastDayListViewController.swift in Sources */,
-				7091A5A01F1E5D8300460252 /* RSpotForecast.swift in Sources */,
-				95D1DA301D4670EB000EF482 /* CDMenu+CoreDataProperties.swift in Sources */,
-				95D1DA2A1D4670EB000EF482 /* CDSpotOwner+CoreDataProperties.swift in Sources */,
+				7091A5A01F1E5D8300460252 /* RWSpotForecast.swift in Sources */,
 				953241F81BC81C75009659A7 /* Facade.swift in Sources */,
 				95C4CAA01D55012E00D35F91 /* Auth.swift in Sources */,
-				952DDC651D3F20D200BD57FD /* CDLocation.swift in Sources */,
-				9540335F1D3C299F00330B57 /* CDForecastResult.swift in Sources */,
 				954081A91D8B16A800A0CA35 /* AboutViewController.swift in Sources */,
-				9540336F1D3C299F00330B57 /* CDSpotOwner.swift in Sources */,
 				70826A551F1F686100328BC5 /* RWForecast.swift in Sources */,
 				9508D1C81DA0AA45008C2A75 /* ForecastHierarchyViewController.swift in Sources */,
 				95E61DFE1D3054440096E616 /* DetailViewController.swift in Sources */,
-				9540336B1D3C299F00330B57 /* CDSpot.swift in Sources */,
 				952996221D512387000030B0 /* ForecastDayListViewCell.swift in Sources */,
-				952713781DA2D854002D2A29 /* CDMenu+SwiftIconFont.swift in Sources */,
-				70FE005A1F12E88500096217 /* CDManagedObject+CoreDataClass.swift in Sources */,
+				952713781DA2D854002D2A29 /* RMenu+.swift in Sources */,
 				953241F61BC81C75009659A7 /* Common.swift in Sources */,
+				70C9D6311F20B11600F4FED8 /* RMenu.swift in Sources */,
 				A129F8C41B2CA81600EBC1DD /* AppDelegate.swift in Sources */,
-				95D1DA201D4670EB000EF482 /* CDForecastModel+CoreDataProperties.swift in Sources */,
-				954033731D3C299F00330B57 /* CDTimeWeather.swift in Sources */,
 				70A970971F130B2300DBC25D /* HockeyAppManager.swift in Sources */,
 				9508D1D01DA0B932008C2A75 /* ForecastHierarchyBodyViewController.swift in Sources */,
-				95D1DA281D4670EB000EF482 /* CDForecastResult+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1529,19 +1417,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		95E61E051D305A3D0096E616 /* Xoshem.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				95E61E061D305A3D0096E616 /* Xoshem.xcdatamodel */,
-			);
-			currentVersion = 95E61E061D305A3D0096E616 /* Xoshem.xcdatamodel */;
-			path = Xoshem.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A129F8B81B2CA81600EBC1DD /* Project object */;
 }

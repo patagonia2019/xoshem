@@ -21,27 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         started = true
         try! Facade.instance.start()
-        HockeyAppManager.instance.configure()
 
-        // Override point for customization after application launch.
-        guard let window = window else {
-            return false
-        }
-        let splitViewController = window.rootViewController as! UISplitViewController
-        let vcs = splitViewController.viewControllers
-        if let navigationController = vcs.last as? UINavigationController,
-            let top = navigationController.topViewController {
-            top.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
-        }
-        splitViewController.delegate = self
-        
-        if let bgImage = UIImage.init(named: Common.image.background) {
-            splitViewController.view.backgroundColor = bgImage.patternColor(customSize: UIScreen.main.bounds.size)
-        }
-        
-        return true
+        return configureSplitView()
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -96,6 +79,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
             NotificationCenter.default.post(name: Notification.Name(rawValue: Common.notification.editing), object: false)
         })
+    }
+
+    
+    private func configureSplitView() -> Bool {
+        // Override point for customization after application launch.
+        guard let window = window else {
+            return false
+        }
+        let splitViewController = window.rootViewController as! UISplitViewController
+        let vcs = splitViewController.viewControllers
+        if let navigationController = vcs.last as? UINavigationController,
+            let top = navigationController.topViewController {
+            top.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
+        }
+        splitViewController.delegate = self
+        
+        if let bgImage = UIImage.init(named: Common.image.background) {
+            splitViewController.view.backgroundColor = bgImage.patternColor(customSize: UIScreen.main.bounds.size)
+        }
+        
+        return true
     }
 
 }

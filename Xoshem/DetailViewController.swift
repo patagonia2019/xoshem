@@ -15,7 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var searchContainer: UIView!
     @IBOutlet weak var helpContainer: UIView!
 
-    var detailItem: CDMenu? {
+    var detailItem: RMenu? {
         didSet {
             // Update the view.
             configureView()
@@ -34,7 +34,9 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         if detailItem == nil {
-            detailItem = Facade.instance.fetchRootMenu()[0] as CDMenu
+            if let menus = try! RMenu.fetchRoot() {
+                detailItem = menus[0]
+            }
         }
         configureView()
         super.viewDidLoad()

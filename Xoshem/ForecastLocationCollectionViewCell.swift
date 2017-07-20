@@ -17,7 +17,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var degreeLabel: UILabel!
     @IBOutlet weak var createAnotherCityImageView: UIImageView!
     @IBOutlet weak var trashButton: UIButton!
-    var forecastResult: CDForecastResult!
+    var spotForecast: RWSpotForecast!
     var updateClosure: (() -> ())?
 
     override func awakeFromNib() {
@@ -38,22 +38,17 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     }
     
     func updateName() {
-        if let _namecheck = forecastResult.namecheck() {
-            cityLabel.text = "\(_namecheck)"
+        spotNameLabel.text = "\(spotForecast.spotname)"
+        spotNameLabel.alpha = 1
+    }
+
+    func updateSpotName() {
+        if let name = spotForecast.locationName() {
+            cityLabel.text = "\(name)"
             cityLabel.alpha = 1
         }
         else {
             cityLabel.alpha = 0
-        }
-    }
-
-    func updateSpotName() {
-        if let name = forecastResult.name {
-            spotNameLabel.text = "\(name)"
-            spotNameLabel.alpha = 1
-        }
-        else {
-            spotNameLabel.alpha = 0
         }
     }
     
@@ -61,26 +56,21 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         let date = Date()
         let calendar = Calendar.current
         let components = (calendar as NSCalendar).components(.hour, from: date)
-        guard let hour = components.hour else {
-            return
-        }
-        guard let temperature : Float = forecastResult.temperatureByHour(hour) else {
-            degreeLabel.alpha = 0
-            roundedContainerView.alpha = 0
-            return
-        }
+        guard let hour = components.hour,
+              let fcst = spotForecast.fcst else { return }
+        let temperature : Float = fcst.temperature[hour].value
         degreeLabel.text = "\(temperature)°"
         roundedContainerView.alpha = 1
         degreeLabel.alpha = 1
     }
     
-    func configureCellWithLocation(_ location: CDLocation, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
+    func configureCellWithLocation(_ location: RLocation, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
     {
         configure()
         degreeLabel.alpha = 1
         trashButton.alpha = isEditing ? 1 : 0
-        trashButton.isHighlighted = forecastResult.hide
-        currentLocationImageView.alpha = forecastResult.placemarkResult != nil ? 1 : 0
+//        trashButton.isHighlighted = forecastResult.hide
+//        currentLocationImageView.alpha = forecastResult.placemarkResult != nil ? 1 : 0
         updateName()
         updateSpotName()
         updateTemperature()
@@ -88,14 +78,14 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         updateClosure = didUpdate
     }
     
-    func configureCell(_ fcr: CDForecastResult, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
+    func configureCell(_ fcr: RWSpotForecast, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
     {
         configure()
-        forecastResult = fcr
+        spotForecast = fcr
         degreeLabel.alpha = 1
         trashButton.alpha = isEditing ? 1 : 0
-        trashButton.isHighlighted = forecastResult.hide
-        currentLocationImageView.alpha = forecastResult.placemarkResult != nil ? 1 : 0
+//        trashButton.isHighlighted = forecastResult.hide
+//        currentLocationImageView.alpha = forecastResult.placemarkResult != nil ? 1 : 0
         updateName()
         updateSpotName()
         updateTemperature()
@@ -103,8 +93,18 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         updateClosure = didUpdate
     }
     
+    var color: UIColor {
+        if _color != nil {
+            return _color!
+        }
+        _color = JFCore.Common.randomColor()
+        
+        return _color!
+    }
+    var _color: UIColor? = nil
+
     func configureColor() {
-        contentView.backgroundColor = forecastResult.color
+        contentView.backgroundColor = color
     }
 
     func configureLastCell()
@@ -126,7 +126,6 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     
     @IBAction func trashAction(_ sender: AnyObject) {
         if let closure = updateClosure {
-            forecastResult.hide = !forecastResult.hide
             closure()
         }
     }

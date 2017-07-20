@@ -11,10 +11,32 @@ import RealmSwift
 import CoreLocation
 
 class RPlacemark: Object {
-    var object : CLPlacemark?
+    
+    convenience public init(placemark: CLPlacemark, rlocation: RLocation?) {
+        self.init()
+        administrativeArea = placemark.administrativeArea ?? ""
+        if let areas = placemark.areasOfInterest {
+            for area in areas {
+                areasOfInterest.append(StringObject(value: area))
+            }
+        }
+        country = placemark.country ?? ""
+        inlandWater = placemark.inlandWater ?? ""
+        isoCountryCode = placemark.isoCountryCode ?? ""
+        locality = placemark.locality ?? ""
+        name = placemark.name ?? ""
+        ocean = placemark.ocean ?? ""
+        postalCode = placemark.postalCode ?? ""
+        subAdministrativeArea = placemark.subAdministrativeArea ?? ""
+        subLocality = placemark.subLocality ?? ""
+        subThoroughfare = placemark.subThoroughfare ?? ""
+        thoroughfare = placemark.thoroughfare ?? ""
+        location = rlocation
+    }
+    
     
     dynamic var administrativeArea: String = ""
-    dynamic var areasOfInterest: String = ""
+    let areasOfInterest = List<StringObject>()
     dynamic var country: String = ""
     dynamic var inlandWater: String = ""
     dynamic var isoCountryCode: String = ""

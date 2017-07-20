@@ -8,6 +8,7 @@ def sharedPods
     pod 'Localize-Swift', '~> 1.7'
     pod 'JFWindguru', :path => '/Users/javierfuchs/Job/southfox/jfwindguru'
     pod 'JFCore'
+    pod 'RealmSwift'
 end
 
 def iosPods
@@ -22,8 +23,6 @@ def iosPods
     pod 'Crashlytics'
     pod 'Digits'
     pod 'FontWeather.swift', :path => '/Users/javierfuchs/Job/southfox/FontWeather.swift'
-    pod 'HockeySDK', '~> 4.1.5'
-    pod 'RealmSwift'
 end
 
 def watchPods

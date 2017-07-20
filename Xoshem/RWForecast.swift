@@ -11,7 +11,7 @@ import RealmSwift
 import JFWindguru
 
 public class StringObject: Object {
-    public dynamic var value: String?
+    public dynamic var value: String = ""
 }
 
 public class FloatObject: Object {
@@ -28,7 +28,6 @@ public class DictObject: Object {
 }
 
 class RWForecast: Object {
-    var object : WForecast?
     dynamic var initStamp   = 0  // initstamp
     let temperature         = List<FloatObject>() // TMP: temperature
     let cloudCoverTotal     = List<IntObject>() // TCDC: Cloud cover (%) Total
@@ -49,16 +48,16 @@ class RWForecast: Object {
     let hr_h                = List<StringObject>()
     let hr_d                = List<StringObject>()
     let hours               = List<StringObject>()
-    dynamic var initDate: Date? = nil
-    dynamic var init_d: String? = nil
-    dynamic var init_dm: String? = nil
-    dynamic var init_h: String? = nil
-    dynamic var initstr: String? = nil
-    dynamic var model_name: String? = nil
-    dynamic var model_longname: String? = nil
-    dynamic var id_model: String? = nil
-    dynamic var update_last: Date? = nil
-    dynamic var update_next: Date? = nil
+    dynamic var initDate: Date = Date()
+    dynamic var init_d: String = ""
+    dynamic var init_dm: String = ""
+    dynamic var init_h: String = ""
+    dynamic var initstr: String = ""
+    dynamic var model_name: String = ""
+    dynamic var model_longname: String = ""
+    dynamic var id_model: String = ""
+    dynamic var update_last: Date = Date()
+    dynamic var update_next: Date = Date()
     let img_param           = List<DictObject>()
     let img_var_map         = List<DictObject>()
 }

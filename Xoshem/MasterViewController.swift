@@ -51,8 +51,9 @@ class MasterViewController: BaseTableViewController {
             else {
                 controller = segue.destination as! DetailViewController
             }
-            let object = Facade.instance.fetchRootMenu()[indexPath.row] as CDMenu
-            controller.detailItem = object
+            guard let menus = try! RMenu.fetchRoot() else { return }
+            let menu = menus[indexPath.item]
+            controller.detailItem = menu
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
             controller.navigationItem.leftItemsSupplementBackButton = true
             
@@ -74,25 +75,29 @@ class MasterViewController: BaseTableViewController {
     // MARK: - Table View
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Facade.instance.fetchRootMenu().count
+        guard let menus = try! RMenu.fetchRoot() else { return 0 }
+        return menus.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Common.cell.identifier.root, for: indexPath)
-        let menu = Facade.instance.fetchRootMenu()[(indexPath as NSIndexPath).row] as CDMenu
-        configureCell(cell, withMenu: menu)
+ 
+        if let menus = try! RMenu.fetchRoot() {
+            let menu = menus[indexPath.item]
+            configureCell(cell, withMenu: menu)
+        }
         return cell
     }
     
-    func configureCell(_ cell: UITableViewCell, withMenu menu: CDMenu) {
+    func configureCell(_ cell: UITableViewCell, withMenu menu: RMenu) {
         cell.backgroundColor = UIColor.clear
-        if let name = menu.name,
-           let textLabel = cell.textLabel {
+        let name = menu.name
+        if let textLabel = cell.textLabel {
             textLabel.font = UIFont.boldSystemFont(ofSize: 16)
             textLabel.text = name
         }
+        let iconName = menu.iconName
         guard let fromFont = menu.iconFont,
-            let iconName = menu.iconName,
             let cellImage = cell.imageView else {
                 assertionFailure("need icon here for \(menu)")
                 return

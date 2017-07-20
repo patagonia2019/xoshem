@@ -11,7 +11,6 @@ import RealmSwift
 import JFWindguru
 
 class RWindguruStation : Object {
-    var object : WindguruStation?
     dynamic var id: String = ""
     dynamic var station: String = ""
     dynamic var distance: Int = 0

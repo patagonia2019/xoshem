@@ -16,9 +16,9 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var collectionView: UICollectionView!
     var cellSize: CGSize! = CGSize(width: 191.5, height: 350.0)
     var updateSize: CGSize! = CGSize.zero
-    var forecasts: [CDForecastResult]!
-    var currentLocation: CDLocation?
-    var currentForecast: CDForecastResult?
+    var forecasts: [RWSpotForecast]!
+    var currentLocation: RLocation?
+    var currentForecast: RWSpotForecast?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,8 +52,6 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
         if let _ = currentLocation {
             count = 1
         }
-        // rest of the forecast
-        //        count = count + forecastsFiltered.count
         
         // Add new (+)
         count = count + 1
@@ -65,10 +63,10 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
         return totalCells()
     }
     
-    func currentForecastResult() -> CDForecastResult? {
+    func currentForecastResult() -> RWSpotForecast? {
         if let location = currentLocation {
-            if let placemark = location.placemarks?.allObjects.first as! CDPlacemark? {
-                return placemark.forecastResults?.allObjects.first as! CDForecastResult?
+            if let placemark = location.placemarks.first {
+                return placemark.forecastResults.first
             }
         }
         return nil
@@ -87,11 +85,6 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
                 })
             }
         }
-        //        else if forecastsFiltered.count > 0 {
-        //            cell.configureCell(forecastsFiltered[indexPath.row-1], isEditing: editing, didUpdate: { (Void) in
-        //                updateForecastView(false)
-        //            })
-        //        }
         return cell
     }
     
@@ -121,10 +114,6 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
                     performSegue(withIdentifier: Common.segue.forecastDetail, sender: nil)
                 }
             }
-            //            else if forecastsFiltered.count > 0 {
-            //                currentForecast = forecastsFiltered[indexPath.row]
-            //                performSegueWithIdentifier(Common.segue.forecastDetail, sender: nil)
-            //            }
         }
     }
     
@@ -187,7 +176,6 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
                                     if let strong = self {
                                         if let isEditing: Bool = note.object as? Bool {
                                             strong.setEditing(isEditing, animated: true)
-                                            strong._forecastsFiltered = nil
                                             strong.collectionView.reloadData()
                                         }
                                     }})
@@ -210,25 +198,6 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
         }
     }
     
-    var forecastsFiltered: [CDForecastResult] {
-        if _forecastsFiltered != nil {
-            return _forecastsFiltered!
-        }
-        
-        _forecastsFiltered = forecasts.filter { (forecast) -> Bool in
-            if isEditing {
-                return true
-            }
-            if forecast.hide {
-                return false
-            }
-            return true
-        }
-        
-        return _forecastsFiltered!
-    }
-    var _forecastsFiltered: [CDForecastResult]? = nil
-    
     
     func reloadView() {
         UIView.animate(withDuration: 0.3,
@@ -246,9 +215,9 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
     fileprivate func updateForecastView(_ showAlert: Bool)
     {
         do {
-            currentLocation = try Facade.instance.fetchCurrentLocation()
+//            currentLocation = try Facade.instance.fetchCurrentLocation()
             
-            forecasts = try Facade.instance.fetchForecastResult()
+//            forecasts = try Facade.instance.fetchForecastResult()
             
             if (showAlert) {
                 let alertView = SCLAlertView()
@@ -281,8 +250,8 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
         if segue.identifier == Common.segue.forecastDetail {
             let vc:ForecastDetailViewController = segue.destination as! ForecastDetailViewController
             if let _currentForecast = currentForecast {
-                vc.detailItem = _currentForecast
-                vc.title = _currentForecast.namecheck()
+                vc.detailItem = currentForecast
+                vc.title = currentForecast?.spotname
             }
         }
         else if segue.identifier == Common.segue.search {

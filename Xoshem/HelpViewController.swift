@@ -14,7 +14,7 @@ import SwiftIconFont
 class HelpViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var currentMenuOption : CDMenu?
+    var currentMenuOption : RMenu?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,32 +27,34 @@ class HelpViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     // MARK: - Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Facade.instance.fetchHelpMenu().count
+        guard let menus = try! RMenu.fetchHelp() else { return 0 }
+        return menus.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Common.cell.identifier.help, for: indexPath)
-        let menu = Facade.instance.fetchHelpMenu()[(indexPath as NSIndexPath).row]
-        configureCell(cell, withMenu: menu)
+        if let menus = try! RMenu.fetchHelp() {
+            let menu = menus[indexPath.item]
+            configureCell(cell, withMenu: menu)
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        currentMenuOption = Facade.instance.fetchHelpMenu()[(indexPath as NSIndexPath).row]
-        guard let menu = currentMenuOption,
-                  let segue = menu.segue else { return }
-        performSegue(withIdentifier: segue, sender: self)
+        guard let menus = try! RMenu.fetchHelp() else { return }
+        let menu = menus[indexPath.item]
+        performSegue(withIdentifier: menu.segue, sender: self)
     }
     
-    func configureCell(_ cell: UITableViewCell, withMenu menu: CDMenu) {
+    func configureCell(_ cell: UITableViewCell, withMenu menu: RMenu) {
         cell.backgroundColor = UIColor.clear
-        if let name = menu.name,
-            let textLabel = cell.textLabel {
+        let name = menu.name
+        if let textLabel = cell.textLabel {
             textLabel.text = name
             textLabel.font = UIFont.boldSystemFont(ofSize: 16)
         }
+        let iconName = menu.iconName
         guard let fromFont = menu.iconFont,
-            let iconName = menu.iconName,
             let cellImage = cell.imageView
              else {
                 assertionFailure("need icon here for \(menu)")
