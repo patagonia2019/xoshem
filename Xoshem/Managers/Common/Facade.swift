@@ -9,7 +9,6 @@
 import Foundation
 import JFCore
 import JFWindguru
-import CoreData
 import RealmSwift
 
 /*
@@ -20,7 +19,7 @@ import RealmSwift
  *    It is subscribed to notifications of the LocationManager to update the plist file with the new location/country.
  */
 
-open class Facade: NSObject, NSFetchedResultsControllerDelegate {
+open class Facade: NSObject {
     //
     // Attributes only modified by this class
     //

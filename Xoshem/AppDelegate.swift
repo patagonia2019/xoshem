@@ -8,7 +8,6 @@
 
 import UIKit
 import JFCore
-import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
