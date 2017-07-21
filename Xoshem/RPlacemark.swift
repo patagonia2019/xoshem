@@ -12,6 +12,24 @@ import CoreLocation
 
 class RPlacemark: Object {
     
+    dynamic var administrativeArea: String = ""
+    let areasOfInterest = List<StringObject>()
+    dynamic var country: String = ""
+    dynamic var inlandWater: String = ""
+    dynamic var isoCountryCode: String = ""
+    dynamic var locality: String = ""
+    dynamic var name: String = ""
+    dynamic var ocean: String = ""
+    dynamic var postalCode: String = ""
+    dynamic var subAdministrativeArea: String = ""
+    dynamic var subLocality: String = ""
+    dynamic var subThoroughfare: String = ""
+    dynamic var thoroughfare: String = ""
+    let spots = List<RSpotOwner>()
+    dynamic var selectedSpot: RSpotOwner?
+    dynamic var spotForecast: RWSpotForecast?
+    dynamic var location: RLocation?
+    
     convenience public init(placemark: CLPlacemark, rlocation: RLocation?) {
         self.init()
         administrativeArea = placemark.administrativeArea ?? ""
@@ -34,20 +52,4 @@ class RPlacemark: Object {
         location = rlocation
     }
     
-    
-    dynamic var administrativeArea: String = ""
-    let areasOfInterest = List<StringObject>()
-    dynamic var country: String = ""
-    dynamic var inlandWater: String = ""
-    dynamic var isoCountryCode: String = ""
-    dynamic var locality: String = ""
-    dynamic var name: String = ""
-    dynamic var ocean: String = ""
-    dynamic var postalCode: String = ""
-    dynamic var subAdministrativeArea: String = ""
-    dynamic var subLocality: String = ""
-    dynamic var subThoroughfare: String = ""
-    dynamic var thoroughfare: String = ""
-    let forecastResults = List<RWSpotForecast>()
-    dynamic var location: RLocation? // to-one relationships must be optional
 }

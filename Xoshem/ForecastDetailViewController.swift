@@ -53,7 +53,7 @@ class ForecastDetailViewController: UIViewController {
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: Common.notification.editing), object: editing)
+        NotificationCenter.default.post(name: EditDidReceiveNotification, object: editing)
         
     }
 

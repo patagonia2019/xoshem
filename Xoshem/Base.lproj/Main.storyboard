@@ -40,21 +40,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oi6-TO-ZYs">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="r8O-7G-2WE" kind="embed" identifier="forecast" id="RIf-fu-Yha"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TEx-sl-Hdg">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="225" y="-67" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="6Ic-St-LBz" kind="embed" identifier="search" id="eCk-VF-1Wl"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJy-jk-VpB">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="-67" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="pVf-mz-iLp" kind="embed" id="alf-u1-84o"/>
@@ -64,17 +64,19 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="oi6-TO-ZYs" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-16" id="1au-Ol-OYY"/>
-                            <constraint firstItem="TEx-sl-Hdg" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-16" id="2to-fQ-D5T"/>
-                            <constraint firstItem="TJy-jk-VpB" firstAttribute="leading" secondItem="TEx-sl-Hdg" secondAttribute="leading" id="CiZ-Nc-fBl"/>
+                            <constraint firstItem="TEx-sl-Hdg" firstAttribute="width" secondItem="svH-Pt-448" secondAttribute="width" id="4ro-b4-2e2"/>
+                            <constraint firstItem="TJy-jk-VpB" firstAttribute="height" secondItem="svH-Pt-448" secondAttribute="height" id="8B0-0x-3Bd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TEx-sl-Hdg" secondAttribute="trailing" constant="-241" id="PeU-pp-8GH"/>
+                            <constraint firstItem="TJy-jk-VpB" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="XA3-gl-Lri"/>
+                            <constraint firstItem="TEx-sl-Hdg" firstAttribute="height" secondItem="svH-Pt-448" secondAttribute="height" id="XcD-7X-BvK"/>
                             <constraint firstItem="oi6-TO-ZYs" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="topMargin" id="YqX-yR-lNy"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="oi6-TO-ZYs" secondAttribute="trailing" constant="-241" id="drl-5B-Kxl"/>
+                            <constraint firstItem="oi6-TO-ZYs" firstAttribute="height" secondItem="svH-Pt-448" secondAttribute="height" id="ciJ-sE-e3m"/>
+                            <constraint firstItem="oi6-TO-ZYs" firstAttribute="width" secondItem="svH-Pt-448" secondAttribute="width" id="fv4-c2-Mz6"/>
                             <constraint firstItem="TJy-jk-VpB" firstAttribute="width" secondItem="TEx-sl-Hdg" secondAttribute="width" id="g46-ld-wIV"/>
                             <constraint firstItem="TJy-jk-VpB" firstAttribute="height" secondItem="TEx-sl-Hdg" secondAttribute="height" id="nqZ-Os-DJa"/>
                             <constraint firstItem="TJy-jk-VpB" firstAttribute="top" secondItem="TEx-sl-Hdg" secondAttribute="top" id="ska-PU-bHq"/>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="TEx-sl-Hdg" secondAttribute="bottom" constant="67" id="tEo-zF-scJ"/>
-                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="oi6-TO-ZYs" secondAttribute="bottom" constant="67" id="udI-3d-kVk"/>
-                            <constraint firstItem="TEx-sl-Hdg" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="topMargin" id="w3X-mz-J4i"/>
+                            <constraint firstItem="TJy-jk-VpB" firstAttribute="width" secondItem="svH-Pt-448" secondAttribute="width" id="wof-xI-bit"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -180,14 +182,14 @@
                         <viewControllerLayoutGuide type="bottom" id="Rfg-2E-LdN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0Ip-zn-XcM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MsM-Cr-tv6">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="4" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vWG-Li-tT7">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ctI-L5-DfK">
                                             <size key="itemSize" width="199" height="349"/>
@@ -197,7 +199,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ForecastLocationCollectionViewCell" id="4fc-Fj-DH0" customClass="ForecastLocationCollectionViewCell" customModule="Xoshem" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="199" height="349"/>
+                                                <rect key="frame" x="88" y="0.0" width="199" height="349"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="199" height="349"/>
@@ -309,7 +311,8 @@ Bariloche</string>
                             <constraint firstItem="MsM-Cr-tv6" firstAttribute="bottom" secondItem="0Ip-zn-XcM" secondAttribute="bottomMargin" id="BsZ-DI-3Hu"/>
                             <constraint firstItem="MsM-Cr-tv6" firstAttribute="top" secondItem="0Ip-zn-XcM" secondAttribute="topMargin" id="SAS-z7-zjm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MsM-Cr-tv6" secondAttribute="trailing" constant="-20" id="bGf-qW-bjy"/>
-                            <constraint firstItem="MsM-Cr-tv6" firstAttribute="leading" secondItem="0Ip-zn-XcM" secondAttribute="leadingMargin" constant="-20" id="wi4-c2-GfI"/>
+                            <constraint firstItem="MsM-Cr-tv6" firstAttribute="width" secondItem="0Ip-zn-XcM" secondAttribute="width" id="ynA-NQ-aeV"/>
+                            <constraint firstItem="MsM-Cr-tv6" firstAttribute="height" secondItem="0Ip-zn-XcM" secondAttribute="height" id="zOx-cI-dWq"/>
                         </constraints>
                     </view>
                     <connections>
@@ -321,7 +324,7 @@ Bariloche</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Vi-vG-1YE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2464" y="72"/>
+            <point key="canvasLocation" x="2358" y="75"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="VXl-Yd-uDj">
@@ -332,11 +335,11 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="AcT-9M-1QR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MyG-Zz-h6Y">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="u8L-Fx-Rdu">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <rect key="frame" x="-4" y="64" width="383" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="6Ic-St-LBz" id="xqT-UP-xht"/>
@@ -376,17 +379,17 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="vJ0-LP-4us"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5Se-af-u8t">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1x-4r-oii">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="dtP-jE-Of0" kind="embed" identifier="forecastDayList" id="lCA-BU-S77"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Go9-Ko-ZdT">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="zfD-hd-RHq" kind="embed" identifier="forecastHierarchy" id="XS1-6h-kr6"/>
                                 </connections>
@@ -422,22 +425,22 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="M95-hs-dh1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WtR-2o-PIO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tGd-T1-jUK">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HelpCell" textLabel="0fh-Qf-i1c" imageView="hSw-Rb-KWh" style="IBUITableViewCellStyleDefault" id="bDL-aP-ucn">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bDL-aP-ucn" id="iih-qs-Dtf">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0fh-Qf-i1c">
-                                                    <rect key="frame" x="62" y="0.0" width="523" height="44"/>
+                                                    <rect key="frame" x="62" y="0.0" width="306" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
@@ -489,23 +492,23 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="JrM-s5-lZQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GDh-hB-Uad">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJh-QC-QTz">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="UZK-Hj-a42">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ForecastDayStepViewCell" id="dEG-Px-bnU" customClass="ForecastDayStepViewCell" customModule="Xoshem">
-                                        <rect key="frame" x="0.0" y="1" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="1" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dEG-Px-bnU" id="ygb-jK-8xW">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" stepValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="CY8-e1-Ku9">
@@ -546,7 +549,7 @@ Bariloche</string>
                                 </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="TJr-uY-8Y1">
-                                <rect key="frame" x="0.0" y="51" width="600" height="549"/>
+                                <rect key="frame" x="0.0" y="118" width="375" height="549"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="549" id="XD0-tP-cQN"/>
@@ -554,14 +557,14 @@ Bariloche</string>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ForecastDayListViewCell" id="H3U-Pb-3B7" customClass="ForecastDayListViewCell" customModule="Xoshem">
-                                        <rect key="frame" x="0.0" y="1" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="1" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H3U-Pb-3B7" id="iCJ-tg-WtC">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jgo-Yg-Dv8">
-                                                    <rect key="frame" x="8" y="0.0" width="600" height="43"/>
+                                                    <rect key="frame" x="8" y="0.0" width="375" height="43"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fS2-CI-QbW">
                                                             <rect key="frame" x="0.0" y="0.0" width="47" height="43"/>
@@ -570,13 +573,13 @@ Bariloche</string>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="key" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ql8-LX-lYN">
-                                                            <rect key="frame" x="57" y="0.0" width="241.5" height="43"/>
+                                                            <rect key="frame" x="57" y="0.0" width="129" height="43"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dUc-tL-Cb8">
-                                                            <rect key="frame" x="308.5" y="0.0" width="291.5" height="43"/>
+                                                            <rect key="frame" x="196" y="0.0" width="179" height="43"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -645,15 +648,15 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="VG6-Mf-JAm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gvM-qd-Ato">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZc-0C-9pD" userLabel="bg">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <webView opaque="NO" contentMode="scaleToFill" keyboardDisplayRequiresUserAction="NO" paginationMode="topToBottom" translatesAutoresizingMaskIntoConstraints="NO" id="tMJ-4q-Ag5">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                 <connections>
@@ -690,15 +693,15 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="xMT-LD-iIv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ngz-bU-2fE">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnw-CJ-i5n" userLabel="bg">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <webView opaque="NO" contentMode="scaleToFill" keyboardDisplayRequiresUserAction="NO" paginationMode="topToBottom" translatesAutoresizingMaskIntoConstraints="NO" id="rdp-ap-Nfk">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                 <connections>
@@ -726,23 +729,6 @@ Bariloche</string>
             </objects>
             <point key="canvasLocation" x="2882" y="1746"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Uzn-gK-zGY">
-            <objects>
-                <viewController id="OVS-NT-gWj" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dzf-U1-Y4I"/>
-                        <viewControllerLayoutGuide type="bottom" id="n1y-VU-BZo"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Hb5-RN-Qsd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ABl-87-fE0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--Forecast Hierarchy View Controller-->
         <scene sceneID="9EB-lE-Qgm">
             <objects>
@@ -752,7 +738,7 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="EkT-44-NIN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hcd-he-uG0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e68-sA-F7M">

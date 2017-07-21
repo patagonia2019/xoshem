@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import JFWindguru
 
 public class StringObject: Object {
     public dynamic var value: String = ""

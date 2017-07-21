@@ -10,16 +10,19 @@ import UIKit
 import JFWindguru
 import JFCore
 import SCLAlertView
+import RealmSwift
 
-class ForecastLocationViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ForecastLocationViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var cellSize: CGSize! = CGSize(width: 191.5, height: 350.0)
-    var updateSize: CGSize! = CGSize.zero
+//    var cellSize: CGSize! = CGSize(width: 191.5, height: 350.0)
+//    var updateSize: CGSize! = CGSize.zero
     var forecasts: [RWSpotForecast]!
-    var currentLocation: RLocation?
+    var locations: Results<RLocation>?
     var currentForecast: RWSpotForecast?
-    
+    let interItemSpacing: CGFloat = 0
+    let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateForecastView(false)
@@ -37,128 +40,19 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
         unobserveNotification()
     }
     
-    ///
-    /// UICollectionViewDataSource
-    ///
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func cellWidth() -> CGFloat {
+        return (collectionView!.bounds.size.width - (interItemSpacing * 2) - edgeInsets.left - edgeInsets.right) / 2
     }
     
-    func totalCells() -> Int {
-        var count = 0
-        
-        // current location
-        if let _ = currentLocation {
-            count = 1
-        }
-        
-        // Add new (+)
-        count = count + 1
-        
-        return count
+    func boardCellSize() -> CGSize {
+        return CGSize(width: cellWidth(), height: cellWidth())
     }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return totalCells()
-    }
-    
-    func currentForecastResult() -> RWSpotForecast? {
-        if let location = currentLocation {
-            if let placemark = location.placemarks.first {
-                return placemark.forecastResults.first
-            }
-        }
-        return nil
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Common.cell.identifier.forecast, for: indexPath) as! ForecastLocationCollectionViewCell
-        
-        if (indexPath as NSIndexPath).row == totalCells() - 1 {
-            cell.configureLastCell()
-        }
-        else if (indexPath as NSIndexPath).row == 0 {
-            if let forecastResult = currentForecastResult() {
-                cell.configureCell(forecastResult, isEditing: isEditing, didUpdate: { [weak self] (Void) in
-                    self?.updateForecastView(false)
-                })
-            }
-        }
-        return cell
-    }
-    
-    ///
-    /// UICollectionViewDelegate
-    ///
-    
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            let forecastCell = cell as! ForecastLocationCollectionViewCell
-            forecastCell.selected()
-            UIView.animate(withDuration: 0.5, animations: {
-                forecastCell.unselected()
-            })
-            
-            if (indexPath as NSIndexPath).row == totalCells() - 1 {
-                performSegue(withIdentifier: Common.segue.search, sender: nil)
-            }
-            else if (indexPath as NSIndexPath).row == 0 {
-                if let forecastResult = currentForecastResult() {
-                    currentForecast = forecastResult
-                    performSegue(withIdentifier: Common.segue.forecastDetail, sender: nil)
-                }
-            }
-        }
-    }
-    
-    // MARK: UICollectionViewDelegateFlowLayout
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 0, 0, 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 0, height: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: 0, height: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var size = cellSize
-        let viewSize = updateSize.equalTo(CGSize.zero) ? collectionView.frame.size : updateSize
-        let itemsInWidth = Int(viewSize!.width / (size?.width)!)
-        size!.width = viewSize!.width / CGFloat(itemsInWidth)
-        if size!.width >  (cellSize.width * 1.5) {
-            size!.width = cellSize.width
-        }
-        return size!
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
+
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        updateSize = size
+//        updateSize = size
         collectionView.reloadData()
     }
 
@@ -168,63 +62,58 @@ class ForecastLocationViewController: UIViewController, UICollectionViewDelegate
     {
         unobserveNotification()
         
+        let notiCenter = NotificationCenter.default
         let queue = OperationQueue.main
+
+        notiCenter
+            .addObserver(forName: EditDidReceiveNotification, object: nil, queue: queue,
+                using: {
+                    [weak self] note in
+                    if let strong = self {
+                        if let isEditing: Bool = note.object as? Bool {
+                            strong.setEditing(isEditing, animated: true)
+                            strong.collectionView.reloadData()
+                        }
+                    }})
         
-        NotificationCenter.default
-            .addObserver(forName: NSNotification.Name(rawValue: Common.notification.editing), object: nil, queue: queue,
-                                using: { [weak self] note in
-                                    if let strong = self {
-                                        if let isEditing: Bool = note.object as? Bool {
-                                            strong.setEditing(isEditing, animated: true)
-                                            strong.collectionView.reloadData()
-                                        }
-                                    }})
-        
-        NotificationCenter.default
-            .addObserver(forName: NSNotification.Name(rawValue: Common.notification.forecast.updated), object: nil, queue: queue,
-                                using: { [weak self] (NSNotification) in
-                                    if let strong = self {
-                                        strong.updateForecastView(false)
-                                    }
-                })
+        for notification in [ForecastDidUpdateNotification]
+        {
+            notiCenter
+            .addObserver(forName: notification, object: nil, queue: queue,
+                using: {
+                    [weak self] (note) in
+                    self?.updateForecastView(true)
+            })
+        }
     }
     
     fileprivate func unobserveNotification()
     {
-        for notification in [Common.notification.location.saved, JFCore.Constants.Notification.locationUpdated,
-                             JFCore.Constants.Notification.locationError, JFCore.Constants.Notification.locationAuthorized,
-                             Common.notification.editing, Common.notification.forecast.updated] {
-                                NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
+        for notification in [EditDidReceiveNotification,
+                             ForecastDidUpdateNotification]
+        {
+            NotificationCenter.default.removeObserver(self, name: notification, object: nil)
         }
     }
     
-    
     func reloadView() {
-        UIView.animate(withDuration: 0.3,
-           animations: {
-                [weak self] in
-                self?.collectionView.reloadData()
-            },
-           completion: {
-                [weak self]
-                (completed) in
-                self?.collectionView.flashScrollIndicators()
-        })
+        collectionView.reloadData()
+        collectionView.flashScrollIndicators()
     }
     
-    fileprivate func updateForecastView(_ showAlert: Bool)
+    func updateForecastView(_ showAlert: Bool)
     {
         do {
+            
 //            currentLocation = try Facade.instance.fetchCurrentLocation()
             
 //            forecasts = try Facade.instance.fetchForecastResult()
             
             if (showAlert) {
                 let alertView = SCLAlertView()
-                alertView.addButton(Common.title.Reload) { [weak self] (isOtherButton) in
-                    if let strong = self {
-                        strong.reloadView()
-                    }
+                alertView.addButton(Common.title.Reload) {
+                    [weak self] (isOtherButton) in
+                    self?.reloadView()
                 }
                 let subtitle = "\(Common.title.successGetting) \(forecasts.count) \(Common.title.forecasts)"
                 alertView.showSuccess(Common.title.fetchForecast,

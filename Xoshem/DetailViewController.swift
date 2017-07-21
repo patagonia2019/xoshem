@@ -9,6 +9,8 @@
 import UIKit
 import JFCore
 
+let EditDidReceiveNotification: NSNotification.Name = NSNotification.Name(rawValue: "EditDidReceiveNotification")
+
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var forecastContainer: UIView!
@@ -60,7 +62,7 @@ class DetailViewController: UIViewController {
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: Common.notification.editing), object: editing)
+        NotificationCenter.default.post(name: EditDidReceiveNotification, object: editing)
     }
     
     func updateRightBarButtonItem() {

@@ -173,6 +173,7 @@ open class Facade: NSObject {
         LocationManager.instance.reverseLocation(location: location,
             didFailWithError:{_ in },
             didUpdatePlacemarks: {
+                [weak self]
                 (placemarks) in
                 do {
                     let realm = try Realm()
@@ -181,6 +182,7 @@ open class Facade: NSObject {
                             let rplacemark = RPlacemark(placemark: corePlacemark, rlocation: rlocation)
                             realm.add(rplacemark)
                         }
+                        self?.updateSpotsUsingPlacemarks()
                     }
                 }
                 catch {
@@ -196,7 +198,66 @@ open class Facade: NSObject {
     }
     
 
+    func updateSpotsUsingPlacemarks() {
+        let realm = try! Realm()
+        let placemarks = realm.objects(RPlacemark.self)
+        for placemark in placemarks {
+            ForecastWindguruService.instance.searchSpots(byLocation: placemark.locality, failure: { (error) in
+                
+            }, success: { (spotResult) in
+                guard let spotResult = spotResult else {
+                    return
+                }
+                try! realm.write {
+                    let rspotresult = RSpotResult(spotResult: spotResult)
+                    realm.add(rspotresult)
+                }
+            })
+        }
+    }
+    
+    func updateForecastUsingSpots() {
+        let realm = try! Realm()
+        let spots = realm.objects(RSpot.self)
+        for spot in spots {
+            ForecastWindguruService.instance.wforecast(bySpotId: spot.id_spot, failure: { (error) in
+                
+            }, success: { (spotForecast) in
+                guard let spotForecast = spotForecast else {
+                    return
+                }
+                try! realm.write {
+//                    let rspotresult = RWSpotForecast(spotResult: spotResult)
+//                    realm.add(rspotresult)
+                }
 
+            })
+        }
+    }
+
+    func fetchLocation() throws -> Results<RLocation>? {
+        do {
+            let realm = try Realm()
+            return realm.objects(RLocation.self)
+        }
+        catch {
+            let myerror = JFError(code: Common.ErrorCode.fetchLocationIssue.rawValue,
+                                desc: Common.title.errorOnSearch,
+                                reason: "Seems to be an initialization error in database with table Location",
+                                suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
+            Analytics.logError(error: myerror)
+            throw myerror
+        }
+    }
+    
+    func forecastDidUpdateNotification(object: Any?) {
+        NotificationCenter.default.post(name: ForecastDidUpdateNotification, object: object)
+    }
+    
+    func locationDidUpdateNotification(object: Any?) {
+        NotificationCenter.default.post(name: LocationDidUpdateNotification, object: object)
+    }
+    
     fileprivate func observeNotifications()
     {
         unobserveNotifications()
@@ -215,7 +276,7 @@ open class Facade: NSObject {
             }
             try! self?.updateLocations(usingDiscoveredLocations: locations)
         }
-
+        
     }
     
     fileprivate func unobserveNotifications()
@@ -224,37 +285,5 @@ open class Facade: NSObject {
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
         }
     }
-    // MARK: - Core Data stack
- 
-    lazy var applicationDocumentsDirectory: URL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.fuchs.mater-detail.md" in the application's documents Application Support directory.
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return urls[urls.count-1]
-    }()
-    
-
-    func fetchLocation() throws -> Results<RLocation>? {
-        do {
-            let realm = try Realm()
-            return realm.objects(RLocation.self)
-        }
-        catch {
-            let myerror = JFError(code: Common.ErrorCode.fetchLocationIssue.rawValue,
-                                desc: Common.title.errorOnSearch,
-                                reason: "Seems to be an initialization error in database with table Location",
-                                suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-            Analytics.logError(error: myerror)
-            throw myerror
-        }
-    }
-    
-    func forecastUpdated() {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: Common.notification.forecast.updated), object: nil)
-    }
-    
-    func locationSaved() {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: Common.notification.location.saved), object: nil)
-    }
-    
     
 }

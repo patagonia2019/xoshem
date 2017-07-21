@@ -248,7 +248,7 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     {
         unobserveNotification()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Common.notification.forecast.updated),
+        NotificationCenter.default.addObserver(forName: ForecastDidUpdateNotification,
                                                object: nil, queue: OperationQueue.main, using:
             {
                 [weak self] (NSNotification) in
@@ -261,8 +261,8 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     
     fileprivate func unobserveNotification()
     {
-        for notification in [Common.notification.forecast.updated] {
-            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
+        for notification in [ForecastDidUpdateNotification] {
+            NotificationCenter.default.removeObserver(self, name: ForecastDidUpdateNotification, object: nil);
         }
     }
     

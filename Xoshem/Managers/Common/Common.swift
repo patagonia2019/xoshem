@@ -9,6 +9,10 @@
 import Foundation
 import Localize_Swift
 
+let LocationDidUpdateNotification: NSNotification.Name = NSNotification.Name(rawValue: "LocationDidUpdateNotification")
+let ForecastDidUpdateNotification: NSNotification.Name = NSNotification.Name(rawValue: "ForecastDidUpdateNotification")
+
+
 /*
  *  Common
  *
@@ -58,16 +62,6 @@ struct Common {
         case facadeRestartIssue = 138
         case firebaseSignInAnonymouslyWithCompletionIssue = 139
         case cdRemoveMenuIssue = 140
-    }
-
-    struct notification {
-        static let editing : String = "notification.editing"
-        struct location {
-            static let saved : String = "notification.location.saved"
-        }
-        struct forecast {
-            static let updated : String = "notification.forecast.updated"
-        }
     }
 
 

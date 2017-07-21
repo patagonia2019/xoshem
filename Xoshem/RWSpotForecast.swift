@@ -8,8 +8,6 @@
 
 import Foundation
 import RealmSwift
-import JFWindguru
-
 
 class RWSpotForecast: Object {
     dynamic var id_spot = 0

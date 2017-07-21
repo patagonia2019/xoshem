@@ -23,6 +23,7 @@ def iosPods
     pod 'Crashlytics'
     pod 'Digits'
     pod 'FontWeather.swift', :path => '/Users/javierfuchs/Job/southfox/FontWeather.swift'
+    pod 'FlexiCollectionViewLayout'
 end
 
 def watchPods

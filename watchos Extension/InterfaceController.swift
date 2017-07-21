@@ -60,7 +60,7 @@ class InterfaceController: WKInterfaceController {
     
     
     
-    fileprivate func updateForecastView()
+    func updateForecastView()
     {
         if forecastResult != nil
         {
@@ -82,7 +82,7 @@ class InterfaceController: WKInterfaceController {
     {
         unobserveNotification()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Common.notification.forecast.updated), object: nil, queue: OperationQueue.main,
+        NotificationCenter.default.addObserver(forName: ForecastDidUpdateNotification, object: nil, queue: OperationQueue.main,
                using: {
                 [weak self]
                 note in if let object: SpotForecast = note.object as? SpotForecast {
@@ -94,7 +94,7 @@ class InterfaceController: WKInterfaceController {
     
     fileprivate func unobserveNotification()
     {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Common.notification.forecast.updated), object: nil);
+        NotificationCenter.default.removeObserver(self, name: ForecastDidUpdateNotification, object: nil);
     }
     
     fileprivate func hideWeatherInfo()

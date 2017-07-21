@@ -10,7 +10,7 @@ import UIKit
 import JFCore
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var started: Bool = false
 
@@ -50,55 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-    // MARK: - Split view
-    
-    func splitViewController(_ splitViewController: UISplitViewController,
-                             collapseSecondary secondaryViewController:UIViewController,
-                                                             onto primaryViewController:UIViewController) -> Bool {
-        return true
-    }
-    
-    func splitViewController(_ splitViewController: UISplitViewController, show vc: UIViewController,
-                             sender: Any?) -> Bool {
-        return true
-    }
-
-    func splitViewController(_ splitViewController: UISplitViewController, showDetail vc: UIViewController,
-                             sender: Any?) -> Bool {
-
-        return false
-    }
-
-    func splitViewController(_ svc: UISplitViewController, willChangeTo
-        displayMode: UISplitViewControllerDisplayMode)
-    {
-        let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: Common.notification.editing), object: false)
-        })
-    }
-
-    
-    private func configureSplitView() -> Bool {
-        // Override point for customization after application launch.
-        guard let window = window else {
-            return false
-        }
-        let splitViewController = window.rootViewController as! UISplitViewController
-        let vcs = splitViewController.viewControllers
-        if let navigationController = vcs.last as? UINavigationController,
-            let top = navigationController.topViewController {
-            top.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
-        }
-        splitViewController.delegate = self
-        
-        if let bgImage = UIImage.init(named: Common.image.background) {
-            splitViewController.view.backgroundColor = bgImage.patternColor(customSize: UIScreen.main.bounds.size)
-        }
-        
-        return true
     }
 
 }
