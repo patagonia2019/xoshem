@@ -25,18 +25,15 @@ class RPlacemark: Object {
     dynamic var subLocality: String = ""
     dynamic var subThoroughfare: String = ""
     dynamic var thoroughfare: String = ""
-    let spots = List<RSpotOwner>()
-    dynamic var selectedSpot: RSpotOwner?
+    let spotResults = List<RSpotResult>()
+    dynamic var selectedSpot: RSpotResult?
     dynamic var spotForecast: RWSpotForecast?
-    dynamic var location: RLocation?
     
-    convenience public init(placemark: CLPlacemark, rlocation: RLocation?) {
+    convenience public init(placemark: CLPlacemark) {
         self.init()
         administrativeArea = placemark.administrativeArea ?? ""
         if let areas = placemark.areasOfInterest {
-            for area in areas {
-                areasOfInterest.append(StringObject(value: area))
-            }
+            for area in areas { areasOfInterest.append(StringObject(value: [area])) }
         }
         country = placemark.country ?? ""
         inlandWater = placemark.inlandWater ?? ""
@@ -49,7 +46,6 @@ class RPlacemark: Object {
         subLocality = placemark.subLocality ?? ""
         subThoroughfare = placemark.subThoroughfare ?? ""
         thoroughfare = placemark.thoroughfare ?? ""
-        location = rlocation
     }
     
 }

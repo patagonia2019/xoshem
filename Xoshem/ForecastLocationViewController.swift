@@ -15,16 +15,15 @@ import RealmSwift
 class ForecastLocationViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-//    var cellSize: CGSize! = CGSize(width: 191.5, height: 350.0)
-//    var updateSize: CGSize! = CGSize.zero
-    var forecasts: [RWSpotForecast]!
-    var locations: Results<RLocation>?
     var currentForecast: RWSpotForecast?
     let interItemSpacing: CGFloat = 0
     let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let realm = try! Realm()
+        currentForecast = realm.objects(RWSpotForecast.self).first
+
         updateForecastView(false)
     }
     
@@ -82,7 +81,9 @@ class ForecastLocationViewController: UIViewController {
             .addObserver(forName: notification, object: nil, queue: queue,
                 using: {
                     [weak self] (note) in
-                    self?.updateForecastView(true)
+                    if ((self?.currentForecast = note.object as? RWSpotForecast) != nil) {
+                        self?.updateForecastView(true)
+                    }
             })
         }
     }
@@ -103,44 +104,27 @@ class ForecastLocationViewController: UIViewController {
     
     func updateForecastView(_ showAlert: Bool)
     {
-        do {
-            
-//            currentLocation = try Facade.instance.fetchCurrentLocation()
-            
-//            forecasts = try Facade.instance.fetchForecastResult()
-            
-            if (showAlert) {
-                let alertView = SCLAlertView()
-                alertView.addButton(Common.title.Reload) {
-                    [weak self] (isOtherButton) in
-                    self?.reloadView()
-                }
-                let subtitle = "\(Common.title.successGetting) \(forecasts.count) \(Common.title.forecasts)"
-                alertView.showSuccess(Common.title.fetchForecast,
-                                      subTitle: subtitle)
-            }
-            else {
-                reloadView()
-            }
-        }
-        catch {
-            let e = error
+        if (showAlert) {
             let alertView = SCLAlertView()
-            alertView.addButton(Common.title.Reload) { [weak self] (isOtherButton) in
-                if let strong = self {
-                    strong.updateForecastView(false)
-                }
+            alertView.addButton(Common.title.Reload) {
+                [weak self] (isOtherButton) in
+                self?.reloadView()
             }
-            alertView.showError(Common.title.fetchForecast, subTitle: e.localizedDescription)
+            let subtitle = "\(Common.title.successGetting) \(currentForecast?.spotname ?? "Current Location") \(Common.title.forecasts)"
+            alertView.showSuccess(Common.title.fetchForecast,
+                                  subTitle: subtitle)
+        }
+        else {
+            reloadView()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Common.segue.forecastDetail {
             let vc:ForecastDetailViewController = segue.destination as! ForecastDetailViewController
-            if let _currentForecast = currentForecast {
+            if let currentForecast = currentForecast {
                 vc.detailItem = currentForecast
-                vc.title = currentForecast?.spotname
+                vc.title = currentForecast.spotname
             }
         }
         else if segue.identifier == Common.segue.search {

@@ -12,15 +12,17 @@ import JFWindguru
 
 class RSpotResult: Object {
     dynamic var count = 0
-    dynamic var spot : RSpotOwner?
-    
+    let spots = List<RSpotOwner>()
+    dynamic var selectedSpot: RSpotOwner?
+  
     convenience public init(spotResult: SpotResult) {
         self.init()
         count = spotResult.count ?? 0
-        if let spots = spotResult.spots,
-            let first = spots.first {
-            spot = RSpotOwner.init(spotOwner: first)
-        }        
+        if let array = spotResult.spots {
+            for spot in array {
+                spots.append(RSpotOwner.init(spotOwner: spot))
+            }
+        }
     }
 }
 

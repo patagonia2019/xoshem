@@ -61,7 +61,7 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     ///
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == tableView {
+        if tableView == self.tableView {
             return fd.count
         }
         // headerTableView
@@ -102,6 +102,9 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         
     }
     
+    func hourIterator() -> Int {
+        return hour3() / 3
+    }
 
     func hour3() -> Int {
         var hour3 = hour()
@@ -194,31 +197,43 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         appendFd("behance-heeyeun-jeong-59", key: "Forecast Model", value: "\(modelName)")
         let date = fcst.init_d
         appendFd("behance-heeyeun-jeong-14", key: "Init Date", value: "\(date)")
-        let h3 = hour3()
-        let t = fcst.temperature[h3]
-        appendFd("behance-heeyeun-jeong-85", key: "Temperature", value: "\(t) °C")
-        let tr = fcst.temperatureReal[h3]
-        appendFd("behance-heeyeun-jeong-86", key: "Temperature Real", value: "\(tr) °C")
-        let rh = fcst.relativeHumidity[h3]
-        appendFd("behance-heeyeun-jeong-12", key: "Relative humidity", value: "\(rh) %")
-        let speed = fcst.windSpeed[h3]
-        appendFd("behance-heeyeun-jeong-9", key: "Wind Speed", value: "\(speed) knots")
-        let gust = fcst.windGust[h3]
-        appendFd("behance-heeyeun-jeong-13", key: "Wind Gusts", value: "\(gust) knots")
-        let cct = fcst.cloudCoverTotal[h3]
-        appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Total", value: "\(cct) %")
-        let cch = fcst.cloudCoverHigh[h3]
-        appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover High", value: "\(cch) %")
-        let ccm = fcst.cloudCoverMid[h3]
-        appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Mid", value: "\(ccm) %")
-        let ccl = fcst.cloudCoverLow[h3]
-        appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Low", value: "\(ccl) %")
-        let ppt = fcst.precipitation[h3]
-        appendFd("behance-heeyeun-jeong-23", key: "Precipitation", value: "\(ppt) mm/3h")
-        let slp = fcst.seaLevelPressure[h3]
-        appendFd("behance-heeyeun-jeong-54", key: "Sea Level Pressure", value: "\(slp)")
-        let fl = fcst.freezingLevel[h3]
-        appendFd("behance-heeyeun-jeong-10", key: "Freezing Level", value: "\(fl) metters (0° isotherm)")
+        let h = hourIterator()
+        if let t = fcst.temperature(hour: h) {
+            appendFd("behance-heeyeun-jeong-85", key: "Temperature", value: "\(t) °C")
+        }
+        if let tr = fcst.temperature(hour: h) {
+            appendFd("behance-heeyeun-jeong-86", key: "Temperature Real", value: "\(tr) °C")
+        }
+        if let rh = fcst.relativeHumidity(hour: h) {
+            appendFd("behance-heeyeun-jeong-12", key: "Relative humidity", value: "\(rh) %")
+        }
+        if let speed = fcst.windSpeed(hour: h) {
+            appendFd("behance-heeyeun-jeong-9", key: "Wind Speed", value: "\(speed) knots")
+        }
+        if let gust = fcst.windGust(hour: h) {
+            appendFd("behance-heeyeun-jeong-13", key: "Wind Gusts", value: "\(gust) knots")
+        }
+        if let cct = fcst.cloudCoverTotal(hour: h) {
+            appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Total", value: "\(cct) %")
+        }
+        if let cch = fcst.cloudCoverHigh(hour: h) {
+            appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover High", value: "\(cch) %")
+        }
+        if let ccm = fcst.cloudCoverMid(hour: h) {
+            appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Mid", value: "\(ccm) %")
+        }
+        if let ccl = fcst.cloudCoverLow(hour: h) {
+            appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Low", value: "\(ccl) %")
+        }
+        if let ppt = fcst.precipitation(hour: h) {
+            appendFd("behance-heeyeun-jeong-23", key: "Precipitation", value: "\(ppt) mm/3h")
+        }
+        if let slp = fcst.seaLevelPressure(hour: h) {
+            appendFd("behance-heeyeun-jeong-54", key: "Sea Level Pressure", value: "\(slp)")
+        }
+        if let fl = fcst.freezingLevel(hour: h) {
+            appendFd("behance-heeyeun-jeong-10", key: "Freezing Level", value: "\(fl) metters (0° isotherm)")
+        }
         let tides = spotForecast.tides
         appendFd("behance-heeyeun-jeong-6", key: "Tides", value: "\(tides)")
         tableView.reloadData()
@@ -262,7 +277,7 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     fileprivate func unobserveNotification()
     {
         for notification in [ForecastDidUpdateNotification] {
-            NotificationCenter.default.removeObserver(self, name: ForecastDidUpdateNotification, object: nil);
+            NotificationCenter.default.removeObserver(self, name: notification, object: nil);
         }
     }
     

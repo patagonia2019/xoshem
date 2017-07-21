@@ -121,7 +121,6 @@ open class Facade: NSObject {
 
             self?.unobserveNotifications()
         
-            CoreDataManager.instance.save()
             self?.started = false
         })
     }
@@ -179,8 +178,9 @@ open class Facade: NSObject {
                     let realm = try Realm()
                     try realm.write() {
                         for corePlacemark in placemarks {
-                            let rplacemark = RPlacemark(placemark: corePlacemark, rlocation: rlocation)
+                            let rplacemark = RPlacemark(placemark: corePlacemark)
                             realm.add(rplacemark)
+                            rlocation.placemarks.append(rplacemark)
                         }
                         self?.updateSpotsUsingPlacemarks()
                     }
@@ -204,36 +204,52 @@ open class Facade: NSObject {
         for placemark in placemarks {
             ForecastWindguruService.instance.searchSpots(byLocation: placemark.locality, failure: { (error) in
                 
-            }, success: { (spotResult) in
+            }, success: {
+                [weak self]
+                (spotResult) in
                 guard let spotResult = spotResult else {
                     return
                 }
                 try! realm.write {
                     let rspotresult = RSpotResult(spotResult: spotResult)
                     realm.add(rspotresult)
+                    placemark.spotResults.append(rspotresult)
+                    if placemarks.last == placemark {
+                        self?.updateForecastUsingFirstPlacemarkSpot()
+                    }
                 }
             })
         }
     }
     
-    func updateForecastUsingSpots() {
+    func updateForecastUsingFirstPlacemarkSpot() {
+        
         let realm = try! Realm()
-        let spots = realm.objects(RSpot.self)
-        for spot in spots {
-            ForecastWindguruService.instance.wforecast(bySpotId: spot.id_spot, failure: { (error) in
-                
-            }, success: { (spotForecast) in
-                guard let spotForecast = spotForecast else {
-                    return
-                }
-                try! realm.write {
-//                    let rspotresult = RWSpotForecast(spotResult: spotResult)
-//                    realm.add(rspotresult)
-                }
-
-            })
+        let placemarks = realm.objects(RPlacemark.self)
+        for placemark in placemarks {
+            if let spotResult = placemark.spotResults.first,
+                let spotOwner = spotResult.spots.first {
+                ForecastWindguruService.instance.wforecast(bySpotId: spotOwner.id_spot, failure: { (error) in
+                    
+                }, success: {
+                    [weak self]
+                    (spotForecast) in
+                    guard let spotForecast = spotForecast else {
+                        return
+                    }
+                    try! realm.write {
+                        let rwspotforecast = RWSpotForecast(spotForecast: spotForecast)
+                        realm.add(rwspotforecast)
+                        placemark.spotForecast = rwspotforecast
+                        if placemarks.last == placemark {
+                            self?.forecastDidUpdateNotification(object: realm.objects(RWSpotForecast.self).first)
+                        }
+                    }
+                })
+            }
         }
     }
+    
 
     func fetchLocation() throws -> Results<RLocation>? {
         do {

@@ -11,6 +11,8 @@
 		70826A571F1F686F00328BC5 /* RWindguruStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A561F1F686F00328BC5 /* RWindguruStation.swift */; };
 		70826A5B1F1F6C7800328BC5 /* RPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */; };
 		70826A5D1F1F6D1F00328BC5 /* RLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5C1F1F6D1F00328BC5 /* RLocation.swift */; };
+		70898BDD1F2276DA00AD9467 /* RWForecast+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70898BDC1F2276DA00AD9467 /* RWForecast+.swift */; };
+		70898BDE1F2276DA00AD9467 /* RWForecast+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70898BDC1F2276DA00AD9467 /* RWForecast+.swift */; };
 		7091A5A01F1E5D8300460252 /* RWSpotForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7091A59F1F1E5D8300460252 /* RWSpotForecast.swift */; };
 		70A970941F13026800DBC25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A970931F13026800DBC25D /* Assets.xcassets */; };
 		70A970971F130B2300DBC25D /* HockeyAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A970961F130B2300DBC25D /* HockeyAppManager.swift */; };
@@ -131,6 +133,7 @@
 		70826A561F1F686F00328BC5 /* RWindguruStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWindguruStation.swift; sourceTree = "<group>"; };
 		70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPlacemark.swift; sourceTree = "<group>"; };
 		70826A5C1F1F6D1F00328BC5 /* RLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLocation.swift; sourceTree = "<group>"; };
+		70898BDC1F2276DA00AD9467 /* RWForecast+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RWForecast+.swift"; sourceTree = "<group>"; };
 		7091A59F1F1E5D8300460252 /* RWSpotForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWSpotForecast.swift; sourceTree = "<group>"; };
 		70A970931F13026800DBC25D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70A970961F130B2300DBC25D /* HockeyAppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HockeyAppManager.swift; sourceTree = "<group>"; };
@@ -393,6 +396,7 @@
 				7091A59F1F1E5D8300460252 /* RWSpotForecast.swift */,
 				70C9D6341F20BA2600F4FED8 /* RWSpotForecast+.swift */,
 				70826A541F1F686100328BC5 /* RWForecast.swift */,
+				70898BDC1F2276DA00AD9467 /* RWForecast+.swift */,
 				70826A561F1F686F00328BC5 /* RWindguruStation.swift */,
 			);
 			name = Realm;
@@ -463,8 +467,8 @@
 		953241E01BC81C75009659A7 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				953241E51BC81C75009659A7 /* Facade.swift */,
 				953241E41BC81C75009659A7 /* Common.swift */,
+				953241E51BC81C75009659A7 /* Facade.swift */,
 				95C4CAA91D5A614B00D35F91 /* Fabric */,
 				70A970961F130B2300DBC25D /* HockeyAppManager.swift */,
 			);
@@ -900,6 +904,7 @@
 				9577B0DD1CF8DCAE002B023B /* NotificationController.swift in Sources */,
 				70C9D6231F1F7C0F00F4FED8 /* RLocation.swift in Sources */,
 				70C9D6241F1F7C0F00F4FED8 /* RWSpotForecast.swift in Sources */,
+				70898BDE1F2276DA00AD9467 /* RWForecast+.swift in Sources */,
 				95C4CAA11D55012E00D35F91 /* Auth.swift in Sources */,
 				70C9D6221F1F7C0F00F4FED8 /* RPlacemark.swift in Sources */,
 				959A31191D370376003649D5 /* Facade.swift in Sources */,
@@ -947,6 +952,7 @@
 				9508D1C81DA0AA45008C2A75 /* ForecastHierarchyViewController.swift in Sources */,
 				95E61DFE1D3054440096E616 /* DetailViewController.swift in Sources */,
 				952996221D512387000030B0 /* ForecastDayListViewCell.swift in Sources */,
+				70898BDD1F2276DA00AD9467 /* RWForecast+.swift in Sources */,
 				952713781DA2D854002D2A29 /* RMenu+.swift in Sources */,
 				953241F61BC81C75009659A7 /* Common.swift in Sources */,
 				70C9D6431F21658700F4FED8 /* RSpotOwner.swift in Sources */,

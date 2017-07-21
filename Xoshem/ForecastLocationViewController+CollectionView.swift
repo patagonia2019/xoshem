@@ -23,14 +23,13 @@ extension ForecastLocationViewController : UICollectionViewDelegate {
                 forecastCell.unselected()
             })
             
-            if (indexPath as NSIndexPath).row == totalCells() - 1 {
+            let lastRow = totalCells() - 1
+
+            if indexPath.item == lastRow {
                 performSegue(withIdentifier: Common.segue.search, sender: nil)
             }
-            else if (indexPath as NSIndexPath).row == 0 {
-//                if let forecastResult = currentForecastResult() {
-//                    currentForecast = forecastResult
-//                    performSegue(withIdentifier: Common.segue.forecastDetail, sender: nil)
-//                }
+            else if indexPath.item == 0 && currentForecast != nil {
+                performSegue(withIdentifier: Common.segue.forecastDetail, sender: nil)
             }
         }
     }
@@ -47,8 +46,8 @@ extension ForecastLocationViewController : UICollectionViewDataSource {
         var count = 0
         
         // current location
-        if let locations = locations {
-            count += locations.count
+        if currentForecast != nil {
+            count += 1
         }
         // Add new (+)
         count = count + 1
@@ -69,11 +68,11 @@ extension ForecastLocationViewController : UICollectionViewDataSource {
             cell.configureLastCell()
         }
         else if indexPath.item == 0 {
-//            if let forecastResult = currentForecastResult() {
-//                cell.configureCell(forecastResult, isEditing: isEditing, didUpdate: { [weak self] (Void) in
-//                    self?.updateForecastView(false)
-//                })
-//            }
+            if let currentForecast = currentForecast {
+                cell.configureCell(currentForecast, isEditing: isEditing, didUpdate: { [weak self] (Void) in
+                    self?.updateForecastView(false)
+                })
+            }
         }
         return cell
     }

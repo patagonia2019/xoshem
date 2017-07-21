@@ -16,5 +16,14 @@ class RWindguruStation : Object {
     dynamic var distance: Int = 0
     dynamic var id_type: String = ""
     dynamic var wind_avg: Int = 0
+
+    convenience public init(windguruStation: WindguruStation) {
+        self.init()
+        id = windguruStation.id ?? ""
+        station = windguruStation.station ?? ""
+        distance = windguruStation.distance ?? 0
+        id_type = windguruStation.id_type ?? ""
+        wind_avg = windguruStation.wind_avg ?? 0
+    }
 }
 
