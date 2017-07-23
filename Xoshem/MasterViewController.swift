@@ -14,7 +14,7 @@ import SwiftIconFont
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-
+    var errorized : Bool! = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +24,8 @@ class MasterViewController: UITableViewController {
             let last = (controllers[controllers.count-1] as! UINavigationController)
             detailViewController = last.topViewController as? DetailViewController
         }
-        tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: .bottom)
-        performSegue(withIdentifier: "showDetail", sender: self)
+//        tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+//        performSegue(withIdentifier: "showDetail", sender: self)
 
     }
 
@@ -53,7 +53,7 @@ class MasterViewController: UITableViewController {
             else {
                 controller = segue.destination as! DetailViewController
             }
-            guard let menus = try! RMenu.fetchRoot() else { return }
+            guard let menus = Facade.instance.fetchRoot() else { return }
             let menu = menus[indexPath.item]
             controller.detailItem = menu
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -81,28 +81,76 @@ class MasterViewController: UITableViewController {
 
         let queue = OperationQueue.main
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationError), object: nil,
-                                                                queue: queue) {
-            note in if let object: Error = note.object as? Error {
-                let alertView = SCLAlertView()
-                alertView.addButton(Common.title.Cancel) { (isOtherButton) in
-                    try! Facade.instance.stopLocation()
-                }
-                alertView.addButton(Common.title.Retry) { [weak self] (isOtherButton) in
-                    if let strong = self {
-                        strong.locationRestart()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationError), object: nil, queue: queue)
+            {
+                note in
+                JFCore.Common.synchronized {
+                    [weak self] in
+                    if (self?.errorized)! {
+                        return
+                    }
+                    self?.errorized = true
+                    
+                    if let object: Error = note.object as? Error {
+                        let alertView = SCLAlertView()
+                        alertView.addButton(Common.title.Cancel) { (isOtherButton) in
+                            try! Facade.instance.stopLocation()
+                        }
+                        alertView.addButton(Common.title.Retry) { [weak self] (isOtherButton) in
+                            if let strong = self {
+                                strong.locationRestart()
+                            }
+                        }
+                        alertView.showError(Common.title.Locationfailed, subTitle: object.localizedDescription).setDismissBlock {
+                            self?.errorized = false
+                        }
+                        
                     }
                 }
-                alertView.showError(Common.title.Locationfailed, subTitle: object.localizedDescription)
-            }
         }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationAuthorized), object: nil,
-                                                                queue: queue) {
-            (NSNotification) in
-            if !JFCore.LocationManager.instance.isAuthorized() {
-                SCLAlertView().showWarning(Common.title.LocationNotAuthorized, subTitle:"\(JFCore.Common.app)\(Common.title.PleaseAuthorize)")
-            }
+                                               queue: queue)
+            {
+                (note) in
+                JFCore.Common.synchronized {
+                    [weak self] in
+                    if (self?.errorized)! {
+                        return
+                    }
+                    self?.errorized = true
+                    if !JFCore.LocationManager.instance.isAuthorized() {
+                        SCLAlertView().showWarning(Common.title.LocationNotAuthorized,
+                                                   subTitle:"\(JFCore.Common.app)\(Common.title.PleaseAuthorize)").setDismissBlock { [weak self] in
+                                                    self?.errorized = false
+                        }
+
+                    }
+                }
+        }
+
+        NotificationCenter.default.addObserver(forName: FacadeDidErrorNotification, object: nil,
+                                                                queue: queue)
+            {
+                (note) in
+                JFCore.Common.synchronized {
+                    [weak self] in
+                    if (self?.errorized)! {
+                        return
+                    }
+                    self?.errorized = true
+                    let alertView = SCLAlertView()
+                    if let object: JFError = note.object as? JFError {
+                        alertView.showError(object.title(), subTitle: object.debugDescription).setDismissBlock {
+                            self?.errorized = false
+                        }
+                    }
+                    else if let object = note.object as? Error {
+                        alertView.showError(Common.title.error, subTitle: object.localizedDescription).setDismissBlock {
+                            self?.errorized = false
+                        }
+                    }
+                }
         }
     }
     
@@ -118,7 +166,8 @@ class MasterViewController: UITableViewController {
     fileprivate func unobserveLocationServices()
     {
         for notification in [JFCore.Constants.Notification.locationError,
-                             JFCore.Constants.Notification.locationAuthorized] {
+                             JFCore.Constants.Notification.locationAuthorized,
+                             FacadeDidErrorNotification.rawValue] {
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
         }
     }

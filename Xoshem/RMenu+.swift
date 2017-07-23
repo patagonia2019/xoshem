@@ -169,7 +169,7 @@ extension RMenu {
             let myerror = JFError(code: Common.ErrorCode.importMenuArrayIssue.rawValue,
                                   desc: Common.title.errorOnImport,
                                   reason: "Error on CDMenu",
-                                  suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
+                                  suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: error as NSError)
             Analytics.logError(error: myerror)
             throw myerror
         }
@@ -190,8 +190,10 @@ extension RMenu {
             let myerror = JFError(code: Common.ErrorCode.removeMenuIssue.rawValue,
                                   desc: Common.title.errorOnDelete,
                                   reason: "Failed at fetch menu and remove",
-                                  suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
+                                  suggestion: "\(#function)", path: "\(#file)", line: "\(#line)",
+                                  underError: error as NSError)
             Analytics.logError(error: myerror)
+            
             throw myerror
         }
     }

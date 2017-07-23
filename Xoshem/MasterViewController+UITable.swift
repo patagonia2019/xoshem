@@ -12,14 +12,14 @@ extension MasterViewController {
     // MARK: - Table View
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let menus = try! RMenu.fetchRoot() else { return 0 }
+        guard let menus = Facade.instance.fetchRoot() else { return 0 }
         return menus.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Common.cell.identifier.root, for: indexPath)
         
-        if let menus = try! RMenu.fetchRoot() {
+        if let menus = try Facade.instance.fetchRoot() {
             let menu = menus[indexPath.item]
             configureCell(cell, withMenu: menu)
         }

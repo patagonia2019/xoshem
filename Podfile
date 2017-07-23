@@ -7,7 +7,7 @@ def sharedPods
     pod 'AlamofireObjectMapper', '~> 4.0'
     pod 'Localize-Swift', '~> 1.7'
     pod 'JFWindguru', :path => '/Users/javierfuchs/Job/southfox/jfwindguru'
-    pod 'JFCore'
+    pod 'JFCore', :path => '/Users/javierfuchs/Job/southfox/jfcore'
     pod 'RealmSwift'
 end
 

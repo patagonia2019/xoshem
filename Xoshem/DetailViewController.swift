@@ -36,7 +36,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         if detailItem == nil {
-            if let menus = try! RMenu.fetchRoot() {
+            if let menus = Facade.instance.fetchRoot() {
                 detailItem = menus[0]
             }
         }

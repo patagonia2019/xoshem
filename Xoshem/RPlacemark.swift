@@ -12,40 +12,40 @@ import CoreLocation
 
 class RPlacemark: Object {
     
-    dynamic var administrativeArea: String = ""
+    dynamic var administrativeArea: String? = nil
     let areasOfInterest = List<StringObject>()
-    dynamic var country: String = ""
-    dynamic var inlandWater: String = ""
-    dynamic var isoCountryCode: String = ""
-    dynamic var locality: String = ""
-    dynamic var name: String = ""
-    dynamic var ocean: String = ""
-    dynamic var postalCode: String = ""
-    dynamic var subAdministrativeArea: String = ""
-    dynamic var subLocality: String = ""
-    dynamic var subThoroughfare: String = ""
-    dynamic var thoroughfare: String = ""
+    dynamic var country: String? = nil
+    dynamic var inlandWater: String? = nil
+    dynamic var isoCountryCode: String? = nil
+    dynamic var locality: String? = nil
+    dynamic var name: String? = nil
+    dynamic var ocean: String? = nil
+    dynamic var postalCode: String? = nil
+    dynamic var subAdministrativeArea: String? = nil
+    dynamic var subLocality: String? = nil
+    dynamic var subThoroughfare: String? = nil
+    dynamic var thoroughfare: String? = nil
     let spotResults = List<RSpotResult>()
     dynamic var selectedSpot: RSpotResult?
     dynamic var spotForecast: RWSpotForecast?
     
     convenience public init(placemark: CLPlacemark) {
         self.init()
-        administrativeArea = placemark.administrativeArea ?? ""
+        administrativeArea = placemark.administrativeArea
         if let areas = placemark.areasOfInterest {
             for area in areas { areasOfInterest.append(StringObject(value: [area])) }
         }
-        country = placemark.country ?? ""
-        inlandWater = placemark.inlandWater ?? ""
-        isoCountryCode = placemark.isoCountryCode ?? ""
-        locality = placemark.locality ?? ""
-        name = placemark.name ?? ""
-        ocean = placemark.ocean ?? ""
-        postalCode = placemark.postalCode ?? ""
-        subAdministrativeArea = placemark.subAdministrativeArea ?? ""
-        subLocality = placemark.subLocality ?? ""
-        subThoroughfare = placemark.subThoroughfare ?? ""
-        thoroughfare = placemark.thoroughfare ?? ""
+        country = placemark.country
+        inlandWater = placemark.inlandWater
+        isoCountryCode = placemark.isoCountryCode
+        locality = placemark.locality
+        name = placemark.name
+        ocean = placemark.ocean
+        postalCode = placemark.postalCode
+        subAdministrativeArea = placemark.subAdministrativeArea
+        subLocality = placemark.subLocality
+        subThoroughfare = placemark.subThoroughfare
+        thoroughfare = placemark.thoroughfare
     }
     
 }

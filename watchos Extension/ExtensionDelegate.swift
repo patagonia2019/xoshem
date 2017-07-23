@@ -25,7 +25,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             let myerror = JFError(code: Common.ErrorCode.appDidBecomeActiveError.rawValue,
                                 desc: "Failed at start of services",
                                 reason: "Error on did become active",
-                                suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
+                                suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: error as NSError)
             print(myerror)
         }
     }

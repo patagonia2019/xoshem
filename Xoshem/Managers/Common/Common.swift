@@ -9,6 +9,7 @@
 import Foundation
 import Localize_Swift
 
+let FacadeDidErrorNotification: NSNotification.Name = NSNotification.Name(rawValue: "FacadeDidErrorNotification")
 let LocationDidUpdateNotification: NSNotification.Name = NSNotification.Name(rawValue: "LocationDidUpdateNotification")
 let ForecastDidUpdateNotification: NSNotification.Name = NSNotification.Name(rawValue: "ForecastDidUpdateNotification")
 
@@ -107,7 +108,7 @@ struct Common {
     struct title {
         static let About : String = "About".localized()
         static let Cancel : String = "Cancel".localized()
-        static let copyright = "  Copyright © 2015-2016 Mobile Patagonia. All rights reserved.".localized()
+        static let copyright = "  Copyright © 2015-2017 Mobile Patagonia. All rights reserved.".localized()
         static let done : String = "DONE".localized()
         static let error : String = "Error".localized()
         static let errorOnDelete: String = "Error on delete".localized()

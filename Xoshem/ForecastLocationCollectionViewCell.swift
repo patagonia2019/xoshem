@@ -38,7 +38,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     }
     
     func updateName() {
-        spotNameLabel.text = "\(spotForecast.spotname)"
+        spotNameLabel.text = "\(spotForecast.spotName())"
         spotNameLabel.alpha = 1
     }
 

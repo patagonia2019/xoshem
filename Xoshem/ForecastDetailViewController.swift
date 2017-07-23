@@ -24,7 +24,7 @@ class ForecastDetailViewController: UIViewController {
     func configureView() {
         // Update the user interface for the detail item.
         if let detail = detailItem {
-            title = detail.locationName()
+            title = detail.spotName()
         }
         showComponent(1)
     }
@@ -60,8 +60,9 @@ class ForecastDetailViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Common.segue.forecastDayList {
-            let connectContainerViewController = segue.destination as! ForecastDayListViewController
-            connectContainerViewController.spotForecast = detailItem
+            let vc = segue.destination as! ForecastDayListViewController
+            vc.spotForecast = detailItem
+            vc.title = detailItem?.spotName()
         }
     }
 

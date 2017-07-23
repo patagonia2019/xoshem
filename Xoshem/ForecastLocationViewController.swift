@@ -24,10 +24,13 @@ class ForecastLocationViewController: UIViewController {
     deinit {
         notificationToken?.stop()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let realm = try! Realm()
-        currentForecast = realm.objects(RWSpotForecast.self).first
+        
+        configureLayout()
+        
+        currentForecast = Facade.instance.fetchCurrentForecast()
         notificationToken = currentForecast?.addNotificationBlock({
             [weak self]
             (objectChanged) in
@@ -55,7 +58,7 @@ class ForecastLocationViewController: UIViewController {
     }
     
     func boardCellSize() -> CGSize {
-        return CGSize(width: cellWidth(), height: cellWidth())
+        return CGSize(width: cellWidth(), height: cellWidth()*1.5)
     }
 
 
@@ -120,7 +123,7 @@ class ForecastLocationViewController: UIViewController {
                 [weak self] (isOtherButton) in
                 self?.reloadView()
             }
-            let subtitle = "\(Common.title.successGetting) \(currentForecast?.spotname ?? "Current Location") \(Common.title.forecasts)"
+            let subtitle = "\(Common.title.successGetting) \(currentForecast?.spotName() ?? "Current Location") \(Common.title.forecasts)"
             alertView.showSuccess(Common.title.fetchForecast,
                                   subTitle: subtitle)
         }
@@ -134,7 +137,7 @@ class ForecastLocationViewController: UIViewController {
             let vc:ForecastDetailViewController = segue.destination as! ForecastDetailViewController
             if let currentForecast = currentForecast {
                 vc.detailItem = currentForecast
-                vc.title = currentForecast.spotname
+                vc.title = currentForecast.spotName()
             }
         }
         else if segue.identifier == Common.segue.search {

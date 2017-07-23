@@ -39,7 +39,7 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         super.viewDidLoad()
         
         offsetHour = 0
-        
+        title = spotForecast?.spotName()
         updateForecast()
 
     }
@@ -175,12 +175,13 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         let wd = weekday()
         let m = month()
         appendFd("behance-heeyeun-jeong-14", key: "\(wd) \(day24()), \(m)", value: "\(hour24())h")
-        let name = spotForecast.spotname
+        let name = spotForecast.spotName()
         appendFd("behance-heeyeun-jeong-14", key: "Spot Name", value: "\(name)")
         let id_spot = spotForecast.id_spot
         appendFd("behance-heeyeun-jeong-14", key: "Spot Id", value: "\(id_spot)")
-        let tz = spotForecast.tz
-        appendFd("behance-heeyeun-jeong-14", key: "Timezone", value: "\(tz)")
+        if let tz = spotForecast.tz {
+            appendFd("behance-heeyeun-jeong-14", key: "Timezone", value: "\(tz)")
+        }
         let spotowner = spotForecast.id_user
         appendFd("behance-heeyeun-jeong-14", key: "Spot Owner", value: "\(spotowner)")
         let lat = spotForecast.lat
@@ -189,12 +190,15 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         appendFd("behance-heeyeun-jeong-14", key: "Longitude", value: "\(lon)")
         let alt = spotForecast.alt
         appendFd("behance-heeyeun-jeong-14", key: "Altitude", value: "\(alt)")
-        let sunrise = spotForecast.sunrise
-        appendFd("behance-heeyeun-jeong-54-copy-sunrise", key: "Sunrise", value: "\(sunrise)")
-        let sunset = spotForecast.sunset
-        appendFd("behance-heeyeun-jeong-54-copy-sunset", key: "Sunset", value: "\(sunset)")
-        let modelName = spotForecast.model
-        appendFd("behance-heeyeun-jeong-59", key: "Forecast Model", value: "\(modelName)")
+        if let sunrise = spotForecast.sunrise {
+            appendFd("behance-heeyeun-jeong-54-copy-sunrise", key: "Sunrise", value: "\(sunrise)")
+        }
+        if let sunset = spotForecast.sunset {
+            appendFd("behance-heeyeun-jeong-54-copy-sunset", key: "Sunset", value: "\(sunset)")
+        }
+        if let model = spotForecast.model {
+            appendFd("behance-heeyeun-jeong-59", key: "Forecast Model", value: "\(model)")
+        }
         let date = fcst.init_d
         appendFd("behance-heeyeun-jeong-14", key: "Init Date", value: "\(date)")
         let h = hourIterator()

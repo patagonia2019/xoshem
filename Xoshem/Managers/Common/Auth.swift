@@ -27,7 +27,7 @@ class Auth {
                 let myerror = JFError(code: Common.ErrorCode.facadeRestartIssue.rawValue,
                     desc: "Failed at authenticate using Digits",
                     reason: "Error on start Facade",
-                    suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: e)
+                    suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: e)
                 Analytics.logError(error: myerror)
                 blockWithError(myerror)
             }
