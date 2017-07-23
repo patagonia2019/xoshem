@@ -200,14 +200,11 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="215" height="391"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1468141471_map-location-pin-map-marker-outline-stroke" translatesAutoresizingMaskIntoConstraints="NO" id="En7-ux-HgM">
-                                                            <rect key="frame" x="8" y="8" width="44" height="31"/>
-                                                        </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGd-2X-nlr">
-                                                            <rect key="frame" x="59" y="159" width="97" height="122"/>
+                                                            <rect key="frame" x="59" y="159" width="97" height="142"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-ul-TaU">
-                                                                    <rect key="frame" x="27" y="40" width="55" height="42"/>
+                                                                    <rect key="frame" x="27" y="50" width="55" height="42"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35°" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="a4o-qB-lrb">
                                                                             <rect key="frame" x="0.0" y="0.0" width="55" height="42"/>
@@ -224,23 +221,8 @@
                                                                 <constraint firstItem="O0E-ul-TaU" firstAttribute="centerX" secondItem="YGd-2X-nlr" secondAttribute="centerX" constant="5.5" id="zOZ-vd-1d0"/>
                                                             </constraints>
                                                         </view>
-                                                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1468282310_circle-add-plus-new-outline-stroke" translatesAutoresizingMaskIntoConstraints="NO" id="SE7-y9-lEN">
-                                                            <rect key="frame" x="85" y="159" width="45" height="73"/>
-                                                        </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBF-4U-Rer">
-                                                            <rect key="frame" x="135" y="0.0" width="80" height="70"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="80" id="dYa-Kz-dzl"/>
-                                                                <constraint firstAttribute="height" constant="70" id="doB-9h-ym0"/>
-                                                            </constraints>
-                                                            <state key="normal" image="view-eye-interface-symbol"/>
-                                                            <state key="highlighted" image="hide-interface-symbol"/>
-                                                            <connections>
-                                                                <action selector="trashAction:" destination="4fc-Fj-DH0" eventType="touchUpInside" id="YbC-ir-4kK"/>
-                                                            </connections>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="54k-bs-K38">
-                                                            <rect key="frame" x="4" y="71" width="207" height="63"/>
+                                                            <rect key="frame" x="4" y="74" width="207" height="60"/>
                                                             <string key="text">Bariloche
 Rio Negro</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -248,7 +230,7 @@ Rio Negro</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="lsc-mC-YjG">
-                                                            <rect key="frame" x="0.0" y="320" width="215" height="63"/>
+                                                            <rect key="frame" x="0.0" y="340" width="215" height="43"/>
                                                             <string key="text">Aeropuerto
 Bariloche</string>
                                                             <fontDescription key="fontDescription" type="italicSystem" pointSize="18"/>
@@ -259,38 +241,23 @@ Bariloche</string>
                                                 </view>
                                                 <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstItem="54k-bs-K38" firstAttribute="top" secondItem="En7-ux-HgM" secondAttribute="bottom" constant="32" id="0jt-Ml-CHo"/>
-                                                    <constraint firstItem="54k-bs-K38" firstAttribute="top" secondItem="LBF-4U-Rer" secondAttribute="bottom" constant="1" id="46x-xj-09f"/>
+                                                    <constraint firstItem="lsc-mC-YjG" firstAttribute="centerX" secondItem="YGd-2X-nlr" secondAttribute="centerX" id="4p3-ky-lXZ"/>
                                                     <constraint firstItem="YGd-2X-nlr" firstAttribute="centerX" secondItem="4fc-Fj-DH0" secondAttribute="centerX" id="7Rt-Li-2qH"/>
-                                                    <constraint firstItem="LBF-4U-Rer" firstAttribute="leading" secondItem="En7-ux-HgM" secondAttribute="trailing" constant="83" id="Czd-G5-6LJ"/>
-                                                    <constraint firstItem="LBF-4U-Rer" firstAttribute="trailing" secondItem="lsc-mC-YjG" secondAttribute="trailing" id="ERq-YY-BuQ"/>
-                                                    <constraint firstItem="En7-ux-HgM" firstAttribute="leading" secondItem="4fc-Fj-DH0" secondAttribute="leadingMargin" id="FP4-ig-78c"/>
                                                     <constraint firstAttribute="bottomMargin" secondItem="lsc-mC-YjG" secondAttribute="bottom" id="HU7-LO-qKl"/>
-                                                    <constraint firstItem="SE7-y9-lEN" firstAttribute="centerX" secondItem="YGd-2X-nlr" secondAttribute="centerX" id="JaO-MM-m3c"/>
-                                                    <constraint firstItem="SE7-y9-lEN" firstAttribute="leading" secondItem="4fc-Fj-DH0" secondAttribute="leadingMargin" constant="77" id="Ko1-fI-IHG"/>
                                                     <constraint firstItem="54k-bs-K38" firstAttribute="width" secondItem="4fc-Fj-DH0" secondAttribute="width" constant="-8" id="MD5-wx-UjD"/>
                                                     <constraint firstItem="YGd-2X-nlr" firstAttribute="top" secondItem="54k-bs-K38" secondAttribute="bottom" constant="25" id="Sip-lE-tXI"/>
-                                                    <constraint firstItem="SE7-y9-lEN" firstAttribute="centerY" secondItem="4fc-Fj-DH0" secondAttribute="centerY" id="Tke-LF-Tzk"/>
-                                                    <constraint firstAttribute="bottom" secondItem="YGd-2X-nlr" secondAttribute="bottom" constant="110" id="XE3-sY-TcR"/>
                                                     <constraint firstItem="YGd-2X-nlr" firstAttribute="leading" secondItem="4fc-Fj-DH0" secondAttribute="leadingMargin" constant="51" id="b4E-XT-cdU"/>
                                                     <constraint firstItem="YGd-2X-nlr" firstAttribute="top" secondItem="4fc-Fj-DH0" secondAttribute="top" constant="159" id="bzv-md-pbu"/>
-                                                    <constraint firstItem="LBF-4U-Rer" firstAttribute="top" secondItem="4fc-Fj-DH0" secondAttribute="top" id="fIS-ef-Ynd"/>
                                                     <constraint firstItem="lsc-mC-YjG" firstAttribute="top" secondItem="YGd-2X-nlr" secondAttribute="bottom" constant="39" id="fMA-ky-DfR"/>
-                                                    <constraint firstAttribute="trailingMargin" secondItem="LBF-4U-Rer" secondAttribute="trailing" constant="-8" id="gz1-xR-bNW"/>
-                                                    <constraint firstItem="En7-ux-HgM" firstAttribute="top" secondItem="4fc-Fj-DH0" secondAttribute="topMargin" id="hJg-y3-07O"/>
                                                     <constraint firstItem="lsc-mC-YjG" firstAttribute="width" secondItem="4fc-Fj-DH0" secondAttribute="width" id="kn5-gG-OEk"/>
-                                                    <constraint firstItem="SE7-y9-lEN" firstAttribute="top" secondItem="YGd-2X-nlr" secondAttribute="top" id="pcy-XX-80J"/>
                                                     <constraint firstItem="54k-bs-K38" firstAttribute="centerX" secondItem="4fc-Fj-DH0" secondAttribute="centerX" id="vtz-Fl-EgR"/>
                                                 </constraints>
                                                 <size key="customSize" width="215" height="391"/>
                                                 <connections>
                                                     <outlet property="cityLabel" destination="54k-bs-K38" id="x4h-U4-dWe"/>
-                                                    <outlet property="createAnotherCityImageView" destination="SE7-y9-lEN" id="h0v-DY-D6L"/>
-                                                    <outlet property="currentLocationImageView" destination="En7-ux-HgM" id="YVC-5H-cnh"/>
                                                     <outlet property="degreeLabel" destination="a4o-qB-lrb" id="QLa-bN-ExW"/>
                                                     <outlet property="roundedContainerView" destination="YGd-2X-nlr" id="xTp-sy-iJx"/>
                                                     <outlet property="spotNameLabel" destination="lsc-mC-YjG" id="02H-sC-99x"/>
-                                                    <outlet property="trashButton" destination="LBF-4U-Rer" id="Z9f-y5-gtP"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -920,14 +887,10 @@ Bariloche</string>
     </scenes>
     <resources>
         <image name="1468046237_common-search-lookup-glyph" width="32" height="32"/>
-        <image name="1468141471_map-location-pin-map-marker-outline-stroke" width="32" height="32"/>
-        <image name="1468282310_circle-add-plus-new-outline-stroke" width="150" height="150"/>
         <image name="1475399705_circle-back-arrow-glyph" width="32" height="32"/>
         <image name="1475399721_circle-down-arrow-disclosure-glyph" width="32" height="32"/>
         <image name="1475399721_circle-next-arrow-disclosure-glyph" width="32" height="32"/>
         <image name="1475399721_circle-up-arrow-disclosure-glyph" width="32" height="32"/>
-        <image name="hide-interface-symbol" width="32" height="32"/>
-        <image name="view-eye-interface-symbol" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>

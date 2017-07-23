@@ -65,7 +65,7 @@ extension RMenu {
                 "icon": "1468046481_cloud-weather-forecast-cloudy-outline-stroke" as AnyObject,
                 "iconList": "themify" as AnyObject,
                 "iconName": "cloud" as AnyObject,
-                "edit": Bool(true) as AnyObject
+                "edit": Bool(false) as AnyObject
             ],
             [
                 "parentId": Int(0) as AnyObject,

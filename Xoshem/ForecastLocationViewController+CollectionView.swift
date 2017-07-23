@@ -28,7 +28,7 @@ extension ForecastLocationViewController : UICollectionViewDelegate {
             if indexPath.item == lastRow {
                 performSegue(withIdentifier: Common.segue.search, sender: nil)
             }
-            else if indexPath.item == 0 && currentForecast != nil {
+            else if indexPath.item == 0 && Facade.instance.fetchLocalForecast() != nil {
                 performSegue(withIdentifier: Common.segue.forecastDetail, sender: nil)
             }
         }
@@ -46,7 +46,7 @@ extension ForecastLocationViewController : UICollectionViewDataSource {
         var count = 0
         
         // current location
-        if currentForecast != nil {
+        if Facade.instance.fetchLocalForecast() != nil {
             count += 1
         }
         // Add new (+)
@@ -68,7 +68,7 @@ extension ForecastLocationViewController : UICollectionViewDataSource {
             cell.configureLastCell()
         }
         else if indexPath.item == 0 {
-            if let currentForecast = currentForecast {
+            if let currentForecast = Facade.instance.fetchLocalForecast() {
                 cell.configureCell(currentForecast, isEditing: isEditing, didUpdate: { [weak self] (Void) in
                     self?.updateForecastView(false)
                 })

@@ -10,31 +10,24 @@ import UIKit
 import JFCore
 
 class ForecastLocationCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var currentLocationImageView: UIImageView!
     @IBOutlet weak var roundedContainerView: UIView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var spotNameLabel: UILabel!
     @IBOutlet weak var degreeLabel: UILabel!
-    @IBOutlet weak var createAnotherCityImageView: UIImageView!
-    @IBOutlet weak var trashButton: UIButton!
     var spotForecast: RWSpotForecast!
     var updateClosure: (() -> ())?
 
     override func awakeFromNib() {
         
         roundedContainerView.layer.cornerRadius = roundedContainerView.frame.size.height / 2
-        trashButton.isExclusiveTouch = true
     }
     
     func configure()
     {
-        currentLocationImageView.alpha = 0
         roundedContainerView.alpha = 0
         cityLabel.alpha = 0
         spotNameLabel.alpha = 0
         degreeLabel.alpha = 0
-        createAnotherCityImageView.alpha = 0
-        trashButton.alpha = 0
     }
     
     func updateName() {
@@ -68,9 +61,6 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     {
         configure()
         degreeLabel.alpha = 1
-        trashButton.alpha = isEditing ? 1 : 0
-//        trashButton.isHighlighted = forecastResult.hide
-//        currentLocationImageView.alpha = forecastResult.placemarkResult != nil ? 1 : 0
         updateName()
         updateSpotName()
         updateTemperature()
@@ -83,9 +73,6 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         configure()
         spotForecast = fcr
         degreeLabel.alpha = 1
-        trashButton.alpha = isEditing ? 1 : 0
-//        trashButton.isHighlighted = forecastResult.hide
-//        currentLocationImageView.alpha = forecastResult.placemarkResult != nil ? 1 : 0
         updateName()
         updateSpotName()
         updateTemperature()
@@ -110,7 +97,6 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     func configureLastCell()
     {
         configure()
-        createAnotherCityImageView.alpha = 1
         contentView.backgroundColor = UIColor.red
     }
     

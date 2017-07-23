@@ -157,9 +157,12 @@ open class Facade: NSObject {
                 
                 mainFor: for locationA in locations {
                     for locationB in currentLocations {
-                        if locationB.altitude == locationA.altitude &&
+                        if let placemark = locationA.placemarks.last,
+                            placemark.spotForecast != nil &&
+                            locationB.altitude == locationA.altitude &&
                             locationB.coordinate.latitude == locationA.latitude &&
-                            locationB.coordinate.longitude == locationA.longitude {
+                            locationB.coordinate.longitude == locationA.longitude
+                        {
                             change = false
                             break mainFor
                         }
@@ -185,7 +188,6 @@ open class Facade: NSObject {
                             realm.add(rlocation)
                             self?.createPlacemark(withLocation: corelocation, rlocation: rlocation)
                         }
-                        self?.onProcessing = false
                     }
                 }
                 else {
@@ -197,7 +199,7 @@ open class Facade: NSObject {
                 let myerror = JFError(code: Common.ErrorCode.fetchLocationIssue.rawValue,
                     desc: Common.title.errorOnSearch,
                     reason: "Error on search / delete location",
-                    suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: error as NSError)
+                    suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: error as? NSError)
                 Analytics.logFatal(error: myerror)
                 myerror.fatal()
             }
@@ -206,7 +208,10 @@ open class Facade: NSObject {
     
     func createPlacemark(withLocation location: CLLocation, rlocation: RLocation) {
         LocationManager.instance.reverseLocation(location: location,
-            didFailWithError:{ _ in },
+            didFailWithError:{ [weak self] (error) in
+                self?.onProcessing = false
+                self?.facadeDidErrorNotification(object: error)
+            },
             didUpdatePlacemarks: {
                 [weak self]
                 (placemarks) in
@@ -227,6 +232,8 @@ open class Facade: NSObject {
                                           reason: "Error on Location/Placemarks import",
                                           suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: error as NSError)
                     Analytics.logFatal(error: myerror)
+                    self?.onProcessing = false
+                    self?.facadeDidErrorNotification(object: myerror)
                     myerror.fatal()
                 }
         })
@@ -245,10 +252,13 @@ open class Facade: NSObject {
     
     func updateSpots(usingPlacemark placemark: RPlacemark, array: [String]) {
         var array = array
+        var lastError : JFError? = nil
         if array.count > 0 {
             let name = array.removeFirst()
-            updateSpotsTrying(withName: name, failure: { 
-                
+            updateSpotsTrying(withName: name, failure: {
+                [weak self] (error) in
+                lastError = error
+                self?.updateSpots(usingPlacemark: placemark, array: array)
             }, success: {
                 [weak self] (spotResult) in
                 guard let spotResult = spotResult else {
@@ -263,30 +273,52 @@ open class Facade: NSObject {
                     placemark.spotResults.append(rspotresult)
                     if placemarks.last == placemark {
                         self?.updateForecastUsingFirstPlacemarkSpot()
-                    }
+                   }
                 }
             })
+        }
+        else {
+            onProcessing = false
+            facadeDidErrorNotification(object: lastError)
         }
     }
     
     func createNameArray(withPlacemark placemark: RPlacemark) -> [String] {
         
-        var array = [String]()
+        var array = [String]() // TODO: remove repeated
         
-        if let _subLocality = placemark.subLocality {
-            array.append(_subLocality)
+        if let string = placemark.subLocality {
+            array.append(string)
         }
-        if let _locality = placemark.locality {
-            array.append(_locality)
+        if let string = placemark.locality {
+            if !array.contains(string) {
+                array.append(string)
+            }
         }
-        if let _administrativeArea = placemark.administrativeArea {
-            array.append(_administrativeArea)
+        if let string = placemark.administrativeArea {
+            if !array.contains(string) {
+                array.append(string)
+            }
         }
-        if let _subAdministrativeArea = placemark.administrativeArea {
-            array.append(_subAdministrativeArea)
+        if let string = placemark.subAdministrativeArea {
+            if !array.contains(string) {
+                array.append(string)
+            }
         }
-        if let _country = placemark.country {
-            array.append(_country)
+        if let string = placemark.name {
+            if !array.contains(string) {
+                array.append(string)
+            }
+        }
+        if let string = placemark.inlandWater {
+            if !array.contains(string) {
+                array.append(string)
+            }
+        }
+        if let string = placemark.country {
+            if !array.contains(string) {
+                array.append(string)
+            }
         }
         
         return array
@@ -295,15 +327,23 @@ open class Facade: NSObject {
 
     
     func updateSpotsTrying(withName name: String,
-                           failure:@escaping () -> Void,
+                           failure:@escaping (_ error: JFError?) -> Void,
                            success:@escaping (_ spotResult: SpotResult?) -> Void) {
         ForecastWindguruService.instance.searchSpots(byLocation: name, failure: { (error) in
-            failure()
+            if let nserror = error?.nserror {
+                let myerror = JFError.init(code: nserror.code, desc: nserror.localizedDescription, reason: nserror.localizedFailureReason, suggestion: nserror.localizedRecoverySuggestion, path: "\(#file)", line: "\(#line)", underError: nserror)
+                failure(myerror)
+            }
+            else {
+                failure(nil)
+            }
         }, success: {
             (spotResult) in
             guard let spotResult = spotResult,
                 let spots = spotResult.spots,
                 spots.count > 0 else {
+                    let myerror = JFError.init(code: 999, desc: "No posts to update", path: "\(#file)", line: "\(#line)", underError: nil)
+                    failure(myerror)
                     return
             }
             success(spotResult)
@@ -317,12 +357,22 @@ open class Facade: NSObject {
         for placemark in placemarks {
             if let spotResult = placemark.spotResults.first,
                 let spotOwner = spotResult.spots.first {
-                ForecastWindguruService.instance.wforecast(bySpotId: spotOwner.id_spot, failure: { (error) in
-                    
+                ForecastWindguruService.instance.wforecast(bySpotId: spotOwner.id_spot, failure:
+                {
+                    [weak self]
+                    (error) in
+                    self?.onProcessing = false
+                    self?.facadeDidErrorNotification(object: error)
                 }, success: {
                     [weak self]
                     (spotForecast) in
                     guard let spotForecast = spotForecast else {
+                        self?.onProcessing = false
+                        let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastIssue.rawValue,
+                                              desc: Common.title.errorOnUpdate,
+                                              reason: "Error on update forecast",
+                                              suggestion: "\(#function)", path: "\(#file)", line: "\(#line)")
+                        self?.facadeDidErrorNotification(object: myerror)
                         return
                     }
                     try! realm.write {
@@ -330,7 +380,8 @@ open class Facade: NSObject {
                         realm.add(rwspotforecast)
                         placemark.spotForecast = rwspotforecast
                         if placemarks.last == placemark {
-                            self?.forecastDidUpdateNotification(object: realm.objects(RWSpotForecast.self).first)
+                            self?.forecastDidUpdateNotification(object: realm.objects(RWSpotForecast.self).last)
+                            self?.onProcessing = false
                         }
                     }
                 })
@@ -416,15 +467,17 @@ open class Facade: NSObject {
         }
     }
     
-    func fetchCurrentForecast() -> RWSpotForecast? {
+    func fetchLocalForecast() -> RWSpotForecast? {
         do {
             let realm = try Realm()
-            return realm.objects(RWSpotForecast.self).first
+            if let placemark = realm.objects(RPlacemark.self).last {
+                return placemark.spotForecast
+            }
         }
         catch {
             facadeDidErrorNotification(object: error)
-            return nil
         }
+        return nil
     }
 #endif
     
