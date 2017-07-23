@@ -16,15 +16,25 @@ class ForecastLocationViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var currentForecast: RWSpotForecast?
+    var notificationToken: NotificationToken?
     let interItemSpacing: CGFloat = 0
     let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
+
+    deinit {
+        notificationToken?.stop()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let realm = try! Realm()
         currentForecast = realm.objects(RWSpotForecast.self).first
-
+        notificationToken = currentForecast?.addNotificationBlock({
+            [weak self]
+            (objectChanged) in
+            self?.updateForecastView(true)
+        })
         updateForecastView(false)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

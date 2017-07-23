@@ -118,7 +118,16 @@ open class Facade: NSObject {
         JFCore.Common.synchronized(syncBlock: { [weak self] in
             Analytics.stop()
             LocationManager.instance.stop()
-
+            
+//            let realm = try! Realm()
+//            try! realm.write() {
+//                let objects = realm.objects(RLocation.self)
+//                realm.delete(objects)
+//                if let corelocation = LocationManager.instance.locations?.first {
+//                    let rlocation = RLocation(location: corelocation)
+//                    realm.add(rlocation)
+//                }
+//            }
             self?.unobserveNotifications()
         
             self?.started = false
@@ -128,11 +137,10 @@ open class Facade: NSObject {
     
     func updateLocations(usingDiscoveredLocations currentLocations: [CLLocation]) throws {
         JFCore.Common.synchronized(syncBlock: { [weak self] in
-
             do {
-                guard let locations = try self?.fetchLocation() else {
-                    return
-                }
+                self?.onProcessing = true
+                let realm = try Realm()
+                let locations = realm.objects(RLocation.self)
                 
                 var change = true
                 
@@ -147,17 +155,34 @@ open class Facade: NSObject {
                     }
                 }
                 if change {
-                    let realm = try Realm()
                     try realm.write() {
+                        for location in locations {
+                            for placemark in location.placemarks {
+                                if let spotForecast = placemark.spotForecast {
+                                    realm.delete(spotForecast)
+                                }
+//                                if let selectedSpot = placemark.selectedSpot {
+//                                    realm.delete(selectedSpot)
+//                                }
+//                                realm.delete(placemark.spotResults)
+                            }
+                            realm.delete(location.placemarks)
+                        }
+                        realm.delete(locations)
                         for corelocation in currentLocations {
                             let rlocation = RLocation(location: corelocation)
                             realm.add(rlocation)
                             self?.createPlacemark(withLocation: corelocation, rlocation: rlocation)
                         }
+                        self?.onProcessing = false
                     }
+                }
+                else {
+                    self?.onProcessing = false
                 }
             }
             catch {
+                self?.onProcessing = false
                 let myerror = JFError(code: Common.ErrorCode.fetchLocationIssue.rawValue,
                     desc: Common.title.errorOnSearch,
                     reason: "Error on search / delete location",
@@ -170,7 +195,9 @@ open class Facade: NSObject {
     
     func createPlacemark(withLocation location: CLLocation, rlocation: RLocation) {
         LocationManager.instance.reverseLocation(location: location,
-            didFailWithError:{_ in },
+            didFailWithError:{
+                [weak self] _ in
+            },
             didUpdatePlacemarks: {
                 [weak self]
                 (placemarks) in

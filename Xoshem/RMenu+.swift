@@ -187,7 +187,7 @@ extension RMenu {
             }
         }
         catch {
-            let myerror = JFError(code: Common.ErrorCode.cdRemoveMenuIssue.rawValue,
+            let myerror = JFError(code: Common.ErrorCode.removeMenuIssue.rawValue,
                                   desc: Common.title.errorOnDelete,
                                   reason: "Failed at fetch menu and remove",
                                   suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)

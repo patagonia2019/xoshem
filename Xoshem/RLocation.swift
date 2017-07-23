@@ -32,5 +32,4 @@ class RLocation: Object {
         horizontalAccuracy = location.horizontalAccuracy
         verticalAccuracy = location.verticalAccuracy
     }
-
-}
+    }

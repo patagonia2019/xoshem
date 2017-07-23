@@ -61,7 +61,8 @@ struct Common {
         case fetchPlacemarkIssue = 137
         case facadeRestartIssue = 138
         case firebaseSignInAnonymouslyWithCompletionIssue = 139
-        case cdRemoveMenuIssue = 140
+        case removeMenuIssue = 140
+        case removeLocationIssue = 141
     }
 
 
