@@ -30,6 +30,7 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet weak var backgroundColorView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerTableView: UITableView!
+    var placemark: RPlacemark?
     var spotForecast: RWSpotForecast?
     var fd = [DataStruct]()
     var segmentControl: UISegmentedControl?

@@ -479,6 +479,17 @@ open class Facade: NSObject {
         }
         return nil
     }
+
+    func fetchLocalPlacemark() -> RPlacemark? {
+        do {
+            let realm = try Realm()
+            return realm.objects(RPlacemark.self).last
+        }
+        catch {
+            facadeDidErrorNotification(object: error)
+        }
+        return nil
+    }
 #endif
     
     

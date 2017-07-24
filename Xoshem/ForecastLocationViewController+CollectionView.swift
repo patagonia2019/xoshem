@@ -68,8 +68,8 @@ extension ForecastLocationViewController : UICollectionViewDataSource {
             cell.configureLastCell()
         }
         else if indexPath.item == 0 {
-            if let currentForecast = Facade.instance.fetchLocalForecast() {
-                cell.configureCell(currentForecast, isEditing: isEditing, didUpdate: { [weak self] (Void) in
+            if let placemark = Facade.instance.fetchLocalPlacemark() {
+                cell.configureCell(withPlacemark: placemark, isEditing: isEditing, didUpdate: { [weak self] (Void) in
                     self?.updateForecastView(false)
                 })
             }

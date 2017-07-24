@@ -7,6 +7,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -53,8 +54,8 @@
                                     <segue destination="6Ic-St-LBz" kind="embed" identifier="search" id="eCk-VF-1Wl"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJy-jk-VpB">
-                                <rect key="frame" x="0.0" y="-67" width="375" height="667"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TJy-jk-VpB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="536"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="pVf-mz-iLp" kind="embed" id="alf-u1-84o"/>
@@ -89,7 +90,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1465" y="198"/>
+            <point key="canvasLocation" x="1464.8" y="197.45127436281859"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
@@ -200,62 +201,90 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="215" height="391"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGd-2X-nlr">
-                                                            <rect key="frame" x="59" y="159" width="97" height="142"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MWy-vY-CwA">
+                                                            <rect key="frame" x="0.0" y="0.0" width="215" height="391"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-ul-TaU">
-                                                                    <rect key="frame" x="27" y="50" width="55" height="42"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Zix-j7-G4w">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="215" height="130.5"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jb7-fY-xFk">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="215" height="130.5"/>
+                                                                            <subviews>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sMf-x3-PnG">
+                                                                                    <rect key="frame" x="0.0" y="45" width="40" height="40"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="40" id="OXV-Nl-f5F"/>
+                                                                                        <constraint firstAttribute="width" secondItem="sMf-x3-PnG" secondAttribute="height" multiplier="40:40" id="ich-TP-TDu"/>
+                                                                                    </constraints>
+                                                                                </imageView>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="54k-bs-K38">
+                                                                                    <rect key="frame" x="40" y="38.5" width="175" height="53"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="96.5" id="zK7-r3-6ZF"/>
+                                                                                    </constraints>
+                                                                                    <string key="text">Bariloche
+Rio Negro</string>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstItem="54k-bs-K38" firstAttribute="width" relation="lessThanOrEqual" secondItem="Jb7-fY-xFk" secondAttribute="width" multiplier="0.9" id="KOm-Gk-bh1"/>
+                                                                            </constraints>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="Jb7-fY-xFk" firstAttribute="top" secondItem="Zix-j7-G4w" secondAttribute="top" id="bkq-5l-3iQ"/>
+                                                                        <constraint firstItem="Jb7-fY-xFk" firstAttribute="leading" secondItem="Zix-j7-G4w" secondAttribute="leading" id="eCx-bO-jUu"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="Jb7-fY-xFk" secondAttribute="trailing" id="lC7-HN-SSr"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGd-2X-nlr">
+                                                                    <rect key="frame" x="42.5" y="130.5" width="130" height="130"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35°" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="a4o-qB-lrb">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="55" height="42"/>
+                                                                            <rect key="frame" x="37" y="44" width="55" height="42"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                </stackView>
-                                                            </subviews>
-                                                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstItem="O0E-ul-TaU" firstAttribute="centerY" secondItem="YGd-2X-nlr" secondAttribute="centerY" id="Kyp-EJ-Vw2"/>
-                                                                <constraint firstItem="O0E-ul-TaU" firstAttribute="centerX" secondItem="YGd-2X-nlr" secondAttribute="centerX" constant="5.5" id="zOZ-vd-1d0"/>
-                                                            </constraints>
-                                                        </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="54k-bs-K38">
-                                                            <rect key="frame" x="4" y="74" width="207" height="60"/>
-                                                            <string key="text">Bariloche
-Rio Negro</string>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="lsc-mC-YjG">
-                                                            <rect key="frame" x="0.0" y="340" width="215" height="43"/>
-                                                            <string key="text">Aeropuerto
+                                                                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstItem="a4o-qB-lrb" firstAttribute="centerY" secondItem="YGd-2X-nlr" secondAttribute="centerY" id="GtZ-kb-pXM"/>
+                                                                        <constraint firstAttribute="width" secondItem="YGd-2X-nlr" secondAttribute="height" multiplier="1:1" id="hRQ-5V-CIW"/>
+                                                                        <constraint firstItem="a4o-qB-lrb" firstAttribute="centerX" secondItem="YGd-2X-nlr" secondAttribute="centerX" id="hfK-F9-6j5"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="clip" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="lsc-mC-YjG">
+                                                                    <rect key="frame" x="20" y="260.5" width="175" height="130.5"/>
+                                                                    <string key="text">Aeropuerto
 Bariloche</string>
-                                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="18"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="lsc-mC-YjG" firstAttribute="width" secondItem="MWy-vY-CwA" secondAttribute="width" constant="-40" id="MfE-yh-8SP"/>
+                                                            </constraints>
+                                                        </stackView>
                                                     </subviews>
                                                 </view>
                                                 <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstItem="lsc-mC-YjG" firstAttribute="centerX" secondItem="YGd-2X-nlr" secondAttribute="centerX" id="4p3-ky-lXZ"/>
-                                                    <constraint firstItem="YGd-2X-nlr" firstAttribute="centerX" secondItem="4fc-Fj-DH0" secondAttribute="centerX" id="7Rt-Li-2qH"/>
-                                                    <constraint firstAttribute="bottomMargin" secondItem="lsc-mC-YjG" secondAttribute="bottom" id="HU7-LO-qKl"/>
-                                                    <constraint firstItem="54k-bs-K38" firstAttribute="width" secondItem="4fc-Fj-DH0" secondAttribute="width" constant="-8" id="MD5-wx-UjD"/>
-                                                    <constraint firstItem="YGd-2X-nlr" firstAttribute="top" secondItem="54k-bs-K38" secondAttribute="bottom" constant="25" id="Sip-lE-tXI"/>
-                                                    <constraint firstItem="YGd-2X-nlr" firstAttribute="leading" secondItem="4fc-Fj-DH0" secondAttribute="leadingMargin" constant="51" id="b4E-XT-cdU"/>
-                                                    <constraint firstItem="YGd-2X-nlr" firstAttribute="top" secondItem="4fc-Fj-DH0" secondAttribute="top" constant="159" id="bzv-md-pbu"/>
-                                                    <constraint firstItem="lsc-mC-YjG" firstAttribute="top" secondItem="YGd-2X-nlr" secondAttribute="bottom" constant="39" id="fMA-ky-DfR"/>
-                                                    <constraint firstItem="lsc-mC-YjG" firstAttribute="width" secondItem="4fc-Fj-DH0" secondAttribute="width" id="kn5-gG-OEk"/>
-                                                    <constraint firstItem="54k-bs-K38" firstAttribute="centerX" secondItem="4fc-Fj-DH0" secondAttribute="centerX" id="vtz-Fl-EgR"/>
+                                                    <constraint firstItem="MWy-vY-CwA" firstAttribute="height" secondItem="4fc-Fj-DH0" secondAttribute="height" id="Bna-lZ-Jep"/>
+                                                    <constraint firstItem="MWy-vY-CwA" firstAttribute="width" secondItem="4fc-Fj-DH0" secondAttribute="width" id="CEC-rd-U22"/>
+                                                    <constraint firstItem="MWy-vY-CwA" firstAttribute="centerX" secondItem="4fc-Fj-DH0" secondAttribute="centerX" id="CJj-0P-AuJ"/>
+                                                    <constraint firstItem="Jb7-fY-xFk" firstAttribute="width" secondItem="4fc-Fj-DH0" secondAttribute="width" id="qWM-Ta-FmQ"/>
+                                                    <constraint firstItem="MWy-vY-CwA" firstAttribute="centerY" secondItem="4fc-Fj-DH0" secondAttribute="centerY" id="rxl-TU-D9W"/>
                                                 </constraints>
                                                 <size key="customSize" width="215" height="391"/>
                                                 <connections>
                                                     <outlet property="cityLabel" destination="54k-bs-K38" id="x4h-U4-dWe"/>
                                                     <outlet property="degreeLabel" destination="a4o-qB-lrb" id="QLa-bN-ExW"/>
+                                                    <outlet property="locationIcon" destination="sMf-x3-PnG" id="weh-Nr-YI8"/>
                                                     <outlet property="roundedContainerView" destination="YGd-2X-nlr" id="xTp-sy-iJx"/>
                                                     <outlet property="spotNameLabel" destination="lsc-mC-YjG" id="02H-sC-99x"/>
                                                 </connections>
@@ -276,7 +305,6 @@ Bariloche</string>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="MsM-Cr-tv6" firstAttribute="bottom" secondItem="0Ip-zn-XcM" secondAttribute="bottomMargin" id="BsZ-DI-3Hu"/>
                             <constraint firstItem="MsM-Cr-tv6" firstAttribute="centerX" secondItem="0Ip-zn-XcM" secondAttribute="centerX" id="PAy-N9-hyI"/>
                             <constraint firstItem="MsM-Cr-tv6" firstAttribute="top" secondItem="0Ip-zn-XcM" secondAttribute="topMargin" id="SAS-z7-zjm"/>
                             <constraint firstItem="MsM-Cr-tv6" firstAttribute="width" secondItem="0Ip-zn-XcM" secondAttribute="width" id="ynA-NQ-aeV"/>
@@ -393,11 +421,11 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="M95-hs-dh1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WtR-2o-PIO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tGd-T1-jUK">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="536"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HelpCell" textLabel="0fh-Qf-i1c" imageView="hSw-Rb-KWh" style="IBUITableViewCellStyleDefault" id="bDL-aP-ucn">
@@ -619,15 +647,15 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="VG6-Mf-JAm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gvM-qd-Ato">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZc-0C-9pD" userLabel="bg">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <webView opaque="NO" contentMode="scaleToFill" keyboardDisplayRequiresUserAction="NO" paginationMode="topToBottom" translatesAutoresizingMaskIntoConstraints="NO" id="tMJ-4q-Ag5">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                 <connections>
@@ -664,15 +692,15 @@ Bariloche</string>
                         <viewControllerLayoutGuide type="bottom" id="xMT-LD-iIv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ngz-bU-2fE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnw-CJ-i5n" userLabel="bg">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <webView opaque="NO" contentMode="scaleToFill" keyboardDisplayRequiresUserAction="NO" paginationMode="topToBottom" translatesAutoresizingMaskIntoConstraints="NO" id="rdp-ap-Nfk">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                 <connections>

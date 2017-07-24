@@ -62,7 +62,6 @@ extension RMenu {
                 "parentId": Int(0) as AnyObject,
                 "id": Int(1) as AnyObject,
                 "name": Common.title.Forecast as AnyObject,
-                "icon": "1468046481_cloud-weather-forecast-cloudy-outline-stroke" as AnyObject,
                 "iconList": "themify" as AnyObject,
                 "iconName": "cloud" as AnyObject,
                 "edit": Bool(false) as AnyObject
@@ -71,7 +70,6 @@ extension RMenu {
                 "parentId": Int(0) as AnyObject,
                 "id": Int(2) as AnyObject,
                 "name": Common.title.Search as AnyObject,
-                "icon": "1468046237_common-search-lookup-glyph" as AnyObject,
                 "iconList": "FontAwesome" as AnyObject,
                 "iconName": "search" as AnyObject,
                 "edit": Bool(false) as AnyObject
@@ -80,7 +78,6 @@ extension RMenu {
                 "parentId": Int(0) as AnyObject,
                 "id": Int(3) as AnyObject,
                 "name": Common.title.Options as AnyObject,
-                "icon": "1468046524_editor-setting-gear-outline-stroke" as AnyObject,
                 "iconList": "FontAwesome" as AnyObject,
                 "iconName": "gear" as AnyObject,
                 "edit": Bool(false) as AnyObject
@@ -89,7 +86,6 @@ extension RMenu {
                 "parentId": Int(0) as AnyObject,
                 "id": Int(4) as AnyObject,
                 "name": Common.title.Help as AnyObject,
-                "icon": "1468046356_circle-help-question-mark-outline-stroke" as AnyObject,
                 "iconList": "Ionicons" as AnyObject,
                 "iconName": "help-circled" as AnyObject,
                 "edit": Bool(false) as AnyObject
@@ -100,7 +96,6 @@ extension RMenu {
                 "name": Common.title.frequentlyAskedQuestions as AnyObject,
                 "segue": Common.segue.web as AnyObject,
                 "file": Common.file.faq as AnyObject,
-                "icon": "1468046956_common-bookmark-book-open-glyph" as AnyObject,
                 "iconList": "Ionicons" as AnyObject,
                 "iconName": "ios-book-outline" as AnyObject,
                 "edit": Bool(false) as AnyObject
@@ -111,7 +106,6 @@ extension RMenu {
                 "name": Common.title.Tutorial as AnyObject,
                 "segue": Common.segue.web as AnyObject,
                 "file": Common.file.tutorial as AnyObject,
-                "icon": "1475082499_device-board-presentation-content-chart-outline-stroke" as AnyObject,
                 "iconList": "octicons" as AnyObject,
                 "iconName": "device-desktop" as AnyObject,
                 "edit": Bool(false) as AnyObject
@@ -122,7 +116,6 @@ extension RMenu {
                 "name": Common.title.TermsOfUse as AnyObject,
                 "segue": Common.segue.web as AnyObject,
                 "file": Common.file.tou as AnyObject,
-                "icon": "1468046901_editor-books-library-collection-glyph" as AnyObject,
                 "iconList": "Ionicons" as AnyObject,
                 "iconName": "bowtie" as AnyObject,
                 "edit": Bool(false) as AnyObject
@@ -133,7 +126,6 @@ extension RMenu {
                 "name": Common.title.TermsAndConditions as AnyObject,
                 "segue": Common.segue.web as AnyObject,
                 "file": Common.file.tac as AnyObject,
-                "icon": "1468046859_business-tie-outline-stroke" as AnyObject,
                 "iconList": "Ionicons" as AnyObject,
                 "iconName": "bowtie" as AnyObject,
                 "edit": Bool(false) as AnyObject
@@ -144,7 +136,6 @@ extension RMenu {
                 "name": "\(Common.title.About) \(JFCore.Common.app)" as AnyObject,
                 "segue": Common.segue.about as AnyObject,
                 "file": Common.file.about as AnyObject,
-                "icon": "1468046733_circle-info-more-information-detail-outline-stroke" as AnyObject,
                 "iconList": "Ionicons" as AnyObject,
                 "iconName": "ios-information-outline" as AnyObject,
                 "edit": Bool(false) as AnyObject

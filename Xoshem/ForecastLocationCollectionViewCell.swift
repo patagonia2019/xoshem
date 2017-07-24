@@ -8,18 +8,25 @@
 
 import UIKit
 import JFCore
+import SwiftIconFont
 
 class ForecastLocationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var roundedContainerView: UIView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var spotNameLabel: UILabel!
     @IBOutlet weak var degreeLabel: UILabel!
+    @IBOutlet weak var locationIcon: UIImageView!
+    var placemark: RPlacemark!
     var spotForecast: RWSpotForecast!
     var updateClosure: (() -> ())?
 
     override func awakeFromNib() {
-        
-        roundedContainerView.layer.cornerRadius = roundedContainerView.frame.size.height / 2
+        changeRounded()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        changeRounded()
     }
     
     func configure()
@@ -31,18 +38,13 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     }
     
     func updateName() {
-        spotNameLabel.text = "\(spotForecast.spotName())"
+        spotNameLabel.text = spotForecast.spotName()
         spotNameLabel.alpha = 1
     }
 
     func updateSpotName() {
-        if let name = spotForecast.locationName() {
-            cityLabel.text = "\(name)"
-            cityLabel.alpha = 1
-        }
-        else {
-            cityLabel.alpha = 0
-        }
+        cityLabel.text = placemark.locationName()
+        cityLabel.alpha = 1
     }
     
     func updateTemperature() {
@@ -65,6 +67,22 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         updateSpotName()
         updateTemperature()
         configureColor()
+        updateClosure = didUpdate
+    }
+    
+    func configureCell(withPlacemark placemark: RPlacemark, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
+    {
+        configure()
+        self.placemark = placemark
+        if let fcr = placemark.spotForecast {
+            spotForecast = fcr
+        }
+        degreeLabel.alpha = 1
+        updateName()
+        updateSpotName()
+        updateTemperature()
+        configureColor()
+        configureIconLocation()
         updateClosure = didUpdate
     }
     
@@ -97,7 +115,18 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     func configureLastCell()
     {
         configure()
+        roundedContainerView.alpha = 1
+        degreeLabel.alpha = 1
+        degreeLabel.text = "[Add]"
         contentView.backgroundColor = UIColor.red
+    }
+    
+    func configureIconLocation()
+    {
+        let size = CGSize(width: 50, height: 50)
+        let fontSize :CGFloat = 50.0
+        let icon = UIImage.icon(from: .Ionicon, iconColor: .white, code: "location", imageSize: size, ofSize: fontSize)
+        locationIcon.image = icon
     }
     
     func selected()
@@ -115,7 +144,14 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
             closure()
         }
     }
+
     
+    private func changeRounded() {
+        let dimension = roundedContainerView.frame.size
+        let lenght = dimension.width > dimension.height ? dimension.width : dimension.height
+        roundedContainerView.layer.cornerRadius = lenght / 2
+    }
+
 }
 
 

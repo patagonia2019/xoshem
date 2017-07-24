@@ -47,22 +47,23 @@ class ForecastLocationViewController: UIViewController {
     
     
     func cellWidth() -> CGFloat {
-        return (collectionView!.bounds.size.width - (interItemSpacing * 2) - edgeInsets.left - edgeInsets.right) / 2
+        return (collectionView!.bounds.size.width - (interItemSpacing * 2) - edgeInsets.left - edgeInsets.right)
     }
     
     func boardCellSize() -> CGSize {
-        return CGSize(width: cellWidth(), height: cellWidth()*1.5)
+        if collectionView!.bounds.size.height < collectionView!.bounds.size.width {
+            return CGSize(width: cellWidth()/3, height: cellWidth()/2 - 24)
+        }
+        return CGSize(width: cellWidth()/2, height: cellWidth() - 64)
     }
 
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-//        updateSize = size
         collectionView.reloadData()
     }
 
     /// Notifications
-    
     fileprivate func observeNotification()
     {
         unobserveNotification()
@@ -87,7 +88,7 @@ class ForecastLocationViewController: UIViewController {
             .addObserver(forName: notification, object: nil, queue: queue,
                 using: {
                     [weak self] (note) in
-                    self?.updateForecastView(true)
+                    self?.updateForecastView(false)
             })
         }
     }
@@ -113,7 +114,6 @@ class ForecastLocationViewController: UIViewController {
                 let alertView = SCLAlertView()
                 alertView.addButton(Common.title.Reload) {
                     [weak self] (isOtherButton) in
-    //                self?.currentForecast = 
                     self?.reloadView()
                 }
                 let subtitle = "\(Common.title.successGetting) \(currentForecast.spotName()) \(Common.title.forecasts)"
