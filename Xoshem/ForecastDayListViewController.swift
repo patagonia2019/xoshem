@@ -200,8 +200,17 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
             appendFd("behance-heeyeun-jeong-9", key: "Wind Direction", value: "\(dir)")
         }
         if let knots = fcst.windSpeedKnots(hour: h),
-            let effect = fcst.windSpeedBftEffect(hour: h) {
-            appendFd("behance-heeyeun-jeong-9", key: "Wind Speed", value: "\(knots) knots \(effect)")
+            let bft = fcst.windSpeedBft(hour: h) {
+            appendFd("behance-heeyeun-jeong-9", key: "Wind Speed", value: "\(knots) knots, \(bft) bft")
+        }
+        if let effect = fcst.windSpeedBftEffect(hour: h) {
+            appendFd("behance-heeyeun-jeong-9", key: "Wind Speed Effect", value: "\(effect)")
+        }
+        if let effectOnSea = fcst.windSpeedBftEffectOnSea(hour: h) {
+            appendFd("behance-heeyeun-jeong-9", key: "Wind Effect On Sea", value: "\(effectOnSea)")
+        }
+        if let effectOnLand = fcst.windSpeedBftEffectOnLand(hour: h) {
+            appendFd("behance-heeyeun-jeong-9", key: "Wind Effect On Land", value: "\(effectOnLand)")
         }
         if let gust = fcst.windGust(hour: h) {
             appendFd("behance-heeyeun-jeong-13", key: "Wind Gusts", value: "\(gust) knots")
