@@ -199,8 +199,9 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         if let dir = fcst.windDirectionName(hour: h) {
             appendFd("behance-heeyeun-jeong-9", key: "Wind Direction", value: "\(dir)")
         }
-        if let speed = fcst.windSpeedKnots(hour: h) {
-            appendFd("behance-heeyeun-jeong-9", key: "Wind Speed", value: "\(speed) knots")
+        if let knots = fcst.windSpeedKnots(hour: h),
+            let effect = fcst.windSpeedBftEffect(hour: h) {
+            appendFd("behance-heeyeun-jeong-9", key: "Wind Speed", value: "\(knots) knots \(effect)")
         }
         if let gust = fcst.windGust(hour: h) {
             appendFd("behance-heeyeun-jeong-13", key: "Wind Gusts", value: "\(gust) knots")
@@ -338,7 +339,7 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     fileprivate func showConfigureWindAlert() {
         let alert = SCLAlertView()
         alert.addButton("m/s") {
-
+            
         }
         alert.addButton("knots") {
             

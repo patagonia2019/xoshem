@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		702D98EF1F2615B60098FAE6 /* RPlacemark+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D98EE1F2615B60098FAE6 /* RPlacemark+.swift */; };
+		702D98F91F26D2EB0098FAE6 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D98F81F26D2EB0098FAE6 /* RUser.swift */; };
+		702D98FA1F26D2EB0098FAE6 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D98F81F26D2EB0098FAE6 /* RUser.swift */; };
 		70826A551F1F686100328BC5 /* RWForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A541F1F686100328BC5 /* RWForecast.swift */; };
 		70826A571F1F686F00328BC5 /* RWindguruStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A561F1F686F00328BC5 /* RWindguruStation.swift */; };
 		70826A5B1F1F6C7800328BC5 /* RPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */; };
@@ -131,6 +133,7 @@
 		67A931181C6D8E6C04467BFB /* Pods_Xoshem_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6879D4052CC2AC23310CE46A /* Pods-watchos Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchos Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-watchos Extension/Pods-watchos Extension.release.xcconfig"; sourceTree = "<group>"; };
 		702D98EE1F2615B60098FAE6 /* RPlacemark+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RPlacemark+.swift"; sourceTree = "<group>"; };
+		702D98F81F26D2EB0098FAE6 /* RUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RUser.swift; sourceTree = "<group>"; };
 		70826A541F1F686100328BC5 /* RWForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWForecast.swift; sourceTree = "<group>"; };
 		70826A561F1F686F00328BC5 /* RWindguruStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWindguruStation.swift; sourceTree = "<group>"; };
 		70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPlacemark.swift; sourceTree = "<group>"; };
@@ -396,6 +399,7 @@
 				70C9D6451F21675C00F4FED8 /* RSpot.swift */,
 				70C9D6421F21658700F4FED8 /* RSpotOwner.swift */,
 				70C9D63F1F21652E00F4FED8 /* RSpotResult.swift */,
+				702D98F81F26D2EB0098FAE6 /* RUser.swift */,
 				7091A59F1F1E5D8300460252 /* RWSpotForecast.swift */,
 				70C9D6341F20BA2600F4FED8 /* RWSpotForecast+.swift */,
 				70826A541F1F686100328BC5 /* RWForecast.swift */,
@@ -919,6 +923,7 @@
 				9577B0D91CF8DCAE002B023B /* InterfaceController.swift in Sources */,
 				70C9D6411F21652E00F4FED8 /* RSpotResult.swift in Sources */,
 				95069CB61D670F4E003704F6 /* Crash.swift in Sources */,
+				702D98FA1F26D2EB0098FAE6 /* RUser.swift in Sources */,
 				70C9D6441F21658700F4FED8 /* RSpotOwner.swift in Sources */,
 				70C9D6361F20BA2600F4FED8 /* RWSpotForecast+.swift in Sources */,
 			);
@@ -937,6 +942,7 @@
 				9508D1D21DA0B946008C2A75 /* ForecastHierarchyFooterViewController.swift in Sources */,
 				95E61DFD1D3054440096E616 /* MasterViewController.swift in Sources */,
 				95E61E0D1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift in Sources */,
+				702D98F91F26D2EB0098FAE6 /* RUser.swift in Sources */,
 				70C9D63E1F212DB200F4FED8 /* ForecastLocationViewController+CollectionView.swift in Sources */,
 				70C9D6351F20BA2600F4FED8 /* RWSpotForecast+.swift in Sources */,
 				95069CB51D670F4D003704F6 /* Crash.swift in Sources */,
