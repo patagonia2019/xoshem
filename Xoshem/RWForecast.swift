@@ -10,6 +10,8 @@ import Foundation
 import RealmSwift
 import JFWindguru
 
+
+
 public class StringObject: Object {
     dynamic var value: String = ""
 }
@@ -42,8 +44,11 @@ class RWForecast: Object {
     let windSpeed           = List<FloatObject>() //  WINDSPD: Wind speed (knots)
     let windDirection       = List<IntObject>() //  WINDDIR: Wind direction
     let SMERN               = List<IntObject>()
+    let SMER                = List<IntObject>()
     let temperatureReal     = List<FloatObject>() // TMPE: temperature in 2 meters above ground with correction to real altitude of the spot.
     let PCPT                = List<IntObject>()
+    let HTSGW               = List<FloatObject>()
+    let PERPW               = List<FloatObject>()
     let hr_weekday          = List<IntObject>()
     let hr_h                = List<StringObject>()
     let hr_d                = List<StringObject>()
@@ -103,11 +108,20 @@ class RWForecast: Object {
         if let smern = forecast.SMERN {
             for i in smern { SMERN.append(IntObject(value: [i])) }
         }
+        if let smer = forecast.SMER {
+            for i in smer { SMER.append(IntObject(value: [i])) }
+        }
         if let tr = forecast.temperatureReal {
             for f in tr { temperatureReal.append(FloatObject(value: [f])) }
         }
         if let pcpt = forecast.PCPT {
             for i in pcpt { PCPT.append(IntObject(value: [i])) }
+        }
+        if let htsw = forecast.HTSGW {
+            for f in htsw { HTSGW.append(FloatObject(value: [f])) }
+        }
+        if let perpw = forecast.PERPW {
+            for f in perpw { PERPW.append(FloatObject(value: [f])) }
         }
         if let hrw = forecast.hr_weekday {
             for i in hrw { hr_weekday.append(IntObject(value: [i])) }

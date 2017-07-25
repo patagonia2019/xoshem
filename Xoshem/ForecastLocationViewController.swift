@@ -11,6 +11,7 @@ import JFWindguru
 import JFCore
 import SCLAlertView
 import RealmSwift
+import SwiftSpinner
 
 class ForecastLocationViewController: UIViewController {
     
@@ -30,13 +31,17 @@ class ForecastLocationViewController: UIViewController {
         configureLayout()
         
         updateForecastView(false)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.flashScrollIndicators()
         observeNotification()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.flashScrollIndicators()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,6 +94,7 @@ class ForecastLocationViewController: UIViewController {
                 using: {
                     [weak self] (note) in
                     self?.updateForecastView(false)
+//                    SwiftSpinner.hide()
             })
         }
     }

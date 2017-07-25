@@ -25,7 +25,16 @@ open class Facade: NSObject {
     //
     fileprivate var locations = [CLLocation]()
     fileprivate var started : Bool = false
-    fileprivate var onProcessing : Bool = false
+    fileprivate var onProcessing : Bool = false {
+        willSet {
+            if newValue == true {
+                requestDidStartNotification(object: nil)
+            }
+            else {
+                requestDidStopNotification(object: nil)
+            }
+        }
+    }
     fileprivate var auth: Auth!
     fileprivate static var firstTime: Bool = true
     open var lastRefreshDate : Date?
@@ -411,6 +420,14 @@ open class Facade: NSObject {
     
     func locationDidUpdateNotification(object: Any?) {
         NotificationCenter.default.post(name: LocationDidUpdateNotification, object: object)
+    }
+    
+    func requestDidStartNotification(object: Any?) {
+        NotificationCenter.default.post(name: RequestDidStartNotification, object: object)
+    }
+    
+    func requestDidStopNotification(object: Any?) {
+        NotificationCenter.default.post(name: RequestDidStopNotification, object: object)
     }
 
     func facadeDidErrorNotification(object: Any?) {

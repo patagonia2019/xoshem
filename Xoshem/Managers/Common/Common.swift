@@ -10,6 +10,8 @@ import Foundation
 import Localize_Swift
 
 let FacadeDidErrorNotification: NSNotification.Name = NSNotification.Name(rawValue: "FacadeDidErrorNotification")
+let RequestDidStartNotification: NSNotification.Name = NSNotification.Name(rawValue: "RequestDidStartNotification")
+let RequestDidStopNotification: NSNotification.Name = NSNotification.Name(rawValue: "RequestDidStopNotification")
 let LocationDidUpdateNotification: NSNotification.Name = NSNotification.Name(rawValue: "LocationDidUpdateNotification")
 let ForecastDidUpdateNotification: NSNotification.Name = NSNotification.Name(rawValue: "ForecastDidUpdateNotification")
 

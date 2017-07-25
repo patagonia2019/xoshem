@@ -10,6 +10,7 @@ import UIKit
 import JFCore
 import SCLAlertView
 import SwiftIconFont
+import SwiftSpinner
 
 class MasterViewController: UITableViewController {
 
@@ -27,12 +28,17 @@ class MasterViewController: UITableViewController {
 //        tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: .bottom)
 //        performSegue(withIdentifier: "showDetail", sender: self)
 
+        SwiftSpinner.setTitleFont(UIFont.systemFont(ofSize: 10))
+
+        SwiftSpinner.useContainerView(view)
+        SwiftSpinner.show("Sunshine is delicious, rain is refreshing, wind braces us up, snow is exhilarating; there is really no such thing as bad weather, only different kinds of good weather. ~John Ruskin")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
         observeLocationServices()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,6 +87,20 @@ class MasterViewController: UITableViewController {
 
         let queue = OperationQueue.main
         
+        NotificationCenter.default.addObserver(forName: RequestDidStartNotification, object: nil, queue: queue)
+        { note in
+            DispatchQueue.main.async() {
+                SwiftSpinner.show("Sunshine is delicious, rain is refreshing, wind braces us up, snow is exhilarating; there is really no such thing as bad weather, only different kinds of good weather. ~John Ruskin")
+            }
+        }
+
+        NotificationCenter.default.addObserver(forName: RequestDidStopNotification, object: nil, queue: queue)
+        { note in
+            DispatchQueue.main.async() {
+                SwiftSpinner.hide()
+            }
+        }
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationError), object: nil, queue: queue)
             {
                 note in
@@ -167,7 +187,9 @@ class MasterViewController: UITableViewController {
     {
         for notification in [JFCore.Constants.Notification.locationError,
                              JFCore.Constants.Notification.locationAuthorized,
-                             FacadeDidErrorNotification.rawValue] {
+                             FacadeDidErrorNotification.rawValue,
+                             RequestDidStartNotification.rawValue,
+                             RequestDidStopNotification.rawValue] {
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
         }
     }

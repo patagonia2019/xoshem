@@ -7,33 +7,7 @@
 //
 
 import Foundation
-//#if os(watchOS)
-// let h3 = hour3()
-// let t = fcst.temperature[h3].value
-// let t = fcst.temperature[h3].value
-// appendFd("behance-heeyeun-jeong-85", key: "Temperature", value: "\(t) °C")
-// let tr = fcst.temperatureReal[h3].value
-// appendFd("behance-heeyeun-jeong-86", key: "Temperature Real", value: "\(tr) °C")
-// let rh = fcst.relativeHumidity[h3].value
-// appendFd("behance-heeyeun-jeong-12", key: "Relative humidity", value: "\(rh) %")
-// let speed = fcst.windSpeed[h3].value
-// appendFd("behance-heeyeun-jeong-9", key: "Wind Speed", value: "\(speed) knots")
-// let gust = fcst.windGust[h3].value
-// appendFd("behance-heeyeun-jeong-13", key: "Wind Gusts", value: "\(gust) knots")
-// let cct = fcst.cloudCoverTotal[h3].value
-// appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Total", value: "\(cct) %")
-// let cch = fcst.cloudCoverHigh[h3].value
-// appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover High", value: "\(cch) %")
-// let ccm = fcst.cloudCoverMid[h3].value
-// appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Mid", value: "\(ccm) %")
-// let ccl = fcst.cloudCoverLow[h3].value
-// appendFd("behance-heeyeun-jeong-7", key: "Cloud Cover Low", value: "\(ccl) %")
-// let ppt = fcst.precipitation[h3].value
-// appendFd("behance-heeyeun-jeong-23", key: "Precipitation", value: "\(ppt) mm/3h")
-// let slp = fcst.seaLevelPressure[h3].value
-// appendFd("behance-heeyeun-jeong-54", key: "Sea Level Pressure", value: "\(slp)")
-// let fl = fcst.freezingLevel[h3].value
-//#endif
+import JFWindguru
 
 extension RWForecast {
     
@@ -57,10 +31,105 @@ extension RWForecast {
         }
         return nil
     }
+    
+    func smern(hour: Int) -> Int? {
+        if SMERN.count > 0 && hour < SMERN.count {
+            return SMERN[hour].value
+        }
+        return nil
+    }
+    
+    func smer(hour: Int) -> Int? {
+        if SMER.count > 0 && hour < SMERN.count {
+            return SMER[hour].value
+        }
+        return nil
+    }
 
-    func windSpeed(hour: Int) -> Float? {
+    private func windSpeed(hour: Int) -> Float? {
         if windSpeed.count > 0 && hour < windSpeed.count {
             return windSpeed[hour].value
+        }
+        return nil
+    }
+    
+    func windSpeedKnots(hour: Int) -> Float? {
+        return windSpeed(hour:hour)
+    }
+
+    func windSpeedKmh(hour: Int) -> Float? {
+        if let knots = windSpeed(hour:hour) {
+            var knotsBft = KnotsBeaufort.init(value: knots)
+            return knotsBft.kmh()
+        }
+        return nil
+    }
+    
+    func windSpeedMph(hour: Int) -> Float? {
+        if let knots = windSpeed(hour:hour) {
+            var knotsBft = KnotsBeaufort.init(value: knots)
+            return knotsBft.mph()
+        }
+        return nil
+    }
+
+    func windSpeedMps(hour: Int) -> Float? {
+        if let knots = windSpeed(hour:hour) {
+            var knotsBft = KnotsBeaufort.init(value: knots)
+            return knotsBft.mps()
+        }
+        return nil
+    }
+    
+    func windSpeedBft(hour: Int) -> Int? {
+        if let knots = windSpeed(hour:hour) {
+            var knotsBft = KnotsBeaufort.init(value: knots)
+            return knotsBft.bft()
+        }
+        return nil
+    }
+    
+    func windSpeedBftEffect(hour: Int) -> String? {
+        if let knots = windSpeed(hour:hour) {
+            var knotsBft = KnotsBeaufort.init(value: knots)
+            return knotsBft.effect()
+        }
+        return nil
+    }
+    
+    func windSpeedBftEffectOnSea(hour: Int) -> String? {
+        if let knots = windSpeed(hour:hour) {
+            var knotsBft = KnotsBeaufort.init(value: knots)
+            return knotsBft.effectOnSea()
+        }
+        return nil
+    }
+    
+    func windSpeedBftEffectOnLand(hour: Int) -> String? {
+        if let knots = windSpeed(hour:hour) {
+            var knotsBft = KnotsBeaufort.init(value: knots)
+            return knotsBft.effectOnLand()
+        }
+        return nil
+    }
+    
+
+    func windDirection(hour: Int) -> Int? {
+        if windDirection.count > 0 && hour < windDirection.count {
+            return windDirection[hour].value
+        }
+        return nil
+    }
+    
+    // Thanks: https://www.campbellsci.com/blog/convert-wind-directions
+    func windDirectionName(hour: Int) -> String? {
+        let compass = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+        if let direction = windDirection(hour: hour) {
+            let module = Double(direction % 360)
+            let index = Int(module / 22.5) + 1 // degrees for each sector
+            if index >= 0 && index < compass.count {
+                return compass[index]
+            }
         }
         return nil
     }
@@ -68,6 +137,20 @@ extension RWForecast {
     func windGust(hour: Int) -> Float? {
         if windGust.count > 0 && hour < windGust.count {
             return windGust[hour].value
+        }
+        return nil
+    }
+    
+    func perpw(hour: Int) -> Float? {
+        if PERPW.count > 0 && hour < PERPW.count {
+            return PERPW[hour].value
+        }
+        return nil
+    }
+
+    func htsgw(hour: Int) -> Float? {
+        if HTSGW.count > 0 && hour < HTSGW.count {
+            return HTSGW[hour].value
         }
         return nil
     }
@@ -103,6 +186,13 @@ extension RWForecast {
     func precipitation(hour: Int) -> Int? {
         if precipitation.count > 0 && hour < precipitation.count {
             return precipitation[hour].value
+        }
+        return nil
+    }
+    
+    func pcpt(hour: Int) -> Int? {
+        if PCPT.count > 0 && hour < PCPT.count {
+            return PCPT[hour].value
         }
         return nil
     }

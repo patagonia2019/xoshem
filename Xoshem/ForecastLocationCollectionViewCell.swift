@@ -52,8 +52,8 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         let calendar = Calendar.current
         let components = (calendar as NSCalendar).components(.hour, from: date)
         guard let hour = components.hour,
-              let fcst = spotForecast.fcst else { return }
-        let temperature : Float = fcst.temperature[hour].value
+              let fcst = spotForecast.fcst,
+              let temperature : Float = fcst.temperatureReal(hour: hour) else { return }
         degreeLabel.text = "\(temperature)°"
         roundedContainerView.alpha = 1
         degreeLabel.alpha = 1
@@ -98,15 +98,9 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         updateClosure = didUpdate
     }
     
-    var color: UIColor {
-        if _color != nil {
-            return _color!
-        }
-        _color = JFCore.Common.randomColor()
-        
-        return _color!
-    }
-    var _color: UIColor? = nil
+    lazy var color: UIColor = {
+        return JFCore.Common.randomColor(r : 0)
+    }()
 
     func configureColor() {
         contentView.backgroundColor = color
