@@ -59,7 +59,7 @@ extension RWForecast {
 
     func windSpeedKmh(hour: Int) -> Float? {
         if let knots = windSpeed(hour:hour) {
-            var knotsBft = KnotsBeaufort.init(value: knots)
+            var knotsBft = Knots.init(value: knots)
             return knotsBft.kmh()
         }
         return nil
@@ -67,7 +67,7 @@ extension RWForecast {
     
     func windSpeedMph(hour: Int) -> Float? {
         if let knots = windSpeed(hour:hour) {
-            var knotsBft = KnotsBeaufort.init(value: knots)
+            var knotsBft = Knots.init(value: knots)
             return knotsBft.mph()
         }
         return nil
@@ -75,7 +75,7 @@ extension RWForecast {
 
     func windSpeedMps(hour: Int) -> Float? {
         if let knots = windSpeed(hour:hour) {
-            var knotsBft = KnotsBeaufort.init(value: knots)
+            var knotsBft = Knots.init(value: knots)
             return knotsBft.mps()
         }
         return nil
@@ -83,7 +83,7 @@ extension RWForecast {
     
     func windSpeedBft(hour: Int) -> Int? {
         if let knots = windSpeed(hour:hour) {
-            var knotsBft = KnotsBeaufort.init(value: knots)
+            var knotsBft = Knots.init(value: knots)
             return knotsBft.bft()
         }
         return nil
@@ -91,7 +91,7 @@ extension RWForecast {
     
     func windSpeedBftEffect(hour: Int) -> String? {
         if let knots = windSpeed(hour:hour) {
-            var knotsBft = KnotsBeaufort.init(value: knots)
+            var knotsBft = Knots.init(value: knots)
             return knotsBft.effect()
         }
         return nil
@@ -99,7 +99,7 @@ extension RWForecast {
     
     func windSpeedBftEffectOnSea(hour: Int) -> String? {
         if let knots = windSpeed(hour:hour) {
-            var knotsBft = KnotsBeaufort.init(value: knots)
+            var knotsBft = Knots.init(value: knots)
             return knotsBft.effectOnSea()
         }
         return nil
@@ -107,7 +107,7 @@ extension RWForecast {
     
     func windSpeedBftEffectOnLand(hour: Int) -> String? {
         if let knots = windSpeed(hour:hour) {
-            var knotsBft = KnotsBeaufort.init(value: knots)
+            var knotsBft = Knots.init(value: knots)
             return knotsBft.effectOnLand()
         }
         return nil
@@ -121,15 +121,9 @@ extension RWForecast {
         return nil
     }
     
-    // Thanks: https://www.campbellsci.com/blog/convert-wind-directions
     func windDirectionName(hour: Int) -> String? {
-        let compass = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
         if let direction = windDirection(hour: hour) {
-            let module = Double(direction % 360)
-            let index = Int(module / 22.5) + 1 // degrees for each sector
-            if index >= 0 && index < compass.count {
-                return compass[index]
-            }
+            return WForecast.windDirectionName(direction:direction)
         }
         return nil
     }
