@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import JFWindguru
 import CoreLocation
 
 class RPlacemark: Object {
@@ -25,9 +26,9 @@ class RPlacemark: Object {
     dynamic var subLocality: String? = nil
     dynamic var subThoroughfare: String? = nil
     dynamic var thoroughfare: String? = nil
-    let spotResults = List<RSpotResult>()
-    dynamic var selectedSpot: RSpotResult?
-    dynamic var spotForecast: RWSpotForecast?
+    let spotResults = List<SpotResult>()
+    dynamic var selectedSpot: SpotResult?
+    dynamic var spotForecast: WSpotForecast?
     
     convenience public init(placemark: CLPlacemark) {
         self.init()

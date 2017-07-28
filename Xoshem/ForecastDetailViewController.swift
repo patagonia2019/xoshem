@@ -8,13 +8,14 @@
 
 import UIKit
 import JFCore
+import JFWindguru
 
 class ForecastDetailViewController: UIViewController {
 
     @IBOutlet weak var dayListContainer: UIView!
     @IBOutlet weak var hierarchyContainer: UIView!
     
-    var detailItem: RWSpotForecast? {
+    var detailItem: WSpotForecast? {
         didSet {
             // Update the view.
             configureView()

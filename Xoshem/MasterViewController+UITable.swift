@@ -19,7 +19,7 @@ extension MasterViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Common.cell.identifier.root, for: indexPath)
         
-        if let menus = try Facade.instance.fetchRoot() {
+        if let menus = Facade.instance.fetchRoot() {
             let menu = menus[indexPath.item]
             configureCell(cell, withMenu: menu)
         }

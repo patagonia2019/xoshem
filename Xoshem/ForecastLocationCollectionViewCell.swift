@@ -8,6 +8,7 @@
 
 import UIKit
 import JFCore
+import JFWindguru
 import SwiftIconFont
 
 class ForecastLocationCollectionViewCell: UICollectionViewCell {
@@ -17,7 +18,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var degreeLabel: UILabel!
     @IBOutlet weak var locationIcon: UIImageView!
     var placemark: RPlacemark!
-    var spotForecast: RWSpotForecast!
+    var spotForecast: WSpotForecast!
     var updateClosure: (() -> ())?
 
     override func awakeFromNib() {
@@ -86,7 +87,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         updateClosure = didUpdate
     }
     
-    func configureCell(_ fcr: RWSpotForecast, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
+    func configureCell(_ fcr: WSpotForecast, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
     {
         configure()
         spotForecast = fcr

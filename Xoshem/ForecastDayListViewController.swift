@@ -9,6 +9,7 @@
 import UIKit
 import JFCore
 import SCLAlertView
+import JFWindguru
 
 private let reuseIdentifierSteper = "ForecastDayStepViewCell"
 
@@ -32,7 +33,7 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerTableView: UITableView!
     var placemark: RPlacemark?
-    var spotForecast: RWSpotForecast?
+    var spotForecast: WSpotForecast?
     var fd = [DataStruct]()
     var segmentControl: UISegmentedControl?
     var offsetHour: Int?
