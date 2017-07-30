@@ -53,7 +53,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         let calendar = Calendar.current
         let components = (calendar as NSCalendar).components(.hour, from: date)
         guard let hour = components.hour,
-              let fcst = spotForecast.fcst,
+              let fcst = spotForecast.forecast(),
               let temperature : Float = fcst.temperatureReal(hour: hour) else { return }
         degreeLabel.text = "\(temperature)°"
         roundedContainerView.alpha = 1

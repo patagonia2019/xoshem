@@ -78,7 +78,9 @@ struct Common {
     struct cell {
         struct identifier {
             static let forecast = "ForecastLocationCollectionViewCell"
-            static let forecastDayList = "ForecastDayListViewCell"
+            static let forecastDayList1 = "ForecastDayListViewCell1"
+            static let forecastDayList2 = "ForecastDayListViewCell2"
+            static let forecastDayList3 = "ForecastDayListViewCell3"
             static let help : String = "HelpCell"
             static let menu : String = "MenuCell"
             static let option : String = "OptionCell"

@@ -55,6 +55,21 @@ http://www.flaticon.com/free-icon/hide-interface-symbol_38488
 [Stack Frames](https://www.youtube.com/watch?v=O0llR7sfrkc)
 [Coordinates](http://latitude.to/lat/-31.74132/lng/-60.51155/place/Parana%2C%20Entre%20Rios%2C%20Argentina)
 
+## Acronym
+
+GRIB    identifier (gridded binary) 
+WDIR    Wind direction [°]
+WIND    Wind speed [m/s]
+UGRD    Wind U component [m/s]
+VGRD    Wind V component [m/s]
+HTSG    WSignificant wave height [m]
+WVDI    RMean wave direction [°]
+WVPE    RMean wave period [s]
+DIRP    WPeak wave direction [°]
+PERP    WPeak wave period [s]
+DIRS    WWind sea direction [°] Undefined if wind too weak to generate wave in spectral model domain.
+PERS    WCorresponding wind sea period [s]
+
 
 ## Future work ##
 

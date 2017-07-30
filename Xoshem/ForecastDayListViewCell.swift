@@ -10,31 +10,41 @@ import UIKit
 
 class ForecastDayListViewCell: UITableViewCell {
 
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var keyLabel: UILabel!
-    @IBOutlet weak var valueLabel: UILabel!
-        
+    @IBOutlet weak var iconView: UIImageView?
+    @IBOutlet weak var keyLabel: UILabel?
+    @IBOutlet weak var valueLabel: UILabel?
+    
     func configure()
     {
-        iconView.alpha = 0
-        keyLabel.alpha = 0
-        valueLabel.alpha = 0
+        if let iconView = iconView {
+            iconView.alpha = 0
+        }
+        if let keyLabel = keyLabel {
+            keyLabel.alpha = 0
+        }
+        if let valueLabel = valueLabel {
+            valueLabel.alpha = 0
+        }
     }
     
     func configure(_ iconName: String?, key: String?, value: String?)
     {
         configure()
-        if let _iconName = iconName {
+        if let iconName = iconName,
+           let iconView = iconView {
             iconView.alpha = 1
-            iconView.image = UIImage.init(named: _iconName)
+            iconView.image = UIImage.init(named:
+                iconName)
         }
-        if let _key = key {
+        if let key = key,
+           let keyLabel = keyLabel {
             keyLabel.alpha = 1
-            keyLabel.text = _key
+            keyLabel.text = key + ": "
         }
-        if let _value = value {
+        if let value = value,
+           let valueLabel = valueLabel {
             valueLabel.alpha = 1
-            valueLabel.text = _value
+            valueLabel.text = value
         }
     }
 

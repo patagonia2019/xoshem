@@ -122,17 +122,9 @@ open class Facade: NSObject {
         #if os(watchOS)
             print("TARGET_OS_WATCH")
         #else
-            if (TARGET_OS_SIMULATOR == 1) {
-                print("TARGET_OS_SIMULATOR")
-                Analytics.logFunction(function: #function,
-                                      parameters: ["line": "\(#line)" as AnyObject,
-                                                   "device": "simulator" as AnyObject])
-            }
-            else {
-                Analytics.logFunction(function: #function,
-                                      parameters: ["line": "\(#line)" as AnyObject,
-                                                   "device": "real device" as AnyObject])
-            }
+            Analytics.logFunction(function: #function,
+                                  parameters: ["line": "\(#line)" as AnyObject,
+                                               "device": ((TARGET_OS_SIMULATOR == 1) ? "simulator" : "realdevice") as AnyObject])
         #endif
 
             LocationManager.instance.start()
@@ -347,7 +339,7 @@ open class Facade: NSObject {
         }, success: {
             (spotResult) in
             guard let spotResult = spotResult,
-                spotResult.spots.count > 0 else {
+                spotResult.numberOfSpots() > 0 else {
                     let myerror = JFError.init(code: 999, desc: "No posts to update", path: "\(#file)", line: "\(#line)", underError: nil)
                     failure(myerror)
                     return
@@ -362,8 +354,8 @@ open class Facade: NSObject {
         let placemarks = realm.objects(RPlacemark.self)
         for placemark in placemarks {
             if let spotResult = placemark.spotResults.first,
-                let spotOwner = spotResult.spots.first,
-                let id_spot = spotOwner.id_spot {
+                let spotOwner = spotResult.firstSpot(),
+                let id_spot = spotOwner.id() {
                 ForecastWindguruService.instance.wforecast(bySpotId: id_spot, failure:
                 {
                     [weak self]
