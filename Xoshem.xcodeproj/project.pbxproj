@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70281CF41F302CDD006E7012 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70281CF31F302CDD006E7012 /* RxCLLocationManagerDelegateProxy.swift */; };
+		70281CF51F302CDD006E7012 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70281CF31F302CDD006E7012 /* RxCLLocationManagerDelegateProxy.swift */; };
+		70281CF71F302D3A006E7012 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70281CF61F302D39006E7012 /* CLLocationManager+Rx.swift */; };
+		70281CF81F302D3A006E7012 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70281CF61F302D39006E7012 /* CLLocationManager+Rx.swift */; };
+		70281CFA1F302D71006E7012 /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70281CF91F302D71006E7012 /* GeolocationService.swift */; };
+		70281CFB1F302D71006E7012 /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70281CF91F302D71006E7012 /* GeolocationService.swift */; };
 		702D98EF1F2615B60098FAE6 /* RPlacemark+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D98EE1F2615B60098FAE6 /* RPlacemark+.swift */; };
 		70826A5B1F1F6C7800328BC5 /* RPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */; };
 		70826A5D1F1F6D1F00328BC5 /* RLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5C1F1F6D1F00328BC5 /* RLocation.swift */; };
@@ -114,6 +120,9 @@
 		23A32751654F3056CE8F62B5 /* Pods_Xoshem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A931181C6D8E6C04467BFB /* Pods_Xoshem_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6879D4052CC2AC23310CE46A /* Pods-watchos Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchos Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-watchos Extension/Pods-watchos Extension.release.xcconfig"; sourceTree = "<group>"; };
+		70281CF31F302CDD006E7012 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
+		70281CF61F302D39006E7012 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
+		70281CF91F302D71006E7012 /* GeolocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationService.swift; sourceTree = "<group>"; };
 		702D98EE1F2615B60098FAE6 /* RPlacemark+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RPlacemark+.swift"; sourceTree = "<group>"; };
 		70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPlacemark.swift; sourceTree = "<group>"; };
 		70826A5C1F1F6D1F00328BC5 /* RLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLocation.swift; sourceTree = "<group>"; };
@@ -442,6 +451,9 @@
 				953241E51BC81C75009659A7 /* Facade.swift */,
 				95C4CAA91D5A614B00D35F91 /* Fabric */,
 				70A970961F130B2300DBC25D /* HockeyAppManager.swift */,
+				70281CF91F302D71006E7012 /* GeolocationService.swift */,
+				70281CF31F302CDD006E7012 /* RxCLLocationManagerDelegateProxy.swift */,
+				70281CF61F302D39006E7012 /* CLLocationManager+Rx.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -878,7 +890,10 @@
 				70C9D6221F1F7C0F00F4FED8 /* RPlacemark.swift in Sources */,
 				959A31191D370376003649D5 /* Facade.swift in Sources */,
 				9577B0DB1CF8DCAE002B023B /* ExtensionDelegate.swift in Sources */,
+				70281CFB1F302D71006E7012 /* GeolocationService.swift in Sources */,
 				9577B0EC1CFC6F15002B023B /* Common.swift in Sources */,
+				70281CF51F302CDD006E7012 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
+				70281CF81F302D3A006E7012 /* CLLocationManager+Rx.swift in Sources */,
 				9577B0D91CF8DCAE002B023B /* InterfaceController.swift in Sources */,
 				95069CB61D670F4E003704F6 /* Crash.swift in Sources */,
 			);
@@ -899,6 +914,7 @@
 				95E61E0D1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift in Sources */,
 				70C9D63E1F212DB200F4FED8 /* ForecastLocationViewController+CollectionView.swift in Sources */,
 				95069CB51D670F4D003704F6 /* Crash.swift in Sources */,
+				70281CF71F302D3A006E7012 /* CLLocationManager+Rx.swift in Sources */,
 				70826A5B1F1F6C7800328BC5 /* RPlacemark.swift in Sources */,
 				9508D1CA1DA0B5D4008C2A75 /* ForecastHierarchyHeaderViewController.swift in Sources */,
 				95E61E0F1D3471FF0096E616 /* HelpViewController.swift in Sources */,
@@ -913,6 +929,8 @@
 				952996221D512387000030B0 /* ForecastDayListViewCell.swift in Sources */,
 				952713781DA2D854002D2A29 /* RMenu+.swift in Sources */,
 				953241F61BC81C75009659A7 /* Common.swift in Sources */,
+				70281CF41F302CDD006E7012 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
+				70281CFA1F302D71006E7012 /* GeolocationService.swift in Sources */,
 				70C9D63C1F212BC500F4FED8 /* ForecastLocationViewController+FlexiLayout.swift in Sources */,
 				70C9D6311F20B11600F4FED8 /* RMenu.swift in Sources */,
 				A129F8C41B2CA81600EBC1DD /* AppDelegate.swift in Sources */,

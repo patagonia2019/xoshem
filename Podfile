@@ -8,6 +8,8 @@ def sharedPods
     pod 'Localize-Swift', '~> 1.7'
     pod 'JFWindguru/ExtFwk', :path => '/Users/javierfuchs/Job/southfox/jfwindguru'
     pod 'JFCore', :path => '/Users/javierfuchs/Job/southfox/jfcore'
+    pod 'RxSwift', '~> 3.0'
+    pod 'RxCocoa', '~> 3.0'
 end
 
 def iosPods

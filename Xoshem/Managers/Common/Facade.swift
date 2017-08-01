@@ -10,6 +10,8 @@ import Foundation
 import JFCore
 import JFWindguru
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 /*
  *  Facade

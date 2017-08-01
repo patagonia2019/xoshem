@@ -12,6 +12,8 @@ import JFCore
 import SCLAlertView
 import RealmSwift
 import SwiftSpinner
+import RxSwift
+import RxCocoa
 
 class ForecastLocationViewController: UIViewController {
     
@@ -153,3 +155,14 @@ class ForecastLocationViewController: UIViewController {
     }
     
 }
+
+
+private extension Reactive where Base: UILabel {
+    var coordinates: UIBindingObserver<Base, CLLocationCoordinate2D> {
+        return UIBindingObserver(UIElement: base) { label, location in
+            let text = "Lat: \(location.latitude)\nLon: \(location.longitude)"
+            SCLAlertView().showInfo("location", subTitle: text)
+        }
+    }
+}
+
