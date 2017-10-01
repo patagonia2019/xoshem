@@ -194,7 +194,7 @@ open class Facade: NSObject {
                     }
                 }
                 else {
-                    self?.onProcessing = false
+                    self?.updateForecastUsingFirstPlacemarkSpot()
                 }
             }
             catch {
@@ -367,15 +367,16 @@ open class Facade: NSObject {
                 }, success: {
                     [weak self]
                     (spotForecast) in
-                    guard let spotForecast = spotForecast else {
-                        self?.onProcessing = false
-                        let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastIssue.rawValue,
-                                              desc: Common.title.errorOnUpdate,
-                                              reason: "Error on update forecast",
-                                              suggestion: "\(#function)", path: "\(#file)", line: "\(#line)")
-                        self?.facadeDidErrorNotification(object: myerror)
-                        return
-                    }
+//                    guard let spotForecast = spotForecast else {
+//                        self?.onProcessing = false
+//                        let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastIssue.rawValue,
+//                                              desc: Common.title.errorOnUpdate,
+//                                              reason: "Error on update forecast",
+//                                              suggestion: "\(#function)", path: "\(#file)", line: "\(#line)")
+//                        self?.facadeDidErrorNotification(object: myerror)
+//                        return
+//                    }
+                    let realm = try! Realm()
                     try! realm.write {
                         placemark.spotForecast = spotForecast
                         if placemarks.last == placemark {
