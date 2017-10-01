@@ -577,7 +577,7 @@ Bariloche</string>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gea-gt-R2T">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
-                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
                                                             <color key="textColor" red="0.93728298610000005" green="0.78578016490000002" blue="0.26662868919999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -619,7 +619,7 @@ Bariloche</string>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nkm-QF-q6u">
                                                             <rect key="frame" x="74.5" y="0.0" width="300.5" height="99.5"/>
-                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
                                                             <color key="textColor" red="0.93728298610000005" green="0.78578016490000002" blue="0.26662868919999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -644,7 +644,7 @@ Bariloche</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <outlet property="iconView" destination="iKL-dS-29H" id="qMN-5N-wPE"/>
+                                            <outlet property="iconView" destination="iKL-dS-29H" id="uTB-Oc-GrF"/>
                                             <outlet property="valueLabel" destination="Nkm-QF-q6u" id="KYM-2g-VIL"/>
                                         </connections>
                                     </tableViewCell>
@@ -666,7 +666,7 @@ Bariloche</string>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="key" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ql8-LX-lYN">
                                                             <rect key="frame" x="74.5" y="0.0" width="121" height="99.5"/>
-                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
                                                             <color key="textColor" red="0.93728298610000005" green="0.78578016490000002" blue="0.26662868919999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -675,7 +675,7 @@ Bariloche</string>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUc-tL-Cb8">
                                                             <rect key="frame" x="203.5" y="0.0" width="171.5" height="99.5"/>
-                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
                                                             <color key="textColor" red="0.93728298610000005" green="0.78578016490000002" blue="0.26662868919999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -701,7 +701,7 @@ Bariloche</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <outlet property="iconView" destination="fS2-CI-QbW" id="NLB-J8-3Oz"/>
+                                            <outlet property="iconView" destination="fS2-CI-QbW" id="yVS-Ge-X9r"/>
                                             <outlet property="keyLabel" destination="ql8-LX-lYN" id="act-9X-G9c"/>
                                             <outlet property="valueLabel" destination="dUc-tL-Cb8" id="zXa-Ce-lgf"/>
                                         </connections>

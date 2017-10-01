@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FontWeather_swift
 
 class ForecastDayListViewCell: UITableViewCell {
 
@@ -26,15 +27,25 @@ class ForecastDayListViewCell: UITableViewCell {
             valueLabel.alpha = 0
         }
     }
-    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+
     func configure(_ iconName: String?, key: String?, value: String?)
     {
         configure()
         if let iconName = iconName,
            let iconView = iconView {
             iconView.alpha = 1
-            iconView.image = UIImage.init(named:
-                iconName)
+            let image = UIImage.fontWeatherIconWithCode(code: iconName, textColor: .white, size: CGSize.init(width: 40, height: 40), backgroundColor: .brown)
+//            let image = UIImage.fontWeatherIconWithName(name: .MoonFull, textColor: .blue, size: CGSize.init(width: 40, height: 40))
+            if let data = UIImagePNGRepresentation(image) {
+                let filename = getDocumentsDirectory().appendingPathComponent("\(iconName).png")
+                try? data.write(to: filename)
+            }
+
+            iconView.image = image
         }
         if let key = key,
            let keyLabel = keyLabel {
