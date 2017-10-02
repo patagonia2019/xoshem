@@ -10,7 +10,7 @@ import UIKit
 import JFCore
 import JFWindguru
 
-class ForecastDetailViewController: UIViewController {
+class ForecastDetailViewController: BaseViewController {
 
     @IBOutlet weak var dayListContainer: UIView!
     @IBOutlet weak var hierarchyContainer: UIView!

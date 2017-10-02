@@ -15,7 +15,7 @@ import SwiftSpinner
 import RxSwift
 import RxCocoa
 
-class ForecastLocationViewController: UIViewController {
+class ForecastLocationViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var notificationToken: NotificationToken?

@@ -100,7 +100,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     }
     
     lazy var color: UIColor = {
-        return JFCore.Common.randomColor(r : 0)
+        return JFCore.Common.randomColor()
     }()
 
     func configureColor() {
@@ -113,7 +113,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         roundedContainerView.alpha = 1
         degreeLabel.alpha = 1
         degreeLabel.text = "[Add]"
-        contentView.backgroundColor = UIColor.red
+        contentView.backgroundColor = UIColor.init(red: 199/255, green: 49/255, blue: 41/255, alpha: 1)
     }
     
     func configureIconLocation()

@@ -11,7 +11,7 @@ import JFCore
 
 let EditDidReceiveNotification: NSNotification.Name = NSNotification.Name(rawValue: "EditDidReceiveNotification")
 
-class DetailViewController: UIViewController {
+class DetailViewController: BaseViewController {
 
     @IBOutlet weak var forecastContainer: UIView!
     @IBOutlet weak var searchContainer: UIView!
@@ -31,6 +31,7 @@ class DetailViewController: UIViewController {
             updateRightBarButtonItem()
             showComponent(Int(detail.id))
         }
+        navigationItem.backBarButtonItem?.title = ""
     }
 
     override func viewDidLoad() {

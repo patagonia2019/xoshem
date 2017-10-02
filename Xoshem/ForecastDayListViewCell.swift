@@ -19,6 +19,9 @@ class ForecastDayListViewCell: UITableViewCell {
     {
         if let iconView = iconView {
             iconView.alpha = 0
+            iconView.layer.masksToBounds = false
+            iconView.layer.cornerRadius = 20
+            iconView.clipsToBounds = true
         }
         if let keyLabel = keyLabel {
             keyLabel.alpha = 0
@@ -31,20 +34,14 @@ class ForecastDayListViewCell: UITableViewCell {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-
+    
     func configure(_ iconName: String?, key: String?, value: String?)
     {
         configure()
         if let iconName = iconName,
            let iconView = iconView {
             iconView.alpha = 1
-            let image = UIImage.fontWeatherIconWithCode(code: iconName, textColor: .white, size: CGSize.init(width: 40, height: 40), backgroundColor: .brown)
-//            let image = UIImage.fontWeatherIconWithName(name: .MoonFull, textColor: .blue, size: CGSize.init(width: 40, height: 40))
-            if let data = UIImagePNGRepresentation(image) {
-                let filename = getDocumentsDirectory().appendingPathComponent("\(iconName).png")
-                try? data.write(to: filename)
-            }
-
+            let image = UIImage.fontWeatherIconWithCode(code: iconName, textColor: .white, size: CGSize.init(width: 30, height: 30))
             iconView.image = image
         }
         if let key = key,

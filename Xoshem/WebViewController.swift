@@ -12,7 +12,7 @@ import Localize_Swift
 import SCLAlertView
 import JFCore
 
-class WebViewController: UIViewController, UIWebViewDelegate {
+class WebViewController: BaseViewController, UIWebViewDelegate {
     
     @IBOutlet weak var web: UIWebView!
     var fileName : String?

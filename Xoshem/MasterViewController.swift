@@ -12,7 +12,7 @@ import SCLAlertView
 import SwiftIconFont
 import SwiftSpinner
 
-class MasterViewController: UITableViewController {
+class MasterViewController: BaseTableViewController {
 
     var detailViewController: DetailViewController? = nil
     var errorized : Bool! = false
@@ -63,6 +63,7 @@ class MasterViewController: UITableViewController {
             let menu = menus[indexPath.item]
             controller.detailItem = menu
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            controller.navigationItem.leftBarButtonItem?.tintColor = .white
             controller.navigationItem.leftItemsSupplementBackButton = true
             
             if UIDevice.current.userInterfaceIdiom == .phone {

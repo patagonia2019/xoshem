@@ -55,10 +55,19 @@ extension AppDelegate: UISplitViewControllerDelegate {
         splitViewController.delegate = self
         
         if let bgImage = UIImage.init(named: Common.image.background) {
-            splitViewController.view.backgroundColor = bgImage.patternColor(customSize: UIScreen.main.bounds.size)
+            splitViewController.view.backgroundColor = bgImage.convertColor(color: UIColor.init(red: 118/255, green: 135/255, blue: 219/255, alpha: 0.5)).patternColor(customSize: UIScreen.main.bounds.size)
         }
-        
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+
+
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor.black
+        shadow.shadowOffset = CGSize.init(width: 1, height: 1)
+        UINavigationBar.appearance().titleTextAttributes =
+            [NSForegroundColorAttributeName : UIColor.white,
+             NSShadowAttributeName : shadow]
+        UINavigationBar.appearance().tintColor = .white
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.clear], for: UIControlState.normal)
+
         return true
     }
     

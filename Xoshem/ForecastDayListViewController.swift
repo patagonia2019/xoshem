@@ -19,10 +19,10 @@ struct DataStruct {
     var keyData: String!
     var valueData: String!
     var id: Int!
-    var h : CGFloat!
+    var d : Definition?
 }
 
-class ForecastDayListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ForecastDayListViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var backgroundColorView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -54,13 +54,18 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         unobserveNotification()
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableView == self.tableView {
-            let data = fd[indexPath.item]
-            return data.h
-        }
-        return 44
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 10))
+        header.backgroundColor = .clear
+        return header
     }
     
     ///
@@ -68,41 +73,23 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     ///
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
-            return fd.count
-        }
-        // headerTableView
         return 1
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fd.count
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if tableView == self.tableView {
-            var identifier = "ForecastDayListViewCell1"
-            let data = fd[indexPath.item]
-            if let id = data.id {
-                identifier = "ForecastDayListViewCell\(id)"
-            }
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ForecastDayListViewCell
-            cell.backgroundColor = UIColor.clear
-            cell.configure(data.iconData, key: data.keyData, value: data.valueData)
-            return cell
+        var identifier = "ForecastDayListViewCell1"
+        let data = fd[indexPath.section]
+        if let id = data.id {
+            identifier = "ForecastDayListViewCell\(id)"
         }
-        
-        // headerTableView
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierSteper, for: indexPath) as! ForecastDayStepViewCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ForecastDayListViewCell
         cell.backgroundColor = UIColor.clear
-        cell.configureCell (hour3(), limit:stepperLimit(),
-            didUpdate: {
-                [weak self] (value: Int) in
-                self?.offsetHour = value
-                self?.updateForecast()
-            }, didTapConfigure: {
-                [weak self] in
-                self?.showConfigureAlert()
-        })
+        cell.configure(data.iconData, key: data.keyData, value: data.valueData)
         return cell
     }
 
@@ -112,6 +99,11 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+//        let data = fd[indexPath.section]
+        SCLAlertView().showInfo("Info", subTitle: "")
     }
     
     func hourIterator() -> Int {
@@ -176,8 +168,8 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         return fcst.numberOfHours()
     }
     
-    func appendFd(_ icon: String, _ key: String, _ value: String, _ id: Int, _ h: CGFloat) {
-        let data = DataStruct(orderData: fd.count, iconData: icon, keyData: key, valueData: value, id: id, h: h)
+    func appendFd(_ icon: String, _ key: String, _ value: String, _ id: Int, _ d: Definition? = nil) {
+        let data = DataStruct(orderData: fd.count, iconData: icon, keyData: key, valueData: value, id: id, d: d)
         fd.append(data)
     }
 
@@ -193,84 +185,85 @@ class ForecastDayListViewController: UIViewController, UITableViewDataSource, UI
         
         let id_spot = spotForecast.spotId()
         let name = spotForecast.spotName()
-        appendFd("", "\(wd) \(day24()), \(m)", "\(hour24())h", 1, 44)
-        appendFd("", "Spot \(id_spot)", "\(name)", 1, 100)
+
+        appendFd("", "\(wd) \(day24()), \(m)", "\(hour24())h", 1)
+        appendFd("", "Spot \(id_spot)", "\(name)", 1)
         if let t = fcst.temperature(hour: h),
            let tr = fcst.temperatureReal(hour: h) {
-            appendFd("thermometer-exterior", "Temperature", "\(t) °C", 2, 44)
-            appendFd("thermometer-exterior", "Temperature Real", "\(tr) °C", 2, 44)
+            appendFd("thermometer-exterior", "Temperature", "\(t) °C", 3)
+            appendFd("thermometer-exterior", "Temperature Real", "\(tr) °C", 3)
         }
         if let rh = fcst.relativeHumidity(hour: h) {
-            appendFd("humidity", "Relative humidity", "\(rh) %", 3, 44)
+            appendFd("humidity", "Relative humidity", "\(rh) %", 3)
         }
         if let dir = fcst.windDirectionName(hour: h) {
-            appendFd("wind-direction", "Wind Direction", "\(dir)", 3, 44)
+            appendFd("wind-direction", "Wind Direction", "\(dir)", 3)
         }
         if let knots = fcst.windSpeedKnots(hour: h) {
-            appendFd("windy", "Wind Speed", "\(knots) knots", 3, 44)
+            appendFd("windy", "Wind Speed", "\(knots) knots", 3)
         }
         if let gust = fcst.windGust(hour: h) {
-            appendFd("strong-wind", "Wind Gusts", "\(gust) knots", 3, 44)
+            appendFd("strong-wind", "Wind Gusts", "\(gust) knots", 3)
         }
         if let bft = fcst.windSpeedBft(hour: h),
             let effect = fcst.windSpeedBftEffect(hour: h),
             let onSea = fcst.windSpeedBftEffectOnSea(hour: h),
             let onLand = fcst.windSpeedBftEffectOnLand(hour: h) {
-            appendFd("wind-beaufort-\(bft)", "", "Wind Speed Effect \(bft) bft\nOn Sea: \(effect)\n\(onSea)\nOn Land:\(onLand)", 2, 100)
+            appendFd("wind-beaufort-\(bft)", "", "Wind Speed Effect \(bft) bft\nOn Sea: \(effect)\n\(onSea)\nOn Land:\(onLand)", 2)
         }
         if let perpw = fcst.perpw(hour: h) {
-            appendFd("flood", "Peak wave period", "\(perpw)", 3, 44)
+            appendFd("flood", "Peak wave period", "\(perpw)", 3)
         }
         if let htsgw = fcst.htsgw(hour: h) {
-            appendFd("flood", "Significant Wave Height", "\(htsgw)", 3, 44)
+            appendFd("flood", "Significant Wave Height", "\(htsgw)", 3)
         }
         if let smer = fcst.smer(hour: h),
             let smern = fcst.smern(hour: h) {
-            appendFd("small-craft-advisory", "Wind SMER / SMERN", "\(smer) / \(smern)", 3, 44)
+            appendFd("small-craft-advisory", "Wind SMER / SMERN", "\(smer) / \(smern)", 3)
         }
 
         if let cct = fcst.cloudCoverTotal(hour: h) {
-            appendFd("cloudy", "Cloud Cover Total", "\(cct) %", 3, 44)
+            appendFd("cloud", "Cloud Cover Total", "\(cct) %", 3)
         }
         if let cch = fcst.cloudCoverHigh(hour: h) {
-            appendFd("cloud-up", "Cloud Cover High", "\(cch) %", 3, 44)
+            appendFd("cloud", "Cloud Cover High", "\(cch) %", 3)
         }
         if let ccm = fcst.cloudCoverMid(hour: h) {
-            appendFd("cloud", "Cloud Cover Mid", "\(ccm) %", 3, 44)
+            appendFd("cloud", "Cloud Cover Mid", "\(ccm) %", 3)
         }
         if let ccl = fcst.cloudCoverLow(hour: h) {
-            appendFd("cloud-down", "Cloud Cover Low", "\(ccl) %", 3, 44)
+            appendFd("cloud", "Cloud Cover Low", "\(ccl) %", 3)
         }
         let pcpt = fcst.pcpt(hour: h)
         if let ppt = fcst.precipitation(hour: h) {
             if let pcpt = pcpt {
-                appendFd("rain", "Precipitation", "\(ppt) / \(pcpt) mm/3h", 3, 44)
+                appendFd("rain", "Precipitation", "\(ppt) / \(pcpt) mm/3h", 3)
             }
             else {
-                appendFd("rain", "Precipitation", "\(ppt) mm/3h", 3, 44)
+                appendFd("rain", "Precipitation", "\(ppt) mm/3h", 3)
             }
         }
         if let slp = fcst.seaLevelPressure(hour: h) {
-            appendFd("barometer", "Sea Level Pressure", "\(slp) Pa", 3, 44)
+            appendFd("barometer", "Sea Level Pressure", "\(slp) Pa", 3)
         }
         if let fl = fcst.freezingLevel(hour: h) {
-            appendFd("snowflake-cold", "Freezing Level", "\(fl) meters (0° isotherm)", 3, 100)
+            appendFd("snowflake-cold", "Freezing Level", "\(fl) meters (0° isotherm)", 3)
         }
         if let tz = spotForecast.timezone() {
-            appendFd("time-1", "Timezone", "\(tz)", 3, 100)
+            appendFd("time-1", "Timezone", "\(tz)", 3)
         }
         let coordinates = spotForecast.coordinates()
-        appendFd("train", "Coordinates", "\(coordinates)", 3, 100)
+        appendFd("alien", "Coordinates", "\(coordinates)", 3)
         if let sunrise = spotForecast.sunriseTime(),
             let sunset = spotForecast.sunsetTime() {
-            appendFd("sunrise", "Sunrise", "\(sunrise)", 3, 30)
-            appendFd("sunset", "Sunset", "\(sunset)", 3, 30)
+            appendFd("sunrise", "Sunrise", "\(sunrise)", 3)
+            appendFd("sunset", "Sunset", "\(sunset)", 3)
         }
         if let model = spotForecast.modelInfo() {
-            appendFd("small-craft-advisory", "Forecast Model", "\(model)", 3, 60)
+            appendFd("small-craft-advisory", "Forecast Model", "\(model)", 3)
         }
         if let updated = fcst.lastUpdate() {
-            appendFd("gale-warning", "Updated", "\(updated)", 3, 60)
+            appendFd("gale-warning", "Updated", "\(updated)", 3)
         }
         tableView.reloadData()
         headerTableView.reloadData()

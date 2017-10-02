@@ -10,7 +10,7 @@ import UIKit
 import JFCore
 import SwiftIconFont
 
-class HelpViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HelpViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var currentMenuOption : RMenu?

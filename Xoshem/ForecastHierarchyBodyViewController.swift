@@ -9,7 +9,7 @@
 import UIKit
 import JFCore
 
-class ForecastHierarchyBodyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ForecastHierarchyBodyViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
