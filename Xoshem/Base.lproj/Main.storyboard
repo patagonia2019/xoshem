@@ -571,41 +571,43 @@ Bariloche</string>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="ForecastDayListViewCell1" id="sCa-pb-49R" customClass="ForecastDayListViewCell" customModule="Xoshem">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ForecastDayListViewCell1" id="sCa-pb-49R" customClass="ForecastDayListViewCell" customModule="Xoshem">
                                         <rect key="frame" x="0.0" y="1" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sCa-pb-49R" id="HZ9-Kh-sD6">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="saG-4m-gJQ">
-                                                    <rect key="frame" x="8" y="0.0" width="328" height="99.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gea-gt-R2T">
-                                                            <rect key="frame" x="0.0" y="0.0" width="328" height="99.5"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <size key="shadowOffset" width="1" height="1"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9op-co-Ubw">
+                                                    <rect key="frame" x="-0.5" y="0.0" width="375" height="100"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JAv-qG-zs2">
+                                                        <size key="itemSize" width="50" height="50"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VYW-IB-iOR">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                            </view>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                </collectionView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="saG-4m-gJQ" firstAttribute="height" secondItem="HZ9-Kh-sD6" secondAttribute="height" id="BUI-Xa-3d4"/>
-                                                <constraint firstItem="saG-4m-gJQ" firstAttribute="leading" secondItem="HZ9-Kh-sD6" secondAttribute="leadingMargin" id="E6m-RD-31W"/>
-                                                <constraint firstItem="saG-4m-gJQ" firstAttribute="width" secondItem="HZ9-Kh-sD6" secondAttribute="width" id="JON-ev-FjF"/>
-                                                <constraint firstItem="gea-gt-R2T" firstAttribute="height" secondItem="HZ9-Kh-sD6" secondAttribute="height" id="fhZ-dg-LDG"/>
-                                                <constraint firstItem="saG-4m-gJQ" firstAttribute="top" secondItem="HZ9-Kh-sD6" secondAttribute="top" id="xb2-GS-LfY"/>
+                                                <constraint firstItem="9op-co-Ubw" firstAttribute="centerX" secondItem="HZ9-Kh-sD6" secondAttribute="centerX" id="j1N-0o-Rbc"/>
+                                                <constraint firstItem="9op-co-Ubw" firstAttribute="width" secondItem="HZ9-Kh-sD6" secondAttribute="width" id="ke3-vV-Ap1"/>
+                                                <constraint firstItem="9op-co-Ubw" firstAttribute="height" secondItem="HZ9-Kh-sD6" secondAttribute="height" id="oF1-0e-dx0"/>
+                                                <constraint firstItem="9op-co-Ubw" firstAttribute="centerY" secondItem="HZ9-Kh-sD6" secondAttribute="centerY" id="uYU-hC-ljV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <outlet property="valueLabel" destination="gea-gt-R2T" id="Rgj-CT-hic"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="ForecastDayListViewCell2" id="4ZK-Kd-RhL" customClass="ForecastDayListViewCell" customModule="Xoshem">
                                         <rect key="frame" x="0.0" y="101" width="375" height="100"/>

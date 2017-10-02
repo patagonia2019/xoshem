@@ -55,7 +55,7 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5
+        return 10
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -73,17 +73,19 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     ///
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
         return fd.count
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        let section = indexPath.section
+        let row = indexPath.row
+        
         var identifier = "ForecastDayListViewCell1"
-        let data = fd[indexPath.section]
+        let data = fd[row]
         if let id = data.id {
             identifier = "ForecastDayListViewCell\(id)"
         }
@@ -107,7 +109,7 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     }
     
     func hourIterator() -> Int {
-        return hour3() / 3
+        return hour3() / 3 - 1
     }
 
     func hour3() -> Int {
@@ -179,14 +181,16 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
 
         guard let spotForecast = spotForecast,
             let fcst = spotForecast.forecast() else { return }
-        let wd = weekday()
-        let m = month()
         let h = hourIterator()
         
         let id_spot = spotForecast.spotId()
         let name = spotForecast.spotName()
+        let hour24 = fcst.hour24(hour: h) ?? "-"
+        let day = fcst.day(hour: h) ?? "-"
+        let weekday = fcst.weekday(hour: h) ?? "-"
 
-        appendFd("", "\(wd) \(day24()), \(m)", "\(hour24())h", 1)
+        appendFd("", "", "\(day) - \(weekday)", 1)
+        appendFd("", "", "\(hour24)h", 1)
         appendFd("", "Spot \(id_spot)", "\(name)", 1)
         if let t = fcst.temperature(hour: h),
            let tr = fcst.temperatureReal(hour: h) {
