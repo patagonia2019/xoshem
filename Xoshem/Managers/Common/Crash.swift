@@ -10,7 +10,6 @@ import Foundation
 #if os(iOS)
     import Fabric
     import Crashlytics
-    import DigitsKit
 #endif
 import JFCore
 
@@ -18,7 +17,7 @@ class Crash {
 
     class func start() {
     #if os(iOS)
-        Fabric.with([Crashlytics.self, Digits.self])
+        Fabric.with([Crashlytics.self])
         Fabric.sharedSDK().debug = true
         let selector = #selector(logCustomEventWithName(_:customAttributes:))
         let cl : AnyClass = Answers.classForCoder()

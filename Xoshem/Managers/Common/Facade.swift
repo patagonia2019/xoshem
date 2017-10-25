@@ -9,9 +9,6 @@
 import Foundation
 import JFCore
 import JFWindguru
-import RealmSwift
-import RxSwift
-import RxCocoa
 
 /*
  *  Facade
@@ -25,9 +22,10 @@ open class Facade: NSObject {
     //
     // Attributes only modified by this class
     //
-    fileprivate var locations = [CLLocation]()
+    var coreLocations = [RLocation]()
+    var menuArray = [RMenu]()
     fileprivate var started : Bool = false
-    fileprivate var onProcessing : Bool = false {
+    var onProcessing : Bool = false {
         willSet {
             if newValue == true {
                 requestDidStartNotification(object: nil)
@@ -37,32 +35,18 @@ open class Facade: NSObject {
             }
         }
     }
-    fileprivate var auth: Auth!
     fileprivate static var firstTime: Bool = true
     open var lastRefreshDate : Date?
 
     open static let instance = Facade()
+    
 
     //
     // initialization
     //
     fileprivate override init() {
         super.init()
-        if let info = Bundle.main.infoDictionary,
-            let schemaVersion = info["CFBundleShortVersionString"] as? Int
-        {
-            let version = UInt64(schemaVersion)
-            let config = Realm.Configuration(
-                schemaVersion: version,
-                migrationBlock: { migration, oldSchemaVersion in
-                    if (oldSchemaVersion < 1) {
-                    }
-            })
-            Realm.Configuration.defaultConfiguration = config
-        }
-
         Crash.start()
-        auth = Auth()
     }
     
     open func restart() throws {
@@ -108,15 +92,8 @@ open class Facade: NSObject {
             
         #if os(watchOS)
         #else
-            if (Facade.firstTime) {
-                do {
-                    try RMenu.removeAll()
-                }
-                catch {
-                    self?.facadeDidErrorNotification(object: error)
-                    return
-                }
-
+            if (Facade.firstTime && self?.menuArray.count == 0) {
+                self?.createMenu()
                 Facade.firstTime = false
             }
         #endif
@@ -148,212 +125,8 @@ open class Facade: NSObject {
         })
     }
     
-    
-    func updateLocations(usingDiscoveredLocations currentLocations: [CLLocation]) throws {
-        JFCore.Common.synchronized(syncBlock: { [weak self] in
-            do {
-                self?.onProcessing = true
-                let realm = try Realm()
-                let locations = realm.objects(RLocation.self)
-                
-                var change = true
-                
-                mainFor: for locationA in locations {
-                    for locationB in currentLocations {
-                        if let placemark = locationA.placemarks.last,
-                            placemark.spotForecast != nil &&
-                            locationB.altitude == locationA.altitude &&
-                            locationB.coordinate.latitude == locationA.latitude &&
-                            locationB.coordinate.longitude == locationA.longitude
-                        {
-                            change = false
-                            break mainFor
-                        }
-                    }
-                }
-                if change {
-                    try realm.write() {
-                        for location in locations {
-                            for placemark in location.placemarks {
-                                if let spotForecast = placemark.spotForecast {
-                                    realm.delete(spotForecast)
-                                }
-//                                if let selectedSpot = placemark.selectedSpot {
-//                                    realm.delete(selectedSpot)
-//                                }
-//                                realm.delete(placemark.spotResults)
-                            }
-                            realm.delete(location.placemarks)
-                        }
-                        realm.delete(locations)
-                        for corelocation in currentLocations {
-                            let rlocation = RLocation(location: corelocation)
-                            realm.add(rlocation)
-                            self?.createPlacemark(withLocation: corelocation, rlocation: rlocation)
-                        }
-                    }
-                }
-                else {
-                    self?.updateForecastUsingFirstPlacemarkSpot()
-                }
-            }
-            catch {
-                self?.onProcessing = false
-                let myerror = JFError(code: Common.ErrorCode.fetchLocationIssue.rawValue,
-                    desc: Common.title.errorOnSearch,
-                    reason: "Error on search / delete location",
-                    suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: error as NSError)
-                Analytics.logFatal(error: myerror)
-                myerror.fatal()
-            }
-        })
-    }
-    
-    func createPlacemark(withLocation location: CLLocation, rlocation: RLocation) {
-        LocationManager.instance.reverseLocation(location: location,
-            didFailWithError:{ [weak self] (error) in
-                self?.onProcessing = false
-                self?.facadeDidErrorNotification(object: error)
-            },
-            didUpdatePlacemarks: {
-                [weak self]
-                (placemarks) in
-                do {
-                    let realm = try Realm()
-                    try realm.write() {
-                        for corePlacemark in placemarks {
-                            let rplacemark = RPlacemark(placemark: corePlacemark)
-                            realm.add(rplacemark)
-                            rlocation.placemarks.append(rplacemark)
-                        }
-                        self?.updateSpotsUsingPlacemarks()
-                    }
-                }
-                catch {
-                    let myerror = JFError(code: Common.ErrorCode.cdUpdateLocationIssue.rawValue,
-                                          desc: Common.title.errorOnUpdate,
-                                          reason: "Error on Location/Placemarks import",
-                                          suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: error as NSError)
-                    Analytics.logFatal(error: myerror)
-                    self?.onProcessing = false
-                    self?.facadeDidErrorNotification(object: myerror)
-                    myerror.fatal()
-                }
-        })
-
-    }
-    
-
-    func updateSpotsUsingPlacemarks() {
-        let realm = try! Realm()
-        let placemarks = realm.objects(RPlacemark.self)
-        for placemark in placemarks {
-            let array = createNameArray(withPlacemark: placemark)
-            updateSpots(usingPlacemark: placemark, array: array)
-        }
-    }
-    
-    func updateSpots(usingPlacemark placemark: RPlacemark, array: [String]) {
-        var array = array
-        var lastError : JFError? = nil
-        if array.count > 0 {
-            let name = array.removeFirst()
-            updateSpotsTrying(withName: name, failure: {
-                [weak self] (error) in
-                lastError = error
-                self?.updateSpots(usingPlacemark: placemark, array: array)
-            }, success: {
-                [weak self] (spotResult) in
-                guard let spotResult = spotResult else {
-                    self?.updateSpots(usingPlacemark: placemark, array: array)
-                    return
-                }
-                let realm = try! Realm()
-                let placemarks = realm.objects(RPlacemark.self)
-                try! realm.write {
-                    placemark.spotResults.append(spotResult)
-                    if placemarks.last == placemark {
-                        self?.updateForecastUsingFirstPlacemarkSpot()
-                   }
-                }
-            })
-        }
-        else {
-            onProcessing = false
-            facadeDidErrorNotification(object: lastError)
-        }
-    }
-    
-    func createNameArray(withPlacemark placemark: RPlacemark) -> [String] {
-        
-        var array = [String]() // TODO: remove repeated
-        
-        if let string = placemark.subLocality {
-            array.append(string)
-        }
-        if let string = placemark.locality {
-            if !array.contains(string) {
-                array.append(string)
-            }
-        }
-        if let string = placemark.administrativeArea {
-            if !array.contains(string) {
-                array.append(string)
-            }
-        }
-        if let string = placemark.subAdministrativeArea {
-            if !array.contains(string) {
-                array.append(string)
-            }
-        }
-        if let string = placemark.name {
-            if !array.contains(string) {
-                array.append(string)
-            }
-        }
-        if let string = placemark.inlandWater {
-            if !array.contains(string) {
-                array.append(string)
-            }
-        }
-        if let string = placemark.country {
-            if !array.contains(string) {
-                array.append(string)
-            }
-        }
-        
-        return array
-    }
-    
-
-    
-    func updateSpotsTrying(withName name: String,
-                           failure:@escaping (_ error: JFError?) -> Void,
-                           success:@escaping (_ spotResult: SpotResult?) -> Void) {
-        ForecastWindguruService.instance.searchSpots(byLocation: name, failure: { (error) in
-            if let nserror = error?.nserror {
-                let myerror = JFError.init(code: nserror.code, desc: nserror.localizedDescription, reason: nserror.localizedFailureReason, suggestion: nserror.localizedRecoverySuggestion, path: "\(#file)", line: "\(#line)", underError: nserror)
-                failure(myerror)
-            }
-            else {
-                failure(nil)
-            }
-        }, success: {
-            (spotResult) in
-            guard let spotResult = spotResult,
-                spotResult.numberOfSpots() > 0 else {
-                    let myerror = JFError.init(code: 999, desc: "No posts to update", path: "\(#file)", line: "\(#line)", underError: nil)
-                    failure(myerror)
-                    return
-            }
-            success(spotResult)
-        })
-    }
-    
     func updateForecastUsingFirstPlacemarkSpot() {
         
-        let realm = try! Realm()
-        let placemarks = realm.objects(RPlacemark.self)
         for placemark in placemarks {
             if let spotResult = placemark.spotResults.first,
                 let spotOwner = spotResult.firstSpot(),
@@ -389,21 +162,6 @@ open class Facade: NSObject {
         }
     }
     
-
-    func fetchLocation() throws -> Results<RLocation>? {
-        do {
-            let realm = try Realm()
-            return realm.objects(RLocation.self)
-        }
-        catch {
-            let myerror = JFError(code: Common.ErrorCode.fetchLocationIssue.rawValue,
-                                desc: Common.title.errorOnSearch,
-                                reason: "Seems to be an initialization error in database with table Location",
-                                suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: error as NSError)
-            Analytics.logError(error: myerror)
-            throw myerror
-        }
-    }
     
     func forecastDidUpdateNotification(object: Any?) {
         NotificationCenter.default.post(name: ForecastDidUpdateNotification, object: object)
@@ -453,52 +211,22 @@ open class Facade: NSObject {
         }
     }
     
-#if os(watchOS)
-#else
-    func fetchRoot() -> Results<RMenu>? {
-        do {
-            return try RMenu.fetchRoot()
-        }
-        catch {
-            facadeDidErrorNotification(object: error)
-            return nil
-        }
+    /*
+     * Private parts
+     */
+    
+    private struct Constants {
+        static let plist = "Xoshem"
     }
+    
+    
+    public lazy var info : [String : AnyObject]? = {
+        guard let path = Bundle.main.path(forResource: Constants.plist, ofType: "plist"),
+            let dict = NSDictionary.init(contentsOfFile: path) as? [String: AnyObject] else {
+                return nil
+        }
+        return dict
+    }()
+    
 
-    func fetchHelp() -> Results<RMenu>? {
-        do {
-           return try RMenu.fetchHelp()
-        }
-        catch {
-            facadeDidErrorNotification(object: error)
-            return nil
-        }
-    }
-    
-    func fetchLocalForecast() -> WSpotForecast? {
-        do {
-            let realm = try Realm()
-            if let placemark = realm.objects(RPlacemark.self).last {
-                return placemark.spotForecast
-            }
-        }
-        catch {
-            facadeDidErrorNotification(object: error)
-        }
-        return nil
-    }
-
-    func fetchLocalPlacemark() -> RPlacemark? {
-        do {
-            let realm = try Realm()
-            return realm.objects(RPlacemark.self).last
-        }
-        catch {
-            facadeDidErrorNotification(object: error)
-        }
-        return nil
-    }
-#endif
-    
-    
 }

@@ -26,13 +26,13 @@ class HelpViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 
     // MARK: - Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let menus = try! RMenu.fetchHelp() else { return 0 }
+        guard let menus = Facade.instance.fetchHelp() else { return 0 }
         return menus.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Common.cell.identifier.help, for: indexPath)
-        if let menus = try! RMenu.fetchHelp() {
+        if let menus = Facade.instance.fetchHelp() {
             let menu = menus[indexPath.item]
             configureCell(cell, withMenu: menu)
         }
@@ -40,7 +40,7 @@ class HelpViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let menus = try! RMenu.fetchHelp() else { return }
+        guard let menus = Facade.instance.fetchHelp() else { return }
         let menu = menus[indexPath.item]
         performSegue(withIdentifier: menu.segue, sender: self)
     }

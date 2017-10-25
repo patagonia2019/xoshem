@@ -8,31 +8,10 @@
 
 import Foundation
 import SwiftIconFont
-import RealmSwift
 import JFCore
 
 extension RMenu {
     
-    class func fetchRoot() throws -> Results<RMenu>? {
-        let realm = try Realm()
-        var objects = realm.objects(RMenu.self).filter("parentId = 0")
-        if objects.count == 0 {
-            try RMenu.create()
-            objects = realm.objects(RMenu.self).filter("parentId = 0")
-        }
-        return objects
-    }
-    
-    class func fetchHelp() throws -> Results<RMenu>? {
-        let realm = try Realm()
-        var objects = realm.objects(RMenu.self).filter("parentId = 4")
-        if objects.count == 0 {
-            try RMenu.create()
-            objects = realm.objects(RMenu.self).filter("parentId = 4")
-        }
-        return objects
-    }
-
     var iconFont: Fonts? {
         switch iconList {
         case "FontAwesome":
@@ -55,138 +34,23 @@ extension RMenu {
     }
     
     
-    class func create() throws {
-        
-        let menuArray : [[String: AnyObject]] = [
-            [
-                "parentId": Int(0) as AnyObject,
-                "id": Int(1) as AnyObject,
-                "name": Common.title.Forecast as AnyObject,
-                "iconList": "themify" as AnyObject,
-                "iconName": "cloud" as AnyObject,
-                "edit": Bool(false) as AnyObject
-            ],
-            [
-                "parentId": Int(0) as AnyObject,
-                "id": Int(2) as AnyObject,
-                "name": Common.title.Search as AnyObject,
-                "iconList": "FontAwesome" as AnyObject,
-                "iconName": "search" as AnyObject,
-                "edit": Bool(false) as AnyObject
-            ],
-            [
-                "parentId": Int(0) as AnyObject,
-                "id": Int(3) as AnyObject,
-                "name": Common.title.Options as AnyObject,
-                "iconList": "FontAwesome" as AnyObject,
-                "iconName": "gear" as AnyObject,
-                "edit": Bool(false) as AnyObject
-            ],
-            [
-                "parentId": Int(0) as AnyObject,
-                "id": Int(4) as AnyObject,
-                "name": Common.title.Help as AnyObject,
-                "iconList": "Ionicons" as AnyObject,
-                "iconName": "help-circled" as AnyObject,
-                "edit": Bool(false) as AnyObject
-            ],
-            [
-                "parentId": Int(4) as AnyObject,
-                "id": Int(1) as AnyObject,
-                "name": Common.title.frequentlyAskedQuestions as AnyObject,
-                "segue": Common.segue.web as AnyObject,
-                "file": Common.file.faq as AnyObject,
-                "iconList": "Ionicons" as AnyObject,
-                "iconName": "ios-book-outline" as AnyObject,
-                "edit": Bool(false) as AnyObject
-            ],
-            [
-                "parentId": Int(4) as AnyObject,
-                "id": Int(2) as AnyObject,
-                "name": Common.title.Tutorial as AnyObject,
-                "segue": Common.segue.web as AnyObject,
-                "file": Common.file.tutorial as AnyObject,
-                "iconList": "octicons" as AnyObject,
-                "iconName": "device-desktop" as AnyObject,
-                "edit": Bool(false) as AnyObject
-            ],
-            [
-                "parentId": Int(4) as AnyObject,
-                "id": Int(3) as AnyObject,
-                "name": Common.title.TermsOfUse as AnyObject,
-                "segue": Common.segue.web as AnyObject,
-                "file": Common.file.tou as AnyObject,
-                "iconList": "Ionicons" as AnyObject,
-                "iconName": "bowtie" as AnyObject,
-                "edit": Bool(false) as AnyObject
-            ],
-            [
-                "parentId": Int(4) as AnyObject,
-                "id": Int(4) as AnyObject,
-                "name": Common.title.TermsAndConditions as AnyObject,
-                "segue": Common.segue.web as AnyObject,
-                "file": Common.file.tac as AnyObject,
-                "iconList": "Ionicons" as AnyObject,
-                "iconName": "bowtie" as AnyObject,
-                "edit": Bool(false) as AnyObject
-            ],
-            [
-                "parentId": Int(4) as AnyObject,
-                "id": Int(5) as AnyObject,
-                "name": "\(Common.title.About) \(JFCore.Common.app)" as AnyObject,
-                "segue": Common.segue.about as AnyObject,
-                "file": Common.file.about as AnyObject,
-                "iconList": "Ionicons" as AnyObject,
-                "iconName": "ios-information-outline" as AnyObject,
-                "edit": Bool(false) as AnyObject
-            ]
-        ]
-        
-        /*
-         Create a context on a private queue to:
-         - Fetch existing menus to compare with incoming data.
-         - Create new menus as required.
-         */
-        
-        do {
-            let realm = try Realm()
-            try realm.write {
-                for menu in menuArray {
-                    realm.create(RMenu.self, value: menu)
-                }
-            }
+    static func parseJSON(_ json: [[String : Any?]]?) -> [RMenu] {
+        var array = [RMenu]()
+        for dict in json ?? [[:]] {
+            let id = dict["id"] as? Int ?? 0
+            let parentId = dict["parentId"] as? Int ?? 0
+            let requireLogin = dict["requireLogin"] as? Bool ?? false
+            let name = dict["name"] as? String ?? ""
+            let segue = dict["segue"] as? String ?? ""
+            let iconList = dict["iconList"] as? String ?? ""
+            let iconName = dict["iconName"] as? String ?? ""
+            let file = dict["file"] as? String ?? ""
+            let submenu = parseJSON(dict["submenu"] as? [[String : Any?]])
+            array.append(RMenu(edit: false, id: id, name: name, segue: segue, iconList: iconList, iconName: iconName, parentId: parentId, requireLogin: requireLogin, file: file, submenu: submenu))
         }
-        catch {
-            let myerror = JFError(code: Common.ErrorCode.importMenuArrayIssue.rawValue,
-                                  desc: Common.title.errorOnImport,
-                                  reason: "Error on CDMenu",
-                                  suggestion: "\(#function)", path: "\(#file)", line: "\(#line)", underError: error as NSError)
-            Analytics.logError(error: myerror)
-            throw myerror
-        }
+        return array
     }
     
-    
-    class func removeAll() throws {
-        do {
-            let realm = try Realm()
-            let objects = realm.objects(RMenu.self)
-            if objects.count > 0 {
-                try realm.write {
-                    realm.delete(objects)
-                }
-            }
-        }
-        catch {
-            let myerror = JFError(code: Common.ErrorCode.removeMenuIssue.rawValue,
-                                  desc: Common.title.errorOnDelete,
-                                  reason: "Failed at fetch menu and remove",
-                                  suggestion: "\(#function)", path: "\(#file)", line: "\(#line)",
-                                  underError: error as NSError)
-            Analytics.logError(error: myerror)
-            
-            throw myerror
-        }
-    }
-    
+
+
 }

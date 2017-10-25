@@ -8,7 +8,6 @@
 
 import UIKit
 import JFCore
-import SCLAlertView
 import JFWindguru
 
 private let reuseIdentifierSteper = "ForecastDayStepViewCell"
@@ -77,11 +76,23 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
+        if section == 0 {
+            let id_spot = spotForecast.spotId()
+            let name = spotForecast.spotName()
+            let hour24 = fcst.hour24(hour: h) ?? "-"
+            let day = fcst.day(hour: h) ?? "-"
+            let weekday = fcst.weekday(hour: h) ?? "-"
+            
+            appendFd("", "", "\(day) - \(weekday)", 2)
+            appendFd("", "", "\(hour24)h", 2)
+            appendFd("", "Spot \(id_spot)", "\(name)", 2)
+
+        }
         let row = indexPath.row
         
         var identifier = "ForecastDayListViewCell1"
@@ -105,7 +116,7 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
 //        let data = fd[indexPath.section]
-        SCLAlertView().showInfo("Info", subTitle: "")
+//        SCLAlertView().showInfo("Info", subTitle: "")
     }
     
     func hourIterator() -> Int {
@@ -183,15 +194,6 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
             let fcst = spotForecast.forecast() else { return }
         let h = hourIterator()
         
-        let id_spot = spotForecast.spotId()
-        let name = spotForecast.spotName()
-        let hour24 = fcst.hour24(hour: h) ?? "-"
-        let day = fcst.day(hour: h) ?? "-"
-        let weekday = fcst.weekday(hour: h) ?? "-"
-
-        appendFd("", "", "\(day) - \(weekday)", 1)
-        appendFd("", "", "\(hour24)h", 1)
-        appendFd("", "Spot \(id_spot)", "\(name)", 1)
         if let t = fcst.temperature(hour: h),
            let tr = fcst.temperatureReal(hour: h) {
             appendFd("thermometer-exterior", "Temperature", "\(t) °C", 3)
@@ -323,38 +325,38 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     
 
     fileprivate func showConfigureAlert() {
-        let alert = SCLAlertView()
-        alert.addButton("Wind speed: knots") {
-            [weak self] in
-            self?.showConfigureWindAlert()
-        }
-        alert.addButton("Temperature: Celsius") {
-            [weak self] in
-            self?.showConfigureWindAlert()
-        }
-        alert.addButton("Wave: meters") {
-            [weak self] in
-            self?.showConfigureWindAlert()
-        }
-        alert.showEdit("Configure", subTitle: "Configure display options", closeButtonTitle: "Cancel")
+//        let alert = SCLAlertView()
+//        alert.addButton("Wind speed: knots") {
+//            [weak self] in
+//            self?.showConfigureWindAlert()
+//        }
+//        alert.addButton("Temperature: Celsius") {
+//            [weak self] in
+//            self?.showConfigureWindAlert()
+//        }
+//        alert.addButton("Wave: meters") {
+//            [weak self] in
+//            self?.showConfigureWindAlert()
+//        }
+//        alert.showEdit("Configure", subTitle: "Configure display options", closeButtonTitle: "Cancel")
     }
 
     fileprivate func showConfigureWindAlert() {
-        let alert = SCLAlertView()
-        alert.addButton("m/s") {
-            
-        }
-        alert.addButton("knots") {
-            
-        }
-        alert.addButton("km/h") {
-            
-        }
-        alert.addButton("mph") {
-            
-        }
-        alert.addButton("Bft") {
-            
-        }
+//        let alert = SCLAlertView()
+//        alert.addButton("m/s") {
+//
+//        }
+//        alert.addButton("knots") {
+//
+//        }
+//        alert.addButton("km/h") {
+//
+//        }
+//        alert.addButton("mph") {
+//
+//        }
+//        alert.addButton("Bft") {
+//
+//        }
     }
 }

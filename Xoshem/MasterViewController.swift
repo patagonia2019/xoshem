@@ -8,7 +8,6 @@
 
 import UIKit
 import JFCore
-import SCLAlertView
 import SwiftIconFont
 import SwiftSpinner
 
@@ -113,18 +112,18 @@ class MasterViewController: BaseTableViewController {
                     self?.errorized = true
                     
                     if let object: Error = note.object as? Error {
-                        let alertView = SCLAlertView()
-                        alertView.addButton(Common.title.Cancel) { (isOtherButton) in
-                            try! Facade.instance.stopLocation()
-                        }
-                        alertView.addButton(Common.title.Retry) { [weak self] (isOtherButton) in
-                            if let strong = self {
-                                strong.locationRestart()
-                            }
-                        }
-                        alertView.showError(Common.title.Locationfailed, subTitle: object.localizedDescription).setDismissBlock {
-                            self?.errorized = false
-                        }
+//                        let alertView = SCLAlertView()
+//                        alertView.addButton(Common.title.Cancel) { (isOtherButton) in
+//                            try! Facade.instance.stopLocation()
+//                        }
+//                        alertView.addButton(Common.title.Retry) { [weak self] (isOtherButton) in
+//                            if let strong = self {
+//                                strong.locationRestart()
+//                            }
+//                        }
+//                        alertView.showError(Common.title.Locationfailed, subTitle: object.localizedDescription).setDismissBlock {
+//                            self?.errorized = false
+//                        }
                         
                     }
                 }
@@ -141,10 +140,10 @@ class MasterViewController: BaseTableViewController {
                     }
                     self?.errorized = true
                     if !JFCore.LocationManager.instance.isAuthorized() {
-                        SCLAlertView().showWarning(Common.title.LocationNotAuthorized,
-                                                   subTitle:"\(JFCore.Common.app)\(Common.title.PleaseAuthorize)").setDismissBlock { [weak self] in
-                                                    self?.errorized = false
-                        }
+//                        SCLAlertView().showWarning(Common.title.LocationNotAuthorized,
+//                                                   subTitle:"\(JFCore.Common.app)\(Common.title.PleaseAuthorize)").setDismissBlock { [weak self] in
+//                                                    self?.errorized = false
+//                        }
 
                     }
                 }
@@ -160,17 +159,17 @@ class MasterViewController: BaseTableViewController {
                         return
                     }
                     self?.errorized = true
-                    let alertView = SCLAlertView()
-                    if let object: JFError = note.object as? JFError {
-                        alertView.showError(object.title(), subTitle: object.debugDescription).setDismissBlock {
-                            self?.errorized = false
-                        }
-                    }
-                    else if let object = note.object as? Error {
-                        alertView.showError(Common.title.error, subTitle: object.localizedDescription).setDismissBlock {
-                            self?.errorized = false
-                        }
-                    }
+//                    let alertView = SCLAlertView()
+//                    if let object: JFError = note.object as? JFError {
+//                        alertView.showError(object.title(), subTitle: object.debugDescription).setDismissBlock {
+//                            self?.errorized = false
+//                        }
+//                    }
+//                    else if let object = note.object as? Error {
+//                        alertView.showError(Common.title.error, subTitle: object.localizedDescription).setDismissBlock {
+//                            self?.errorized = false
+//                        }
+//                    }
                 }
         }
     }
@@ -180,7 +179,7 @@ class MasterViewController: BaseTableViewController {
             try Facade.instance.restartLocation()
         } catch {
             let e = error
-            SCLAlertView().showError(Common.title.Servicesfailed, subTitle:e.localizedDescription)
+//            SCLAlertView().showError(Common.title.Servicesfailed, subTitle:e.localizedDescription)
         }
     }
     

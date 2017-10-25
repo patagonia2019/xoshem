@@ -63,10 +63,10 @@ extension AppDelegate: UISplitViewControllerDelegate {
         shadow.shadowColor = UIColor.black
         shadow.shadowOffset = CGSize.init(width: 1, height: 1)
         UINavigationBar.appearance().titleTextAttributes =
-            [NSForegroundColorAttributeName : UIColor.white,
-             NSShadowAttributeName : shadow]
+            [NSAttributedStringKey.foregroundColor : UIColor.white,
+             NSAttributedStringKey.shadow : shadow]
         UINavigationBar.appearance().tintColor = .white
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.clear], for: UIControlState.normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.clear], for: UIControlState.normal)
 
         return true
     }

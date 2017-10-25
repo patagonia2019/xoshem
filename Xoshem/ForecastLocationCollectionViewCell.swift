@@ -60,7 +60,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         degreeLabel.alpha = 1
     }
     
-    func configureCellWithLocation(_ location: RLocation, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
+    func configureCellWithLocation(_ location: RLocation, isEditing: Bool, didUpdate:@escaping () -> Void)
     {
         configure()
         degreeLabel.alpha = 1
@@ -71,10 +71,10 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         updateClosure = didUpdate
     }
     
-    func configureCell(withPlacemark placemark: RPlacemark, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
+    func configureCellWithCurrentPlacemark(didUpdate:@escaping () -> Void)
     {
         configure()
-        self.placemark = placemark
+        self.placemark = Facade.instance.coreLocations.first?.placemarks.first
         if let fcr = placemark.spotForecast {
             spotForecast = fcr
         }
@@ -87,7 +87,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
         updateClosure = didUpdate
     }
     
-    func configureCell(_ fcr: WSpotForecast, isEditing: Bool, didUpdate:@escaping (Void) -> Void)
+    func configureCell(_ fcr: WSpotForecast, isEditing: Bool, didUpdate:@escaping () -> Void)
     {
         configure()
         spotForecast = fcr

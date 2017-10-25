@@ -69,8 +69,7 @@ struct Common {
     }
 
 
-    static let kJFGroup : String = "group.fuchs.schuf.Xoshem"
-    static let email : String = "xoshem.fuchs@gmail.com"
+    static let email : String = "mobilepatagonia@gmail.com"
     struct animation {
         static let duration: Double = 2.0
     }
@@ -101,14 +100,6 @@ struct Common {
         static let background : String = "background"
     }
     
-    struct file {
-        static let faq : String = "FAQ.html"
-        static let tou : String = "TermsOfUse.html"
-        static let tac : String = "TermsAndConditions.html"
-        static let tutorial : String = "Tutorial.html"
-        static let about : String = "About.html"
-    }
-
     struct title {
         static let About : String = "About".localized()
         static let Cancel : String = "Cancel".localized()

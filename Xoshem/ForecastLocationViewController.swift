@@ -9,22 +9,18 @@
 import UIKit
 import JFWindguru
 import JFCore
-import SCLAlertView
-import RealmSwift
 import SwiftSpinner
-import RxSwift
-import RxCocoa
 
 class ForecastLocationViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var notificationToken: NotificationToken?
+//    var notificationToken: NotificationToken?
     let interItemSpacing: CGFloat = 0
     let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
 
     deinit {
-        notificationToken?.stop()
+//        notificationToken?.stop()
     }
     
     override func viewDidLoad() {
@@ -117,30 +113,16 @@ class ForecastLocationViewController: BaseViewController {
     
     func updateForecastView(_ showAlert: Bool)
     {
-        if (showAlert) {
-            if let currentForecast = Facade.instance.fetchLocalForecast() {
-                let alertView = SCLAlertView()
-                alertView.addButton(Common.title.Reload) {
-                    [weak self] (isOtherButton) in
-                    self?.reloadView()
-                }
-                let subtitle = "\(Common.title.successGetting) \(currentForecast.spotName()) \(Common.title.forecasts)"
-                alertView.showSuccess(Common.title.fetchForecast,
-                                  subTitle: subtitle)
-            }
-        }
-        else {
-            reloadView()
-        }
+        reloadView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Common.segue.forecastDetail {
-            let vc:ForecastDetailViewController = segue.destination as! ForecastDetailViewController
-            if let currentForecast = Facade.instance.fetchLocalForecast() {
-                vc.detailItem = currentForecast
-                vc.title = currentForecast.spotName()
-            }
+//            let vc:ForecastDetailViewController = segue.destination as! ForecastDetailViewController
+//            if let currentForecast = Facade.instance.fetchLocalForecast() {
+//                vc.detailItem = currentForecast
+//                vc.title = currentForecast.spotName()
+//            }
         }
         else if segue.identifier == Common.segue.search {
             let vc:UIViewController = segue.destination
@@ -156,13 +138,4 @@ class ForecastLocationViewController: BaseViewController {
     
 }
 
-
-private extension Reactive where Base: UILabel {
-    var coordinates: UIBindingObserver<Base, CLLocationCoordinate2D> {
-        return UIBindingObserver(UIElement: base) { label, location in
-            let text = "Lat: \(location.latitude)\nLon: \(location.longitude)"
-            SCLAlertView().showInfo("location", subTitle: text)
-        }
-    }
-}
 

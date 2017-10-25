@@ -7,16 +7,16 @@
 //
 
 import Foundation
-import RealmSwift
 
-class RMenu: Object {
-    dynamic var edit: Bool = false
-    dynamic var id: Int = 0
-    dynamic var name: String = ""
-    dynamic var segue: String = ""
-    dynamic var iconList: String = ""
-    dynamic var iconName: String = ""
-    dynamic var parentId: Int = 0
-    dynamic var requireLogin: Bool = false
-    dynamic var file: String = ""
+struct RMenu {
+    var edit: Bool = false
+    var id: Int = 0
+    var name: String = ""
+    var segue: String = ""
+    var iconList: String = ""
+    var iconName: String = ""
+    var parentId: Int = 0
+    var requireLogin: Bool = false
+    var file: String = ""
+    var submenu : [RMenu]?
 }

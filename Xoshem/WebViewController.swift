@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Localize_Swift
-import SCLAlertView
 import JFCore
 
 class WebViewController: BaseViewController, UIWebViewDelegate {
@@ -72,23 +71,22 @@ class WebViewController: BaseViewController, UIWebViewDelegate {
     }
     
     func showError(error : Error?, showMore: Bool = false) {
-        let alert = SCLAlertView()
-        alert.addButton(Common.title.Cancel) {
-        }
-        alert.addButton(Common.title.MoreInfo) {[weak self] in
+        let alert = UIAlertController(title: Common.title.error, message: error.debugDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Common.title.Cancel, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: Common.title.MoreInfo, style: .cancel, handler: { [weak self] (action) in
             self?.showError(error: error, showMore: true)
-        }
-        alert.addButton(Common.title.Retry) { [weak self] in
+        }))
+        alert.addAction(UIAlertAction(title: Common.title.Retry, style: .cancel, handler: { [weak self] (action) in
             self?.load()
-        }
-        
+        }))
+
         if let e : JFError = error as? JFError {
-            alert.showError(e.title(), subTitle: showMore ? e.debugDescription : e.reason())
+            alert.title = e.title()
+            alert.message = showMore ? e.debugDescription : e.reason()
         } else if let ldesc = error?.localizedDescription {
-            alert.showError(Common.title.error, subTitle: showMore ? error.debugDescription : ldesc)
-        } else {
-            alert.showError(Common.title.error, subTitle: error.debugDescription)
+            alert.message = showMore ? error.debugDescription : ldesc
         }
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
