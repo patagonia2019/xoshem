@@ -5,8 +5,8 @@ use_frameworks!
 
 def sharedPods
     pod 'Localize-Swift', '~> 1.7'
-    pod 'JFWindguru', :path => '/Users/javierfuchs/Job/southfox/jfwindguru'
-    pod 'JFCore', :path => '/Users/javierfuchs/Job/southfox/jfcore'
+    pod 'JFWindguru', :git => 'https://github.com/southfox/jfwindguru', :branch => 'master'
+    pod 'JFCore', :git => 'https://github.com/southfox/jfcore', :branch => 'master'
 end
 
 def iosPods
@@ -15,7 +15,7 @@ def iosPods
     pod 'SwiftIconFont', '~> 2.7.2'
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'FontWeather.swift', :path => '/Users/javierfuchs/Job/southfox/FontWeather.swift'
+    pod 'FontWeather.swift', :git => 'https://github.com/southfox/FontWeather.swift', :branch => 'master'
     pod 'FlexiCollectionViewLayout'
 end
 
