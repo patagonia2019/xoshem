@@ -8,7 +8,7 @@
 			<key>id</key>
 			<integer>1</integer>
 			<key>name</key>
-			<string>\(Common.title.Forecast)</string>
+			<string>Forecast</string>
 			<key>iconList</key>
 			<string>themify</string>
 			<key>iconName</key>
@@ -20,7 +20,7 @@
 			<key>id</key>
 			<integer>2</integer>
 			<key>name</key>
-			<string>\(Common.title.Search)</string>
+			<string>Search</string>
 			<key>iconList</key>
 			<string>FontAwesome</string>
 			<key>iconName</key>
@@ -32,7 +32,7 @@
 			<key>id</key>
 			<integer>3</integer>
 			<key>name</key>
-			<string>\(Common.title.Options)</string>
+			<string>Options</string>
 			<key>iconList</key>
 			<string>FontAwesome</string>
 			<key>iconName</key>
@@ -44,7 +44,7 @@
 			<key>id</key>
 			<integer>4</integer>
 			<key>name</key>
-			<string>\(Common.title.Help)</string>
+			<string>Help</string>
 			<key>iconList</key>
 			<string>Ionicons</string>
 			<key>iconName</key>
@@ -57,9 +57,9 @@
 					<key>id</key>
 					<integer>1</integer>
 					<key>name</key>
-					<string>\(Common.title.frequentlyAskedQuestions)</string>
+					<string>Frequently Asked Questions</string>
 					<key>segue</key>
-					<string>\(Common.segue.web)</string>
+					<string>web</string>
 					<key>file</key>
 					<string>FAQ.html</string>
 					<key>iconList</key>
@@ -73,9 +73,9 @@
 					<key>id</key>
 					<integer>2</integer>
 					<key>name</key>
-					<string>\(Common.title.Tutorial)</string>
+					<string>Tutorial</string>
 					<key>segue</key>
-					<string>\(Common.segue.web)</string>
+					<string>web</string>
 					<key>file</key>
 					<string>Tutorial.html</string>
 					<key>iconList</key>
@@ -89,9 +89,9 @@
 					<key>id</key>
 					<integer>3</integer>
 					<key>name</key>
-					<string>\(Common.title.TermsOfUse)</string>
+					<string>TermsOfUse</string>
 					<key>segue</key>
-					<string>\(Common.segue.web)</string>
+					<string>web</string>
 					<key>file</key>
 					<string>TermsOfUse.html</string>
 					<key>iconList</key>
@@ -105,9 +105,9 @@
 					<key>id</key>
 					<integer>4</integer>
 					<key>name</key>
-					<string>\(Common.title.TermsAndConditions)</string>
+					<string>TermsAndConditions</string>
 					<key>segue</key>
-					<string>\(Common.segue.web)</string>
+					<string>web</string>
 					<key>file</key>
 					<string>TermsAndConditions.html</string>
 					<key>iconList</key>
@@ -121,9 +121,9 @@
 					<key>id</key>
 					<integer>5</integer>
 					<key>name</key>
-					<string>\(Common.title.About) \(JFCore.Common.app)</string>
+					<string>About</string>
 					<key>segue</key>
-					<string>\(Common.segue.about)</string>
+					<string>about</string>
 					<key>file</key>
 					<string>About.html</string>
 					<key>iconList</key>

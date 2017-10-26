@@ -72,6 +72,9 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     ///
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
         return fd.count
     }
     
@@ -82,16 +85,20 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         if section == 0 {
-            let id_spot = spotForecast.spotId()
-            let name = spotForecast.spotName()
-            let hour24 = fcst.hour24(hour: h) ?? "-"
-            let day = fcst.day(hour: h) ?? "-"
-            let weekday = fcst.weekday(hour: h) ?? "-"
-            
-            appendFd("", "", "\(day) - \(weekday)", 2)
-            appendFd("", "", "\(hour24)h", 2)
-            appendFd("", "Spot \(id_spot)", "\(name)", 2)
+            let id_spot = spotForecast?.spotId()
+            let name = spotForecast?.spotName()
+            let fcst = spotForecast?.forecast()
+            let h = hourIterator()
+            let hour24 = fcst?.hour24(hour: h) ?? "-"
+            let day = fcst?.day(hour: h) ?? "-"
+            let weekday = fcst?.weekday(hour: h) ?? "-"
+        
+            let str =  "\(day) - \(weekday) - \(hour24)h - Spot \(id_spot) - \(name)"
 
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "ForecastDayListViewCell1", for: indexPath) as! ForecastDayListViewCell
+            cell.backgroundColor = UIColor.clear
+            cell.configure(nil, key: nil, value: str)
+            return cell
         }
         let row = indexPath.row
         
@@ -303,10 +310,7 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
                                                object: nil, queue: OperationQueue.main, using:
             {
                 [weak self] (NSNotification) in
-                guard let strong = self else { return }
-                if let navigationController = strong.navigationController {
-                    navigationController.popToRootViewController(animated: true)
-                }
+                self?.navigationController?.popToRootViewController(animated: true)
         })
     }
     

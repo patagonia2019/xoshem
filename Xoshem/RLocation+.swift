@@ -11,11 +11,12 @@ import JFCore
 
 extension RLocation {
     
-    func searchPlacemarks(withFailure failure:@escaping (_ error: JFError?) -> Void,
-                                     success:@escaping () -> Void)
+    func searchPlacemarks(completion: @escaping ((Bool) -> Swift.Void))
     {
         LocationManager.instance.reverseLocation(location: coreLocation,
-                                                 didFailWithError:failure,
+                                                 didFailWithError: { _ in
+                                                    completion(false)
+        },
                                                  didUpdatePlacemarks: {
                                                     [weak self]
                                                     (placemarkCores) in
@@ -24,8 +25,7 @@ extension RLocation {
                                                         self?.placemarks.append(placemark)
                                                     }
                                                     self?.selectedPlacemark = self?.placemarks.first
-                                                    self?.selectedPlacemark?.searchSpots()
-                                                    success()
+                                                    self?.selectedPlacemark?.searchSpots(completion: completion)
         })
         
     }

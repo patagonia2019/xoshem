@@ -15,7 +15,7 @@ extension Facade {
             self?.onProcessing = true
             var change = true
             
-            if let locations = self?.coreLocations {
+            if let locations = self?.locations {
                 locationCycle: for locationA in locations {
                     for locationB in currentLocations {
                         if locationB.altitude == locationA.coreLocation.altitude &&
@@ -29,26 +29,26 @@ extension Facade {
                 }
             }
             if change {
-                self?.coreLocations.removeAll()
+                self?.locations.removeAll()
                 for corelocation in currentLocations {
                     let location = RLocation.init(location: corelocation)
-                    location.searchPlacemarks(withFailure: { (error) in
+                    location.searchPlacemarks(completion: { [weak self] (succeed) in
+                        if (succeed) {
+                            self?.locations.append(location)
+                        }
+                        else {
+                        }
                         self?.onProcessing = false
-                        self?.facadeDidErrorNotification(object: error)
-                    }, success: {
+                        self?.forecastDidUpdateNotification(object: location)
                     })
-                    self?.coreLocations.append(location)
                 }
-            }
-            else {
-                self?.updateForecastUsingFirstPlacemarkSpot()
             }
         })
     }
     
 
     func hasCurrentLocalForecast() -> Bool {
-        if self.coreLocations.count > 0 {
+        if self.locations.count > 0 {
             return true
         }
         return false

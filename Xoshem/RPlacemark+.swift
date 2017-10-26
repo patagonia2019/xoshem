@@ -90,58 +90,40 @@ extension RPlacemark {
     }
     
 
-    func searchSpots() {
+    func searchSpots(completion: @escaping ((Bool) -> Swift.Void)) {
         let array = nameArray()
-        searchSpots(array: array)
+        searchSpots(array: array, completion: completion)
     }
 
 
-    private func searchSpots(array: [String]) {
+    private func searchSpots(array: [String], completion: @escaping ((Bool) -> Swift.Void)) {
         var array = array
         if array.count > 0 {
             let name = array.removeFirst()
-            searchSpot(withName: name,
+            ForecastWindguruService.instance.searchSpots(byLocation: name,
                 failure: {
                     [weak self] (error) in
-                    self?.searchSpots(array: array)
+                    self?.searchSpots(array: array, completion: completion)
                 },
                 success: {
                     [weak self] (spotResult) in
-                    guard let spotResult = spotResult else {
-                        self?.searchSpots(array: array)
+                    guard let spotResult = spotResult,
+                          let spot = spotResult.firstSpot(),
+                          let spotId = spot.id() else {
+                        self?.searchSpots(array: array, completion: completion)
                         return
                     }
                     self?.spotResults.append(spotResult)
-                    let spot = spotResult.firstSpot()
-                    spot?.updateForecast()
+                    ForecastWindguruService.instance.wforecast(bySpotId: spotId, failure: {_ in },
+                        success: {
+                            [weak self] (wspotforecast) in
+                            self?.wspotForecast = wspotforecast
+                            completion(true)
+                        }
+                    )
                 }
             )
         }
     }
     
-    func searchSpot(withName name: String,
-                    failure:@escaping (_ error: JFError?) -> Void,
-                    success:@escaping (_ spotResult: SpotResult?) -> Void) {
-        ForecastWindguruService.instance.searchSpots(byLocation: name,
-            failure: { (error) in
-                if let nserror = error?.nserror {
-                    let myerror = JFError.init(code: nserror.code, desc: nserror.localizedDescription, reason: nserror.localizedFailureReason, suggestion: nserror.localizedRecoverySuggestion, path: "\(#file)", line: "\(#line)", underError: nserror)
-                    failure(myerror)
-                }
-                else {
-                    failure(nil)
-                }
-            },
-            success: {
-                (spotResult) in
-                guard let spotResult = spotResult,
-                    spotResult.numberOfSpots() > 0 else {
-                        let myerror = JFError.init(code: 999, desc: "No posts to update", path: "\(#file)", line: "\(#line)", underError: nil)
-                        failure(myerror)
-                        return
-                }
-                success(spotResult)
-            }
-        )
-    }
 }

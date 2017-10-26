@@ -118,11 +118,11 @@ class ForecastLocationViewController: BaseViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Common.segue.forecastDetail {
-//            let vc:ForecastDetailViewController = segue.destination as! ForecastDetailViewController
-//            if let currentForecast = Facade.instance.fetchLocalForecast() {
-//                vc.detailItem = currentForecast
-//                vc.title = currentForecast.spotName()
-//            }
+            let vc:ForecastDetailViewController = segue.destination as! ForecastDetailViewController
+            if let currentForecast = Facade.instance.locations.first?.selectedPlacemark?.wspotForecast {
+                vc.detailItem = currentForecast
+                vc.title = currentForecast.spotName()
+            }
         }
         else if segue.identifier == Common.segue.search {
             let vc:UIViewController = segue.destination

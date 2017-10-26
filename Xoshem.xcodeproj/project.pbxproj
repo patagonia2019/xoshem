@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		70065BCD1F9FDDF30021B340 /* Spot+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70065BCC1F9FDDF30021B340 /* Spot+.swift */; };
 		702D98EF1F2615B60098FAE6 /* RPlacemark+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D98EE1F2615B60098FAE6 /* RPlacemark+.swift */; };
 		7037021D1F9D4107003B5BAA /* Facade+Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7037021C1F9D4107003B5BAA /* Facade+Location.swift */; };
 		703702201F9D428B003B5BAA /* RLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7037021F1F9D428B003B5BAA /* RLocation.swift */; };
 		70826A5B1F1F6C7800328BC5 /* RPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */; };
-		7096DEEC1F9F59E300B07326 /* Xoschem.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7096DEEB1F9F59E300B07326 /* Xoschem.plist */; };
+		7096DEEC1F9F59E300B07326 /* Xoshem.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7096DEEB1F9F59E300B07326 /* Xoshem.plist */; };
 		70A66DB91F9D7D4700172DA6 /* RLocation+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A66DB81F9D7D4700172DA6 /* RLocation+.swift */; };
 		70A66DBB1F9E843400172DA6 /* Facade+Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A66DBA1F9E843400172DA6 /* Facade+Menu.swift */; };
 		70A970941F13026800DBC25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A970931F13026800DBC25D /* Assets.xcassets */; };
@@ -74,12 +73,11 @@
 		23A32751654F3056CE8F62B5 /* Pods_Xoshem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A931181C6D8E6C04467BFB /* Pods_Xoshem_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xoshem_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6879D4052CC2AC23310CE46A /* Pods-watchos Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchos Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-watchos Extension/Pods-watchos Extension.release.xcconfig"; sourceTree = "<group>"; };
-		70065BCC1F9FDDF30021B340 /* Spot+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spot+.swift"; sourceTree = "<group>"; };
 		702D98EE1F2615B60098FAE6 /* RPlacemark+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RPlacemark+.swift"; sourceTree = "<group>"; };
 		7037021C1F9D4107003B5BAA /* Facade+Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Facade+Location.swift"; sourceTree = "<group>"; };
 		7037021F1F9D428B003B5BAA /* RLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLocation.swift; sourceTree = "<group>"; };
 		70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPlacemark.swift; sourceTree = "<group>"; };
-		7096DEEB1F9F59E300B07326 /* Xoschem.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Xoschem.plist; sourceTree = "<group>"; };
+		7096DEEB1F9F59E300B07326 /* Xoshem.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Xoshem.plist; sourceTree = "<group>"; };
 		70A66DB81F9D7D4700172DA6 /* RLocation+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RLocation+.swift"; sourceTree = "<group>"; };
 		70A66DBA1F9E843400172DA6 /* Facade+Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Facade+Menu.swift"; sourceTree = "<group>"; };
 		70A970931F13026800DBC25D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -308,20 +306,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		70826A5E1F1F6F8900328BC5 /* Realm */ = {
-			isa = PBXGroup;
-			children = (
-				7037021F1F9D428B003B5BAA /* RLocation.swift */,
-				70A66DB81F9D7D4700172DA6 /* RLocation+.swift */,
-				70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */,
-				702D98EE1F2615B60098FAE6 /* RPlacemark+.swift */,
-				70C9D6301F20B11600F4FED8 /* RMenu.swift */,
-				952713771DA2D854002D2A29 /* RMenu+.swift */,
-				70065BCC1F9FDDF30021B340 /* Spot+.swift */,
-			);
-			name = Realm;
-			sourceTree = "<group>";
-		};
 		9508D1CB1DA0B8A7008C2A75 /* Hierarchy */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,7 +359,7 @@
 				A129F8CC1B2CA81600EBC1DD /* LaunchScreen.storyboard */,
 				A129F8CF1B2CA81600EBC1DD /* Info.plist */,
 				952A82C41D52C87300C546DB /* GoogleService-Info.plist */,
-				7096DEEB1F9F59E300B07326 /* Xoschem.plist */,
+				7096DEEB1F9F59E300B07326 /* Xoshem.plist */,
 				955E14531D76DAD100B5B4D9 /* common.css */,
 				955E142D1D7566A500B5B4D9 /* FAQ.html */,
 				955E144B1D75683E00B5B4D9 /* Tutorial.html */,
@@ -433,7 +417,12 @@
 		959A31181D35E3BF003649D5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				70826A5E1F1F6F8900328BC5 /* Realm */,
+				7037021F1F9D428B003B5BAA /* RLocation.swift */,
+				70A66DB81F9D7D4700172DA6 /* RLocation+.swift */,
+				70826A5A1F1F6C7800328BC5 /* RPlacemark.swift */,
+				702D98EE1F2615B60098FAE6 /* RPlacemark+.swift */,
+				70C9D6301F20B11600F4FED8 /* RMenu.swift */,
+				952713771DA2D854002D2A29 /* RMenu+.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -620,7 +609,7 @@
 				955E14431D75680400B5B4D9 /* TermsAndConditions.html in Resources */,
 				95069C871D664110003704F6 /* Localizable.strings in Resources */,
 				955E142B1D7566A500B5B4D9 /* FAQ.html in Resources */,
-				7096DEEC1F9F59E300B07326 /* Xoschem.plist in Resources */,
+				7096DEEC1F9F59E300B07326 /* Xoshem.plist in Resources */,
 				955E144F1D75687300B5B4D9 /* About.html in Resources */,
 				955E14541D76DAD100B5B4D9 /* common.css in Resources */,
 				95069C921D66646B003704F6 /* Main.storyboard in Resources */,
@@ -710,7 +699,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				955E141C1D75568700B5B4D9 /* WebViewController.swift in Sources */,
-				70065BCD1F9FDDF30021B340 /* Spot+.swift in Sources */,
 				70C9D63A1F212AE200F4FED8 /* MasterViewController+UITable.swift in Sources */,
 				70C9D6381F212A1E00F4FED8 /* AppDelegate+Split.swift in Sources */,
 				7037021D1F9D4107003B5BAA /* Facade+Location.swift in Sources */,

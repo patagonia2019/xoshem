@@ -45,8 +45,11 @@ extension RMenu {
             let iconList = dict["iconList"] as? String ?? ""
             let iconName = dict["iconName"] as? String ?? ""
             let file = dict["file"] as? String ?? ""
-            let submenu = parseJSON(dict["submenu"] as? [[String : Any?]])
-            array.append(RMenu(edit: false, id: id, name: name, segue: segue, iconList: iconList, iconName: iconName, parentId: parentId, requireLogin: requireLogin, file: file, submenu: submenu))
+            var submenu : [RMenu]? = nil
+            if let menuArray = dict["menu"] as? [[String : Any?]] {
+                submenu = parseJSON(menuArray)
+            }
+            array.append(RMenu(edit: false, id: id, name: name.localized(), segue: segue, iconList: iconList, iconName: iconName, parentId: parentId, requireLogin: requireLogin, file: file, submenu: submenu))
         }
         return array
     }

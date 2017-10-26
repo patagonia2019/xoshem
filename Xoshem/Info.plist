@@ -52,7 +52,9 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Your location is used to deliver timely weather information for your immediate area.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>I need Location</string>
+	<string>Your location is used to deliver timely weather information for your immediate area.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location is used to deliver timely weather information for your immediate area.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

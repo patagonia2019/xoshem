@@ -22,7 +22,7 @@ open class Facade: NSObject {
     //
     // Attributes only modified by this class
     //
-    var coreLocations = [RLocation]()
+    var locations = [RLocation]()
     var menuArray = [RMenu]()
     fileprivate var started : Bool = false
     var onProcessing : Bool = false {
@@ -124,45 +124,7 @@ open class Facade: NSObject {
             self?.started = false
         })
     }
-    
-    func updateForecastUsingFirstPlacemarkSpot() {
         
-        for placemark in placemarks {
-            if let spotResult = placemark.spotResults.first,
-                let spotOwner = spotResult.firstSpot(),
-                let id_spot = spotOwner.id() {
-                ForecastWindguruService.instance.wforecast(bySpotId: id_spot, failure:
-                {
-                    [weak self]
-                    (error) in
-                    self?.onProcessing = false
-                    self?.facadeDidErrorNotification(object: error)
-                }, success: {
-                    [weak self]
-                    (spotForecast) in
-//                    guard let spotForecast = spotForecast else {
-//                        self?.onProcessing = false
-//                        let myerror = JFError(code: Common.ErrorCode.cdUpdateForecastIssue.rawValue,
-//                                              desc: Common.title.errorOnUpdate,
-//                                              reason: "Error on update forecast",
-//                                              suggestion: "\(#function)", path: "\(#file)", line: "\(#line)")
-//                        self?.facadeDidErrorNotification(object: myerror)
-//                        return
-//                    }
-                    let realm = try! Realm()
-                    try! realm.write {
-                        placemark.spotForecast = spotForecast
-                        if placemarks.last == placemark {
-                            self?.forecastDidUpdateNotification(object: spotForecast)
-                            self?.onProcessing = false
-                        }
-                    }
-                })
-            }
-        }
-    }
-    
-    
     func forecastDidUpdateNotification(object: Any?) {
         NotificationCenter.default.post(name: ForecastDidUpdateNotification, object: object)
     }
@@ -187,7 +149,8 @@ open class Facade: NSObject {
     {
         unobserveNotifications()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationUpdated), object: nil, queue: OperationQueue.main) {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationUpdated), object: nil, queue: OperationQueue.main)
+        {
             [weak self]
             (NSNotification) in
             if !LocationManager.instance.isRunning() {
@@ -210,18 +173,10 @@ open class Facade: NSObject {
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
         }
     }
-    
-    /*
-     * Private parts
-     */
-    
-    private struct Constants {
-        static let plist = "Xoshem"
-    }
-    
-    
     public lazy var info : [String : AnyObject]? = {
-        guard let path = Bundle.main.path(forResource: Constants.plist, ofType: "plist"),
+        guard let appDict = Bundle.main.infoDictionary,
+            let bundleName = appDict["CFBundleName"] as? String,
+            let path = Bundle.main.path(forResource: bundleName, ofType: "plist"),
             let dict = NSDictionary.init(contentsOfFile: path) as? [String: AnyObject] else {
                 return nil
         }

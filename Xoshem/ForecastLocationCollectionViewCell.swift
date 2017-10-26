@@ -74,8 +74,8 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     func configureCellWithCurrentPlacemark(didUpdate:@escaping () -> Void)
     {
         configure()
-        self.placemark = Facade.instance.coreLocations.first?.placemarks.first
-        if let fcr = placemark.spotForecast {
+        placemark = Facade.instance.locations.first?.selectedPlacemark
+        if let fcr = placemark.wspotForecast {
             spotForecast = fcr
         }
         degreeLabel.alpha = 1
