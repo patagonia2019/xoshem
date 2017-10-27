@@ -15,6 +15,7 @@ class MasterViewController: BaseTableViewController {
 
     var detailViewController: DetailViewController? = nil
     var errorized : Bool! = false
+    var usingSpinner: Bool! = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +27,7 @@ class MasterViewController: BaseTableViewController {
         }
 //        tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: .bottom)
 //        performSegue(withIdentifier: "showDetail", sender: self)
-
-        SwiftSpinner.setTitleFont(UIFont.systemFont(ofSize: 10))
-
-        SwiftSpinner.useContainerView(view)
-        SwiftSpinner.show("Sunshine is delicious, rain is refreshing, wind braces us up, snow is exhilarating; there is really no such thing as bad weather, only different kinds of good weather. ~John Ruskin")
+        startSpinner()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -89,15 +86,15 @@ class MasterViewController: BaseTableViewController {
         
         NotificationCenter.default.addObserver(forName: RequestDidStartNotification, object: nil, queue: queue)
         { note in
-            DispatchQueue.main.async() {
-                SwiftSpinner.show("Sunshine is delicious, rain is refreshing, wind braces us up, snow is exhilarating; there is really no such thing as bad weather, only different kinds of good weather. ~John Ruskin")
+            DispatchQueue.main.async() { [unowned self] in
+                self.showSpinner()
             }
         }
 
         NotificationCenter.default.addObserver(forName: RequestDidStopNotification, object: nil, queue: queue)
         { note in
-            DispatchQueue.main.async() {
-                SwiftSpinner.hide()
+            DispatchQueue.main.async() { [unowned self] in
+                self.hideSpinner()
             }
         }
 
@@ -198,6 +195,24 @@ class MasterViewController: BaseTableViewController {
         super.didReceiveMemoryWarning()
         
         Analytics.logMemoryWarning(function: #function, line: #line)
+    }
+    
+    func startSpinner() {
+        SwiftSpinner.setTitleFont(UIFont.systemFont(ofSize: 10))
+        SwiftSpinner.useContainerView(view)
+        showSpinner()
+    }
+    
+    func showSpinner() {
+        if !usingSpinner {
+            usingSpinner = true
+            SwiftSpinner.show("Sunshine is delicious, rain is refreshing, wind braces us up, snow is exhilarating; there is really no such thing as bad weather, only different kinds of good weather. ~John Ruskin")
+        }
+    }
+    
+    func hideSpinner() {
+        usingSpinner = false
+        SwiftSpinner.hide()
     }
 
 }
