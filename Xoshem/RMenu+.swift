@@ -15,19 +15,19 @@ extension RMenu {
     var iconFont: Fonts? {
         switch iconList {
         case "FontAwesome":
-            return .FontAwesome
+            return .fontAwesome
         case "open-iconic":
-            return .Iconic
+            return .iconic
         case "Ionicons":
-            return .Ionicon
+            return .ionicon
         case "octicons":
-            return .Octicon
+            return .octicon
         case "themify":
-            return .Themify
+            return .themify
         case "map-icons":
-            return .MapIcon
+            return .mapIcon
         case "MaterialIcons-Regular":
-            return .MaterialIcon
+            return .materialIcon
         default:
             return nil
         }

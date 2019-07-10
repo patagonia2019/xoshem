@@ -120,7 +120,7 @@ class ForecastLocationCollectionViewCell: UICollectionViewCell {
     {
         let size = CGSize(width: 50, height: 50)
         let fontSize :CGFloat = 50.0
-        let icon = UIImage.icon(from: .Ionicon, iconColor: .white, code: "location", imageSize: size, ofSize: fontSize)
+        let icon = UIImage.icon(from: .ionicon, iconColor: .white, code: "location", imageSize: size, ofSize: fontSize)
         locationIcon.image = icon
     }
     

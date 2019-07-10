@@ -8,6 +8,7 @@
 
 import Foundation
 import JFCore
+import CoreLocation
 
 extension Facade {
     func updateLocations(usingDiscoveredLocations currentLocations: [CLLocation]) throws {

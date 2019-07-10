@@ -14,7 +14,7 @@ private let reuseIdentifierSteper = "ForecastDayStepViewCell"
 
 struct DataStruct {
     var orderData: Int!
-    var iconData: String!
+    var iconData: Common.Symbols.FontWeather!
     var keyData: String!
     var valueData: String!
     var id: Int!
@@ -188,7 +188,7 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
         return fcst.numberOfHours()
     }
     
-    func appendFd(_ icon: String, _ key: String, _ value: String, _ id: Int, _ d: Definition? = nil) {
+    func appendFd(_ icon: Common.Symbols.FontWeather, _ key: String, _ value: String, _ id: Int, _ d: Definition? = nil) {
         let data = DataStruct(orderData: fd.count, iconData: icon, keyData: key, valueData: value, id: id, d: d)
         fd.append(data)
     }
@@ -203,80 +203,98 @@ class ForecastDayListViewController: BaseViewController, UITableViewDataSource, 
         
         if let t = fcst.temperature(hour: h),
            let tr = fcst.temperatureReal(hour: h) {
-            appendFd("thermometer-exterior", "Temperature", "\(t) °C", 3)
-            appendFd("thermometer-exterior", "Temperature Real", "\(tr) °C", 3)
+            appendFd(.wi_thermometer_exterior, "Temperature", "\(t) °C", 3)
+            appendFd(.wi_thermometer_exterior, "Temperature Real", "\(tr) °C", 3)
         }
         if let rh = fcst.relativeHumidity(hour: h) {
-            appendFd("humidity", "Relative humidity", "\(rh) %", 3)
+            appendFd(.wi_humidity, "Relative humidity", "\(rh) %", 3)
         }
         if let dir = fcst.windDirectionName(hour: h) {
-            appendFd("wind-direction", "Wind Direction", "\(dir)", 3)
+            appendFd(.wi_wind_direction, "Wind Direction", "\(dir)", 3)
         }
         if let knots = fcst.windSpeedKnots(hour: h) {
-            appendFd("windy", "Wind Speed", "\(knots) knots", 3)
+            appendFd(.wi_windy, "Wind Speed", "\(knots) knots", 3)
         }
         if let gust = fcst.windGust(hour: h) {
-            appendFd("strong-wind", "Wind Gusts", "\(gust) knots", 3)
+            appendFd(.wi_strong_wind, "Wind Gusts", "\(gust) knots", 3)
+        }
+        func bftnum(i : Int) -> Common.Symbols.FontWeather {
+            switch (i) {
+            case 0: return .wi_wind_beaufort_0
+            case 1: return .wi_wind_beaufort_1
+            case 2: return .wi_wind_beaufort_2
+            case 3: return .wi_wind_beaufort_3
+            case 4: return .wi_wind_beaufort_4
+            case 5: return .wi_wind_beaufort_5
+            case 6: return .wi_wind_beaufort_6
+            case 7: return .wi_wind_beaufort_7
+            case 8: return .wi_wind_beaufort_8
+            case 9: return .wi_wind_beaufort_9
+            case 10: return .wi_wind_beaufort_10
+            case 11: return .wi_wind_beaufort_11
+            case 12: return .wi_wind_beaufort_12
+            default: return .wi_wind_beaufort_0
+            }
         }
         if let bft = fcst.windSpeedBft(hour: h),
             let effect = fcst.windSpeedBftEffect(hour: h),
             let onSea = fcst.windSpeedBftEffectOnSea(hour: h),
             let onLand = fcst.windSpeedBftEffectOnLand(hour: h) {
-            appendFd("wind-beaufort-\(bft)", "", "Wind Speed Effect \(bft) bft\nOn Sea: \(effect)\n\(onSea)\nOn Land:\(onLand)", 2)
+            appendFd(bftnum(i: bft), "", "Wind Speed Effect \(bft) bft\nOn Sea: \(effect)\n\(onSea)\nOn Land:\(onLand)", 2)
         }
         if let perpw = fcst.perpw(hour: h) {
-            appendFd("flood", "Peak wave period", "\(perpw)", 3)
+            appendFd(.wi_flood, "Peak wave period", "\(perpw)", 3)
         }
         if let htsgw = fcst.htsgw(hour: h) {
-            appendFd("flood", "Significant Wave Height", "\(htsgw)", 3)
+            appendFd(.wi_flood, "Significant Wave Height", "\(htsgw)", 3)
         }
         if let smer = fcst.smer(hour: h),
             let smern = fcst.smern(hour: h) {
-            appendFd("small-craft-advisory", "Wind SMER / SMERN", "\(smer) / \(smern)", 3)
+            appendFd(.wi_small_craft_advisory, "Wind SMER / SMERN", "\(smer) / \(smern)", 3)
         }
 
         if let cct = fcst.cloudCoverTotal(hour: h) {
-            appendFd("cloud", "Cloud Cover Total", "\(cct) %", 3)
+            appendFd(.wi_cloud, "Cloud Cover Total", "\(cct) %", 3)
         }
         if let cch = fcst.cloudCoverHigh(hour: h) {
-            appendFd("cloud", "Cloud Cover High", "\(cch) %", 3)
+            appendFd(.wi_cloud, "Cloud Cover High", "\(cch) %", 3)
         }
         if let ccm = fcst.cloudCoverMid(hour: h) {
-            appendFd("cloud", "Cloud Cover Mid", "\(ccm) %", 3)
+            appendFd(.wi_cloud, "Cloud Cover Mid", "\(ccm) %", 3)
         }
         if let ccl = fcst.cloudCoverLow(hour: h) {
-            appendFd("cloud", "Cloud Cover Low", "\(ccl) %", 3)
+            appendFd(.wi_cloud, "Cloud Cover Low", "\(ccl) %", 3)
         }
         let pcpt = fcst.pcpt(hour: h)
         if let ppt = fcst.precipitation(hour: h) {
             if let pcpt = pcpt {
-                appendFd("rain", "Precipitation", "\(ppt) / \(pcpt) mm/3h", 3)
+                appendFd(.wi_rain, "Precipitation", "\(ppt) / \(pcpt) mm/3h", 3)
             }
             else {
-                appendFd("rain", "Precipitation", "\(ppt) mm/3h", 3)
+                appendFd(.wi_rain, "Precipitation", "\(ppt) mm/3h", 3)
             }
         }
         if let slp = fcst.seaLevelPressure(hour: h) {
-            appendFd("barometer", "Sea Level Pressure", "\(slp) Pa", 3)
+            appendFd(.wi_barometer, "Sea Level Pressure", "\(slp) Pa", 3)
         }
         if let fl = fcst.freezingLevel(hour: h) {
-            appendFd("snowflake-cold", "Freezing Level", "\(fl) meters (0° isotherm)", 3)
+            appendFd(.wi_snowflake_cold, "Freezing Level", "\(fl) meters (0° isotherm)", 3)
         }
         if let tz = spotForecast.timezone() {
-            appendFd("time-1", "Timezone", "\(tz)", 3)
+            appendFd(.wi_time_1, "Timezone", "\(tz)", 3)
         }
         let coordinates = spotForecast.coordinates()
-        appendFd("alien", "Coordinates", "\(coordinates)", 3)
+        appendFd(.wi_alien, "Coordinates", "\(coordinates)", 3)
         if let sunrise = spotForecast.sunriseTime(),
             let sunset = spotForecast.sunsetTime() {
-            appendFd("sunrise", "Sunrise", "\(sunrise)", 3)
-            appendFd("sunset", "Sunset", "\(sunset)", 3)
+            appendFd(.wi_sunrise, "Sunrise", "\(sunrise)", 3)
+            appendFd(.wi_sunset, "Sunset", "\(sunset)", 3)
         }
         if let model = spotForecast.modelInfo() {
-            appendFd("small-craft-advisory", "Forecast Model", "\(model)", 3)
+            appendFd(.wi_small_craft_advisory, "Forecast Model", "\(model)", 3)
         }
         if let updated = fcst.lastUpdate() {
-            appendFd("gale-warning", "Updated", "\(updated)", 3)
+            appendFd(.wi_gale_warning, "Updated", "\(updated)", 3)
         }
         tableView.reloadData()
         headerTableView.reloadData()

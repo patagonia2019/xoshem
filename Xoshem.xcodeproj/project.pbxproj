@@ -51,6 +51,7 @@
 		95E61E0B1D31FAB10096E616 /* ForecastLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61E0A1D31FAB10096E616 /* ForecastLocationViewController.swift */; };
 		95E61E0D1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61E0C1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift */; };
 		95E61E0F1D3471FF0096E616 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E61E0E1D3471FF0096E616 /* HelpViewController.swift */; };
+		98DAB90222D5A055001FED9E /* weathericons-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98DAB90122D5A055001FED9E /* weathericons-regular-webfont.ttf */; };
 		9EE14EA39AA627850C2ED4DC /* Pods_Xoshem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A32751654F3056CE8F62B5 /* Pods_Xoshem.framework */; };
 		A129F8C41B2CA81600EBC1DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A129F8C31B2CA81600EBC1DD /* AppDelegate.swift */; };
 		A129F8CE1B2CA81600EBC1DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A129F8CC1B2CA81600EBC1DD /* LaunchScreen.storyboard */; };
@@ -272,6 +273,7 @@
 		95E61E0C1D3204D30096E616 /* ForecastLocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastLocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		95E61E0E1D3471FF0096E616 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		95E61E101D35233C0096E616 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		98DAB90122D5A055001FED9E /* weathericons-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "weathericons-regular-webfont.ttf"; sourceTree = "<group>"; };
 		A129F8C01B2CA81600EBC1DD /* Xoshem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xoshem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A129F8C31B2CA81600EBC1DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A129F8CF1B2CA81600EBC1DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 		951A80871D7448EF000FEF30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				98DAB90122D5A055001FED9E /* weathericons-regular-webfont.ttf */,
 				70A970931F13026800DBC25D /* Assets.xcassets */,
 				95151AFF1BC82610003DC3E3 /* Xoshem.entitlements */,
 				95069C891D664110003704F6 /* Localizable.strings */,
@@ -525,7 +528,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Fuchs;
 				TargetAttributes = {
 					A129F8BF1B2CA81600EBC1DD = {
@@ -552,6 +555,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				es,
@@ -609,6 +613,7 @@
 				955E14431D75680400B5B4D9 /* TermsAndConditions.html in Resources */,
 				95069C871D664110003704F6 /* Localizable.strings in Resources */,
 				955E142B1D7566A500B5B4D9 /* FAQ.html in Resources */,
+				98DAB90222D5A055001FED9E /* weathericons-regular-webfont.ttf in Resources */,
 				7096DEEC1F9F59E300B07326 /* Xoshem.plist in Resources */,
 				955E144F1D75687300B5B4D9 /* About.html in Resources */,
 				955E14541D76DAD100B5B4D9 /* common.css in Resources */,
@@ -641,13 +646,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Xoshem-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		951784D21D522323007399F6 /* ShellScript */ = {
@@ -669,13 +677,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Xoshem/Pods-Xoshem-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Xoshem/Pods-Xoshem-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Xoshem/Pods-Xoshem-resources.sh\"\n";
 		};
 		B5B3B53ED7A61B3EE8A1F13C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -683,13 +694,26 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Xoshem/Pods-Xoshem-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FlexiCollectionViewLayout/FlexiCollectionViewLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/JFCore/JFCore.framework",
+				"${BUILT_PRODUCTS_DIR}/JFWindguru/JFWindguru.framework",
+				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftIconFont/SwiftIconFont.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlexiCollectionViewLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFWindguru.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIconFont.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Xoshem/Pods-Xoshem-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Xoshem/Pods-Xoshem-frameworks.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -965,12 +989,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -996,7 +1022,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1018,12 +1044,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1043,7 +1071,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1063,6 +1091,7 @@
 				DEVELOPMENT_TEAM = 27XTSJS68A;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Xoshem/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobilepatagonia.Xoshem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1088,6 +1117,7 @@
 				DEVELOPMENT_TEAM = 27XTSJS68A;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Xoshem/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobilepatagonia.Xoshem;
 				PRODUCT_NAME = "$(TARGET_NAME)";

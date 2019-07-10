@@ -7,21 +7,17 @@
 //
 
 import UIKit
-import FontWeather_swift
 
 class ForecastDayListViewCell: UITableViewCell {
 
-    @IBOutlet weak var iconView: UIImageView?
+    @IBOutlet weak var iconLabel: UILabel?
     @IBOutlet weak var keyLabel: UILabel?
     @IBOutlet weak var valueLabel: UILabel?
     
     func configure()
     {
-        if let iconView = iconView {
-            iconView.alpha = 0
-            iconView.layer.masksToBounds = false
-            iconView.layer.cornerRadius = 20
-            iconView.clipsToBounds = true
+        if let iconLabel = iconLabel {
+            iconLabel.alpha = 0
         }
         if let keyLabel = keyLabel {
             keyLabel.alpha = 0
@@ -35,14 +31,13 @@ class ForecastDayListViewCell: UITableViewCell {
         return paths[0]
     }
     
-    func configure(_ iconName: String?, key: String?, value: String?)
+    func configure(_ iconName: Common.Symbols.FontWeather?, key: String?, value: String?)
     {
         configure()
         if let iconName = iconName,
-           let iconView = iconView {
-            iconView.alpha = 1
-            let image = UIImage.fontWeatherIconWithCode(code: iconName, textColor: .white, size: CGSize.init(width: 30, height: 30))
-            iconView.image = image
+           let iconLabel = iconLabel {
+            iconLabel.alpha = 1
+            iconLabel.text = "\(Common.Symbols.show(icon: iconName))"
         }
         if let key = key,
            let keyLabel = keyLabel {

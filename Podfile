@@ -5,8 +5,8 @@ use_frameworks!
 
 def sharedPods
     pod 'Localize-Swift', '~> 1.7'
-    pod 'JFWindguru', :path => '/Users/javierfuchs/Job/southfox/jfwindguru'
-    pod 'JFCore', :path => '/Users/javierfuchs/Job/southfox/jfcore'
+    pod 'JFWindguru', :path => '../jfwindguru'
+    pod 'JFCore', :path => '../jfcore'
 end
 
 def iosPods
@@ -15,7 +15,6 @@ def iosPods
     pod 'SwiftIconFont', '~> 2.7.2'
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'FontWeather.swift', :path => '/Users/javierfuchs/Job/southfox/FontWeather.swift'
     pod 'FlexiCollectionViewLayout'
 end
 
@@ -23,13 +22,26 @@ end
 #end
 
 target 'Xoshem' do
+    platform :ios, '12.0'
     iosPods
     sharedPods
 end
 
 #target 'watchos Extension' do
-#platform :watchos, '2.2'
+#platform :watchos, '5.2'
 #    watchPods
 #    sharedPods
 #end
+
+#target 'XoshemTvOS' do
+#  platform :tvos, '12.0'
+#  pod 'JFWindguru', :path => '../'
+#end
+
+
+#target 'XoshemMacOS' do
+#  platform :macos, '10.14'
+#  pod 'JFWindguru', :path => '../'
+#end
+
 

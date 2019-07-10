@@ -67,6 +67,49 @@ struct Common {
         case removeMenuIssue = 140
         case removeLocationIssue = 141
     }
+    
+    struct font {
+        static let name : String = "Weather Icons Regular"
+    }
+
+    public struct Symbols {
+        // Use https://erikflowers.github.io/weather-icons/
+        enum FontWeather : Int {
+            case wi_thermometer_exterior = 0xf053
+            case wi_humidity = 0xf07a
+            case wi_wind_direction = 0xf0b1
+            case wi_windy = 0xf021
+            case wi_strong_wind = 0xf050
+            case wi_wind_beaufort_0 = 0xf0b7
+            case wi_wind_beaufort_1 = 0xf0b9
+            case wi_wind_beaufort_2 = 0xf0ba
+            case wi_wind_beaufort_3 = 0xf0bb
+            case wi_wind_beaufort_4 = 0xf0bc
+            case wi_wind_beaufort_5 = 0xf0bd
+            case wi_wind_beaufort_6 = 0xf0be
+            case wi_wind_beaufort_7 = 0xf0bf
+            case wi_wind_beaufort_8 = 0xf0b8
+            case wi_wind_beaufort_9 = 0xf0c0
+            case wi_wind_beaufort_10 = 0xf0c1
+            case wi_wind_beaufort_11 = 0xf0c2
+            case wi_wind_beaufort_12 = 0xf0c3
+            case wi_flood = 0xf07c
+            case wi_small_craft_advisory = 0xf0cc
+            case wi_cloud = 0xf041
+            case wi_rain = 0xf019
+            case wi_barometer = 0xf079
+            case wi_snowflake_cold = 0xf076
+            case wi_time_1 = 0xf08a
+            case wi_alien = 0xf075
+            case wi_sunrise = 0xf051
+            case wi_sunset = 0xf052
+            case wi_gale_warning = 0xf0cd
+            
+        }
+        public static func show(icon: FontWeather) -> Character {
+            return Character(UnicodeScalar(icon.rawValue) ?? "?")
+        }
+    }
 
 
     static let email : String = "mobilepatagonia@gmail.com"

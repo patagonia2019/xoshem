@@ -33,7 +33,7 @@ class ForecastDayStepViewCell: UITableViewCell {
     fileprivate func configureSettingsButton() {
         let size = CGSize(width: 50, height: 50)
         let fontSize :CGFloat = 50.0
-        let icon = UIImage.icon(from: .Ionicon, iconColor: .white, code: "settings", imageSize: size, ofSize: fontSize)
+        let icon = UIImage.icon(from: .ionicon, iconColor: .white, code: "settings", imageSize: size, ofSize: fontSize)
         configureButton.setImage(icon, for: .normal)
     }
 
